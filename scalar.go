@@ -13,17 +13,18 @@ type (
 	// Boolean represents true or false values.
 	Boolean bool
 
-	// DateTime is an ISO-8601 encoded UTC date string.
+	// DateTime is an ISO-8601 encoded UTC date.
 	DateTime struct{ time.Time }
 
-	// Float represents signed double-precision fractional values as specified by IEEE 754.
+	// Float represents signed double-precision fractional values as
+	// specified by IEEE 754.
 	Float float64
 
 	// GitObjectID is a Git object ID. For example,
 	// "912ec1990bd09f8fc128c3fa6b59105085aabc03".
 	GitObjectID string
 
-	// GitTimestamp is an ISO-8601 encoded date string.
+	// GitTimestamp is an ISO-8601 encoded date.
 	// Unlike the DateTime type, GitTimestamp is not converted in UTC.
 	GitTimestamp struct{ time.Time }
 
