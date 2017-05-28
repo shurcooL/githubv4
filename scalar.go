@@ -19,8 +19,9 @@ type (
 	// Float represents signed double-precision fractional values as specified by IEEE 754.
 	Float float64
 
-	// GitObjectID is a Git object ID.
-	GitObjectID string // TODO: Confirm.
+	// GitObjectID is a Git object ID. For example,
+	// "912ec1990bd09f8fc128c3fa6b59105085aabc03".
+	GitObjectID string
 
 	// GitTimestamp is an ISO-8601 encoded date string.
 	// Unlike the DateTime type, GitTimestamp is not converted in UTC.
