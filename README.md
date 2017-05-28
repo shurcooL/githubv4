@@ -193,7 +193,54 @@ Finally, call `client.Query` providing `variables`:
 
 ### Pagination
 
-_TODO._
+Imagine you wanted to get a complete list of comments in an issue, and not just the first 10 or so. To do that, you'll need to perform multiple queries and use pagination information. For example:
+
+```Go
+type comment struct {
+	Body   githubql.String
+	Author struct {
+		Login     githubql.String
+		AvatarURL githubql.URL `graphql:"avatarUrl(size: 72)"`
+	}
+	ViewerCanReact githubql.Boolean
+}
+var q struct {
+	Repository struct {
+		Issue struct {
+			Comments struct {
+				Nodes    []comment
+				PageInfo struct {
+					EndCursor   githubql.String
+					HasNextPage githubql.Boolean
+				}
+			} `graphql:"comments(first: $CommentsFirst, after: $CommentsAfter)"`
+		} `graphql:"issue(number: $IssueNumber)"`
+	} `graphql:"repository(owner: $RepositoryOwner, name: $RepositoryName)"`
+}
+variables := map[string]interface{}{
+	"RepositoryOwner": githubql.String(owner),
+	"RepositoryName":  githubql.String(name),
+	"IssueNumber":     githubql.Int(issue),
+	"CommentsFirst":   githubql.NewInt(100),    // Request 100 comments per page.
+	"CommentsAfter":   (*githubql.String)(nil), // Null after argument gets first page.
+}
+
+// Get comments from all pages.
+var allComments []comment
+for {
+	err := s.clQL.Query(ctx, &q, variables)
+	if err != nil {
+		return err
+	}
+	allComments = append(allComments, q.Repository.Issue.Comments.Nodes...)
+	if !q.Repository.Issue.Comments.PageInfo.HasNextPage {
+		break
+	}
+	variables["CommentsAfter"] = githubql.NewString(q.Repository.Issue.Comments.PageInfo.EndCursor)
+}
+```
+
+There is more than one way to perform pagination. Consider additional fields inside [`PageInfo`](https://developer.github.com/v4/reference/object/pageinfo/) object.
 
 ### Large Query
 
