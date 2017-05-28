@@ -127,7 +127,69 @@ fmt.Println("CreatedAt:", query.Viewer.CreatedAt)
 
 ### Arguments and Variables
 
-_TODO._
+Often, you'll want to specify arguments on some fields. You can use the `graphql` struct field tag for this.
+
+For example, to make the following GraphQL query:
+
+```GraphQL
+{
+	repository(owner: "octocat", name: "Hello-World") {
+		description
+	}
+}
+```
+
+You can define this variable:
+
+```Go
+var q struct {
+	Repository struct {
+		Description githubql.String
+	} `graphql:"repository(owner: \"octocat\", name: \"Hello-World\")"`
+}
+```
+
+And call `client.Query`:
+
+```Go
+err := client.Query(context.Background(), &q, nil)
+if err != nil {
+	// Handle error.
+}
+fmt.Println(q.Repository.Description)
+
+// Output:
+// My first repository on GitHub!
+```
+
+However, that'll only work if the arguments are constant and known in advance. Otherwise, you will need to make use of variables. Define a `variables` map:
+
+```Go
+// fetchRepoDescription fetches description of repo with owner and name.
+func fetchRepoDescription(ctx context.Context, owner, name string) (string, error) {
+	variables := map[string]interface{}{
+		"RepositoryOwner": githubql.String(owner),
+		"RepositoryName":  githubql.String(name),
+	}
+```
+
+Then, replace the constants in the struct field tag with variable names:
+
+```Go
+	var q struct {
+		Repository struct {
+			Description githubql.String
+		} `graphql:"repository(owner: $RepositoryOwner, name: $RepositoryName)"`
+	}
+```
+
+Finally, call `client.Query` providing `variables`:
+
+```Go
+	err := client.Query(ctx, &q, variables)
+	return q.Repository.Description, err
+}
+```
 
 ### Pagination
 
