@@ -37,7 +37,7 @@ type (
 	// intended to be human-readable. When expected as an input type,
 	// any string (such as "VXNlci0xMA==") or integer (such as 4) input
 	// value will be accepted as an ID.
-	ID string
+	ID interface{}
 
 	// Int represents non-fractional signed whole numeric values.
 	// Int can represent values between -(2^31) and 2^31 - 1.
