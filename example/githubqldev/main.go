@@ -41,7 +41,7 @@ func run() error {
 			URL       githubql.URI
 		}
 
-		var v struct {
+		var q struct {
 			Repository struct {
 				DatabaseID githubql.Int
 				URL        githubql.URI
@@ -102,11 +102,11 @@ func run() error {
 			"CommentsFirst":   githubql.NewInt(1),
 			"CommentsAfter":   githubql.NewString("Y3Vyc29yOjE5NTE4NDI1Ng=="),
 		}
-		err := client.Query(context.Background(), &v, variables)
+		err := client.Query(context.Background(), &q, variables)
 		if err != nil {
 			return err
 		}
-		printJSON(v)
+		printJSON(q)
 		//goon.Dump(out)
 		//fmt.Println(github.Stringify(out))
 	}
@@ -116,7 +116,7 @@ func run() error {
 	// That involves first doing a query (and determining whether the reaction already exists),
 	// then either adding or removing it.
 	{
-		var v struct {
+		var q struct {
 			Repository struct {
 				Issue struct {
 					ID        githubql.ID
@@ -132,13 +132,13 @@ func run() error {
 			"IssueNumber":     githubql.Int(2),
 			"ReactionContent": githubql.ThumbsUp,
 		}
-		err := client.Query(context.Background(), &v, variables)
+		err := client.Query(context.Background(), &q, variables)
 		if err != nil {
 			return err
 		}
-		fmt.Println("already reacted:", v.Repository.Issue.Reactions.ViewerHasReacted)
+		fmt.Println("already reacted:", q.Repository.Issue.Reactions.ViewerHasReacted)
 
-		if !v.Repository.Issue.Reactions.ViewerHasReacted {
+		if !q.Repository.Issue.Reactions.ViewerHasReacted {
 			// Add reaction.
 			var m struct {
 				AddReaction struct {
@@ -153,7 +153,7 @@ func run() error {
 			}
 			variables := map[string]interface{}{
 				"Input": githubql.AddReactionInput{
-					SubjectID: v.Repository.Issue.ID,
+					SubjectID: q.Repository.Issue.ID,
 					Content:   githubql.ThumbsUp,
 				},
 			}
