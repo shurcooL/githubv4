@@ -72,8 +72,8 @@ func querifyType(w io.Writer, t reflect.Type) {
 	case reflect.Ptr, reflect.Slice:
 		querifyType(w, t.Elem())
 	case reflect.Struct:
-		// Special handling of DateTime, GitTimestamp types.
-		if t == dateTimeType || t == gitTimestampType {
+		// Special handling of scalar struct types.
+		if t == dateTimeType || t == gitTimestampType || t == uriType || t == x509CertificateType {
 			return
 		}
 		io.WriteString(w, "{")
@@ -97,8 +97,10 @@ func querifyType(w io.Writer, t reflect.Type) {
 }
 
 var (
-	dateTimeType     = reflect.TypeOf(DateTime{})
-	gitTimestampType = reflect.TypeOf(GitTimestamp{})
+	dateTimeType        = reflect.TypeOf(DateTime{})
+	gitTimestampType    = reflect.TypeOf(GitTimestamp{})
+	uriType             = reflect.TypeOf(URI{})
+	x509CertificateType = reflect.TypeOf(X509Certificate{})
 )
 
 func mixedCapsToLowerCamelCase(s string) string {
