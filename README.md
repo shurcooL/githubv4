@@ -242,13 +242,64 @@ for {
 
 There is more than one way to perform pagination. Consider additional fields inside [`PageInfo`](https://developer.github.com/v4/reference/object/pageinfo/) object.
 
-### Large Query
-
-_TODO._
-
 ### Mutations
 
-_TODO._
+Mutations often require information that you can only find out by performing a query first. Let's suppose you've already done that.
+
+For example, to make the following GraphQL mutation:
+
+```GraphQL
+mutation($Input: AddReactionInput!) {
+	addReaction(input: $Input) {
+		reaction {
+			content
+		}
+		subject {
+			id
+		}
+	}
+}
+variables {
+	"Input": {
+		"subjectId": "MDU6SXNzdWUyMTc5NTQ0OTc=",
+		"content": "HOORAY"
+	}
+}
+```
+
+You can define:
+
+```Go
+var m struct {
+	AddReaction struct {
+		Reaction struct {
+			Content githubql.ReactionContent
+		}
+		Subject struct {
+			ID githubql.ID
+		}
+	} `graphql:"addReaction(input: $Input)"`
+}
+variables := map[string]interface{}{
+	"Input": githubql.AddReactionInput{
+		SubjectID: targetIssue.ID, // ID of the target issue from a previous query.
+		Content:   githubql.Hooray,
+	},
+}
+```
+
+And call `client.Mutate`:
+
+```Go
+err := client.Mutate(context.Background(), &m, variables)
+if err != nil {
+	// Handle error.
+}
+fmt.Printf("Added a %v reaction to subject with ID %#v!\n", m.AddReaction.Reaction.Content, m.AddReaction.Subject.ID)
+
+// Output:
+// Added a HOORAY reaction to subject with ID "MDU6SXNzdWUyMTc5NTQ0OTc="!
+```
 
 Directories
 -----------
