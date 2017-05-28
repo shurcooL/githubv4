@@ -213,7 +213,7 @@ var q struct {
 					EndCursor   githubql.String
 					HasNextPage githubql.Boolean
 				}
-			} `graphql:"comments(first: $CommentsFirst, after: $CommentsAfter)"`
+			} `graphql:"comments(first: 100, after: $CommentsCursor)"` // 100 per page.
 		} `graphql:"issue(number: $IssueNumber)"`
 	} `graphql:"repository(owner: $RepositoryOwner, name: $RepositoryName)"`
 }
@@ -221,8 +221,7 @@ variables := map[string]interface{}{
 	"RepositoryOwner": githubql.String(owner),
 	"RepositoryName":  githubql.String(name),
 	"IssueNumber":     githubql.Int(issue),
-	"CommentsFirst":   githubql.NewInt(100),    // Request 100 comments per page.
-	"CommentsAfter":   (*githubql.String)(nil), // Null after argument gets first page.
+	"CommentsCursor":  (*githubql.String)(nil), // Null after argument to get first page.
 }
 
 // Get comments from all pages.
@@ -236,7 +235,7 @@ for {
 	if !q.Repository.Issue.Comments.PageInfo.HasNextPage {
 		break
 	}
-	variables["CommentsAfter"] = githubql.NewString(q.Repository.Issue.Comments.PageInfo.EndCursor)
+	variables["CommentsCursor"] = githubql.NewString(q.Repository.Issue.Comments.PageInfo.EndCursor)
 }
 ```
 
