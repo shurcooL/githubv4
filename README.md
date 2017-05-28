@@ -35,7 +35,7 @@ Currently implemented:
 -	[ ] Research and complete, document the rest of GraphQL features.
 -	[ ] Fully document (and add tests for edge cases) the `graphql` struct field tag.
 -	[ ] Extremely clean, beautiful, idiomatic Go code (100% coverage, 0 lines of hacky code).
-	-	[ ] Document all public identifiers.
+	-	[x] Document all public identifiers.
 	-	[ ] Clean up implementations of some private helpers (currently functional, but hacky).
 
 Future:
