@@ -200,7 +200,7 @@ type comment struct {
 	Body   githubql.String
 	Author struct {
 		Login     githubql.String
-		AvatarURL githubql.URL `graphql:"avatarUrl(size: 72)"`
+		AvatarURL githubql.URI `graphql:"avatarUrl(size: 72)"`
 	}
 	ViewerCanReact githubql.Boolean
 }
