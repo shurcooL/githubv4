@@ -34,7 +34,7 @@ func constructMutation(v interface{}, variables map[string]interface{}) string {
 
 // queryArguments constructs a minified arguments string for variables.
 //
-// E.g., map{"Foo": Int(123), "Bar": NewBoolean(true)} -> "$Foo:Int!$Bar:Boolean".
+// E.g., map[string]interface{}{"A": Int(123), "B": NewBoolean(true)} -> "$A:Int!$B:Boolean".
 func queryArguments(variables map[string]interface{}) string {
 	sorted := make([]string, 0, len(variables))
 	for k := range variables {

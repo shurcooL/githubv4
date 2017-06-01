@@ -1,6 +1,193 @@
 package githubql
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
+	"reflect"
+	"testing"
+)
+
+func TestNewClient_nil(t *testing.T) {
+	// Shouldn't panic with nil parameter.
+	client := NewClient(nil)
+	_ = client
+}
+
+func TestClient_Query(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
+		if got, want := req.Method, http.MethodPost; got != want {
+			t.Errorf("got request method: %v, want: %v", got, want)
+		}
+		body := mustRead(req.Body)
+		if got, want := body, `{"query":"{viewer{login}}"}`+"\n"; got != want {
+			t.Errorf("got body: %v, want %v", got, want)
+		}
+		mustWrite(w, `{"data": {"viewer": {"login": "gopher"}}}`)
+	})
+	client := NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+
+	type query struct {
+		Viewer struct {
+			Login String
+		}
+	}
+
+	var q query
+	err := client.Query(context.Background(), &q, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := q
+
+	var want query
+	want.Viewer.Login = "gopher"
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("client.Query got: %v, want: %v", got, want)
+	}
+}
+
+func TestClient_Query_error(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
+		http.Error(w, "404 Not Found", http.StatusNotFound)
+	})
+	client := NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+
+	type query struct {
+		Viewer struct {
+			Login String
+		}
+	}
+
+	var q query
+	err := client.Query(context.Background(), &q, nil)
+	if err == nil {
+		t.Fatal("got error: nil, want: non-nil")
+	}
+	if got, want := err.Error(), "unexpected status: Not Found"; got != want {
+		t.Fatalf("got error: %v, want: %v", got, want)
+	}
+}
+
+func TestClient_Mutate(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
+		if got, want := req.Method, http.MethodPost; got != want {
+			t.Errorf("got request method: %v, want: %v", got, want)
+		}
+		body := mustRead(req.Body)
+		if got, want := body, `{"query":"mutation($Input:AddReactionInput!){addReaction(input:$Input){reaction{content},subject{id,reactionGroups{users{totalCount}}}}}","variables":{"Input":{"subjectId":"MDU6SXNzdWUyMTc5NTQ0OTc=","content":"HOORAY"}}}`+"\n"; got != want {
+			t.Errorf("got body: %v, want %v", got, want)
+		}
+		mustWrite(w, `{"data": {
+			"addReaction": {
+				"reaction": {
+					"content": "HOORAY"
+				},
+				"subject": {
+					"id": "MDU6SXNzdWUyMTc5NTQ0OTc=",
+					"reactionGroups": [
+						{
+							"users": {"totalCount": 3}
+						}
+					]
+				}
+			}
+		}}`)
+	})
+	client := NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+
+	type reactionGroup struct {
+		Users struct {
+			TotalCount Int
+		}
+	}
+	type mutation struct {
+		AddReaction struct {
+			Reaction struct {
+				Content ReactionContent
+			}
+			Subject struct {
+				ID             ID
+				ReactionGroups []reactionGroup
+			}
+		} `graphql:"addReaction(input:$Input)"`
+	}
+
+	var m mutation
+	variables := map[string]interface{}{
+		"Input": AddReactionInput{
+			SubjectID: "MDU6SXNzdWUyMTc5NTQ0OTc=",
+			Content:   Hooray,
+		},
+	}
+	err := client.Mutate(context.Background(), &m, variables)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := m
+
+	var want mutation
+	want.AddReaction.Reaction.Content = Hooray
+	want.AddReaction.Subject.ID = "MDU6SXNzdWUyMTc5NTQ0OTc="
+	var rg reactionGroup
+	rg.Users.TotalCount = 3
+	want.AddReaction.Subject.ReactionGroups = []reactionGroup{rg}
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("client.Query got: %v, want: %v", got, want)
+	}
+}
+
+func TestQueryArguments(t *testing.T) {
+	tests := []struct {
+		name string
+		in   map[string]interface{}
+		want string
+	}{
+		{
+			in:   map[string]interface{}{"A": Int(123), "B": NewBoolean(true)},
+			want: "$A:Int!$B:Boolean",
+		},
+	}
+	for _, tc := range tests {
+		got := queryArguments(tc.in)
+		if got != tc.want {
+			t.Errorf("%s: got: %q, want: %q", tc.name, got, tc.want)
+		}
+	}
+}
+
+// localRoundTripper is an http.RoundTripper that executes HTTP transactions
+// by using mux directly, instead of going over an HTTP connection.
+type localRoundTripper struct {
+	mux *http.ServeMux
+}
+
+func (l localRoundTripper) RoundTrip(req *http.Request) (*http.Response, error) {
+	w := httptest.NewRecorder()
+	l.mux.ServeHTTP(w, req)
+	return w.Result(), nil
+}
+
+func mustRead(r io.Reader) string {
+	b, err := ioutil.ReadAll(r)
+	if err != nil {
+		panic(err)
+	}
+	return string(b)
+}
+
+func mustWrite(w io.Writer, s string) {
+	_, err := io.WriteString(w, s)
+	if err != nil {
+		panic(err)
+	}
+}
 
 // TODO: These should be converted into real tests. I used examples during
 //       rapid prototyping because they're quicker to write (less boilerplate).
