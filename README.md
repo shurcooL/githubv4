@@ -168,8 +168,8 @@ However, that'll only work if the arguments are constant and known in advance. O
 // fetchRepoDescription fetches description of repo with owner and name.
 func fetchRepoDescription(ctx context.Context, owner, name string) (string, error) {
 	variables := map[string]interface{}{
-		"RepositoryOwner": githubql.String(owner),
-		"RepositoryName":  githubql.String(name),
+		"Owner": githubql.String(owner),
+		"Name":  githubql.String(name),
 	}
 ```
 
@@ -179,7 +179,7 @@ Then, replace the constants in the struct field tag with variable names:
 	var q struct {
 		Repository struct {
 			Description githubql.String
-		} `graphql:"repository(owner: $RepositoryOwner, name: $RepositoryName)"`
+		} `graphql:"repository(owner: $Owner, name: $Name)"`
 	}
 ```
 
