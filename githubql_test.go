@@ -151,13 +151,11 @@ func TestClient_Mutate(t *testing.T) {
 	}
 
 	var m mutation
-	variables := map[string]interface{}{
-		"Input": githubql.AddReactionInput{
-			SubjectID: "MDU6SXNzdWUyMTc5NTQ0OTc=",
-			Content:   githubql.Hooray,
-		},
+	input := githubql.AddReactionInput{
+		SubjectID: "MDU6SXNzdWUyMTc5NTQ0OTc=",
+		Content:   githubql.Hooray,
 	}
-	err := client.Mutate(context.Background(), &m, variables)
+	err := client.Mutate(context.Background(), &m, input, nil)
 	if err != nil {
 		t.Fatal(err)
 	}

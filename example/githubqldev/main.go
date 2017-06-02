@@ -151,13 +151,11 @@ func run() error {
 					}
 				} `graphql:"addReaction(input:$Input)"`
 			}
-			variables := map[string]interface{}{
-				"Input": githubql.AddReactionInput{
-					SubjectID: q.Repository.Issue.ID,
-					Content:   githubql.ThumbsUp,
-				},
+			input := githubql.AddReactionInput{
+				SubjectID: q.Repository.Issue.ID,
+				Content:   githubql.ThumbsUp,
 			}
-			err := client.Mutate(context.Background(), &m, variables)
+			err := client.Mutate(context.Background(), &m, input, nil)
 			if err != nil {
 				return err
 			}

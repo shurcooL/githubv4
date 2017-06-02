@@ -279,18 +279,16 @@ var m struct {
 		}
 	} `graphql:"addReaction(input: $Input)"`
 }
-variables := map[string]interface{}{
-	"Input": githubql.AddReactionInput{
-		SubjectID: targetIssue.ID, // ID of the target issue from a previous query.
-		Content:   githubql.Hooray,
-	},
+input := githubql.AddReactionInput{
+	SubjectID: targetIssue.ID, // ID of the target issue from a previous query.
+	Content:   githubql.Hooray,
 }
 ```
 
 And call `client.Mutate`:
 
 ```Go
-err := client.Mutate(context.Background(), &m, variables)
+err := client.Mutate(context.Background(), &m, input, nil)
 if err != nil {
 	// Handle error.
 }

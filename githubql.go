@@ -29,19 +29,23 @@ func NewClient(httpClient *http.Client) *Client {
 	}
 }
 
-// Query executes a single GraphQL query request, with a query derived from q,
-// populating the response into it. q should be a pointer to struct that
-// corresponds to the GitHub GraphQL schema.
+// Query executes a single GraphQL query request,
+// with a query derived from q, populating the response into it.
+// q should be a pointer to struct that corresponds to the GitHub GraphQL schema.
 func (c *Client) Query(ctx context.Context, q interface{}, variables map[string]interface{}) error {
 	return c.do(ctx, queryOperation, q, variables)
 }
 
-// Mutate executes a single GraphQL mutation request, with a mutation derived from m,
-// populating the response into it. m should be a pointer to struct that
-// corresponds to the GitHub GraphQL schema.
-//
-// THINK: Consider having Mutate accept input separate from variables (since they're often left nil). For convenience.
-func (c *Client) Mutate(ctx context.Context, m interface{}, variables map[string]interface{}) error {
+// Mutate executes a single GraphQL mutation request,
+// with a mutation derived from m, populating the response into it.
+// m should be a pointer to struct that corresponds to the GitHub GraphQL schema.
+// Provided input will be set as a variable named "Input".
+func (c *Client) Mutate(ctx context.Context, m interface{}, input Input, variables map[string]interface{}) error {
+	if variables == nil {
+		variables = map[string]interface{}{"Input": input}
+	} else {
+		variables["Input"] = input
+	}
 	return c.do(ctx, mutationOperation, m, variables)
 }
 
