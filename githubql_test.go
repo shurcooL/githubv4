@@ -52,26 +52,56 @@ func TestClient_Query(t *testing.T) {
 	}
 }
 
-func TestClient_Query_error(t *testing.T) {
+func TestClient_Query_errorResponse(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
+		mustWrite(w, `{
+			"data": null,
+			"errors": [
+				{
+					"message": "Field 'bad' doesn't exist on type 'Query'",
+					"locations": [
+						{
+							"line": 7,
+							"column": 3
+						}
+					]
+				}
+			]
+		}`)
+	})
+	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+
+	var q struct {
+		Bad githubql.String
+	}
+	err := client.Query(context.Background(), &q, nil)
+	if err == nil {
+		t.Fatal("got error: nil, want: non-nil")
+	}
+	if got, want := err.Error(), "Field 'bad' doesn't exist on type 'Query'"; got != want {
+		t.Errorf("got error: %v, want: %v", got, want)
+	}
+}
+
+func TestClient_Query_errorStatusCode(t *testing.T) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "404 Not Found", http.StatusNotFound)
 	})
 	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
 
-	type query struct {
+	var q struct {
 		Viewer struct {
 			Login githubql.String
 		}
 	}
-
-	var q query
 	err := client.Query(context.Background(), &q, nil)
 	if err == nil {
 		t.Fatal("got error: nil, want: non-nil")
 	}
 	if got, want := err.Error(), "unexpected status: Not Found"; got != want {
-		t.Fatalf("got error: %v, want: %v", got, want)
+		t.Errorf("got error: %v, want: %v", got, want)
 	}
 }
 
