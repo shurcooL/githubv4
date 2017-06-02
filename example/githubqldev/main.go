@@ -144,7 +144,8 @@ func run() error {
 				AddReaction struct {
 					Subject struct {
 						ReactionGroups []struct {
-							Users struct {
+							Content githubql.ReactionContent
+							Users   struct {
 								TotalCount githubql.Int
 							}
 						}
@@ -160,8 +161,31 @@ func run() error {
 				return err
 			}
 			printJSON(m)
+			fmt.Println("Successfully added reaction.")
 		} else {
-			// TODO: Use GraphQL API.
+			// Remove reaction.
+			var m struct {
+				RemoveReaction struct {
+					Subject struct {
+						ReactionGroups []struct {
+							Content githubql.ReactionContent
+							Users   struct {
+								TotalCount githubql.Int
+							}
+						}
+					}
+				} `graphql:"removeReaction(input:$Input)"`
+			}
+			input := githubql.RemoveReactionInput{
+				SubjectID: q.Repository.Issue.ID,
+				Content:   githubql.ThumbsUp,
+			}
+			err := client.Mutate(context.Background(), &m, input, nil)
+			if err != nil {
+				return err
+			}
+			printJSON(m)
+			fmt.Println("Successfully removed reaction.")
 		}
 	}
 
