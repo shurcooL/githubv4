@@ -111,8 +111,3 @@ func mixedCapsToLowerCamelCase(s string) string {
 	r[0] = unicode.ToLower(r[0])
 	return string(r)
 }
-
-// InternalTest is a temporary dummy type that will be removed. It exists only
-// to attach some internal tests that are currently implemented as examples.
-// See the TODO comment at top of githubql_test.go for justification.
-type InternalTest struct{}
