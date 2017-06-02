@@ -54,7 +54,6 @@ func (c *Client) do(ctx context.Context, op operationType, v interface{}, variab
 	case mutationOperation:
 		query = constructMutation(v, variables)
 	}
-	fmt.Println(query) // TODO: Remove sometime soon...
 	in := struct {
 		Query     string                 `json:"query"`
 		Variables map[string]interface{} `json:"variables,omitempty"`
