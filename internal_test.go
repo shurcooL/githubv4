@@ -153,15 +153,15 @@ func TestConstructQuery(t *testing.T) {
 				Repository struct {
 					Issue struct {
 						Body String
-					} `graphql:"issue(number: $IssueNumber)"`
-				} `graphql:"repository(owner: $RepositoryOwner, name: $RepositoryName)"`
+					} `graphql:"issue(number: $issueNumber)"`
+				} `graphql:"repository(owner: $repositoryOwner, name: $repositoryName)"`
 			}{},
 			inVariables: map[string]interface{}{
-				"RepositoryOwner": String("shurcooL-test"),
-				"RepositoryName":  String("test-repo"),
-				"IssueNumber":     Int(1),
+				"repositoryOwner": String("shurcooL-test"),
+				"repositoryName":  String("test-repo"),
+				"issueNumber":     Int(1),
 			},
-			want: `query($IssueNumber:Int!$RepositoryName:String!$RepositoryOwner:String!){repository(owner: $RepositoryOwner, name: $RepositoryName){issue(number: $IssueNumber){body}}}`,
+			want: `query($issueNumber:Int!$repositoryName:String!$repositoryOwner:String!){repository(owner: $repositoryOwner, name: $repositoryName){issue(number: $issueNumber){body}}}`,
 		},
 		{
 			inV: struct {
@@ -174,15 +174,15 @@ func TestConstructQuery(t *testing.T) {
 								}
 							} `graphql:"users(first:10)"`
 						}
-					} `graphql:"issue(number: $IssueNumber)"`
-				} `graphql:"repository(owner: $RepositoryOwner, name: $RepositoryName)"`
+					} `graphql:"issue(number: $issueNumber)"`
+				} `graphql:"repository(owner: $repositoryOwner, name: $repositoryName)"`
 			}{},
 			inVariables: map[string]interface{}{
-				"RepositoryOwner": String("shurcooL-test"),
-				"RepositoryName":  String("test-repo"),
-				"IssueNumber":     Int(1),
+				"repositoryOwner": String("shurcooL-test"),
+				"repositoryName":  String("test-repo"),
+				"issueNumber":     Int(1),
 			},
-			want: `query($IssueNumber:Int!$RepositoryName:String!$RepositoryOwner:String!){repository(owner: $RepositoryOwner, name: $RepositoryName){issue(number: $IssueNumber){reactionGroups{users(first:10){nodes{login}}}}}}`,
+			want: `query($issueNumber:Int!$repositoryName:String!$repositoryOwner:String!){repository(owner: $repositoryOwner, name: $repositoryName){issue(number: $issueNumber){reactionGroups{users(first:10){nodes{login}}}}}}`,
 		},
 	}
 	for _, tc := range tests {
@@ -209,15 +209,15 @@ func TestConstructMutation(t *testing.T) {
 							}
 						}
 					}
-				} `graphql:"addReaction(input:$Input)"`
+				} `graphql:"addReaction(input:$input)"`
 			}{},
 			inVariables: map[string]interface{}{
-				"Input": AddReactionInput{
+				"input": AddReactionInput{
 					SubjectID: "MDU6SXNzdWUyMzE1MjcyNzk=",
 					Content:   ThumbsUp,
 				},
 			},
-			want: `mutation($Input:AddReactionInput!){addReaction(input:$Input){subject{reactionGroups{users{totalCount}}}}}`,
+			want: `mutation($input:AddReactionInput!){addReaction(input:$input){subject{reactionGroups{users{totalCount}}}}}`,
 		},
 	}
 	for _, tc := range tests {
@@ -235,8 +235,8 @@ func TestQueryArguments(t *testing.T) {
 		want string
 	}{
 		{
-			in:   map[string]interface{}{"A": Int(123), "B": NewBoolean(true)},
-			want: "$A:Int!$B:Boolean",
+			in:   map[string]interface{}{"a": Int(123), "b": NewBoolean(true)},
+			want: "$a:Int!$b:Boolean",
 		},
 	}
 	for _, tc := range tests {

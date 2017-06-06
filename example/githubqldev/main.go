@@ -79,9 +79,9 @@ func run() error {
 							EndCursor   githubql.String
 							HasNextPage githubql.Boolean
 						}
-					} `graphql:"comments(first:$CommentsFirst,after:$CommentsAfter)"`
-				} `graphql:"issue(number:$IssueNumber)"`
-			} `graphql:"repository(owner:$RepositoryOwner,name:$RepositoryName)"`
+					} `graphql:"comments(first:$commentsFirst,after:$commentsAfter)"`
+				} `graphql:"issue(number:$issueNumber)"`
+			} `graphql:"repository(owner:$repositoryOwner,name:$repositoryName)"`
 			Viewer struct {
 				Login      githubql.String
 				CreatedAt  githubql.DateTime
@@ -96,11 +96,11 @@ func run() error {
 			}
 		}
 		variables := map[string]interface{}{
-			"RepositoryOwner": githubql.String("shurcooL-test"),
-			"RepositoryName":  githubql.String("test-repo"),
-			"IssueNumber":     githubql.Int(1),
-			"CommentsFirst":   githubql.NewInt(1),
-			"CommentsAfter":   githubql.NewString("Y3Vyc29yOjE5NTE4NDI1Ng=="),
+			"repositoryOwner": githubql.String("shurcooL-test"),
+			"repositoryName":  githubql.String("test-repo"),
+			"issueNumber":     githubql.Int(1),
+			"commentsFirst":   githubql.NewInt(1),
+			"commentsAfter":   githubql.NewString("Y3Vyc29yOjE5NTE4NDI1Ng=="),
 		}
 		err := client.Query(context.Background(), &q, variables)
 		if err != nil {
@@ -122,15 +122,15 @@ func run() error {
 					ID        githubql.ID
 					Reactions struct {
 						ViewerHasReacted githubql.Boolean
-					} `graphql:"reactions(content:$ReactionContent)"`
-				} `graphql:"issue(number:$IssueNumber)"`
-			} `graphql:"repository(owner:$RepositoryOwner,name:$RepositoryName)"`
+					} `graphql:"reactions(content:$reactionContent)"`
+				} `graphql:"issue(number:$issueNumber)"`
+			} `graphql:"repository(owner:$repositoryOwner,name:$repositoryName)"`
 		}
 		variables := map[string]interface{}{
-			"RepositoryOwner": githubql.String("shurcooL-test"),
-			"RepositoryName":  githubql.String("test-repo"),
-			"IssueNumber":     githubql.Int(2),
-			"ReactionContent": githubql.ThumbsUp,
+			"repositoryOwner": githubql.String("shurcooL-test"),
+			"repositoryName":  githubql.String("test-repo"),
+			"issueNumber":     githubql.Int(2),
+			"reactionContent": githubql.ThumbsUp,
 		}
 		err := client.Query(context.Background(), &q, variables)
 		if err != nil {
@@ -150,7 +150,7 @@ func run() error {
 							}
 						}
 					}
-				} `graphql:"addReaction(input:$Input)"`
+				} `graphql:"addReaction(input:$input)"`
 			}
 			input := githubql.AddReactionInput{
 				SubjectID: q.Repository.Issue.ID,
@@ -174,7 +174,7 @@ func run() error {
 							}
 						}
 					}
-				} `graphql:"removeReaction(input:$Input)"`
+				} `graphql:"removeReaction(input:$input)"`
 			}
 			input := githubql.RemoveReactionInput{
 				SubjectID: q.Repository.Issue.ID,
