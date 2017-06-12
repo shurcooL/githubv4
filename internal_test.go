@@ -214,7 +214,7 @@ func TestConstructMutation(t *testing.T) {
 			inVariables: map[string]interface{}{
 				"input": AddReactionInput{
 					SubjectID: "MDU6SXNzdWUyMzE1MjcyNzk=",
-					Content:   ThumbsUp,
+					Content:   ReactionContentThumbsUp,
 				},
 			},
 			want: `mutation($input:AddReactionInput!){addReaction(input:$input){subject{reactionGroups{users{totalCount}}}}}`,

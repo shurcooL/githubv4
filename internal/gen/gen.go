@@ -78,7 +78,7 @@ type {{.name}} string
 
 // {{.description | fullSentence}}
 const ({{range .enumValues}}
-	{{.name | enumIdentifier}} {{$.name}} = {{.name | quote}} // {{.description | fullSentence}}{{end}}
+	{{$.name}}{{.name | enumIdentifier}} {{$.name}} = {{.name | quote}} // {{.description | fullSentence}}{{end}}
 )
 {{- end -}}
 `),

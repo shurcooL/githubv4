@@ -153,7 +153,7 @@ func TestClient_Mutate(t *testing.T) {
 	var m mutation
 	input := githubql.AddReactionInput{
 		SubjectID: "MDU6SXNzdWUyMTc5NTQ0OTc=",
-		Content:   githubql.Hooray,
+		Content:   githubql.ReactionContentHooray,
 	}
 	err := client.Mutate(context.Background(), &m, input, nil)
 	if err != nil {
@@ -162,7 +162,7 @@ func TestClient_Mutate(t *testing.T) {
 	got := m
 
 	var want mutation
-	want.AddReaction.Reaction.Content = githubql.Hooray
+	want.AddReaction.Reaction.Content = githubql.ReactionContentHooray
 	want.AddReaction.Subject.ID = "MDU6SXNzdWUyMTc5NTQ0OTc="
 	var rg reactionGroup
 	rg.Users.TotalCount = 3

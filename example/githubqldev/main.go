@@ -130,7 +130,7 @@ func run() error {
 			"repositoryOwner": githubql.String("shurcooL-test"),
 			"repositoryName":  githubql.String("test-repo"),
 			"issueNumber":     githubql.Int(2),
-			"reactionContent": githubql.ThumbsUp,
+			"reactionContent": githubql.ReactionContentThumbsUp,
 		}
 		err := client.Query(context.Background(), &q, variables)
 		if err != nil {
@@ -154,7 +154,7 @@ func run() error {
 			}
 			input := githubql.AddReactionInput{
 				SubjectID: q.Repository.Issue.ID,
-				Content:   githubql.ThumbsUp,
+				Content:   githubql.ReactionContentThumbsUp,
 			}
 			err := client.Mutate(context.Background(), &m, input, nil)
 			if err != nil {
@@ -178,7 +178,7 @@ func run() error {
 			}
 			input := githubql.RemoveReactionInput{
 				SubjectID: q.Repository.Issue.ID,
-				Content:   githubql.ThumbsUp,
+				Content:   githubql.ReactionContentThumbsUp,
 			}
 			err := client.Mutate(context.Background(), &m, input, nil)
 			if err != nil {
