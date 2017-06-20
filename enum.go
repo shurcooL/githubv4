@@ -68,7 +68,7 @@ type ReactionOrderField string
 
 // A list of fields that reactions can be ordered by.
 const (
-	CreatedAt ReactionOrderField = "CREATED_AT" // Allows ordering a list of reactions by when they were created.
+//	CreatedAt ReactionOrderField = "CREATED_AT" // Allows ordering a list of reactions by when they were created.
 )
 
 // GitSignatureState represents the state of a Git signature.
@@ -108,8 +108,8 @@ type IssueState string
 
 // The possible states of an issue.
 const (
-	Open   IssueState = "OPEN"   // An issue that is still open.
-	Closed IssueState = "CLOSED" // An issue that has been closed.
+//	Open   IssueState = "OPEN"   // An issue that is still open.
+//	Closed IssueState = "CLOSED" // An issue that has been closed.
 )
 
 // IssueOrderField represents properties by which issue connections can be ordered.
@@ -117,9 +117,9 @@ type IssueOrderField string
 
 // Properties by which issue connections can be ordered.
 const (
-	CreatedAt IssueOrderField = "CREATED_AT" // Order issues by creation time.
-	UpdatedAt IssueOrderField = "UPDATED_AT" // Order issues by update time.
-	Comments  IssueOrderField = "COMMENTS"   // Order issues by comment count.
+	//CreatedAt IssueOrderField = "CREATED_AT" // Order issues by creation time.
+	//UpdatedAt IssueOrderField = "UPDATED_AT" // Order issues by update time.
+	Comments IssueOrderField = "COMMENTS" // Order issues by comment count.
 )
 
 // SubscriptionState represents the possible states of a subscription.
@@ -146,10 +146,10 @@ type RepositoryOrderField string
 
 // Properties by which repository connections can be ordered.
 const (
-	CreatedAt RepositoryOrderField = "CREATED_AT" // Order repositories by creation time.
-	UpdatedAt RepositoryOrderField = "UPDATED_AT" // Order repositories by update time.
-	PushedAt  RepositoryOrderField = "PUSHED_AT"  // Order repositories by push time.
-	Name      RepositoryOrderField = "NAME"       // Order repositories by name.
+	//CreatedAt RepositoryOrderField = "CREATED_AT" // Order repositories by creation time.
+	//UpdatedAt RepositoryOrderField = "UPDATED_AT" // Order repositories by update time.
+	PushedAt RepositoryOrderField = "PUSHED_AT" // Order repositories by push time.
+	//Name     RepositoryOrderField = "NAME"      // Order repositories by name.
 )
 
 // RepositoryAffiliation represents the affiliation of a user to a repository.
@@ -167,8 +167,8 @@ type PullRequestState string
 
 // The possible states of a pull request.
 const (
-	Open   PullRequestState = "OPEN"   // A pull request that is still open.
-	Closed PullRequestState = "CLOSED" // A pull request that has been closed without being merged.
+	//Open   PullRequestState = "OPEN"   // A pull request that is still open.
+	//Closed PullRequestState = "CLOSED" // A pull request that has been closed without being merged.
 	Merged PullRequestState = "MERGED" // A pull request that has been closed by being merged.
 )
 
@@ -196,7 +196,7 @@ type PullRequestReviewState string
 
 // The possible states of a pull request review.
 const (
-	Pending          PullRequestReviewState = "PENDING"           // A review that has not yet been submitted.
+	//Pending          PullRequestReviewState = "PENDING"           // A review that has not yet been submitted.
 	Commented        PullRequestReviewState = "COMMENTED"         // An informational review.
 	Approved         PullRequestReviewState = "APPROVED"          // A review allowing the pull request to merge.
 	ChangesRequested PullRequestReviewState = "CHANGES_REQUESTED" // A review blocking the pull request from merging.
@@ -208,8 +208,8 @@ type PullRequestPubSubTopic string
 
 // The possible PubSub channels for a pull request.
 const (
-	Updated    PullRequestPubSubTopic = "UPDATED"    // The channel ID for observing pull request updates.
-	Markasread PullRequestPubSubTopic = "MARKASREAD" // The channel ID for marking an pull request as read.
+//	Updated    PullRequestPubSubTopic = "UPDATED"    // The channel ID for observing pull request updates.
+//	Markasread PullRequestPubSubTopic = "MARKASREAD" // The channel ID for marking an pull request as read.
 )
 
 // DeploymentStatusState represents the possible states for a deployment status.
@@ -217,11 +217,11 @@ type DeploymentStatusState string
 
 // The possible states for a deployment status.
 const (
-	Pending  DeploymentStatusState = "PENDING"  // The deployment is pending.
-	Success  DeploymentStatusState = "SUCCESS"  // The deployment was successful.
-	Failure  DeploymentStatusState = "FAILURE"  // The deployment has failed.
+	//Pending  DeploymentStatusState = "PENDING"  // The deployment is pending.
+	//Success  DeploymentStatusState = "SUCCESS"  // The deployment was successful.
+	//Failure  DeploymentStatusState = "FAILURE"  // The deployment has failed.
 	Inactive DeploymentStatusState = "INACTIVE" // The deployment is inactive.
-	Error    DeploymentStatusState = "ERROR"    // The deployment experienced an error.
+	//Error    DeploymentStatusState = "ERROR"    // The deployment experienced an error.
 )
 
 // DeploymentState represents the possible states in which a deployment can be.
@@ -232,10 +232,10 @@ const (
 	Abandoned DeploymentState = "ABANDONED" // The pending deployment was not updated after 30 minutes.
 	Active    DeploymentState = "ACTIVE"    // The deployment is currently active.
 	Destroyed DeploymentState = "DESTROYED" // An inactive transient deployment.
-	Error     DeploymentState = "ERROR"     // The deployment experienced an error.
-	Failure   DeploymentState = "FAILURE"   // The deployment has failed.
-	Inactive  DeploymentState = "INACTIVE"  // The deployment is inactive.
-	Pending   DeploymentState = "PENDING"   // The deployment is pending.
+	//Error     DeploymentState = "ERROR"     // The deployment experienced an error.
+	//Failure   DeploymentState = "FAILURE"   // The deployment has failed.
+	//Inactive  DeploymentState = "INACTIVE"  // The deployment is inactive.
+	//Pending   DeploymentState = "PENDING"   // The deployment is pending.
 )
 
 // OrganizationInvitationRole represents the possible organization invitation roles.
@@ -256,7 +256,7 @@ type DefaultRepositoryPermissionField string
 const (
 	Read  DefaultRepositoryPermissionField = "READ"  // Members have read access to org repos by default.
 	Write DefaultRepositoryPermissionField = "WRITE" // Members have read and write access to org repos by default.
-	Admin DefaultRepositoryPermissionField = "ADMIN" // Members have read, write, and admin access to org repos by default.
+	//Admin DefaultRepositoryPermissionField = "ADMIN" // Members have read, write, and admin access to org repos by default.
 )
 
 // TeamPrivacy represents the possible team privacy values.
@@ -282,7 +282,7 @@ type TeamOrderField string
 
 // Properties by which team connections can be ordered.
 const (
-	Name TeamOrderField = "NAME" // Allows ordering a list of teams by name.
+//Name TeamOrderField = "NAME" // Allows ordering a list of teams by name.
 )
 
 // TeamRole represents the role of a user on a team.
@@ -290,7 +290,7 @@ type TeamRole string
 
 // The role of a user on a team.
 const (
-	Admin  TeamRole = "ADMIN"  // User has admin rights on the team.
+	//Admin  TeamRole = "ADMIN"  // User has admin rights on the team.
 	Member TeamRole = "MEMBER" // User is a member of the team.
 )
 
@@ -307,9 +307,9 @@ type GistPrivacy string
 
 // The privacy of a Gist.
 const (
-	Public GistPrivacy = "PUBLIC" // Public.
-	Secret GistPrivacy = "SECRET" // Secret.
-	All    GistPrivacy = "ALL"    // Gists that are public and secret.
+	//Public GistPrivacy = "PUBLIC" // Public.
+	//Secret GistPrivacy = "SECRET" // Secret.
+	All GistPrivacy = "ALL" // Gists that are public and secret.
 )
 
 // MilestoneState represents the possible states of a milestone.
@@ -317,8 +317,8 @@ type MilestoneState string
 
 // The possible states of a milestone.
 const (
-	Open   MilestoneState = "OPEN"   // A milestone that is still open.
-	Closed MilestoneState = "CLOSED" // A milestone that has been closed.
+//	Open   MilestoneState = "OPEN"   // A milestone that is still open.
+//	Closed MilestoneState = "CLOSED" // A milestone that has been closed.
 )
 
 // RepositoryLockReason represents the possible reasons a given repsitory could be in a locked state.
@@ -337,7 +337,7 @@ type RepositoryCollaboratorAffiliation string
 
 // The affiliation type between collaborator and repository.
 const (
-	All     RepositoryCollaboratorAffiliation = "ALL"     // All collaborators of the repository.
+	//All     RepositoryCollaboratorAffiliation = "ALL"     // All collaborators of the repository.
 	Outside RepositoryCollaboratorAffiliation = "OUTSIDE" // All outside collaborators of an organization-owned repository.
 )
 
