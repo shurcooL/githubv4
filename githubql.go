@@ -39,12 +39,12 @@ func (c *Client) Query(ctx context.Context, q interface{}, variables map[string]
 // Mutate executes a single GraphQL mutation request,
 // with a mutation derived from m, populating the response into it.
 // m should be a pointer to struct that corresponds to the GitHub GraphQL schema.
-// Provided input will be set as a variable named "Input".
+// Provided input will be set as a variable named "input".
 func (c *Client) Mutate(ctx context.Context, m interface{}, input Input, variables map[string]interface{}) error {
 	if variables == nil {
-		variables = map[string]interface{}{"Input": input}
+		variables = map[string]interface{}{"input": input}
 	} else {
-		variables["Input"] = input
+		variables["input"] = input
 	}
 	return c.do(ctx, mutationOperation, m, variables)
 }

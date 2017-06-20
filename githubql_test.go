@@ -112,7 +112,7 @@ func TestClient_Mutate(t *testing.T) {
 			t.Errorf("got request method: %v, want: %v", got, want)
 		}
 		body := mustRead(req.Body)
-		if got, want := body, `{"query":"mutation($Input:AddReactionInput!){addReaction(input:$Input){reaction{content},subject{id,reactionGroups{users{totalCount}}}}}","variables":{"Input":{"subjectId":"MDU6SXNzdWUyMTc5NTQ0OTc=","content":"HOORAY"}}}`+"\n"; got != want {
+		if got, want := body, `{"query":"mutation($input:AddReactionInput!){addReaction(input:$input){reaction{content},subject{id,reactionGroups{users{totalCount}}}}}","variables":{"input":{"subjectId":"MDU6SXNzdWUyMTc5NTQ0OTc=","content":"HOORAY"}}}`+"\n"; got != want {
 			t.Errorf("got body: %v, want %v", got, want)
 		}
 		mustWrite(w, `{"data": {
@@ -147,7 +147,7 @@ func TestClient_Mutate(t *testing.T) {
 				ID             githubql.ID
 				ReactionGroups []reactionGroup
 			}
-		} `graphql:"addReaction(input:$Input)"`
+		} `graphql:"addReaction(input:$input)"`
 	}
 
 	var m mutation

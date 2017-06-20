@@ -168,8 +168,8 @@ However, that'll only work if the arguments are constant and known in advance. O
 // fetchRepoDescription fetches description of repo with owner and name.
 func fetchRepoDescription(ctx context.Context, owner, name string) (string, error) {
 	variables := map[string]interface{}{
-		"Owner": githubql.String(owner),
-		"Name":  githubql.String(name),
+		"owner": githubql.String(owner),
+		"name":  githubql.String(name),
 	}
 ```
 
@@ -179,7 +179,7 @@ Then, replace the constants in the struct field tag with variable names:
 	var q struct {
 		Repository struct {
 			Description githubql.String
-		} `graphql:"repository(owner: $Owner, name: $Name)"`
+		} `graphql:"repository(owner: $owner, name: $name)"`
 	}
 ```
 
@@ -213,15 +213,15 @@ var q struct {
 					EndCursor   githubql.String
 					HasNextPage githubql.Boolean
 				}
-			} `graphql:"comments(first: 100, after: $CommentsCursor)"` // 100 per page.
-		} `graphql:"issue(number: $IssueNumber)"`
-	} `graphql:"repository(owner: $RepositoryOwner, name: $RepositoryName)"`
+			} `graphql:"comments(first: 100, after: $commentsCursor)"` // 100 per page.
+		} `graphql:"issue(number: $issueNumber)"`
+	} `graphql:"repository(owner: $repositoryOwner, name: $repositoryName)"`
 }
 variables := map[string]interface{}{
-	"RepositoryOwner": githubql.String(owner),
-	"RepositoryName":  githubql.String(name),
-	"IssueNumber":     githubql.Int(issue),
-	"CommentsCursor":  (*githubql.String)(nil), // Null after argument to get first page.
+	"repositoryOwner": githubql.String(owner),
+	"repositoryName":  githubql.String(name),
+	"issueNumber":     githubql.Int(issue),
+	"commentsCursor":  (*githubql.String)(nil), // Null after argument to get first page.
 }
 
 // Get comments from all pages.
@@ -235,7 +235,7 @@ for {
 	if !q.Repository.Issue.Comments.PageInfo.HasNextPage {
 		break
 	}
-	variables["CommentsCursor"] = githubql.NewString(q.Repository.Issue.Comments.PageInfo.EndCursor)
+	variables["commentsCursor"] = githubql.NewString(q.Repository.Issue.Comments.PageInfo.EndCursor)
 }
 ```
 
@@ -248,8 +248,8 @@ Mutations often require information that you can only find out by performing a q
 For example, to make the following GraphQL mutation:
 
 ```GraphQL
-mutation($Input: AddReactionInput!) {
-	addReaction(input: $Input) {
+mutation($input: AddReactionInput!) {
+	addReaction(input: $input) {
 		reaction {
 			content
 		}
@@ -259,7 +259,7 @@ mutation($Input: AddReactionInput!) {
 	}
 }
 variables {
-	"Input": {
+	"input": {
 		"subjectId": "MDU6SXNzdWUyMTc5NTQ0OTc=",
 		"content": "HOORAY"
 	}
@@ -277,7 +277,7 @@ var m struct {
 		Subject struct {
 			ID githubql.ID
 		}
-	} `graphql:"addReaction(input: $Input)"`
+	} `graphql:"addReaction(input: $input)"`
 }
 input := githubql.AddReactionInput{
 	SubjectID: targetIssue.ID, // ID of the target issue from a previous query.
