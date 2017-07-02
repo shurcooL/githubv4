@@ -162,24 +162,24 @@ fmt.Println(q.Repository.Description)
 // My first repository on GitHub!
 ```
 
-However, that'll only work if the arguments are constant and known in advance. Otherwise, you will need to make use of variables. Define a `variables` map:
+However, that'll only work if the arguments are constant and known in advance. Otherwise, you will need to make use of variables. Replace the constants in the struct field tag with variable names:
 
 ```Go
 // fetchRepoDescription fetches description of repo with owner and name.
 func fetchRepoDescription(ctx context.Context, owner, name string) (string, error) {
-	variables := map[string]interface{}{
-		"owner": githubql.String(owner),
-		"name":  githubql.String(name),
-	}
-```
-
-Then, replace the constants in the struct field tag with variable names:
-
-```Go
 	var q struct {
 		Repository struct {
 			Description githubql.String
 		} `graphql:"repository(owner: $owner, name: $name)"`
+	}
+```
+
+Then, define a `variables` map with their values:
+
+```Go
+	variables := map[string]interface{}{
+		"owner": githubql.String(owner),
+		"name":  githubql.String(name),
 	}
 ```
 
