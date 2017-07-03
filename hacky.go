@@ -46,10 +46,14 @@ func queryArguments(variables map[string]interface{}) string {
 		v := variables[k]
 		s += "$" + k + ":"
 		t := reflect.TypeOf(v)
-		if t.Kind() == reflect.Ptr {
+		switch t.Kind() {
+		case reflect.Slice, reflect.Array:
+			// TODO: Support t.Elem() being a pointer, if needed. Probably want to do this recursively.
+			s += "[" + t.Elem().Name() + "!]" // E.g., "[IssueState!]".
+		case reflect.Ptr:
 			// Pointer is an optional type, so no "!" at the end.
 			s += t.Elem().Name() // E.g., "Int".
-		} else {
+		default:
 			// Value is a required type, so add "!" to the end.
 			s += t.Name() + "!" // E.g., "Int!".
 		}

@@ -238,6 +238,18 @@ func TestQueryArguments(t *testing.T) {
 			in:   map[string]interface{}{"a": Int(123), "b": NewBoolean(true)},
 			want: "$a:Int!$b:Boolean",
 		},
+		{
+			in:   map[string]interface{}{"states": []IssueState{IssueStateOpen, IssueStateClosed}},
+			want: "$states:[IssueState!]",
+		},
+		{
+			in:   map[string]interface{}{"states": []IssueState(nil)},
+			want: "$states:[IssueState!]",
+		},
+		{
+			in:   map[string]interface{}{"states": [...]IssueState{IssueStateOpen, IssueStateClosed}},
+			want: "$states:[IssueState!]",
+		},
 	}
 	for _, tc := range tests {
 		got := queryArguments(tc.in)
