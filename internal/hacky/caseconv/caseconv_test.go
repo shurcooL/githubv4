@@ -7,6 +7,12 @@ import (
 	"github.com/shurcooL/githubql/internal/hacky/caseconv"
 )
 
+func ExampleLowerCamelCaseToMixedCaps() {
+	fmt.Println(caseconv.LowerCamelCaseToMixedCaps("clientMutationId"))
+
+	// Output: ClientMutationID
+}
+
 func ExampleMixedCapsToLowerCamelCase() {
 	fmt.Println(caseconv.MixedCapsToLowerCamelCase("ClientMutationID"))
 
@@ -27,6 +33,12 @@ func ExampleCamelCaseToUnderscoreSep() {
 
 func ExampleUnderscoreSepToMixedCaps() {
 	fmt.Println(caseconv.UnderscoreSepToMixedCaps("string_URL_append"))
+
+	// Output: StringURLAppend
+}
+
+func ExampleUpperUnderscoreSepToMixedCaps() {
+	fmt.Println(caseconv.UpperUnderscoreSepToMixedCaps("STRING_URL_APPEND"))
 
 	// Output: StringURLAppend
 }

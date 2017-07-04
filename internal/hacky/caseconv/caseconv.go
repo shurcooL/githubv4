@@ -6,6 +6,11 @@ import (
 	"unicode"
 )
 
+// LowerCamelCaseToMixedCaps converts "clientMutationId" to "ClientMutationID" form.
+func LowerCamelCaseToMixedCaps(s string) string {
+	return UnderscoreSepToMixedCaps(CamelCaseToUnderscoreSep(s))
+}
+
 // MixedCapsToLowerCamelCase converts "ClientMutationID" to "clientMutationId" form.
 func MixedCapsToLowerCamelCase(s string) string {
 	r := []rune(UnderscoreSepToCamelCase(MixedCapsToUnderscoreSep(s)))
@@ -34,6 +39,11 @@ func UnderscoreSepToMixedCaps(in string) string {
 		}
 	}
 	return out
+}
+
+// UpperUnderscoreSepToMixedCaps converts "STRING_URL_APPEND" to "StringURLAppend" form.
+func UpperUnderscoreSepToMixedCaps(s string) string {
+	return UnderscoreSepToMixedCaps(strings.ToLower(s))
 }
 
 // CamelCaseToUnderscoreSep converts "StringUrlAppend" to "string_url_append" form.
