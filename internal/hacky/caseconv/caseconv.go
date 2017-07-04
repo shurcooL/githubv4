@@ -6,6 +6,16 @@ import (
 	"unicode"
 )
 
+// MixedCapsToLowerCamelCase converts "ClientMutationID" to "clientMutationId" form.
+func MixedCapsToLowerCamelCase(s string) string {
+	r := []rune(UnderscoreSepToCamelCase(MixedCapsToUnderscoreSep(s)))
+	if len(r) == 0 {
+		return ""
+	}
+	r[0] = unicode.ToLower(r[0])
+	return string(r)
+}
+
 // UnderscoreSepToCamelCase converts "string_URL_append" to "StringUrlAppend" form.
 func UnderscoreSepToCamelCase(s string) string {
 	return strings.Replace(strings.Title(strings.Replace(strings.ToLower(s), "_", " ", -1)), " ", "", -1)

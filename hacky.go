@@ -5,7 +5,6 @@ import (
 	"io"
 	"reflect"
 	"sort"
-	"unicode"
 
 	"github.com/shurcooL/githubql/internal/hacky/caseconv"
 )
@@ -81,18 +80,18 @@ func querifyType(w io.Writer, t reflect.Type) {
 			return
 		}
 		io.WriteString(w, "{")
-		var sep bool
+		sep := false
 		for i := 0; i < t.NumField(); i++ {
-			if sep {
-				io.WriteString(w, ",")
-			} else {
+			if !sep {
 				sep = true
+			} else {
+				io.WriteString(w, ",")
 			}
 			f := t.Field(i)
 			if value, ok := f.Tag.Lookup("graphql"); ok {
 				io.WriteString(w, value)
 			} else {
-				io.WriteString(w, mixedCapsToLowerCamelCase(f.Name))
+				io.WriteString(w, caseconv.MixedCapsToLowerCamelCase(f.Name))
 			}
 			querifyType(w, f.Type)
 		}
@@ -106,12 +105,3 @@ var (
 	uriType             = reflect.TypeOf(URI{})
 	x509CertificateType = reflect.TypeOf(X509Certificate{})
 )
-
-func mixedCapsToLowerCamelCase(s string) string {
-	r := []rune(caseconv.UnderscoreSepToCamelCase(caseconv.MixedCapsToUnderscoreSep(s)))
-	if len(r) == 0 {
-		return ""
-	}
-	r[0] = unicode.ToLower(r[0])
-	return string(r)
-}

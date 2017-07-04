@@ -2,9 +2,16 @@ package caseconv_test
 
 import (
 	"fmt"
+	"testing"
 
 	"github.com/shurcooL/githubql/internal/hacky/caseconv"
 )
+
+func ExampleMixedCapsToLowerCamelCase() {
+	fmt.Println(caseconv.MixedCapsToLowerCamelCase("ClientMutationID"))
+
+	// Output: clientMutationId
+}
 
 func ExampleUnderscoreSepToCamelCase() {
 	fmt.Println(caseconv.UnderscoreSepToCamelCase("string_URL_append"))
@@ -33,4 +40,24 @@ func ExampleMixedCapsToUnderscoreSep() {
 	// string_URL_append
 	// URL_from
 	// set_URL_HTML
+}
+
+func TestMixedCapsToLowerCamelCase(t *testing.T) {
+	tests := []struct {
+		in   string
+		want string
+	}{
+		{in: "DatabaseID", want: "databaseId"},
+		{in: "URL", want: "url"},
+		{in: "ID", want: "id"},
+		{in: "CreatedAt", want: "createdAt"},
+		{in: "Login", want: "login"},
+		{in: "ResetAt", want: "resetAt"},
+	}
+	for _, tc := range tests {
+		got := caseconv.MixedCapsToLowerCamelCase(tc.in)
+		if got != tc.want {
+			t.Errorf("got: %q, want: %q", got, tc.want)
+		}
+	}
 }

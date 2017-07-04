@@ -258,23 +258,3 @@ func TestQueryArguments(t *testing.T) {
 		}
 	}
 }
-
-func TestMixedCapsToLowerCamelCase(t *testing.T) {
-	tests := []struct {
-		in   string
-		want string
-	}{
-		{in: "DatabaseID", want: "databaseId"},
-		{in: "URL", want: "url"},
-		{in: "ID", want: "id"},
-		{in: "CreatedAt", want: "createdAt"},
-		{in: "Login", want: "login"},
-		{in: "ResetAt", want: "resetAt"},
-	}
-	for _, tc := range tests {
-		got := mixedCapsToLowerCamelCase(tc.in)
-		if got != tc.want {
-			t.Errorf("got: %q, want: %q", got, tc.want)
-		}
-	}
-}
