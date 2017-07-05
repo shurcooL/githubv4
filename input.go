@@ -254,6 +254,8 @@ type AddPullRequestReviewInput struct {
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
+	// The commit OID the review pertains to. (Optional.)
+	CommitOID *GitObjectID `json:"commitOID,omitempty"`
 	// The contents of the review body comment. (Optional.)
 	Body *String `json:"body,omitempty"`
 	// The event to perform on the pull request review. (Optional.)

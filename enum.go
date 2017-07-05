@@ -38,6 +38,29 @@ const (
 	ProjectCardStateRedacted    ProjectCardState = "REDACTED"     // The card is redacted.
 )
 
+// SubscriptionState represents the possible states of a subscription.
+type SubscriptionState string
+
+// The possible states of a subscription.
+const (
+	SubscriptionStateUnsubscribed SubscriptionState = "UNSUBSCRIBED" // The User is only notified when particpating or @mentioned.
+	SubscriptionStateSubscribed   SubscriptionState = "SUBSCRIBED"   // The User is notified of all conversations.
+	SubscriptionStateIgnored      SubscriptionState = "IGNORED"      // The User is never notified.
+)
+
+// CommentAuthorAssociation represents a comment author association with repository.
+type CommentAuthorAssociation string
+
+// A comment author association with repository.
+const (
+	CommentAuthorAssociationMember               CommentAuthorAssociation = "MEMBER"                 // Author is a member of the organization that owns the repository.
+	CommentAuthorAssociationOwner                CommentAuthorAssociation = "OWNER"                  // Author is the owner of the repository.
+	CommentAuthorAssociationCollaborator         CommentAuthorAssociation = "COLLABORATOR"           // Author has been invited to collaborate on the repository.
+	CommentAuthorAssociationContributor          CommentAuthorAssociation = "CONTRIBUTOR"            // Author has previously committed to the repository.
+	CommentAuthorAssociationFirstTimeContributor CommentAuthorAssociation = "FIRST_TIME_CONTRIBUTOR" // Author has not previously committed to the repository.
+	CommentAuthorAssociationNone                 CommentAuthorAssociation = "NONE"                   // Author has no association with the repository.
+)
+
 // CommentCannotUpdateReason represents the possible errors that will prevent a user from updating a comment.
 type CommentCannotUpdateReason string
 
@@ -122,16 +145,6 @@ const (
 	IssueOrderFieldComments  IssueOrderField = "COMMENTS"   // Order issues by comment count.
 )
 
-// SubscriptionState represents the possible states of a subscription.
-type SubscriptionState string
-
-// The possible states of a subscription.
-const (
-	SubscriptionStateUnsubscribed SubscriptionState = "UNSUBSCRIBED" // The User is only notified when particpating or @mentioned.
-	SubscriptionStateSubscribed   SubscriptionState = "SUBSCRIBED"   // The User is notified of all conversations.
-	SubscriptionStateIgnored      SubscriptionState = "IGNORED"      // The User is never notified.
-)
-
 // RepositoryPrivacy represents the privacy of a repository.
 type RepositoryPrivacy string
 
@@ -146,10 +159,11 @@ type RepositoryOrderField string
 
 // Properties by which repository connections can be ordered.
 const (
-	RepositoryOrderFieldCreatedAt RepositoryOrderField = "CREATED_AT" // Order repositories by creation time.
-	RepositoryOrderFieldUpdatedAt RepositoryOrderField = "UPDATED_AT" // Order repositories by update time.
-	RepositoryOrderFieldPushedAt  RepositoryOrderField = "PUSHED_AT"  // Order repositories by push time.
-	RepositoryOrderFieldName      RepositoryOrderField = "NAME"       // Order repositories by name.
+	RepositoryOrderFieldCreatedAt  RepositoryOrderField = "CREATED_AT" // Order repositories by creation time.
+	RepositoryOrderFieldUpdatedAt  RepositoryOrderField = "UPDATED_AT" // Order repositories by update time.
+	RepositoryOrderFieldPushedAt   RepositoryOrderField = "PUSHED_AT"  // Order repositories by push time.
+	RepositoryOrderFieldName       RepositoryOrderField = "NAME"       // Order repositories by name.
+	RepositoryOrderFieldStargazers RepositoryOrderField = "STARGAZERS" // Order repositories by number of stargazers.
 )
 
 // RepositoryAffiliation represents the affiliation of a user to a repository.
@@ -210,6 +224,63 @@ type PullRequestPubSubTopic string
 const (
 	PullRequestPubSubTopicUpdated    PullRequestPubSubTopic = "UPDATED"    // The channel ID for observing pull request updates.
 	PullRequestPubSubTopicMarkasread PullRequestPubSubTopic = "MARKASREAD" // The channel ID for marking an pull request as read.
+	PullRequestPubSubTopicHeadRef    PullRequestPubSubTopic = "HEAD_REF"   // The channel ID for observing head ref updates.
+)
+
+// TeamPrivacy represents the possible team privacy values.
+type TeamPrivacy string
+
+// The possible team privacy values.
+const (
+	TeamPrivacySecret  TeamPrivacy = "SECRET"  // A secret team can only be seen by its members.
+	TeamPrivacyVisible TeamPrivacy = "VISIBLE" // A visible team can be seen and @mentioned by every member of the organization.
+)
+
+// UserOrderField represents properties by which user connections can be ordered.
+type UserOrderField string
+
+// Properties by which user connections can be ordered.
+const (
+	UserOrderFieldLogin  UserOrderField = "LOGIN"  // Allows ordering a list of users by their login.
+	UserOrderFieldAction UserOrderField = "ACTION" // Allows ordering a list of users by their ability action.
+)
+
+// OrganizationInvitationRole represents the possible organization invitation roles.
+type OrganizationInvitationRole string
+
+// The possible organization invitation roles.
+const (
+	OrganizationInvitationRoleDirectMember   OrganizationInvitationRole = "DIRECT_MEMBER"   // The user is invited to be a direct member of the organization.
+	OrganizationInvitationRoleAdmin          OrganizationInvitationRole = "ADMIN"           // The user is invited to be an admin of the organization.
+	OrganizationInvitationRoleBillingManager OrganizationInvitationRole = "BILLING_MANAGER" // The user is invited to be a billing manager of the organization.
+	OrganizationInvitationRoleReinstate      OrganizationInvitationRole = "REINSTATE"       // The user's previous role will be reinstated.
+)
+
+// TeamOrderField represents properties by which team connections can be ordered.
+type TeamOrderField string
+
+// Properties by which team connections can be ordered.
+const (
+	TeamOrderFieldName TeamOrderField = "NAME" // Allows ordering a list of teams by name.
+)
+
+// DefaultRepositoryPermissionField represents the possible default permissions for organization-owned repositories.
+type DefaultRepositoryPermissionField string
+
+// The possible default permissions for organization-owned repositories.
+const (
+	DefaultRepositoryPermissionFieldRead  DefaultRepositoryPermissionField = "READ"  // Members have read access to org repos by default.
+	DefaultRepositoryPermissionFieldWrite DefaultRepositoryPermissionField = "WRITE" // Members have read and write access to org repos by default.
+	DefaultRepositoryPermissionFieldAdmin DefaultRepositoryPermissionField = "ADMIN" // Members have read, write, and admin access to org repos by default.
+)
+
+// TeamRole represents the role of a user on a team.
+type TeamRole string
+
+// The role of a user on a team.
+const (
+	TeamRoleAdmin  TeamRole = "ADMIN"  // User has admin rights on the team.
+	TeamRoleMember TeamRole = "MEMBER" // User is a member of the team.
 )
 
 // DeploymentStatusState represents the possible states for a deployment status.
@@ -236,62 +307,6 @@ const (
 	DeploymentStateFailure   DeploymentState = "FAILURE"   // The deployment has failed.
 	DeploymentStateInactive  DeploymentState = "INACTIVE"  // The deployment is inactive.
 	DeploymentStatePending   DeploymentState = "PENDING"   // The deployment is pending.
-)
-
-// OrganizationInvitationRole represents the possible organization invitation roles.
-type OrganizationInvitationRole string
-
-// The possible organization invitation roles.
-const (
-	OrganizationInvitationRoleDirectMember   OrganizationInvitationRole = "DIRECT_MEMBER"   // The user is invited to be a direct member of the organization.
-	OrganizationInvitationRoleAdmin          OrganizationInvitationRole = "ADMIN"           // The user is invited to be an admin of the organization.
-	OrganizationInvitationRoleBillingManager OrganizationInvitationRole = "BILLING_MANAGER" // The user is invited to be a billing manager of the organization.
-	OrganizationInvitationRoleReinstate      OrganizationInvitationRole = "REINSTATE"       // The user's previous role will be reinstated.
-)
-
-// DefaultRepositoryPermissionField represents the possible default permissions for organization-owned repositories.
-type DefaultRepositoryPermissionField string
-
-// The possible default permissions for organization-owned repositories.
-const (
-	DefaultRepositoryPermissionFieldRead  DefaultRepositoryPermissionField = "READ"  // Members have read access to org repos by default.
-	DefaultRepositoryPermissionFieldWrite DefaultRepositoryPermissionField = "WRITE" // Members have read and write access to org repos by default.
-	DefaultRepositoryPermissionFieldAdmin DefaultRepositoryPermissionField = "ADMIN" // Members have read, write, and admin access to org repos by default.
-)
-
-// TeamPrivacy represents the possible team privacy values.
-type TeamPrivacy string
-
-// The possible team privacy values.
-const (
-	TeamPrivacySecret  TeamPrivacy = "SECRET"  // A secret team can only be seen by its members.
-	TeamPrivacyVisible TeamPrivacy = "VISIBLE" // A visible team can be seen and @mentioned by every member of the organization.
-)
-
-// UserOrderField represents properties by which user connections can be ordered.
-type UserOrderField string
-
-// Properties by which user connections can be ordered.
-const (
-	UserOrderFieldLogin  UserOrderField = "LOGIN"  // Allows ordering a list of users by their login.
-	UserOrderFieldAction UserOrderField = "ACTION" // Allows ordering a list of users by their ability action.
-)
-
-// TeamOrderField represents properties by which team connections can be ordered.
-type TeamOrderField string
-
-// Properties by which team connections can be ordered.
-const (
-	TeamOrderFieldName TeamOrderField = "NAME" // Allows ordering a list of teams by name.
-)
-
-// TeamRole represents the role of a user on a team.
-type TeamRole string
-
-// The role of a user on a team.
-const (
-	TeamRoleAdmin  TeamRole = "ADMIN"  // User has admin rights on the team.
-	TeamRoleMember TeamRole = "MEMBER" // User is a member of the team.
 )
 
 // StarOrderField represents properties by which star connections can be ordered.
