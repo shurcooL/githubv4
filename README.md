@@ -31,13 +31,13 @@ Currently implemented:
 	-	[x] Better organized, medium sized tests.
 -	[x] Aliases.
 	-	[ ] Documentation.
-	-	[ ] Improved support.
+	-	[x] Improved support.
 -	[x] [Inline fragments](http://graphql.org/learn/queries/#inline-fragments).
 -	[x] Generate all of objects, enums, input objects, etc.
 	-	[x] Clean up GitHub documentation to pass `golint`.
--	[ ] Unions.
-	-	[x] Functional, but inconvenient.
-	-	[ ] Improved support (https://github.com/shurcooL/githubql/issues/10).
+-	[x] Unions.
+	-	[x] Functional.
+	-	[x] Improved support (https://github.com/shurcooL/githubql/issues/10).
 -	[ ] Directives (haven't tested yet, but expect it to be supported).
 -	[ ] Research and complete, document the rest of GraphQL features.
 -	[ ] Fully document (and add tests for edge cases) the `graphql` struct field tag.

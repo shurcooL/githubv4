@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/shurcooL/githubql"
 )
@@ -25,16 +26,17 @@ func TestClient_Query(t *testing.T) {
 			t.Errorf("got request method: %v, want: %v", got, want)
 		}
 		body := mustRead(req.Body)
-		if got, want := body, `{"query":"{viewer{login}}"}`+"\n"; got != want {
+		if got, want := body, `{"query":"{viewer{login,bio}}"}`+"\n"; got != want {
 			t.Errorf("got body: %v, want %v", got, want)
 		}
-		mustWrite(w, `{"data": {"viewer": {"login": "gopher"}}}`)
+		mustWrite(w, `{"data": {"viewer": {"login": "gopher", "bio": "The Go gopher."}}}`)
 	})
 	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
 
 	type query struct {
 		Viewer struct {
-			Login githubql.String
+			Login     githubql.String
+			Biography githubql.String `graphql:"bio"` // GraphQL alias.
 		}
 	}
 
@@ -47,6 +49,7 @@ func TestClient_Query(t *testing.T) {
 
 	var want query
 	want.Viewer.Login = "gopher"
+	want.Viewer.Biography = "The Go gopher."
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("client.Query got: %v, want: %v", got, want)
 	}
@@ -102,6 +105,92 @@ func TestClient_Query_errorStatusCode(t *testing.T) {
 	}
 	if got, want := err.Error(), "unexpected status: Not Found"; got != want {
 		t.Errorf("got error: %v, want: %v", got, want)
+	}
+}
+
+func TestClient_Query_union(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
+		if got, want := req.Method, http.MethodPost; got != want {
+			t.Errorf("got request method: %v, want: %v", got, want)
+		}
+		body := mustRead(req.Body)
+		if got, want := body, `{"query":"query($issueNumber:Int!$repositoryName:String!$repositoryOwner:String!){repository(owner: $repositoryOwner, name: $repositoryName){issue(number: $issueNumber){timeline(first: 10){nodes{__typename,...on ClosedEvent{actor{login},createdAt},...on ReopenedEvent{actor{login},createdAt},...on RenamedTitleEvent{actor{login},createdAt,currentTitle,previousTitle}}}}}}","variables":{"issueNumber":1,"repositoryName":"go","repositoryOwner":"golang"}}`+"\n"; got != want {
+			t.Errorf("got body: %v, want %v", got, want)
+		}
+		mustWrite(w, `{"data": {
+			"repository": {
+				"issue": {
+					"timeline": {
+						"nodes": [
+							{
+								"__typename": "RenamedTitleEvent",
+								"createdAt": "2017-06-29T04:12:01Z",
+								"actor": {
+									"login": "gopher"
+								},
+								"currentTitle": "new",
+								"previousTitle": "old"
+							}
+						]
+					}
+				}
+			}
+		}}`)
+	})
+	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+
+	type event struct { // Common fields for all events.
+		Actor     struct{ Login githubql.String }
+		CreatedAt githubql.DateTime
+	}
+	type issueTimelineItem struct {
+		Typename    string `graphql:"__typename"`
+		ClosedEvent struct {
+			event
+		} `graphql:"...on ClosedEvent"`
+		ReopenedEvent struct {
+			event
+		} `graphql:"...on ReopenedEvent"`
+		RenamedTitleEvent struct {
+			event
+			CurrentTitle  string
+			PreviousTitle string
+		} `graphql:"...on RenamedTitleEvent"`
+	}
+	type query struct {
+		Repository struct {
+			Issue struct {
+				Timeline struct {
+					Nodes []issueTimelineItem
+				} `graphql:"timeline(first: 10)"`
+			} `graphql:"issue(number: $issueNumber)"`
+		} `graphql:"repository(owner: $repositoryOwner, name: $repositoryName)"`
+	}
+
+	var q query
+	variables := map[string]interface{}{
+		"repositoryOwner": githubql.String("golang"),
+		"repositoryName":  githubql.String("go"),
+		"issueNumber":     githubql.Int(1),
+	}
+	err := client.Query(context.Background(), &q, variables)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := q
+
+	var want query
+	want.Repository.Issue.Timeline.Nodes = make([]issueTimelineItem, 1)
+	want.Repository.Issue.Timeline.Nodes[0].Typename = "RenamedTitleEvent"
+	want.Repository.Issue.Timeline.Nodes[0].RenamedTitleEvent.Actor.Login = "gopher"
+	want.Repository.Issue.Timeline.Nodes[0].RenamedTitleEvent.CreatedAt.Time = time.Unix(1498709521, 0).UTC()
+	want.Repository.Issue.Timeline.Nodes[0].RenamedTitleEvent.CurrentTitle = "new"
+	want.Repository.Issue.Timeline.Nodes[0].RenamedTitleEvent.PreviousTitle = "old"
+	want.Repository.Issue.Timeline.Nodes[0].ClosedEvent.event = want.Repository.Issue.Timeline.Nodes[0].RenamedTitleEvent.event
+	want.Repository.Issue.Timeline.Nodes[0].ReopenedEvent.event = want.Repository.Issue.Timeline.Nodes[0].RenamedTitleEvent.event
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("client.Query:\ngot:  %+v\nwant: %+v", got, want)
 	}
 }
 

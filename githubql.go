@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/shurcooL/githubql/internal/jsonutil"
 	"github.com/shurcooL/go/ctxhttp"
 )
 
@@ -78,11 +79,11 @@ func (c *Client) do(ctx context.Context, op operationType, v interface{}, variab
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("unexpected status: %v", resp.Status)
 	}
-	out := struct {
-		Data   interface{}
+	var out struct {
+		Data   json.RawMessage
 		Errors errors
 		//Extensions interface{} // Unused.
-	}{Data: v}
+	}
 	err = json.NewDecoder(resp.Body).Decode(&out)
 	if err != nil {
 		return err
@@ -90,7 +91,8 @@ func (c *Client) do(ctx context.Context, op operationType, v interface{}, variab
 	if len(out.Errors) > 0 {
 		return out.Errors
 	}
-	return nil
+	err = jsonutil.UnmarshalGraphQL(out.Data, v)
+	return err
 }
 
 // errors represents the "errors" array in a response from a GraphQL server.
