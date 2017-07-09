@@ -9,29 +9,36 @@ If you're looking for a client library for GitHub REST API v3, the recommended p
 
 **Status:** In active early research and development. The API will change when opportunities for improvement are discovered; it is not yet frozen.
 
-Goals
+Focus
 -----
 
--	Friendly, minimal and powerful API.
+-	Friendly, simple and powerful API.
 -	Correctness, high performance and efficiency.
--	[ ] Support for all of GitHub GraphQL API v4, code generated from schema.
+-	Support all of GitHub GraphQL API v4 via code generation from schema.
+
+### Roadmap
 
 Currently implemented:
 
 -	[x] Basic and intermediate queries.
--	[x] At least one mutation.
+-	[x] All mutations.
 -	[x] Query minification before network transfer.
 -	[x] Scalars.
+	-	[ ] Improved support (https://github.com/shurcooL/githubql/issues/9).
 -	[x] Specifying arguments and passing variables.
--	[ ] Thorough test coverage.
+-	[x] Thorough test coverage.
 	-	[x] Initial basic tests (hacky but functional).
-	-	[ ] Better organized, medium sized tests.
-	-	[ ] Consider using a GraphQL server implementation to allow queries to be done offline, without requiring credentials.
--	[ ] Aliases (known plan, small uncertainty about whether it'll work).
--	[ ] Directives (known plan, small uncertainty about whether it'll work).
--	[ ] [Inline fragments](http://graphql.org/learn/queries/#inline-fragments) (known plan, small uncertainty about whether it'll work).
--	[ ] Generate all of objects, enums, input objects, etc.
-	-	[ ] Clean up GitHub documentation to pass `golint`.
+	-	[x] Better organized, medium sized tests.
+-	[x] Aliases.
+	-	[ ] Documentation.
+	-	[ ] Improved support.
+-	[x] [Inline fragments](http://graphql.org/learn/queries/#inline-fragments).
+-	[x] Generate all of objects, enums, input objects, etc.
+	-	[x] Clean up GitHub documentation to pass `golint`.
+-	[ ] Unions.
+	-	[x] Functional, but inconvenient.
+	-	[ ] Improved support (https://github.com/shurcooL/githubql/issues/10).
+-	[ ] Directives (haven't tested yet, but expect it to be supported).
 -	[ ] Research and complete, document the rest of GraphQL features.
 -	[ ] Fully document (and add tests for edge cases) the `graphql` struct field tag.
 -	[ ] Extremely clean, beautiful, idiomatic Go code (100% coverage, 0 lines of hacky code).
@@ -49,9 +56,8 @@ Future:
 
 Known unknowns:
 
--	Whether or not the current API design will scale to support all of advanced GraphQL specification features, and future changes. So far, I'm not aware of any blockers, and it's looking promising. I am constantly evaluating it against alternative API designs that I've considered and prototyped myself, and new ones that I become aware of.
--	I have only explored roughly 75% of the GraphQL specification (Working Draft – October 2016).
-	-	Unions, I am not familiar and haven't considered them yet.
+-	Whether or not the current API design will scale to support all of advanced GraphQL specification features, and future changes. So far, things are looking great, no major blockers found. I am constantly evaluating it against alternative API designs that I've considered and prototyped myself, and new ones that I become aware of.
+-	I have only explored roughly 80% of the GraphQL specification (Working Draft – October 2016).
 -	Performance, allocations, memory usage under heavy workloads in long-running processes.
 -	Optimal long-term package/code layout (i.e., whether to split off some of the parts into smaller sub-packages).
 
