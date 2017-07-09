@@ -70,20 +70,22 @@ func queryArguments(variables map[string]interface{}) string {
 // E.g., struct{Foo Int, Bar *Boolean} -> "{foo,bar}".
 func querify(v interface{}) string {
 	var buf bytes.Buffer
-	querifyType(&buf, reflect.TypeOf(v))
+	querifyType(&buf, reflect.TypeOf(v), false)
 	return buf.String()
 }
 
-func querifyType(w io.Writer, t reflect.Type) {
+func querifyType(w io.Writer, t reflect.Type, inline bool) {
 	switch t.Kind() {
 	case reflect.Ptr, reflect.Slice:
-		querifyType(w, t.Elem())
+		querifyType(w, t.Elem(), false)
 	case reflect.Struct:
 		// Special handling of scalar struct types.
 		if t == dateTimeType || t == gitTimestampType || t == uriType || t == x509CertificateType {
 			return
 		}
-		io.WriteString(w, "{")
+		if !inline {
+			io.WriteString(w, "{")
+		}
 		sep := false
 		for i := 0; i < t.NumField(); i++ {
 			if !sep {
@@ -92,14 +94,20 @@ func querifyType(w io.Writer, t reflect.Type) {
 				io.WriteString(w, ",")
 			}
 			f := t.Field(i)
-			if value, ok := f.Tag.Lookup("graphql"); ok {
-				io.WriteString(w, value)
-			} else {
-				io.WriteString(w, caseconv.MixedCapsToLowerCamelCase(f.Name))
+			value, ok := f.Tag.Lookup("graphql")
+			inlineField := f.Anonymous && !ok
+			if !inlineField {
+				if ok {
+					io.WriteString(w, value)
+				} else {
+					io.WriteString(w, caseconv.MixedCapsToLowerCamelCase(f.Name))
+				}
 			}
-			querifyType(w, f.Type)
+			querifyType(w, f.Type, inlineField)
 		}
-		io.WriteString(w, "}")
+		if !inline {
+			io.WriteString(w, "}")
+		}
 	}
 }
 

@@ -184,6 +184,34 @@ func TestConstructQuery(t *testing.T) {
 			},
 			want: `query($issueNumber:Int!$repositoryName:String!$repositoryOwner:String!){repository(owner: $repositoryOwner, name: $repositoryName){issue(number: $issueNumber){reactionGroups{users(first:10){nodes{login}}}}}}`,
 		},
+		// Embedded structs without graphql tag should be inlined in query.
+		{
+			inV: func() interface{} {
+				type githubqlActor struct {
+					Login     String
+					AvatarURL URI
+					URL       URI
+				}
+				type event struct { // Common fields for all events.
+					Actor     githubqlActor
+					CreatedAt DateTime
+				}
+				type IssueComment struct {
+					Body String
+				}
+				return struct {
+					event                                         // Should be inlined.
+					IssueComment  `graphql:"... on IssueComment"` // Should not be, because of graphql tag.
+					CurrentTitle  String
+					PreviousTitle String
+					Label         struct {
+						Name  String
+						Color String
+					}
+				}{}
+			}(),
+			want: `{actor{login,avatarUrl,url},createdAt,... on IssueComment{body},currentTitle,previousTitle,label{name,color}}`,
+		},
 	}
 	for _, tc := range tests {
 		got := constructQuery(tc.inV, tc.inVariables)
