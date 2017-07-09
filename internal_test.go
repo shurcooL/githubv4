@@ -250,6 +250,10 @@ func TestQueryArguments(t *testing.T) {
 			in:   map[string]interface{}{"states": [...]IssueState{IssueStateOpen, IssueStateClosed}},
 			want: "$states:[IssueState!]",
 		},
+		{
+			in:   map[string]interface{}{"id": ID("someid")},
+			want: "$id:ID!",
+		},
 	}
 	for _, tc := range tests {
 		got := queryArguments(tc.in)

@@ -53,8 +53,12 @@ func queryArguments(variables map[string]interface{}) string {
 			// Pointer is an optional type, so no "!" at the end.
 			s += t.Elem().Name() // E.g., "Int".
 		default:
+			name := t.Name()
+			if name == "string" { // HACK: Workaround for https://github.com/shurcooL/githubql/issues/12.
+				name = "ID"
+			}
 			// Value is a required type, so add "!" to the end.
-			s += t.Name() + "!" // E.g., "Int!".
+			s += name + "!" // E.g., "Int!".
 		}
 	}
 	return s
