@@ -8,12 +8,14 @@ import (
 	"time"
 )
 
-// Note: These custom types are meant to be used in queries, but it's not required.
-// They're here for convenience and documentation. If you use the base Go types,
-// things will still work.
+// Note: These custom types are meant to be used in queries for now.
+// But the plan is to switch to using native Go types (string, int, bool, time.Time, etc.).
+// See https://github.com/shurcooL/githubql/issues/9 for details.
 //
-// TODO: In Go 1.9, consider using type aliases instead (for extra simplicity
-//       and convenience).
+// These custom types currently provide documentation, and their use
+// is required for sending outbound queries. However, native Go types
+// can be used for unmarshaling. Once https://github.com/shurcooL/githubql/issues/9
+// is resolved, native Go types can completely replace these.
 
 type (
 	// Boolean represents true or false values.
