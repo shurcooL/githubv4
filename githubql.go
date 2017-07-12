@@ -16,7 +16,7 @@ type Client struct {
 	httpClient *http.Client
 }
 
-// NewClient create a new GitHub GraphQL API v4 client with the provided http.Client.
+// NewClient creates a new GitHub GraphQL API v4 client with the provided http.Client.
 // If it's nil, then http.DefaultClient is used.
 //
 // Note that GitHub GraphQL API v4 requires authentication, so
