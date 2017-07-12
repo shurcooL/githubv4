@@ -193,7 +193,7 @@ Finally, call `client.Query` providing `variables`:
 
 ```Go
 	err := client.Query(ctx, &q, variables)
-	return q.Repository.Description, err
+	return string(q.Repository.Description), err
 }
 ```
 
