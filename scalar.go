@@ -5,7 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/url"
+	"reflect"
 	"time"
+
+	"github.com/shurcooL/graphql"
 )
 
 // Note: These custom types are meant to be used in queries for now.
@@ -19,14 +22,14 @@ import (
 
 type (
 	// Boolean represents true or false values.
-	Boolean bool
+	Boolean graphql.Boolean
 
 	// DateTime is an ISO-8601 encoded UTC date.
 	DateTime struct{ time.Time }
 
 	// Float represents signed double-precision fractional values as
 	// specified by IEEE 754.
-	Float float64
+	Float graphql.Float
 
 	// GitObjectID is a Git object ID. For example,
 	// "912ec1990bd09f8fc128c3fa6b59105085aabc03".
@@ -45,16 +48,16 @@ type (
 	// intended to be human-readable. When expected as an input type,
 	// any string (such as "VXNlci0xMA==") or integer (such as 4) input
 	// value will be accepted as an ID.
-	ID interface{}
+	ID graphql.ID
 
 	// Int represents non-fractional signed whole numeric values.
 	// Int can represent values between -(2^31) and 2^31 - 1.
-	Int int32
+	Int graphql.Int
 
 	// String represents textual data as UTF-8 character sequences.
 	// This type is most often used by GraphQL to represent free-form
 	// human-readable text.
-	String string
+	String graphql.String
 
 	// URI is an RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI.
 	URI struct{ *url.URL }
@@ -62,6 +65,13 @@ type (
 	// X509Certificate is a valid x509 certificate.
 	X509Certificate struct{ *x509.Certificate }
 )
+
+var scalars = []reflect.Type{
+	reflect.TypeOf(DateTime{}),
+	reflect.TypeOf(GitTimestamp{}),
+	reflect.TypeOf(URI{}),
+	reflect.TypeOf(X509Certificate{}),
+}
 
 // MarshalJSON implements the json.Marshaler interface.
 // The URI is a quoted string.

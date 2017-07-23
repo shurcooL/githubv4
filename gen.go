@@ -11,13 +11,12 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"path/filepath"
 	"sort"
 	"strconv"
 	"strings"
 	"text/template"
 
-	"github.com/shurcooL/githubql/internal/hacky/caseconv"
+	"github.com/shurcooL/graphql/ident"
 )
 
 func main() {
@@ -57,7 +56,7 @@ func run() error {
 }
 
 func loadSchema() (schema interface{}, err error) {
-	f, err := os.Open(filepath.Join("internal", "gen", "schema.json"))
+	f, err := os.Open("schema.json")
 	if err != nil {
 		return nil, err
 	}
@@ -143,8 +142,8 @@ func t(text string) *template.Template {
 			sort.Strings(names)
 			return names
 		},
-		"identifier":     caseconv.LowerCamelCaseToMixedCaps,
-		"enumIdentifier": caseconv.UpperUnderscoreSepToMixedCaps,
+		"identifier":     func(name string) string { return ident.ParseLowerCamelCase(name).ToMixedCaps() },
+		"enumIdentifier": func(name string) string { return ident.ParseScreamingSnakeCase(name).ToMixedCaps() },
 		"type":           typeString,
 		"endSentence": func(s string) string {
 			s = strings.ToLower(s[0:1]) + s[1:]

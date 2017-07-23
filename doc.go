@@ -10,4 +10,4 @@
 // For now, see README for more details.
 package githubql // import "github.com/shurcooL/githubql"
 
-//go:generate go run internal/gen/gen.go
+//go:generate go run gen.go
