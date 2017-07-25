@@ -68,7 +68,7 @@ func loadSchema() (schema interface{}, err error) {
 // Filename -> Template.
 var templates = map[string]*template.Template{
 	"enum.go": t(`package githubql
-{{range .data.__schema.types}}{{if and (eq .kind "ENUM") (not (internal .name))}}
+{{range .data.__schema.types | sortByName}}{{if and (eq .kind "ENUM") (not (internal .name))}}
 {{template "enum" .}}
 {{end}}{{end}}
 
@@ -90,7 +90,7 @@ const ({{range .enumValues}}
 //
 // {{join (inputObjects .data.__schema.types) ", "}}.
 type Input interface{}
-{{range .data.__schema.types}}{{if eq .kind "INPUT_OBJECT"}}
+{{range .data.__schema.types | sortByName}}{{if eq .kind "INPUT_OBJECT"}}
 {{template "inputObject" .}}
 {{end}}{{end}}
 
@@ -130,6 +130,14 @@ func t(text string) *template.Template {
 		"internal": func(s string) bool { return strings.HasPrefix(s, "__") },
 		"quote":    strconv.Quote,
 		"join":     strings.Join,
+		"sortByName": func(types []interface{}) []interface{} {
+			sort.Slice(types, func(i, j int) bool {
+				ni := types[i].(map[string]interface{})["name"].(string)
+				nj := types[j].(map[string]interface{})["name"].(string)
+				return ni < nj
+			})
+			return types
+		},
 		"inputObjects": func(types []interface{}) []string {
 			var names []string
 			for _, t := range types {
