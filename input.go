@@ -302,9 +302,9 @@ type RequestReviewsInput struct {
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 	// The Node IDs of the user to request. (Optional.)
-	UserIds *[]ID `json:"userIds,omitempty"`
+	UserIDs *[]ID `json:"userIds,omitempty"`
 	// The Node IDs of the team to request. (Optional.)
-	TeamIds *[]ID `json:"teamIds,omitempty"`
+	TeamIDs *[]ID `json:"teamIds,omitempty"`
 	// Add users to the set rather than replace. (Optional.)
 	Union *Boolean `json:"union,omitempty"`
 }
