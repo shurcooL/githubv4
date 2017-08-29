@@ -103,7 +103,7 @@ func TestClient_Query_errorStatusCode(t *testing.T) {
 	if err == nil {
 		t.Fatal("got error: nil, want: non-nil")
 	}
-	if got, want := err.Error(), "unexpected status: Not Found"; got != want {
+	if got, want := err.Error(), "unexpected status: 404 Not Found"; got != want {
 		t.Errorf("got error: %v, want: %v", got, want)
 	}
 }
