@@ -1,4 +1,5 @@
 // githubqldev is a test program currently being used for developing githubql package.
+//
 // Warning: It performs some queries and mutations against real GitHub API.
 //
 // It's not meant to be a clean or readable example. But it's functional.
