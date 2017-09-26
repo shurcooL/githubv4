@@ -10,6 +10,7 @@ import (
 	"go/format"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"sort"
 	"strconv"
@@ -29,7 +30,11 @@ func main() {
 }
 
 func run() error {
-	schema, err := loadSchema()
+	githubToken, ok := os.LookupEnv("GITHUB_TOKEN")
+	if !ok {
+		return fmt.Errorf("GITHUB_TOKEN environment variable not set")
+	}
+	schema, err := loadSchema(githubToken)
 	if err != nil {
 		return err
 	}
@@ -55,13 +60,18 @@ func run() error {
 	return nil
 }
 
-func loadSchema() (schema interface{}, err error) {
-	f, err := os.Open("schema.json")
+func loadSchema(githubToken string) (schema interface{}, err error) {
+	req, err := http.NewRequest("GET", "https://api.github.com/graphql", nil)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
-	err = json.NewDecoder(f).Decode(&schema)
+	req.Header.Set("Authorization", "bearer "+githubToken)
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	err = json.NewDecoder(resp.Body).Decode(&schema)
 	return schema, err
 }
 
