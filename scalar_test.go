@@ -79,6 +79,9 @@ func TestNewScalars(t *testing.T) {
 	if got := githubql.NewBoolean(false); got == nil {
 		t.Error("NewBoolean returned nil")
 	}
+	if got := githubql.NewDate(githubql.Date{}); got == nil {
+		t.Error("NewDate returned nil")
+	}
 	if got := githubql.NewDateTime(githubql.DateTime{}); got == nil {
 		t.Error("NewDateTime returned nil")
 	}
