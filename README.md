@@ -188,7 +188,7 @@ var q struct {
 }
 ```
 
-Alternatively, you can define the struct types corresponding to inline framgents, and use them as embedded fields in your query:
+Alternatively, you can define the struct types corresponding to inline fragments, and use them as embedded fields in your query:
 
 ```Go
 type (
