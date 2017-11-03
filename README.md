@@ -71,7 +71,7 @@ var query struct {
 }
 ```
 
-And call `client.Query`, passing a pointer to it:
+Then call `client.Query`, passing a pointer to it:
 
 ```Go
 err := client.Query(context.Background(), &query, nil)
@@ -110,7 +110,7 @@ var q struct {
 }
 ```
 
-And call `client.Query`:
+Then call `client.Query`:
 
 ```Go
 err := client.Query(context.Background(), &q, nil)
@@ -150,6 +150,80 @@ Finally, call `client.Query` providing `variables`:
 	err := client.Query(ctx, &q, variables)
 	return string(q.Repository.Description), err
 }
+```
+
+### Inline Fragments
+
+Some GraphQL queries contain inline fragments. You can use the `graphql` struct field tag to express them.
+
+For example, to make the following GraphQL query:
+
+```GraphQL
+{
+	repositoryOwner(login: "github") {
+		login
+		... on Organization {
+			description
+		}
+		... on User {
+			bio
+		}
+	}
+}
+```
+
+You can define this variable:
+
+```Go
+var q struct {
+	RepositoryOwner struct {
+		Login        githubql.String
+		Organization struct {
+			Description githubql.String
+		} `graphql:"... on Organization"`
+		User struct {
+			Bio githubql.String
+		} `graphql:"... on User"`
+	} `graphql:"repositoryOwner(login: \"github\")"`
+}
+```
+
+Alternatively, you can define the struct types corresponding to inline framgents, and use them as embedded fields in your query:
+
+```Go
+type (
+	OrganizationFragment struct {
+		Description githubql.String
+	}
+	UserFragment struct {
+		Bio githubql.String
+	}
+)
+
+var q struct {
+	RepositoryOwner struct {
+		Login                githubql.String
+		OrganizationFragment `graphql:"... on Organization"`
+		UserFragment         `graphql:"... on User"`
+	} `graphql:"repositoryOwner(login: \"github\")"`
+}
+```
+
+Then call `client.Query`:
+
+```Go
+err := client.Query(context.Background(), &q, nil)
+if err != nil {
+	// Handle error.
+}
+fmt.Println(q.RepositoryOwner.Login)
+fmt.Println(q.RepositoryOwner.Description)
+fmt.Println(q.RepositoryOwner.Bio)
+
+// Output:
+// github
+// How people build software.
+//
 ```
 
 ### Pagination
@@ -246,7 +320,7 @@ input := githubql.AddReactionInput{
 }
 ```
 
-And call `client.Mutate`:
+Then call `client.Mutate`:
 
 ```Go
 err := client.Mutate(context.Background(), &m, input, nil)
