@@ -291,6 +291,24 @@ const (
 	ReactionOrderFieldCreatedAt ReactionOrderField = "CREATED_AT" // Allows ordering a list of reactions by when they were created.
 )
 
+// RefOrderField represents properties by which ref connections can be ordered.
+type RefOrderField string
+
+// Properties by which ref connections can be ordered.
+const (
+	RefOrderFieldTagCommitDate RefOrderField = "TAG_COMMIT_DATE" // Order refs by underlying commit date if the ref prefix is refs/tags/.
+	RefOrderFieldAlphabetical  RefOrderField = "ALPHABETICAL"    // Order refs by their alphanumeric name.
+)
+
+// ReleaseOrderField represents properties by which release connections can be ordered.
+type ReleaseOrderField string
+
+// Properties by which release connections can be ordered.
+const (
+	ReleaseOrderFieldCreatedAt ReleaseOrderField = "CREATED_AT" // Order releases by creation time.
+	ReleaseOrderFieldName      ReleaseOrderField = "NAME"       // Order releases alphabetically by name.
+)
+
 // RepositoryAffiliation represents the affiliation of a user to a repository.
 type RepositoryAffiliation string
 
