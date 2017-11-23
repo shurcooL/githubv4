@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/url"
-	"reflect"
 	"time"
 
 	"github.com/shurcooL/graphql"
@@ -68,14 +67,6 @@ type (
 	// X509Certificate is a valid x509 certificate.
 	X509Certificate struct{ *x509.Certificate }
 )
-
-var scalars = []reflect.Type{
-	reflect.TypeOf(Date{}),
-	reflect.TypeOf(DateTime{}),
-	reflect.TypeOf(GitTimestamp{}),
-	reflect.TypeOf(URI{}),
-	reflect.TypeOf(X509Certificate{}),
-}
 
 // MarshalJSON implements the json.Marshaler interface.
 // The URI is a quoted string.
