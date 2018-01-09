@@ -328,6 +328,18 @@ const (
 	RepositoryCollaboratorAffiliationOutside RepositoryCollaboratorAffiliation = "OUTSIDE" // All outside collaborators of an organization-owned repository.
 )
 
+// RepositoryContributionType represents the reason a repository is listed as 'contributed'.
+type RepositoryContributionType string
+
+// The reason a repository is listed as 'contributed'.
+const (
+	RepositoryContributionTypeCommit            RepositoryContributionType = "COMMIT"              // Created a commit.
+	RepositoryContributionTypeIssue             RepositoryContributionType = "ISSUE"               // Created an issue.
+	RepositoryContributionTypePullRequest       RepositoryContributionType = "PULL_REQUEST"        // Created a pull request.
+	RepositoryContributionTypeRepository        RepositoryContributionType = "REPOSITORY"          // Created the repository.
+	RepositoryContributionTypePullRequestReview RepositoryContributionType = "PULL_REQUEST_REVIEW" // Reviewed a pull request.
+)
+
 // RepositoryLockReason represents the possible reasons a given repository could be in a locked state.
 type RepositoryLockReason string
 
@@ -377,7 +389,7 @@ type SearchType string
 const (
 	SearchTypeIssue      SearchType = "ISSUE"      // Returns results matching issues in repositories.
 	SearchTypeRepository SearchType = "REPOSITORY" // Returns results matching repositories.
-	SearchTypeUser       SearchType = "USER"       // Returns results matching users on GitHub.
+	SearchTypeUser       SearchType = "USER"       // Returns results matching users and organizations on GitHub.
 )
 
 // StarOrderField represents properties by which star connections can be ordered.
@@ -408,6 +420,7 @@ const (
 	SubscriptionStateUnsubscribed SubscriptionState = "UNSUBSCRIBED" // The User is only notified when particpating or @mentioned.
 	SubscriptionStateSubscribed   SubscriptionState = "SUBSCRIBED"   // The User is notified of all conversations.
 	SubscriptionStateIgnored      SubscriptionState = "IGNORED"      // The User is never notified.
+	SubscriptionStateUnavailable  SubscriptionState = "UNAVAILABLE"  // Subscriptions are currently unavailable.
 )
 
 // TeamMemberRole represents the possible team member roles; either 'maintainer' or 'member'.
