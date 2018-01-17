@@ -150,6 +150,17 @@ const (
 	LanguageOrderFieldSize LanguageOrderField = "SIZE" // Order languages by the size of all files containing the language.
 )
 
+// LockReason represents the possible reasons that an issue or pull request was locked.
+type LockReason string
+
+// The possible reasons that an issue or pull request was locked.
+const (
+	LockReasonOffTopic  LockReason = "OFF_TOPIC"  // The issue or pull request was locked because the conversation was off-topic.
+	LockReasonTooHeated LockReason = "TOO_HEATED" // The issue or pull request was locked because the conversation was too heated.
+	LockReasonResolved  LockReason = "RESOLVED"   // The issue or pull request was locked because the conversation was resolved.
+	LockReasonSpam      LockReason = "SPAM"       // The issue or pull request was locked because the conversation was spam.
+)
+
 // MergeableState represents whether or not a PullRequest can be merged.
 type MergeableState string
 
