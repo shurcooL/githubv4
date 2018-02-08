@@ -171,6 +171,17 @@ const (
 	MergeableStateUnknown     MergeableState = "UNKNOWN"     // The mergeability of the pull request is still being calculated.
 )
 
+// MilestoneOrderField represents properties by which milestone connections can be ordered.
+type MilestoneOrderField string
+
+// Properties by which milestone connections can be ordered.
+const (
+	MilestoneOrderFieldDueDate   MilestoneOrderField = "DUE_DATE"   // Order milestones by when they are due.
+	MilestoneOrderFieldCreatedAt MilestoneOrderField = "CREATED_AT" // Order milestones by when they were created.
+	MilestoneOrderFieldUpdatedAt MilestoneOrderField = "UPDATED_AT" // Order milestones by when they were last updated.
+	MilestoneOrderFieldNumber    MilestoneOrderField = "NUMBER"     // Order milestones by their number.
+)
+
 // MilestoneState represents the possible states of a milestone.
 type MilestoneState string
 
