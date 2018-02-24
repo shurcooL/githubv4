@@ -31,7 +31,7 @@ func TestClient_Query(t *testing.T) {
 		}
 		mustWrite(w, `{"data": {"viewer": {"login": "gopher", "bio": "The Go gopher."}}}`)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	type query struct {
 		Viewer struct {
@@ -73,7 +73,7 @@ func TestClient_Query_errorResponse(t *testing.T) {
 			]
 		}`)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	var q struct {
 		Bad githubql.String
@@ -92,7 +92,7 @@ func TestClient_Query_errorStatusCode(t *testing.T) {
 	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "404 Not Found", http.StatusNotFound)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	var q struct {
 		Viewer struct {
@@ -138,7 +138,7 @@ func TestClient_Query_union(t *testing.T) {
 			}
 		}}`)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	type event struct { // Common fields for all events.
 		Actor     struct{ Login githubql.String }
@@ -220,7 +220,7 @@ func TestClient_Mutate(t *testing.T) {
 			}
 		}}`)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{mux: mux}})
+	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	type reactionGroup struct {
 		Users struct {
@@ -262,14 +262,14 @@ func TestClient_Mutate(t *testing.T) {
 }
 
 // localRoundTripper is an http.RoundTripper that executes HTTP transactions
-// by using mux directly, instead of going over an HTTP connection.
+// by using handler directly, instead of going over an HTTP connection.
 type localRoundTripper struct {
-	mux *http.ServeMux
+	handler http.Handler
 }
 
 func (l localRoundTripper) RoundTrip(req *http.Request) (*http.Response, error) {
 	w := httptest.NewRecorder()
-	l.mux.ServeHTTP(w, req)
+	l.handler.ServeHTTP(w, req)
 	return w.Result(), nil
 }
 
