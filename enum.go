@@ -2,13 +2,13 @@
 
 package githubql
 
-// CollaboratorAffiliation represents collaborators affiliation level with a repository.
+// CollaboratorAffiliation represents collaborators affiliation level with a subject.
 type CollaboratorAffiliation string
 
-// Collaborators affiliation level with a repository.
+// Collaborators affiliation level with a subject.
 const (
-	CollaboratorAffiliationOutside CollaboratorAffiliation = "OUTSIDE" // All outside collaborators of an organization-owned repository.
-	CollaboratorAffiliationDirect  CollaboratorAffiliation = "DIRECT"  // All collaborators with permissions to an organization-owned repository, regardless of organization membership status.
+	CollaboratorAffiliationOutside CollaboratorAffiliation = "OUTSIDE" // All outside collaborators of an organization-owned subject.
+	CollaboratorAffiliationDirect  CollaboratorAffiliation = "DIRECT"  // All collaborators with permissions to an organization-owned subject, regardless of organization membership status.
 	CollaboratorAffiliationAll     CollaboratorAffiliation = "ALL"     // All collaborators the authenticated user can see.
 )
 
@@ -38,14 +38,15 @@ const (
 	CommentCannotUpdateReasonVerifiedEmailRequired CommentCannotUpdateReason = "VERIFIED_EMAIL_REQUIRED" // At least one email address must be verified to update this comment.
 )
 
-// DefaultRepositoryPermissionField represents the possible default permissions for organization-owned repositories.
+// DefaultRepositoryPermissionField represents the possible default permissions for repositories.
 type DefaultRepositoryPermissionField string
 
-// The possible default permissions for organization-owned repositories.
+// The possible default permissions for repositories.
 const (
-	DefaultRepositoryPermissionFieldRead  DefaultRepositoryPermissionField = "READ"  // Members have read access to org repos by default.
-	DefaultRepositoryPermissionFieldWrite DefaultRepositoryPermissionField = "WRITE" // Members have read and write access to org repos by default.
-	DefaultRepositoryPermissionFieldAdmin DefaultRepositoryPermissionField = "ADMIN" // Members have read, write, and admin access to org repos by default.
+	DefaultRepositoryPermissionFieldNone  DefaultRepositoryPermissionField = "NONE"  // No access.
+	DefaultRepositoryPermissionFieldRead  DefaultRepositoryPermissionField = "READ"  // Can read repos by default.
+	DefaultRepositoryPermissionFieldWrite DefaultRepositoryPermissionField = "WRITE" // Can read and write repos by default.
+	DefaultRepositoryPermissionFieldAdmin DefaultRepositoryPermissionField = "ADMIN" // Can read, write, and administrate repos by default.
 )
 
 // DeploymentState represents the possible states in which a deployment can be.
@@ -112,6 +113,9 @@ const (
 	GitSignatureStateGpgverifyError       GitSignatureState = "GPGVERIFY_ERROR"       // Internal error - the GPG verification service misbehaved.
 	GitSignatureStateNotSigningKey        GitSignatureState = "NOT_SIGNING_KEY"       // The usage flags for the key that signed this don't allow signing.
 	GitSignatureStateExpiredKey           GitSignatureState = "EXPIRED_KEY"           // Signing key expired.
+	GitSignatureStateOcspPending          GitSignatureState = "OCSP_PENDING"          // Valid signature, pending certificate revocation checking.
+	GitSignatureStateOcspError            GitSignatureState = "OCSP_ERROR"            // Valid siganture, though certificate revocation check failed.
+	GitSignatureStateOcspRevoked          GitSignatureState = "OCSP_REVOKED"          // One or more certificates in chain has been revoked.
 )
 
 // IssueOrderField represents properties by which issue connections can be ordered.
@@ -443,6 +447,15 @@ const (
 	SubscriptionStateSubscribed   SubscriptionState = "SUBSCRIBED"   // The User is notified of all conversations.
 	SubscriptionStateIgnored      SubscriptionState = "IGNORED"      // The User is never notified.
 	SubscriptionStateUnavailable  SubscriptionState = "UNAVAILABLE"  // Subscriptions are currently unavailable.
+)
+
+// TeamMemberOrderField represents properties by which team member connections can be ordered.
+type TeamMemberOrderField string
+
+// Properties by which team member connections can be ordered.
+const (
+	TeamMemberOrderFieldLogin     TeamMemberOrderField = "LOGIN"      // Order team members by login.
+	TeamMemberOrderFieldCreatedAt TeamMemberOrderField = "CREATED_AT" // Order team members by creation time.
 )
 
 // TeamMemberRole represents the possible team member roles; either 'maintainer' or 'member'.
