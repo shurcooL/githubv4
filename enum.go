@@ -135,6 +135,7 @@ type IssuePubSubTopic string
 const (
 	IssuePubSubTopicUpdated    IssuePubSubTopic = "UPDATED"    // The channel ID for observing issue updates.
 	IssuePubSubTopicMarkasread IssuePubSubTopic = "MARKASREAD" // The channel ID for marking an issue as read.
+	IssuePubSubTopicTimeline   IssuePubSubTopic = "TIMELINE"   // The channel ID for updating items on the issue timeline.
 )
 
 // IssueState represents the possible states of an issue.
@@ -261,6 +262,7 @@ const (
 	PullRequestPubSubTopicUpdated    PullRequestPubSubTopic = "UPDATED"    // The channel ID for observing pull request updates.
 	PullRequestPubSubTopicMarkasread PullRequestPubSubTopic = "MARKASREAD" // The channel ID for marking an pull request as read.
 	PullRequestPubSubTopicHeadRef    PullRequestPubSubTopic = "HEAD_REF"   // The channel ID for observing head ref updates.
+	PullRequestPubSubTopicTimeline   PullRequestPubSubTopic = "TIMELINE"   // The channel ID for updating items on the pull request timeline.
 )
 
 // PullRequestReviewEvent represents the possible events to perform on a pull request review.
@@ -446,7 +448,6 @@ const (
 	SubscriptionStateUnsubscribed SubscriptionState = "UNSUBSCRIBED" // The User is only notified when particpating or @mentioned.
 	SubscriptionStateSubscribed   SubscriptionState = "SUBSCRIBED"   // The User is notified of all conversations.
 	SubscriptionStateIgnored      SubscriptionState = "IGNORED"      // The User is never notified.
-	SubscriptionStateUnavailable  SubscriptionState = "UNAVAILABLE"  // Subscriptions are currently unavailable.
 )
 
 // TeamMemberOrderField represents properties by which team member connections can be ordered.
