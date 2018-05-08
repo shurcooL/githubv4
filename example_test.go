@@ -1,4 +1,4 @@
-package githubql_test
+package githubv4_test
 
 import (
 	"context"
@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/shurcooL/githubql"
+	"github.com/shurcooL/githubv4"
 	"golang.org/x/oauth2"
 )
 
@@ -17,7 +17,7 @@ func Example() {
 	)
 	httpClient := oauth2.NewClient(context.Background(), src)
 
-	client := githubql.NewClient(httpClient)
+	client := githubv4.NewClient(httpClient)
 
 	var q struct {
 		Viewer struct {

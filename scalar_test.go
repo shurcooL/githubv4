@@ -1,4 +1,4 @@
-package githubql_test
+package githubv4_test
 
 import (
 	"encoding/json"
@@ -7,17 +7,17 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/shurcooL/githubql"
+	"github.com/shurcooL/githubv4"
 )
 
 func TestURI_MarshalJSON(t *testing.T) {
 	tests := []struct {
 		name string
-		in   githubql.URI
+		in   githubv4.URI
 		want string
 	}{
 		{
-			in:   githubql.URI{URL: &url.URL{Scheme: "https", Host: "example.org", Path: "/foo/bar"}},
+			in:   githubv4.URI{URL: &url.URL{Scheme: "https", Host: "example.org", Path: "/foo/bar"}},
 			want: `"https://example.org/foo/bar"`,
 		},
 	}
@@ -36,17 +36,17 @@ func TestURI_UnmarshalJSON(t *testing.T) {
 	tests := []struct {
 		name      string
 		in        string
-		want      githubql.URI
+		want      githubv4.URI
 		wantError error
 	}{
 		{
 			in:   `"https://example.org/foo/bar"`,
-			want: githubql.URI{URL: &url.URL{Scheme: "https", Host: "example.org", Path: "/foo/bar"}},
+			want: githubv4.URI{URL: &url.URL{Scheme: "https", Host: "example.org", Path: "/foo/bar"}},
 		},
 		{
 			name: "null",
 			in:   `null`,
-			want: githubql.URI{},
+			want: githubv4.URI{},
 		},
 		{
 			name:      "error JSON unmarshaling into string",
@@ -55,7 +55,7 @@ func TestURI_UnmarshalJSON(t *testing.T) {
 		},
 	}
 	for _, tc := range tests {
-		var got githubql.URI
+		var got githubv4.URI
 		err := json.Unmarshal([]byte(tc.in), &got)
 		if got, want := err, tc.wantError; !equalError(got, want) {
 			t.Fatalf("%s: got error: %v, want: %v", tc.name, got, want)
@@ -76,45 +76,45 @@ func equalError(a, b error) bool {
 }
 
 func TestNewScalars(t *testing.T) {
-	if got := githubql.NewBoolean(false); got == nil {
+	if got := githubv4.NewBoolean(false); got == nil {
 		t.Error("NewBoolean returned nil")
 	}
-	if got := githubql.NewDate(githubql.Date{}); got == nil {
+	if got := githubv4.NewDate(githubv4.Date{}); got == nil {
 		t.Error("NewDate returned nil")
 	}
-	if got := githubql.NewDateTime(githubql.DateTime{}); got == nil {
+	if got := githubv4.NewDateTime(githubv4.DateTime{}); got == nil {
 		t.Error("NewDateTime returned nil")
 	}
-	if got := githubql.NewFloat(0.0); got == nil {
+	if got := githubv4.NewFloat(0.0); got == nil {
 		t.Error("NewFloat returned nil")
 	}
-	if got := githubql.NewGitObjectID(""); got == nil {
+	if got := githubv4.NewGitObjectID(""); got == nil {
 		t.Error("NewGitObjectID returned nil")
 	}
-	if got := githubql.NewGitTimestamp(githubql.GitTimestamp{}); got == nil {
+	if got := githubv4.NewGitTimestamp(githubv4.GitTimestamp{}); got == nil {
 		t.Error("NewGitTimestamp returned nil")
 	}
-	if got := githubql.NewHTML(""); got == nil {
+	if got := githubv4.NewHTML(""); got == nil {
 		t.Error("NewHTML returned nil")
 	}
 	// ID with underlying type string.
-	if got := githubql.NewID(""); got == nil {
+	if got := githubv4.NewID(""); got == nil {
 		t.Error("NewID returned nil")
 	}
 	// ID with underlying type int.
-	if got := githubql.NewID(0); got == nil {
+	if got := githubv4.NewID(0); got == nil {
 		t.Error("NewID returned nil")
 	}
-	if got := githubql.NewInt(0); got == nil {
+	if got := githubv4.NewInt(0); got == nil {
 		t.Error("NewInt returned nil")
 	}
-	if got := githubql.NewString(""); got == nil {
+	if got := githubv4.NewString(""); got == nil {
 		t.Error("NewString returned nil")
 	}
-	if got := githubql.NewURI(githubql.URI{}); got == nil {
+	if got := githubv4.NewURI(githubv4.URI{}); got == nil {
 		t.Error("NewURI returned nil")
 	}
-	if got := githubql.NewX509Certificate(githubql.X509Certificate{}); got == nil {
+	if got := githubv4.NewX509Certificate(githubv4.X509Certificate{}); got == nil {
 		t.Error("NewX509Certificate returned nil")
 	}
 }

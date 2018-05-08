@@ -1,4 +1,4 @@
-package githubql_test
+package githubv4_test
 
 import (
 	"context"
@@ -10,12 +10,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/shurcooL/githubql"
+	"github.com/shurcooL/githubv4"
 )
 
 func TestNewClient_nil(t *testing.T) {
 	// Shouldn't panic with nil parameter.
-	client := githubql.NewClient(nil)
+	client := githubv4.NewClient(nil)
 	_ = client
 }
 
@@ -31,12 +31,12 @@ func TestClient_Query(t *testing.T) {
 		}
 		mustWrite(w, `{"data": {"viewer": {"login": "gopher", "bio": "The Go gopher."}}}`)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
+	client := githubv4.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	type query struct {
 		Viewer struct {
-			Login     githubql.String
-			Biography githubql.String `graphql:"bio"` // GraphQL alias.
+			Login     githubv4.String
+			Biography githubv4.String `graphql:"bio"` // GraphQL alias.
 		}
 	}
 
@@ -73,10 +73,10 @@ func TestClient_Query_errorResponse(t *testing.T) {
 			]
 		}`)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
+	client := githubv4.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	var q struct {
-		Bad githubql.String
+		Bad githubv4.String
 	}
 	err := client.Query(context.Background(), &q, nil)
 	if err == nil {
@@ -92,11 +92,11 @@ func TestClient_Query_errorStatusCode(t *testing.T) {
 	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "404 Not Found", http.StatusNotFound)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
+	client := githubv4.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	var q struct {
 		Viewer struct {
-			Login githubql.String
+			Login githubv4.String
 		}
 	}
 	err := client.Query(context.Background(), &q, nil)
@@ -138,11 +138,11 @@ func TestClient_Query_union(t *testing.T) {
 			}
 		}}`)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
+	client := githubv4.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	type event struct { // Common fields for all events.
-		Actor     struct{ Login githubql.String }
-		CreatedAt githubql.DateTime
+		Actor     struct{ Login githubv4.String }
+		CreatedAt githubv4.DateTime
 	}
 	type issueTimelineItem struct {
 		Typename    string `graphql:"__typename"`
@@ -170,9 +170,9 @@ func TestClient_Query_union(t *testing.T) {
 
 	var q query
 	variables := map[string]interface{}{
-		"repositoryOwner": githubql.String("golang"),
-		"repositoryName":  githubql.String("go"),
-		"issueNumber":     githubql.Int(1),
+		"repositoryOwner": githubv4.String("golang"),
+		"repositoryName":  githubv4.String("go"),
+		"issueNumber":     githubv4.Int(1),
 	}
 	err := client.Query(context.Background(), &q, variables)
 	if err != nil {
@@ -220,29 +220,29 @@ func TestClient_Mutate(t *testing.T) {
 			}
 		}}`)
 	})
-	client := githubql.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
+	client := githubv4.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
 
 	type reactionGroup struct {
 		Users struct {
-			TotalCount githubql.Int
+			TotalCount githubv4.Int
 		}
 	}
 	type mutation struct {
 		AddReaction struct {
 			Reaction struct {
-				Content githubql.ReactionContent
+				Content githubv4.ReactionContent
 			}
 			Subject struct {
-				ID             githubql.ID
+				ID             githubv4.ID
 				ReactionGroups []reactionGroup
 			}
 		} `graphql:"addReaction(input:$input)"`
 	}
 
 	var m mutation
-	input := githubql.AddReactionInput{
+	input := githubv4.AddReactionInput{
 		SubjectID: "MDU6SXNzdWUyMTc5NTQ0OTc=",
-		Content:   githubql.ReactionContentHooray,
+		Content:   githubv4.ReactionContentHooray,
 	}
 	err := client.Mutate(context.Background(), &m, input, nil)
 	if err != nil {
@@ -251,7 +251,7 @@ func TestClient_Mutate(t *testing.T) {
 	got := m
 
 	var want mutation
-	want.AddReaction.Reaction.Content = githubql.ReactionContentHooray
+	want.AddReaction.Reaction.Content = githubv4.ReactionContentHooray
 	want.AddReaction.Subject.ID = "MDU6SXNzdWUyMTc5NTQ0OTc="
 	var rg reactionGroup
 	rg.Users.TotalCount = 3

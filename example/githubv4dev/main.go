@@ -1,4 +1,4 @@
-// githubqldev is a test program currently being used for developing githubql package.
+// githubv4dev is a test program currently being used for developing githubv4 package.
 //
 // Warning: It performs some queries and mutations against real GitHub API.
 //
@@ -14,7 +14,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/shurcooL/githubql"
+	"github.com/shurcooL/githubv4"
 	"golang.org/x/oauth2"
 )
 
@@ -32,76 +32,76 @@ func run() error {
 		&oauth2.Token{AccessToken: os.Getenv("GITHUB_GRAPHQL_TEST_TOKEN")},
 	)
 	httpClient := oauth2.NewClient(context.Background(), src)
-	client := githubql.NewClient(httpClient)
+	client := githubv4.NewClient(httpClient)
 
 	// Query some details about a repository, an issue in it, and its comments.
 	{
-		type githubqlActor struct {
-			Login     githubql.String
-			AvatarURL githubql.URI `graphql:"avatarUrl(size:72)"`
-			URL       githubql.URI
+		type githubV4Actor struct {
+			Login     githubv4.String
+			AvatarURL githubv4.URI `graphql:"avatarUrl(size:72)"`
+			URL       githubv4.URI
 		}
 
 		var q struct {
 			Repository struct {
-				DatabaseID githubql.Int
-				URL        githubql.URI
+				DatabaseID githubv4.Int
+				URL        githubv4.URI
 
 				Issue struct {
-					Author         githubqlActor
-					PublishedAt    githubql.DateTime
-					LastEditedAt   *githubql.DateTime
-					Editor         *githubqlActor
-					Body           githubql.String
+					Author         githubV4Actor
+					PublishedAt    githubv4.DateTime
+					LastEditedAt   *githubv4.DateTime
+					Editor         *githubV4Actor
+					Body           githubv4.String
 					ReactionGroups []struct {
-						Content githubql.ReactionContent
+						Content githubv4.ReactionContent
 						Users   struct {
 							Nodes []struct {
-								Login githubql.String
+								Login githubv4.String
 							}
 
-							TotalCount githubql.Int
+							TotalCount githubv4.Int
 						} `graphql:"users(first:10)"`
-						ViewerHasReacted githubql.Boolean
+						ViewerHasReacted githubv4.Boolean
 					}
-					ViewerCanUpdate githubql.Boolean
+					ViewerCanUpdate githubv4.Boolean
 
 					Comments struct {
 						Nodes []struct {
-							Body   githubql.String
+							Body   githubv4.String
 							Author struct {
-								Login githubql.String
+								Login githubv4.String
 							}
 							Editor struct {
-								Login githubql.String
+								Login githubv4.String
 							}
 						}
 						PageInfo struct {
-							EndCursor   githubql.String
-							HasNextPage githubql.Boolean
+							EndCursor   githubv4.String
+							HasNextPage githubv4.Boolean
 						}
 					} `graphql:"comments(first:$commentsFirst,after:$commentsAfter)"`
 				} `graphql:"issue(number:$issueNumber)"`
 			} `graphql:"repository(owner:$repositoryOwner,name:$repositoryName)"`
 			Viewer struct {
-				Login      githubql.String
-				CreatedAt  githubql.DateTime
-				ID         githubql.ID
-				DatabaseID githubql.Int
+				Login      githubv4.String
+				CreatedAt  githubv4.DateTime
+				ID         githubv4.ID
+				DatabaseID githubv4.Int
 			}
 			RateLimit struct {
-				Cost      githubql.Int
-				Limit     githubql.Int
-				Remaining githubql.Int
-				ResetAt   githubql.DateTime
+				Cost      githubv4.Int
+				Limit     githubv4.Int
+				Remaining githubv4.Int
+				ResetAt   githubv4.DateTime
 			}
 		}
 		variables := map[string]interface{}{
-			"repositoryOwner": githubql.String("shurcooL-test"),
-			"repositoryName":  githubql.String("test-repo"),
-			"issueNumber":     githubql.Int(1),
-			"commentsFirst":   githubql.NewInt(1),
-			"commentsAfter":   githubql.NewString("Y3Vyc29yOjE5NTE4NDI1Ng=="),
+			"repositoryOwner": githubv4.String("shurcooL-test"),
+			"repositoryName":  githubv4.String("test-repo"),
+			"issueNumber":     githubv4.Int(1),
+			"commentsFirst":   githubv4.NewInt(1),
+			"commentsAfter":   githubv4.NewString("Y3Vyc29yOjE5NTE4NDI1Ng=="),
 		}
 		err := client.Query(context.Background(), &q, variables)
 		if err != nil {
@@ -120,18 +120,18 @@ func run() error {
 		var q struct {
 			Repository struct {
 				Issue struct {
-					ID        githubql.ID
+					ID        githubv4.ID
 					Reactions struct {
-						ViewerHasReacted githubql.Boolean
+						ViewerHasReacted githubv4.Boolean
 					} `graphql:"reactions(content:$reactionContent)"`
 				} `graphql:"issue(number:$issueNumber)"`
 			} `graphql:"repository(owner:$repositoryOwner,name:$repositoryName)"`
 		}
 		variables := map[string]interface{}{
-			"repositoryOwner": githubql.String("shurcooL-test"),
-			"repositoryName":  githubql.String("test-repo"),
-			"issueNumber":     githubql.Int(2),
-			"reactionContent": githubql.ReactionContentThumbsUp,
+			"repositoryOwner": githubv4.String("shurcooL-test"),
+			"repositoryName":  githubv4.String("test-repo"),
+			"issueNumber":     githubv4.Int(2),
+			"reactionContent": githubv4.ReactionContentThumbsUp,
 		}
 		err := client.Query(context.Background(), &q, variables)
 		if err != nil {
@@ -145,17 +145,17 @@ func run() error {
 				AddReaction struct {
 					Subject struct {
 						ReactionGroups []struct {
-							Content githubql.ReactionContent
+							Content githubv4.ReactionContent
 							Users   struct {
-								TotalCount githubql.Int
+								TotalCount githubv4.Int
 							}
 						}
 					}
 				} `graphql:"addReaction(input:$input)"`
 			}
-			input := githubql.AddReactionInput{
+			input := githubv4.AddReactionInput{
 				SubjectID: q.Repository.Issue.ID,
-				Content:   githubql.ReactionContentThumbsUp,
+				Content:   githubv4.ReactionContentThumbsUp,
 			}
 			err := client.Mutate(context.Background(), &m, input, nil)
 			if err != nil {
@@ -169,17 +169,17 @@ func run() error {
 				RemoveReaction struct {
 					Subject struct {
 						ReactionGroups []struct {
-							Content githubql.ReactionContent
+							Content githubv4.ReactionContent
 							Users   struct {
-								TotalCount githubql.Int
+								TotalCount githubv4.Int
 							}
 						}
 					}
 				} `graphql:"removeReaction(input:$input)"`
 			}
-			input := githubql.RemoveReactionInput{
+			input := githubv4.RemoveReactionInput{
 				SubjectID: q.Repository.Issue.ID,
-				Content:   githubql.ReactionContentThumbsUp,
+				Content:   githubv4.ReactionContentThumbsUp,
 			}
 			err := client.Mutate(context.Background(), &m, input, nil)
 			if err != nil {

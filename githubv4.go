@@ -1,4 +1,4 @@
-package githubql
+package githubv4
 
 import (
 	"context"
