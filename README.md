@@ -43,6 +43,7 @@ func main() {
 
 	client := githubql.NewClient(httpClient)
 	// Use client...
+}
 ```
 
 ### Simple Query
@@ -86,6 +87,65 @@ fmt.Println("CreatedAt:", query.Viewer.CreatedAt)
 // CreatedAt: 2017-05-26 21:17:14 +0000 UTC
 ```
 
+### Scalar Types
+
+For each scalar in the GitHub GraphQL schema listed at https://developer.github.com/v4/reference/scalar/, there is a corresponding Go type in package `githubql`.
+
+You can use these types when writing queries:
+
+```Go
+var query struct {
+	Viewer struct {
+		Login          githubql.String
+		CreatedAt      githubql.DateTime
+		IsBountyHunter githubql.Boolean
+		BioHTML        githubql.HTML
+		WebsiteURL     githubql.URI
+	}
+}
+// Call client.Query() and use results in query...
+```
+
+However, depending on how you're planning to use the results of your query, it's often more convenient to use other Go types.
+
+The `encoding/json` rules are used for converting individual JSON-encoded fields from a GraphQL response into Go values. See https://godoc.org/encoding/json#Unmarshal for details. The [`json.Unmarshaler`](https://godoc.org/encoding/json#Unmarshaler) interface is respected.
+
+That means you can simplify the earlier query by using predeclared Go types:
+
+```Go
+// import "time"
+
+var query struct {
+	Viewer struct {
+		Login          string    // E.g., "gopher".
+		CreatedAt      time.Time // E.g., time.Date(2017, 5, 26, 21, 17, 14, 0, time.UTC).
+		IsBountyHunter bool      // E.g., true.
+		BioHTML        string    // E.g., `I am learning <a href="https://graphql.org">GraphQL</a>!`.
+		WebsiteURL     string    // E.g., "https://golang.org".
+	}
+}
+// Call client.Query() and use results in query...
+```
+
+The [`DateTime`](https://developer.github.com/v4/reference/scalar/datetime/) scalar is described as "an ISO-8601 encoded UTC date string". If you wanted to fetch in that form without parsing it into a `time.Time`, you can use the `string` type. For example, this would work:
+
+```Go
+// import "html/template"
+
+type MyBoolean bool
+
+var query struct {
+	Viewer struct {
+		Login          string        // E.g., "gopher".
+		CreatedAt      string        // E.g., "2017-05-26T21:17:14Z".
+		IsBountyHunter MyBoolean     // E.g., MyBoolean(true).
+		BioHTML        template.HTML // E.g., template.HTML(`I am learning <a href="https://graphql.org">GraphQL</a>!`).
+		WebsiteURL     template.URL  // E.g., template.URL("https://golang.org").
+	}
+}
+// Call client.Query() and use results in query...
+```
+
 ### Arguments and Variables
 
 Often, you'll want to specify arguments on some fields. You can use the `graphql` struct field tag for this.
@@ -105,7 +165,7 @@ You can define this variable:
 ```Go
 var q struct {
 	Repository struct {
-		Description githubql.String
+		Description string
 	} `graphql:"repository(owner: \"octocat\", name: \"Hello-World\")"`
 }
 ```
@@ -130,12 +190,14 @@ However, that'll only work if the arguments are constant and known in advance. O
 func fetchRepoDescription(ctx context.Context, owner, name string) (string, error) {
 	var q struct {
 		Repository struct {
-			Description githubql.String
+			Description string
 		} `graphql:"repository(owner: $owner, name: $name)"`
 	}
 ```
 
-Then, define a `variables` map with their values:
+When sending variables to GraphQL, you need to use exact types that match GraphQL scalar types, otherwise the GraphQL server will return an error.
+
+So, define a `variables` map with their values that are converted to GraphQL scalar types:
 
 ```Go
 	variables := map[string]interface{}{
@@ -148,7 +210,7 @@ Finally, call `client.Query` providing `variables`:
 
 ```Go
 	err := client.Query(ctx, &q, variables)
-	return string(q.Repository.Description), err
+	return q.Repository.Description, err
 }
 ```
 
@@ -177,12 +239,12 @@ You can define this variable:
 ```Go
 var q struct {
 	RepositoryOwner struct {
-		Login        githubql.String
+		Login        string
 		Organization struct {
-			Description githubql.String
+			Description string
 		} `graphql:"... on Organization"`
 		User struct {
-			Bio githubql.String
+			Bio string
 		} `graphql:"... on User"`
 	} `graphql:"repositoryOwner(login: \"github\")"`
 }
@@ -193,16 +255,16 @@ Alternatively, you can define the struct types corresponding to inline fragments
 ```Go
 type (
 	OrganizationFragment struct {
-		Description githubql.String
+		Description string
 	}
 	UserFragment struct {
-		Bio githubql.String
+		Bio string
 	}
 )
 
 var q struct {
 	RepositoryOwner struct {
-		Login                githubql.String
+		Login                string
 		OrganizationFragment `graphql:"... on Organization"`
 		UserFragment         `graphql:"... on User"`
 	} `graphql:"repositoryOwner(login: \"github\")"`
@@ -232,12 +294,12 @@ Imagine you wanted to get a complete list of comments in an issue, and not just 
 
 ```Go
 type comment struct {
-	Body   githubql.String
+	Body   string
 	Author struct {
-		Login     githubql.String
-		AvatarURL githubql.URI `graphql:"avatarUrl(size: 72)"`
+		Login     string
+		AvatarURL string `graphql:"avatarUrl(size: 72)"`
 	}
-	ViewerCanReact githubql.Boolean
+	ViewerCanReact bool
 }
 var q struct {
 	Repository struct {
@@ -246,7 +308,7 @@ var q struct {
 				Nodes    []comment
 				PageInfo struct {
 					EndCursor   githubql.String
-					HasNextPage githubql.Boolean
+					HasNextPage bool
 				}
 			} `graphql:"comments(first: 100, after: $commentsCursor)"` // 100 per page.
 		} `graphql:"issue(number: $issueNumber)"`
@@ -316,7 +378,7 @@ var m struct {
 }
 input := githubql.AddReactionInput{
 	SubjectID: targetIssue.ID, // ID of the target issue from a previous query.
-	Content:   githubql.Hooray,
+	Content:   githubql.ReactionContentHooray,
 }
 ```
 
