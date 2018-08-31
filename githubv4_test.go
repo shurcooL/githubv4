@@ -29,6 +29,7 @@ func TestClient_Query(t *testing.T) {
 		if got, want := body, `{"query":"{viewer{login,bio}}"}`+"\n"; got != want {
 			t.Errorf("got body: %v, want %v", got, want)
 		}
+		w.Header().Set("Content-Type", "application/json")
 		mustWrite(w, `{"data": {"viewer": {"login": "gopher", "bio": "The Go gopher."}}}`)
 	})
 	client := githubv4.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
@@ -58,6 +59,7 @@ func TestClient_Query(t *testing.T) {
 func TestClient_Query_errorResponse(t *testing.T) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
 		mustWrite(w, `{
 			"data": null,
 			"errors": [
@@ -118,6 +120,7 @@ func TestClient_Query_union(t *testing.T) {
 		if got, want := body, `{"query":"query($issueNumber:Int!$repositoryName:String!$repositoryOwner:String!){repository(owner: $repositoryOwner, name: $repositoryName){issue(number: $issueNumber){timeline(first: 10){nodes{__typename,...on ClosedEvent{actor{login},createdAt},...on ReopenedEvent{actor{login},createdAt},...on RenamedTitleEvent{actor{login},createdAt,currentTitle,previousTitle}}}}}}","variables":{"issueNumber":1,"repositoryName":"go","repositoryOwner":"golang"}}`+"\n"; got != want {
 			t.Errorf("got body: %v, want %v", got, want)
 		}
+		w.Header().Set("Content-Type", "application/json")
 		mustWrite(w, `{"data": {
 			"repository": {
 				"issue": {
@@ -204,6 +207,7 @@ func TestClient_Mutate(t *testing.T) {
 		if got, want := body, `{"query":"mutation($input:AddReactionInput!){addReaction(input:$input){reaction{content},subject{id,reactionGroups{users{totalCount}}}}}","variables":{"input":{"subjectId":"MDU6SXNzdWUyMTc5NTQ0OTc=","content":"HOORAY"}}}`+"\n"; got != want {
 			t.Errorf("got body: %v, want %v", got, want)
 		}
+		w.Header().Set("Content-Type", "application/json")
 		mustWrite(w, `{"data": {
 			"addReaction": {
 				"reaction": {
