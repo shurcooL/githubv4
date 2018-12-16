@@ -168,6 +168,7 @@ const (
 	IssueTimelineItemsItemTypeMentionedEvent             IssueTimelineItemsItemType = "MENTIONED_EVENT"                // Represents a 'mentioned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeMilestonedEvent            IssueTimelineItemsItemType = "MILESTONED_EVENT"               // Represents a 'milestoned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeMovedColumnsInProjectEvent IssueTimelineItemsItemType = "MOVED_COLUMNS_IN_PROJECT_EVENT" // Represents a 'moved_columns_in_project' event on a given issue or pull request.
+	IssueTimelineItemsItemTypePinnedEvent                IssueTimelineItemsItemType = "PINNED_EVENT"                   // Represents a 'pinned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeReferencedEvent            IssueTimelineItemsItemType = "REFERENCED_EVENT"               // Represents a 'referenced' event on a given `ReferencedSubject`.
 	IssueTimelineItemsItemTypeRemovedFromProjectEvent    IssueTimelineItemsItemType = "REMOVED_FROM_PROJECT_EVENT"     // Represents a 'removed_from_project' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeRenamedTitleEvent          IssueTimelineItemsItemType = "RENAMED_TITLE_EVENT"            // Represents a 'renamed' event on a given issue or pull request.
@@ -177,6 +178,7 @@ const (
 	IssueTimelineItemsItemTypeUnassignedEvent            IssueTimelineItemsItemType = "UNASSIGNED_EVENT"               // Represents an 'unassigned' event on any assignable object.
 	IssueTimelineItemsItemTypeUnlabeledEvent             IssueTimelineItemsItemType = "UNLABELED_EVENT"                // Represents an 'unlabeled' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUnlockedEvent              IssueTimelineItemsItemType = "UNLOCKED_EVENT"                 // Represents an 'unlocked' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeUnpinnedEvent              IssueTimelineItemsItemType = "UNPINNED_EVENT"                 // Represents an 'unpinned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUnsubscribedEvent          IssueTimelineItemsItemType = "UNSUBSCRIBED_EVENT"             // Represents an 'unsubscribed' event on a given `Subscribable`.
 )
 
@@ -256,6 +258,15 @@ type OrganizationInvitationType string
 const (
 	OrganizationInvitationTypeUser  OrganizationInvitationType = "USER"  // The invitation was to an existing user.
 	OrganizationInvitationTypeEmail OrganizationInvitationType = "EMAIL" // The invitation was to an email address.
+)
+
+// OrganizationMemberRole represents the possible roles within an organization for its members.
+type OrganizationMemberRole string
+
+// The possible roles within an organization for its members.
+const (
+	OrganizationMemberRoleMember OrganizationMemberRole = "MEMBER" // The user is a member of the organization.
+	OrganizationMemberRoleAdmin  OrganizationMemberRole = "ADMIN"  // The user is an administrator of the organization.
 )
 
 // ProjectCardArchivedState represents the possible archived states of a project card.
@@ -403,6 +414,7 @@ const (
 	PullRequestTimelineItemsItemTypeMentionedEvent                    PullRequestTimelineItemsItemType = "MENTIONED_EVENT"                      // Represents a 'mentioned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeMilestonedEvent                   PullRequestTimelineItemsItemType = "MILESTONED_EVENT"                     // Represents a 'milestoned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeMovedColumnsInProjectEvent        PullRequestTimelineItemsItemType = "MOVED_COLUMNS_IN_PROJECT_EVENT"       // Represents a 'moved_columns_in_project' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypePinnedEvent                       PullRequestTimelineItemsItemType = "PINNED_EVENT"                         // Represents a 'pinned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeReferencedEvent                   PullRequestTimelineItemsItemType = "REFERENCED_EVENT"                     // Represents a 'referenced' event on a given `ReferencedSubject`.
 	PullRequestTimelineItemsItemTypeRemovedFromProjectEvent           PullRequestTimelineItemsItemType = "REMOVED_FROM_PROJECT_EVENT"           // Represents a 'removed_from_project' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeRenamedTitleEvent                 PullRequestTimelineItemsItemType = "RENAMED_TITLE_EVENT"                  // Represents a 'renamed' event on a given issue or pull request.
@@ -412,6 +424,7 @@ const (
 	PullRequestTimelineItemsItemTypeUnassignedEvent                   PullRequestTimelineItemsItemType = "UNASSIGNED_EVENT"                     // Represents an 'unassigned' event on any assignable object.
 	PullRequestTimelineItemsItemTypeUnlabeledEvent                    PullRequestTimelineItemsItemType = "UNLABELED_EVENT"                      // Represents an 'unlabeled' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnlockedEvent                     PullRequestTimelineItemsItemType = "UNLOCKED_EVENT"                       // Represents an 'unlocked' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypeUnpinnedEvent                     PullRequestTimelineItemsItemType = "UNPINNED_EVENT"                       // Represents an 'unpinned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnsubscribedEvent                 PullRequestTimelineItemsItemType = "UNSUBSCRIBED_EVENT"                   // Represents an 'unsubscribed' event on a given `Subscribable`.
 )
 
@@ -574,7 +587,7 @@ type SubscriptionState string
 
 // The possible states of a subscription.
 const (
-	SubscriptionStateUnsubscribed SubscriptionState = "UNSUBSCRIBED" // The User is only notified when particpating or @mentioned.
+	SubscriptionStateUnsubscribed SubscriptionState = "UNSUBSCRIBED" // The User is only notified when participating or @mentioned.
 	SubscriptionStateSubscribed   SubscriptionState = "SUBSCRIBED"   // The User is notified of all conversations.
 	SubscriptionStateIgnored      SubscriptionState = "IGNORED"      // The User is never notified.
 )
