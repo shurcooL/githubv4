@@ -439,6 +439,8 @@ const (
 	ReactionContentHooray     ReactionContent = "HOORAY"      // Represents the 🎉 emoji.
 	ReactionContentConfused   ReactionContent = "CONFUSED"    // Represents the 😕 emoji.
 	ReactionContentHeart      ReactionContent = "HEART"       // Represents the ❤️ emoji.
+	ReactionContentRocket     ReactionContent = "ROCKET"      // Represents the 🚀 emoji.
+	ReactionContentEyes       ReactionContent = "EYES"        // Represents the 👀 emoji.
 )
 
 // ReactionOrderField represents a list of fields that reactions can be ordered by.
