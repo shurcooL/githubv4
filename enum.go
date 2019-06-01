@@ -39,6 +39,23 @@ const (
 	CommentCannotUpdateReasonDenied                CommentCannotUpdateReason = "DENIED"                  // You cannot update this comment.
 )
 
+// CommitContributionOrderField represents properties by which commit contribution connections can be ordered.
+type CommitContributionOrderField string
+
+// Properties by which commit contribution connections can be ordered.
+const (
+	CommitContributionOrderFieldOccurredAt  CommitContributionOrderField = "OCCURRED_AT"  // Order commit contributions by when they were made.
+	CommitContributionOrderFieldCommitCount CommitContributionOrderField = "COMMIT_COUNT" // Order commit contributions by how many commits they represent.
+)
+
+// ContributionOrderField represents properties by which contribution connections can be ordered.
+type ContributionOrderField string
+
+// Properties by which contribution connections can be ordered.
+const (
+	ContributionOrderFieldOccurredAt ContributionOrderField = "OCCURRED_AT" // Order contributions by when they were made.
+)
+
 // DefaultRepositoryPermissionField represents the possible default permissions for repositories.
 type DefaultRepositoryPermissionField string
 
@@ -50,18 +67,28 @@ const (
 	DefaultRepositoryPermissionFieldAdmin DefaultRepositoryPermissionField = "ADMIN" // Can read, write, and administrate repos by default.
 )
 
+// DeploymentOrderField represents properties by which deployment connections can be ordered.
+type DeploymentOrderField string
+
+// Properties by which deployment connections can be ordered.
+const (
+	DeploymentOrderFieldCreatedAt DeploymentOrderField = "CREATED_AT" // Order collection by creation time.
+)
+
 // DeploymentState represents the possible states in which a deployment can be.
 type DeploymentState string
 
 // The possible states in which a deployment can be.
 const (
-	DeploymentStateAbandoned DeploymentState = "ABANDONED" // The pending deployment was not updated after 30 minutes.
-	DeploymentStateActive    DeploymentState = "ACTIVE"    // The deployment is currently active.
-	DeploymentStateDestroyed DeploymentState = "DESTROYED" // An inactive transient deployment.
-	DeploymentStateError     DeploymentState = "ERROR"     // The deployment experienced an error.
-	DeploymentStateFailure   DeploymentState = "FAILURE"   // The deployment has failed.
-	DeploymentStateInactive  DeploymentState = "INACTIVE"  // The deployment is inactive.
-	DeploymentStatePending   DeploymentState = "PENDING"   // The deployment is pending.
+	DeploymentStateAbandoned  DeploymentState = "ABANDONED"   // The pending deployment was not updated after 30 minutes.
+	DeploymentStateActive     DeploymentState = "ACTIVE"      // The deployment is currently active.
+	DeploymentStateDestroyed  DeploymentState = "DESTROYED"   // An inactive transient deployment.
+	DeploymentStateError      DeploymentState = "ERROR"       // The deployment experienced an error.
+	DeploymentStateFailure    DeploymentState = "FAILURE"     // The deployment has failed.
+	DeploymentStateInactive   DeploymentState = "INACTIVE"    // The deployment is inactive.
+	DeploymentStatePending    DeploymentState = "PENDING"     // The deployment is pending.
+	DeploymentStateQueued     DeploymentState = "QUEUED"      // The deployment has queued.
+	DeploymentStateInProgress DeploymentState = "IN_PROGRESS" // The deployment is in progress.
 )
 
 // DeploymentStatusState represents the possible states for a deployment status.
@@ -69,11 +96,13 @@ type DeploymentStatusState string
 
 // The possible states for a deployment status.
 const (
-	DeploymentStatusStatePending  DeploymentStatusState = "PENDING"  // The deployment is pending.
-	DeploymentStatusStateSuccess  DeploymentStatusState = "SUCCESS"  // The deployment was successful.
-	DeploymentStatusStateFailure  DeploymentStatusState = "FAILURE"  // The deployment has failed.
-	DeploymentStatusStateInactive DeploymentStatusState = "INACTIVE" // The deployment is inactive.
-	DeploymentStatusStateError    DeploymentStatusState = "ERROR"    // The deployment experienced an error.
+	DeploymentStatusStatePending    DeploymentStatusState = "PENDING"     // The deployment is pending.
+	DeploymentStatusStateSuccess    DeploymentStatusState = "SUCCESS"     // The deployment was successful.
+	DeploymentStatusStateFailure    DeploymentStatusState = "FAILURE"     // The deployment has failed.
+	DeploymentStatusStateInactive   DeploymentStatusState = "INACTIVE"    // The deployment is inactive.
+	DeploymentStatusStateError      DeploymentStatusState = "ERROR"       // The deployment experienced an error.
+	DeploymentStatusStateQueued     DeploymentStatusState = "QUEUED"      // The deployment is queued.
+	DeploymentStatusStateInProgress DeploymentStatusState = "IN_PROGRESS" // The deployment is in progress.
 )
 
 // GistOrderField represents properties by which gist connections can be ordered.
@@ -118,6 +147,16 @@ const (
 	GitSignatureStateOcspError            GitSignatureState = "OCSP_ERROR"            // Valid siganture, though certificate revocation check failed.
 	GitSignatureStateBadCert              GitSignatureState = "BAD_CERT"              // The signing certificate or its chain could not be verified.
 	GitSignatureStateOcspRevoked          GitSignatureState = "OCSP_REVOKED"          // One or more certificates in chain has been revoked.
+)
+
+// IdentityProviderConfigurationState represents the possible states in which authentication can be configured with an identity provider.
+type IdentityProviderConfigurationState string
+
+// The possible states in which authentication can be configured with an identity provider.
+const (
+	IdentityProviderConfigurationStateEnforced     IdentityProviderConfigurationState = "ENFORCED"     // Authentication with an identity provider is configured and enforced.
+	IdentityProviderConfigurationStateConfigured   IdentityProviderConfigurationState = "CONFIGURED"   // Authentication with an identity provider is configured but not enforced.
+	IdentityProviderConfigurationStateUnconfigured IdentityProviderConfigurationState = "UNCONFIGURED" // Authentication with an identity provider is not configured.
 )
 
 // IssueOrderField represents properties by which issue connections can be ordered.
@@ -178,6 +217,7 @@ const (
 	IssueTimelineItemsItemTypeUnassignedEvent            IssueTimelineItemsItemType = "UNASSIGNED_EVENT"               // Represents an 'unassigned' event on any assignable object.
 	IssueTimelineItemsItemTypeUnlabeledEvent             IssueTimelineItemsItemType = "UNLABELED_EVENT"                // Represents an 'unlabeled' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUnlockedEvent              IssueTimelineItemsItemType = "UNLOCKED_EVENT"                 // Represents an 'unlocked' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeUserBlockedEvent           IssueTimelineItemsItemType = "USER_BLOCKED_EVENT"             // Represents a 'user_blocked' event on a given user.
 	IssueTimelineItemsItemTypeUnpinnedEvent              IssueTimelineItemsItemType = "UNPINNED_EVENT"                 // Represents an 'unpinned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUnsubscribedEvent          IssueTimelineItemsItemType = "UNSUBSCRIBED_EVENT"             // Represents an 'unsubscribed' event on a given `Subscribable`.
 )
@@ -267,6 +307,16 @@ type OrganizationMemberRole string
 const (
 	OrganizationMemberRoleMember OrganizationMemberRole = "MEMBER" // The user is a member of the organization.
 	OrganizationMemberRoleAdmin  OrganizationMemberRole = "ADMIN"  // The user is an administrator of the organization.
+)
+
+// PinnableItemType represents represents items that can be pinned to a profile page or dashboard.
+type PinnableItemType string
+
+// Represents items that can be pinned to a profile page or dashboard.
+const (
+	PinnableItemTypeRepository PinnableItemType = "REPOSITORY" // A repository.
+	PinnableItemTypeGist       PinnableItemType = "GIST"       // A gist.
+	PinnableItemTypeIssue      PinnableItemType = "ISSUE"      // An issue.
 )
 
 // ProjectCardArchivedState represents the possible archived states of a project card.
@@ -424,6 +474,7 @@ const (
 	PullRequestTimelineItemsItemTypeUnassignedEvent                   PullRequestTimelineItemsItemType = "UNASSIGNED_EVENT"                     // Represents an 'unassigned' event on any assignable object.
 	PullRequestTimelineItemsItemTypeUnlabeledEvent                    PullRequestTimelineItemsItemType = "UNLABELED_EVENT"                      // Represents an 'unlabeled' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnlockedEvent                     PullRequestTimelineItemsItemType = "UNLOCKED_EVENT"                       // Represents an 'unlocked' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypeUserBlockedEvent                  PullRequestTimelineItemsItemType = "USER_BLOCKED_EVENT"                   // Represents a 'user_blocked' event on a given user.
 	PullRequestTimelineItemsItemTypeUnpinnedEvent                     PullRequestTimelineItemsItemType = "UNPINNED_EVENT"                       // Represents an 'unpinned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnsubscribedEvent                 PullRequestTimelineItemsItemType = "UNSUBSCRIBED_EVENT"                   // Represents an 'unsubscribed' event on a given `Subscribable`.
 )
@@ -540,9 +591,11 @@ type RepositoryPermission string
 
 // The access level to a repository.
 const (
-	RepositoryPermissionAdmin RepositoryPermission = "ADMIN" // Can read, clone, push, and add collaborators.
-	RepositoryPermissionWrite RepositoryPermission = "WRITE" // Can read, clone and push.
-	RepositoryPermissionRead  RepositoryPermission = "READ"  // Can read and clone.
+	RepositoryPermissionAdmin    RepositoryPermission = "ADMIN"    // Can read, clone, and push to this repository. Can also manage issues, pull requests, and repository settings, including adding collaborators.
+	RepositoryPermissionMaintain RepositoryPermission = "MAINTAIN" // Can read, clone, and push to this repository. They can also manage issues, pull requests, and some repository settings.
+	RepositoryPermissionWrite    RepositoryPermission = "WRITE"    // Can read, clone, and push to this repository. Can also manage issues and pull requests.
+	RepositoryPermissionTriage   RepositoryPermission = "TRIAGE"   // Can read and clone this repository. Can also manage issues and pull requests.
+	RepositoryPermissionRead     RepositoryPermission = "READ"     // Can read and clone this repository. Can also open and comment on issues and pull requests.
 )
 
 // RepositoryPrivacy represents the privacy of a repository.
@@ -562,6 +615,55 @@ const (
 	SearchTypeIssue      SearchType = "ISSUE"      // Returns results matching issues in repositories.
 	SearchTypeRepository SearchType = "REPOSITORY" // Returns results matching repositories.
 	SearchTypeUser       SearchType = "USER"       // Returns results matching users and organizations on GitHub.
+)
+
+// SecurityAdvisoryEcosystem represents the possible ecosystems of a security vulnerability's package.
+type SecurityAdvisoryEcosystem string
+
+// The possible ecosystems of a security vulnerability's package.
+const (
+	SecurityAdvisoryEcosystemRubygems SecurityAdvisoryEcosystem = "RUBYGEMS" // Ruby gems hosted at RubyGems.org.
+	SecurityAdvisoryEcosystemNpm      SecurityAdvisoryEcosystem = "NPM"      // JavaScript packages hosted at npmjs.com.
+	SecurityAdvisoryEcosystemPip      SecurityAdvisoryEcosystem = "PIP"      // Python packages hosted at PyPI.org.
+	SecurityAdvisoryEcosystemMaven    SecurityAdvisoryEcosystem = "MAVEN"    // Java artifacts hosted at the Maven central repository.
+	SecurityAdvisoryEcosystemNuget    SecurityAdvisoryEcosystem = "NUGET"    // .NET packages hosted at the NuGet Gallery.
+)
+
+// SecurityAdvisoryIdentifierType represents identifier formats available for advisories.
+type SecurityAdvisoryIdentifierType string
+
+// Identifier formats available for advisories.
+const (
+	SecurityAdvisoryIdentifierTypeCve  SecurityAdvisoryIdentifierType = "CVE"  // Common Vulnerabilities and Exposures Identifier.
+	SecurityAdvisoryIdentifierTypeGhsa SecurityAdvisoryIdentifierType = "GHSA" // GitHub Security Advisory ID.
+)
+
+// SecurityAdvisoryOrderField represents properties by which security advisory connections can be ordered.
+type SecurityAdvisoryOrderField string
+
+// Properties by which security advisory connections can be ordered.
+const (
+	SecurityAdvisoryOrderFieldPublishedAt SecurityAdvisoryOrderField = "PUBLISHED_AT" // Order advisories by publication time.
+	SecurityAdvisoryOrderFieldUpdatedAt   SecurityAdvisoryOrderField = "UPDATED_AT"   // Order advisories by update time.
+)
+
+// SecurityAdvisorySeverity represents severity of the vulnerability.
+type SecurityAdvisorySeverity string
+
+// Severity of the vulnerability.
+const (
+	SecurityAdvisorySeverityLow      SecurityAdvisorySeverity = "LOW"      // Low.
+	SecurityAdvisorySeverityModerate SecurityAdvisorySeverity = "MODERATE" // Moderate.
+	SecurityAdvisorySeverityHigh     SecurityAdvisorySeverity = "HIGH"     // High.
+	SecurityAdvisorySeverityCritical SecurityAdvisorySeverity = "CRITICAL" // Critical.
+)
+
+// SecurityVulnerabilityOrderField represents properties by which security vulnerability connections can be ordered.
+type SecurityVulnerabilityOrderField string
+
+// Properties by which security vulnerability connections can be ordered.
+const (
+	SecurityVulnerabilityOrderFieldUpdatedAt SecurityVulnerabilityOrderField = "UPDATED_AT" // Order vulnerability by update time.
 )
 
 // StarOrderField represents properties by which star connections can be ordered.
@@ -670,4 +772,24 @@ const (
 	TopicSuggestionDeclineReasonTooSpecific        TopicSuggestionDeclineReason = "TOO_SPECIFIC"        // The suggested topic is too specific for the repository (e.g. #ruby-on-rails-version-4-2-1).
 	TopicSuggestionDeclineReasonPersonalPreference TopicSuggestionDeclineReason = "PERSONAL_PREFERENCE" // The viewer does not like the suggested topic.
 	TopicSuggestionDeclineReasonTooGeneral         TopicSuggestionDeclineReason = "TOO_GENERAL"         // The suggested topic is too general for the repository.
+)
+
+// UserBlockDuration represents the possible durations that a user can be blocked for.
+type UserBlockDuration string
+
+// The possible durations that a user can be blocked for.
+const (
+	UserBlockDurationOneDay    UserBlockDuration = "ONE_DAY"    // The user was blocked for 1 day.
+	UserBlockDurationThreeDays UserBlockDuration = "THREE_DAYS" // The user was blocked for 3 days.
+	UserBlockDurationOneWeek   UserBlockDuration = "ONE_WEEK"   // The user was blocked for 7 days.
+	UserBlockDurationOneMonth  UserBlockDuration = "ONE_MONTH"  // The user was blocked for 30 days.
+	UserBlockDurationPermanent UserBlockDuration = "PERMANENT"  // The user was blocked permanently.
+)
+
+// UserStatusOrderField represents properties by which user status connections can be ordered.
+type UserStatusOrderField string
+
+// Properties by which user status connections can be ordered.
+const (
+	UserStatusOrderFieldUpdatedAt UserStatusOrderField = "UPDATED_AT" // Order user statuses by when they were updated.
 )
