@@ -314,9 +314,14 @@ type PinnableItemType string
 
 // Represents items that can be pinned to a profile page or dashboard.
 const (
-	PinnableItemTypeRepository PinnableItemType = "REPOSITORY" // A repository.
-	PinnableItemTypeGist       PinnableItemType = "GIST"       // A gist.
-	PinnableItemTypeIssue      PinnableItemType = "ISSUE"      // An issue.
+	PinnableItemTypeRepository   PinnableItemType = "REPOSITORY"   // A repository.
+	PinnableItemTypeGist         PinnableItemType = "GIST"         // A gist.
+	PinnableItemTypeIssue        PinnableItemType = "ISSUE"        // An issue.
+	PinnableItemTypeProject      PinnableItemType = "PROJECT"      // A project.
+	PinnableItemTypePullRequest  PinnableItemType = "PULL_REQUEST" // A pull request.
+	PinnableItemTypeUser         PinnableItemType = "USER"         // A user.
+	PinnableItemTypeOrganization PinnableItemType = "ORGANIZATION" // An organization.
+	PinnableItemTypeTeam         PinnableItemType = "TEAM"         // A team.
 )
 
 // ProjectCardArchivedState represents the possible archived states of a project card.
@@ -605,6 +610,16 @@ type RepositoryPrivacy string
 const (
 	RepositoryPrivacyPublic  RepositoryPrivacy = "PUBLIC"  // Public.
 	RepositoryPrivacyPrivate RepositoryPrivacy = "PRIVATE" // Private.
+)
+
+// RepositoryVisibility represents the repository's visibility level.
+type RepositoryVisibility string
+
+// The repository's visibility level.
+const (
+	RepositoryVisibilityPrivate  RepositoryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepositoryVisibilityPublic   RepositoryVisibility = "PUBLIC"   // The repository is visible to everyone.
+	RepositoryVisibilityInternal RepositoryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
 )
 
 // SearchType represents represents the individual results of a search.
