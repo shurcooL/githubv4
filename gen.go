@@ -20,21 +20,53 @@ import (
 	"github.com/shurcooL/graphql/ident"
 )
 
-func main() {
-	flag.Parse()
+// schemaPreviews is a list of features that are available during the GitHub API Preview Period
+// Check https://developer.github.com/changes/ for updates
+var schemaPreviews = []string{
+	"audit-log",
+	"flash",
+	"shadow-cat",
+	"antiope",
+	"echo",
+	"hagar",
+	"merge-info",
+	"hawkgirl",
+	"vixen",
+	"daredevil",
+	"starfox",
+	"queen-beryl",
+	"corsair",
+	"elektra",
+	"bane",
+	"slothette",
+}
 
-	err := run()
+func parseArgs(previewMode *bool) {
+	flag.BoolVar(previewMode, "p", false, "Allows generation of schema previews https://developer.github.com/v4/previews")
+	flag.Usage = func() {
+		fmt.Println("Usage: gen [options...]")
+		fmt.Println("Options:")
+		flag.PrintDefaults()
+	}
+	flag.Parse()
+}
+
+func main() {
+	previewMode := false
+	parseArgs(&previewMode)
+
+	err := run(previewMode)
 	if err != nil {
 		log.Fatalln(err)
 	}
 }
 
-func run() error {
+func run(previewMode bool) error {
 	githubToken, ok := os.LookupEnv("GITHUB_TOKEN")
 	if !ok {
 		return fmt.Errorf("GITHUB_TOKEN environment variable not set")
 	}
-	schema, err := loadSchema(githubToken)
+	schema, err := loadSchema(githubToken, previewMode)
 	if err != nil {
 		return err
 	}
@@ -60,12 +92,17 @@ func run() error {
 	return nil
 }
 
-func loadSchema(githubToken string) (schema interface{}, err error) {
+func loadSchema(githubToken string, previewMode bool) (schema interface{}, err error) {
 	req, err := http.NewRequest("GET", "https://api.github.com/graphql", nil)
 	if err != nil {
 		return nil, err
 	}
 	req.Header.Set("Authorization", "bearer "+githubToken)
+	if previewMode {
+		for _, sp := range schemaPreviews {
+			req.Header.Add("Accept", fmt.Sprintf("application/vnd.github.%s-preview+json", sp))
+		}
+	}
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err

@@ -2,6 +2,57 @@
 
 package githubv4
 
+// AuditLogOrderField represents properties by which Audit Log connections can be ordered.
+type AuditLogOrderField string
+
+// Properties by which Audit Log connections can be ordered.
+const (
+	AuditLogOrderFieldCreatedAt AuditLogOrderField = "CREATED_AT" // Order audit log entries by timestamp.
+)
+
+// CheckAnnotationLevel represents represents an annotation's information level.
+type CheckAnnotationLevel string
+
+// Represents an annotation's information level.
+const (
+	CheckAnnotationLevelFailure CheckAnnotationLevel = "FAILURE" // An annotation indicating an inescapable error.
+	CheckAnnotationLevelNotice  CheckAnnotationLevel = "NOTICE"  // An annotation indicating some information.
+	CheckAnnotationLevelWarning CheckAnnotationLevel = "WARNING" // An annotation indicating an ignorable error.
+)
+
+// CheckConclusionState represents the possible states for a check suite or run conclusion.
+type CheckConclusionState string
+
+// The possible states for a check suite or run conclusion.
+const (
+	CheckConclusionStateActionRequired CheckConclusionState = "ACTION_REQUIRED" // The check suite or run requires action.
+	CheckConclusionStateTimedOut       CheckConclusionState = "TIMED_OUT"       // The check suite or run has timed out.
+	CheckConclusionStateCancelled      CheckConclusionState = "CANCELLED"       // The check suite or run has been cancelled.
+	CheckConclusionStateFailure        CheckConclusionState = "FAILURE"         // The check suite or run has failed.
+	CheckConclusionStateSuccess        CheckConclusionState = "SUCCESS"         // The check suite or run has succeeded.
+	CheckConclusionStateNeutral        CheckConclusionState = "NEUTRAL"         // The check suite or run was neutral.
+)
+
+// CheckRunType represents the possible types of check runs.
+type CheckRunType string
+
+// The possible types of check runs.
+const (
+	CheckRunTypeAll    CheckRunType = "ALL"    // Every check run available.
+	CheckRunTypeLatest CheckRunType = "LATEST" // The latest check run.
+)
+
+// CheckStatusState represents the possible states for a check suite or run status.
+type CheckStatusState string
+
+// The possible states for a check suite or run status.
+const (
+	CheckStatusStateQueued     CheckStatusState = "QUEUED"      // The check suite or run has been queued.
+	CheckStatusStateInProgress CheckStatusState = "IN_PROGRESS" // The check suite or run is in progress.
+	CheckStatusStateCompleted  CheckStatusState = "COMPLETED"   // The check suite or run has been completed.
+	CheckStatusStateRequested  CheckStatusState = "REQUESTED"   // The check suite or run has been requested.
+)
+
 // CollaboratorAffiliation represents collaborators affiliation level with a subject.
 type CollaboratorAffiliation string
 
@@ -241,6 +292,21 @@ const (
 	LockReasonSpam      LockReason = "SPAM"       // The issue or pull request was locked because the conversation was spam.
 )
 
+// MergeStateStatus represents detailed status information about a pull request merge.
+type MergeStateStatus string
+
+// Detailed status information about a pull request merge.
+const (
+	MergeStateStatusDirty    MergeStateStatus = "DIRTY"     // The merge commit cannot be cleanly created.
+	MergeStateStatusUnknown  MergeStateStatus = "UNKNOWN"   // The state cannot currently be determined.
+	MergeStateStatusBlocked  MergeStateStatus = "BLOCKED"   // The merge is blocked.
+	MergeStateStatusBehind   MergeStateStatus = "BEHIND"    // The head ref is out of date.
+	MergeStateStatusDraft    MergeStateStatus = "DRAFT"     // The merge is blocked due to the pull request being a draft.
+	MergeStateStatusUnstable MergeStateStatus = "UNSTABLE"  // Mergeable with non-passing commit status.
+	MergeStateStatusHasHooks MergeStateStatus = "HAS_HOOKS" // Mergeable with passing commit status and pre-recieve hooks.
+	MergeStateStatusClean    MergeStateStatus = "CLEAN"     // Mergeable and passing commit status.
+)
+
 // MergeableState represents whether or not a PullRequest can be merged.
 type MergeableState string
 
@@ -271,6 +337,26 @@ const (
 	MilestoneStateClosed MilestoneState = "CLOSED" // A milestone that has been closed.
 )
 
+// OauthApplicationCreateAuditEntryState represents the state of an OAuth Application when it was created.
+type OauthApplicationCreateAuditEntryState string
+
+// The state of an OAuth Application when it was created.
+const (
+	OauthApplicationCreateAuditEntryStateActive          OauthApplicationCreateAuditEntryState = "ACTIVE"           // The OAuth Application was active and allowed to have OAuth Accesses.
+	OauthApplicationCreateAuditEntryStateSuspended       OauthApplicationCreateAuditEntryState = "SUSPENDED"        // The OAuth Application was suspended from generating OAuth Accesses due to abuse or security concerns.
+	OauthApplicationCreateAuditEntryStatePendingDeletion OauthApplicationCreateAuditEntryState = "PENDING_DELETION" // The OAuth Application was in the process of being deleted.
+)
+
+// OauthApplicationRevokeTokensAuditEntryState represents the state of an OAuth Application when its tokens were revoked.
+type OauthApplicationRevokeTokensAuditEntryState string
+
+// The state of an OAuth Application when its tokens were revoked.
+const (
+	OauthApplicationRevokeTokensAuditEntryStateActive          OauthApplicationRevokeTokensAuditEntryState = "ACTIVE"           // The OAuth Application was active and allowed to have OAuth Accesses.
+	OauthApplicationRevokeTokensAuditEntryStateSuspended       OauthApplicationRevokeTokensAuditEntryState = "SUSPENDED"        // The OAuth Application was suspended from generating OAuth Accesses due to abuse or security concerns.
+	OauthApplicationRevokeTokensAuditEntryStatePendingDeletion OauthApplicationRevokeTokensAuditEntryState = "PENDING_DELETION" // The OAuth Application was in the process of being deleted.
+)
+
 // OrderDirection represents possible directions in which to order a list of items when provided an `orderBy` argument.
 type OrderDirection string
 
@@ -278,6 +364,95 @@ type OrderDirection string
 const (
 	OrderDirectionAsc  OrderDirection = "ASC"  // Specifies an ascending order for a given `orderBy` argument.
 	OrderDirectionDesc OrderDirection = "DESC" // Specifies a descending order for a given `orderBy` argument.
+)
+
+// OrgAddMemberAuditEntryPermission represents the permissions available to members on an Organization.
+type OrgAddMemberAuditEntryPermission string
+
+// The permissions available to members on an Organization.
+const (
+	OrgAddMemberAuditEntryPermissionRead  OrgAddMemberAuditEntryPermission = "READ"  // Can read and clone repositories.
+	OrgAddMemberAuditEntryPermissionAdmin OrgAddMemberAuditEntryPermission = "ADMIN" // Can read, clone, push, and add collaborators to repositories.
+)
+
+// OrgRemoveBillingManagerAuditEntryReason represents the reason a billing manager was removed from an Organization.
+type OrgRemoveBillingManagerAuditEntryReason string
+
+// The reason a billing manager was removed from an Organization.
+const (
+	OrgRemoveBillingManagerAuditEntryReasonTwoFactorRequirementNonCompliance          OrgRemoveBillingManagerAuditEntryReason = "TWO_FACTOR_REQUIREMENT_NON_COMPLIANCE"           // The organization required 2FA of its billing managers and this user did not have 2FA enabled.
+	OrgRemoveBillingManagerAuditEntryReasonSamlExternalIdentityMissing                OrgRemoveBillingManagerAuditEntryReason = "SAML_EXTERNAL_IDENTITY_MISSING"                  // SAML external identity missing.
+	OrgRemoveBillingManagerAuditEntryReasonSamlSsoEnforcementRequiresExternalIdentity OrgRemoveBillingManagerAuditEntryReason = "SAML_SSO_ENFORCEMENT_REQUIRES_EXTERNAL_IDENTITY" // SAML SSO enforcement requires an external identity.
+)
+
+// OrgRemoveMemberAuditEntryMembershipType represents the type of membership a user has with an Organization.
+type OrgRemoveMemberAuditEntryMembershipType string
+
+// The type of membership a user has with an Organization.
+const (
+	OrgRemoveMemberAuditEntryMembershipTypeDirectMember        OrgRemoveMemberAuditEntryMembershipType = "DIRECT_MEMBER"        // A direct member is a user that is a member of the Organization.
+	OrgRemoveMemberAuditEntryMembershipTypeAdmin               OrgRemoveMemberAuditEntryMembershipType = "ADMIN"                // Organization administrators have full access and can change several settings, including the names of repositories that belong to the Organization and Owners team membership. In addition, organization admins can delete the organization and all of its repositories.
+	OrgRemoveMemberAuditEntryMembershipTypeBillingManager      OrgRemoveMemberAuditEntryMembershipType = "BILLING_MANAGER"      // A billing manager is a user who manages the billing settings for the Organization, such as updating payment information.
+	OrgRemoveMemberAuditEntryMembershipTypeUnaffiliated        OrgRemoveMemberAuditEntryMembershipType = "UNAFFILIATED"         // An unaffiliated collaborator is a person who is not a member of the Organization and does not have access to any repositories in the Organization.
+	OrgRemoveMemberAuditEntryMembershipTypeOutsideCollaborator OrgRemoveMemberAuditEntryMembershipType = "OUTSIDE_COLLABORATOR" // An outside collaborator is a person who isn't explicitly a member of the Organization, but who has Read, Write, or Admin permissions to one or more repositories in the organization.
+)
+
+// OrgRemoveMemberAuditEntryReason represents the reason a member was removed from an Organization.
+type OrgRemoveMemberAuditEntryReason string
+
+// The reason a member was removed from an Organization.
+const (
+	OrgRemoveMemberAuditEntryReasonTwoFactorRequirementNonCompliance          OrgRemoveMemberAuditEntryReason = "TWO_FACTOR_REQUIREMENT_NON_COMPLIANCE"           // The organization required 2FA of its billing managers and this user did not have 2FA enabled.
+	OrgRemoveMemberAuditEntryReasonSamlExternalIdentityMissing                OrgRemoveMemberAuditEntryReason = "SAML_EXTERNAL_IDENTITY_MISSING"                  // SAML external identity missing.
+	OrgRemoveMemberAuditEntryReasonSamlSsoEnforcementRequiresExternalIdentity OrgRemoveMemberAuditEntryReason = "SAML_SSO_ENFORCEMENT_REQUIRES_EXTERNAL_IDENTITY" // SAML SSO enforcement requires an external identity.
+)
+
+// OrgRemoveOutsideCollaboratorAuditEntryMembershipType represents the type of membership a user has with an Organization.
+type OrgRemoveOutsideCollaboratorAuditEntryMembershipType string
+
+// The type of membership a user has with an Organization.
+const (
+	OrgRemoveOutsideCollaboratorAuditEntryMembershipTypeOutsideCollaborator OrgRemoveOutsideCollaboratorAuditEntryMembershipType = "OUTSIDE_COLLABORATOR" // An outside collaborator is a person who isn't explicitly a member of the Organization, but who has Read, Write, or Admin permissions to one or more repositories in the organization.
+	OrgRemoveOutsideCollaboratorAuditEntryMembershipTypeUnaffiliated        OrgRemoveOutsideCollaboratorAuditEntryMembershipType = "UNAFFILIATED"         // An unaffiliated collaborator is a person who is not a member of the Organization and does not have access to any repositories in the organization.
+	OrgRemoveOutsideCollaboratorAuditEntryMembershipTypeBillingManager      OrgRemoveOutsideCollaboratorAuditEntryMembershipType = "BILLING_MANAGER"      // A billing manager is a user who manages the billing settings for the Organization, such as updating payment information.
+)
+
+// OrgRemoveOutsideCollaboratorAuditEntryReason represents the reason an outside collaborator was removed from an Organization.
+type OrgRemoveOutsideCollaboratorAuditEntryReason string
+
+// The reason an outside collaborator was removed from an Organization.
+const (
+	OrgRemoveOutsideCollaboratorAuditEntryReasonTwoFactorRequirementNonCompliance OrgRemoveOutsideCollaboratorAuditEntryReason = "TWO_FACTOR_REQUIREMENT_NON_COMPLIANCE" // The organization required 2FA of its billing managers and this user did not have 2FA enabled.
+	OrgRemoveOutsideCollaboratorAuditEntryReasonSamlExternalIdentityMissing       OrgRemoveOutsideCollaboratorAuditEntryReason = "SAML_EXTERNAL_IDENTITY_MISSING"        // SAML external identity missing.
+)
+
+// OrgUpdateDefaultRepositoryPermissionAuditEntryPermission represents the default permission a repository can have in an Organization.
+type OrgUpdateDefaultRepositoryPermissionAuditEntryPermission string
+
+// The default permission a repository can have in an Organization.
+const (
+	OrgUpdateDefaultRepositoryPermissionAuditEntryPermissionRead  OrgUpdateDefaultRepositoryPermissionAuditEntryPermission = "READ"  // Can read and clone repositories.
+	OrgUpdateDefaultRepositoryPermissionAuditEntryPermissionWrite OrgUpdateDefaultRepositoryPermissionAuditEntryPermission = "WRITE" // Can read, clone and push to repositories.
+	OrgUpdateDefaultRepositoryPermissionAuditEntryPermissionAdmin OrgUpdateDefaultRepositoryPermissionAuditEntryPermission = "ADMIN" // Can read, clone, push, and add collaborators to repositories.
+	OrgUpdateDefaultRepositoryPermissionAuditEntryPermissionNone  OrgUpdateDefaultRepositoryPermissionAuditEntryPermission = "NONE"  // No default permission value.
+)
+
+// OrgUpdateMemberAuditEntryPermission represents the permissions available to members on an Organization.
+type OrgUpdateMemberAuditEntryPermission string
+
+// The permissions available to members on an Organization.
+const (
+	OrgUpdateMemberAuditEntryPermissionRead  OrgUpdateMemberAuditEntryPermission = "READ"  // Can read and clone repositories.
+	OrgUpdateMemberAuditEntryPermissionAdmin OrgUpdateMemberAuditEntryPermission = "ADMIN" // Can read, clone, push, and add collaborators to repositories.
+)
+
+// OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibility represents the permissions available for repository creation on an Organization.
+type OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibility string
+
+// The permissions available for repository creation on an Organization.
+const (
+	OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibilityAll    OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibility = "ALL"    // All organization members are restricted from creating any repositories.
+	OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibilityPublic OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibility = "PUBLIC" // All organization members are restricted from creating public repositories.
 )
 
 // OrganizationInvitationRole represents the possible organization invitation roles.
@@ -456,6 +631,7 @@ const (
 	PullRequestTimelineItemsItemTypeReviewDismissedEvent              PullRequestTimelineItemsItemType = "REVIEW_DISMISSED_EVENT"               // Represents a 'review_dismissed' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeReviewRequestedEvent              PullRequestTimelineItemsItemType = "REVIEW_REQUESTED_EVENT"               // Represents an 'review_requested' event on a given pull request.
 	PullRequestTimelineItemsItemTypeReviewRequestRemovedEvent         PullRequestTimelineItemsItemType = "REVIEW_REQUEST_REMOVED_EVENT"         // Represents an 'review_request_removed' event on a given pull request.
+	PullRequestTimelineItemsItemTypeReadyForReviewEvent               PullRequestTimelineItemsItemType = "READY_FOR_REVIEW_EVENT"               // Represents a 'ready_for_review' event on a given pull request.
 	PullRequestTimelineItemsItemTypeIssueComment                      PullRequestTimelineItemsItemType = "ISSUE_COMMENT"                        // Represents a comment on an Issue.
 	PullRequestTimelineItemsItemTypeCrossReferencedEvent              PullRequestTimelineItemsItemType = "CROSS_REFERENCED_EVENT"               // Represents a mention made by one issue or pull request to another.
 	PullRequestTimelineItemsItemTypeAddedToProjectEvent               PullRequestTimelineItemsItemType = "ADDED_TO_PROJECT_EVENT"               // Represents a 'added_to_project' event on a given issue or pull request.
@@ -523,6 +699,36 @@ type ReleaseOrderField string
 const (
 	ReleaseOrderFieldCreatedAt ReleaseOrderField = "CREATED_AT" // Order releases by creation time.
 	ReleaseOrderFieldName      ReleaseOrderField = "NAME"       // Order releases alphabetically by name.
+)
+
+// RepoAccessAuditEntryVisibility represents the privacy of a repository.
+type RepoAccessAuditEntryVisibility string
+
+// The privacy of a repository.
+const (
+	RepoAccessAuditEntryVisibilityInternal RepoAccessAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoAccessAuditEntryVisibilityPrivate  RepoAccessAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepoAccessAuditEntryVisibilityPublic   RepoAccessAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
+)
+
+// RepoAddMemberAuditEntryVisibility represents the privacy of a repository.
+type RepoAddMemberAuditEntryVisibility string
+
+// The privacy of a repository.
+const (
+	RepoAddMemberAuditEntryVisibilityInternal RepoAddMemberAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoAddMemberAuditEntryVisibilityPrivate  RepoAddMemberAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepoAddMemberAuditEntryVisibilityPublic   RepoAddMemberAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
+)
+
+// RepoRemoveMemberAuditEntryVisibility represents the privacy of a repository.
+type RepoRemoveMemberAuditEntryVisibility string
+
+// The privacy of a repository.
+const (
+	RepoRemoveMemberAuditEntryVisibilityInternal RepoRemoveMemberAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoRemoveMemberAuditEntryVisibilityPrivate  RepoRemoveMemberAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepoRemoveMemberAuditEntryVisibilityPublic   RepoRemoveMemberAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
 )
 
 // ReportedContentClassifiers represents the reasons a piece of content can be reported or minimized.
@@ -622,6 +828,16 @@ const (
 	RepositoryVisibilityInternal RepositoryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
 )
 
+// RequestableCheckStatusState represents the possible states that can be requested when creating a check run.
+type RequestableCheckStatusState string
+
+// The possible states that can be requested when creating a check run.
+const (
+	RequestableCheckStatusStateQueued     RequestableCheckStatusState = "QUEUED"      // The check suite or run has been queued.
+	RequestableCheckStatusStateInProgress RequestableCheckStatusState = "IN_PROGRESS" // The check suite or run is in progress.
+	RequestableCheckStatusStateCompleted  RequestableCheckStatusState = "COMPLETED"   // The check suite or run has been completed.
+)
+
 // SearchType represents represents the individual results of a search.
 type SearchType string
 
@@ -709,6 +925,22 @@ const (
 	SubscriptionStateUnsubscribed SubscriptionState = "UNSUBSCRIBED" // The User is only notified when participating or @mentioned.
 	SubscriptionStateSubscribed   SubscriptionState = "SUBSCRIBED"   // The User is notified of all conversations.
 	SubscriptionStateIgnored      SubscriptionState = "IGNORED"      // The User is never notified.
+)
+
+// TeamDiscussionCommentOrderField represents properties by which team discussion comment connections can be ordered.
+type TeamDiscussionCommentOrderField string
+
+// Properties by which team discussion comment connections can be ordered.
+const (
+	TeamDiscussionCommentOrderFieldNumber TeamDiscussionCommentOrderField = "NUMBER" // Allows sequential ordering of team discussion comments (which is equivalent to chronological ordering).
+)
+
+// TeamDiscussionOrderField represents properties by which team discussion connections can be ordered.
+type TeamDiscussionOrderField string
+
+// Properties by which team discussion connections can be ordered.
+const (
+	TeamDiscussionOrderFieldCreatedAt TeamDiscussionOrderField = "CREATED_AT" // Allows chronological ordering of team discussions.
 )
 
 // TeamMemberOrderField represents properties by which team member connections can be ordered.
