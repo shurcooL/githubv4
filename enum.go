@@ -372,6 +372,17 @@ const (
 	ProjectStateClosed ProjectState = "CLOSED" // The project is closed.
 )
 
+// ProjectTemplate represents gitHub-provided templates for Projects.
+type ProjectTemplate string
+
+// GitHub-provided templates for Projects.
+const (
+	ProjectTemplateBasicKanban            ProjectTemplate = "BASIC_KANBAN"             // Create a board with columns for To do, In progress and Done.
+	ProjectTemplateAutomatedKanbanV2      ProjectTemplate = "AUTOMATED_KANBAN_V2"      // Create a board with v2 triggers to automatically move cards across To do, In progress and Done columns.
+	ProjectTemplateAutomatedReviewsKanban ProjectTemplate = "AUTOMATED_REVIEWS_KANBAN" // Create a board with triggers to automatically move cards across columns with review automation.
+	ProjectTemplateBugTriage              ProjectTemplate = "BUG_TRIAGE"               // Create a board to triage and prioritize bugs with To do, priority, and Done columns.
+)
+
 // PullRequestOrderField represents properties by which pull_requests connections can be ordered.
 type PullRequestOrderField string
 
@@ -456,6 +467,7 @@ const (
 	PullRequestTimelineItemsItemTypeReviewDismissedEvent              PullRequestTimelineItemsItemType = "REVIEW_DISMISSED_EVENT"               // Represents a 'review_dismissed' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeReviewRequestedEvent              PullRequestTimelineItemsItemType = "REVIEW_REQUESTED_EVENT"               // Represents an 'review_requested' event on a given pull request.
 	PullRequestTimelineItemsItemTypeReviewRequestRemovedEvent         PullRequestTimelineItemsItemType = "REVIEW_REQUEST_REMOVED_EVENT"         // Represents an 'review_request_removed' event on a given pull request.
+	PullRequestTimelineItemsItemTypeReadyForReviewEvent               PullRequestTimelineItemsItemType = "READY_FOR_REVIEW_EVENT"               // Represents a 'ready_for_review' event on a given pull request.
 	PullRequestTimelineItemsItemTypeIssueComment                      PullRequestTimelineItemsItemType = "ISSUE_COMMENT"                        // Represents a comment on an Issue.
 	PullRequestTimelineItemsItemTypeCrossReferencedEvent              PullRequestTimelineItemsItemType = "CROSS_REFERENCED_EVENT"               // Represents a mention made by one issue or pull request to another.
 	PullRequestTimelineItemsItemTypeAddedToProjectEvent               PullRequestTimelineItemsItemType = "ADDED_TO_PROJECT_EVENT"               // Represents a 'added_to_project' event on a given issue or pull request.
