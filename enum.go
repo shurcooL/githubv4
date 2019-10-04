@@ -2,6 +2,14 @@
 
 package githubv4
 
+// AuditLogOrderField represents properties by which Audit Log connections can be ordered.
+type AuditLogOrderField string
+
+// Properties by which Audit Log connections can be ordered.
+const (
+	AuditLogOrderFieldCreatedAt AuditLogOrderField = "CREATED_AT" // Order audit log entries by timestamp.
+)
+
 // CollaboratorAffiliation represents collaborators affiliation level with a subject.
 type CollaboratorAffiliation string
 
@@ -31,6 +39,7 @@ type CommentCannotUpdateReason string
 
 // The possible errors that will prevent a user from updating a comment.
 const (
+	CommentCannotUpdateReasonArchived              CommentCannotUpdateReason = "ARCHIVED"                // Unable to create comment because repository is archived.
 	CommentCannotUpdateReasonInsufficientAccess    CommentCannotUpdateReason = "INSUFFICIENT_ACCESS"     // You must be the author or have write access to this repository to update this comment.
 	CommentCannotUpdateReasonLocked                CommentCannotUpdateReason = "LOCKED"                  // Unable to create comment because issue is locked.
 	CommentCannotUpdateReasonLoginRequired         CommentCannotUpdateReason = "LOGIN_REQUIRED"          // You must be logged in to update this comment.
@@ -204,6 +213,7 @@ const (
 	IssueTimelineItemsItemTypeDemilestonedEvent          IssueTimelineItemsItemType = "DEMILESTONED_EVENT"             // Represents a 'demilestoned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeLabeledEvent               IssueTimelineItemsItemType = "LABELED_EVENT"                  // Represents a 'labeled' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeLockedEvent                IssueTimelineItemsItemType = "LOCKED_EVENT"                   // Represents a 'locked' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeMarkedAsDuplicateEvent     IssueTimelineItemsItemType = "MARKED_AS_DUPLICATE_EVENT"      // Represents a 'marked_as_duplicate' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeMentionedEvent             IssueTimelineItemsItemType = "MENTIONED_EVENT"                // Represents a 'mentioned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeMilestonedEvent            IssueTimelineItemsItemType = "MILESTONED_EVENT"               // Represents a 'milestoned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeMovedColumnsInProjectEvent IssueTimelineItemsItemType = "MOVED_COLUMNS_IN_PROJECT_EVENT" // Represents a 'moved_columns_in_project' event on a given issue or pull request.
@@ -271,6 +281,40 @@ const (
 	MilestoneStateClosed MilestoneState = "CLOSED" // A milestone that has been closed.
 )
 
+// OauthApplicationCreateAuditEntryState represents the state of an OAuth Application when it was created.
+type OauthApplicationCreateAuditEntryState string
+
+// The state of an OAuth Application when it was created.
+const (
+	OauthApplicationCreateAuditEntryStateActive          OauthApplicationCreateAuditEntryState = "ACTIVE"           // The OAuth Application was active and allowed to have OAuth Accesses.
+	OauthApplicationCreateAuditEntryStateSuspended       OauthApplicationCreateAuditEntryState = "SUSPENDED"        // The OAuth Application was suspended from generating OAuth Accesses due to abuse or security concerns.
+	OauthApplicationCreateAuditEntryStatePendingDeletion OauthApplicationCreateAuditEntryState = "PENDING_DELETION" // The OAuth Application was in the process of being deleted.
+)
+
+// OauthApplicationRevokeTokensAuditEntryState represents the state of an OAuth Application when its tokens were revoked.
+type OauthApplicationRevokeTokensAuditEntryState string
+
+// The state of an OAuth Application when its tokens were revoked.
+const (
+	OauthApplicationRevokeTokensAuditEntryStateActive          OauthApplicationRevokeTokensAuditEntryState = "ACTIVE"           // The OAuth Application was active and allowed to have OAuth Accesses.
+	OauthApplicationRevokeTokensAuditEntryStateSuspended       OauthApplicationRevokeTokensAuditEntryState = "SUSPENDED"        // The OAuth Application was suspended from generating OAuth Accesses due to abuse or security concerns.
+	OauthApplicationRevokeTokensAuditEntryStatePendingDeletion OauthApplicationRevokeTokensAuditEntryState = "PENDING_DELETION" // The OAuth Application was in the process of being deleted.
+)
+
+// OperationType represents the corresponding operation type for the action.
+type OperationType string
+
+// The corresponding operation type for the action.
+const (
+	OperationTypeAccess         OperationType = "ACCESS"         // An existing resource was accessed.
+	OperationTypeAuthentication OperationType = "AUTHENTICATION" // A resource performed an authentication event.
+	OperationTypeCreate         OperationType = "CREATE"         // A new resource was created.
+	OperationTypeModify         OperationType = "MODIFY"         // An existing resource was modified.
+	OperationTypeRemove         OperationType = "REMOVE"         // An existing resource was removed.
+	OperationTypeRestore        OperationType = "RESTORE"        // An existing resource was restored.
+	OperationTypeTransfer       OperationType = "TRANSFER"       // An existing resource was transferred between multiple resources.
+)
+
 // OrderDirection represents possible directions in which to order a list of items when provided an `orderBy` argument.
 type OrderDirection string
 
@@ -278,6 +322,107 @@ type OrderDirection string
 const (
 	OrderDirectionAsc  OrderDirection = "ASC"  // Specifies an ascending order for a given `orderBy` argument.
 	OrderDirectionDesc OrderDirection = "DESC" // Specifies a descending order for a given `orderBy` argument.
+)
+
+// OrgAddMemberAuditEntryPermission represents the permissions available to members on an Organization.
+type OrgAddMemberAuditEntryPermission string
+
+// The permissions available to members on an Organization.
+const (
+	OrgAddMemberAuditEntryPermissionRead  OrgAddMemberAuditEntryPermission = "READ"  // Can read and clone repositories.
+	OrgAddMemberAuditEntryPermissionAdmin OrgAddMemberAuditEntryPermission = "ADMIN" // Can read, clone, push, and add collaborators to repositories.
+)
+
+// OrgCreateAuditEntryBillingPlan represents the billing plans available for organizations.
+type OrgCreateAuditEntryBillingPlan string
+
+// The billing plans available for organizations.
+const (
+	OrgCreateAuditEntryBillingPlanFree          OrgCreateAuditEntryBillingPlan = "FREE"            // Free Plan.
+	OrgCreateAuditEntryBillingPlanBusiness      OrgCreateAuditEntryBillingPlan = "BUSINESS"        // Team Plan.
+	OrgCreateAuditEntryBillingPlanBusinessPlus  OrgCreateAuditEntryBillingPlan = "BUSINESS_PLUS"   // Enterprise Cloud Plan.
+	OrgCreateAuditEntryBillingPlanUnlimited     OrgCreateAuditEntryBillingPlan = "UNLIMITED"       // Legacy Unlimited Plan.
+	OrgCreateAuditEntryBillingPlanTieredPerSeat OrgCreateAuditEntryBillingPlan = "TIERED_PER_SEAT" // Tiered Per Seat Plan.
+)
+
+// OrgRemoveBillingManagerAuditEntryReason represents the reason a billing manager was removed from an Organization.
+type OrgRemoveBillingManagerAuditEntryReason string
+
+// The reason a billing manager was removed from an Organization.
+const (
+	OrgRemoveBillingManagerAuditEntryReasonTwoFactorRequirementNonCompliance          OrgRemoveBillingManagerAuditEntryReason = "TWO_FACTOR_REQUIREMENT_NON_COMPLIANCE"           // The organization required 2FA of its billing managers and this user did not have 2FA enabled.
+	OrgRemoveBillingManagerAuditEntryReasonSamlExternalIdentityMissing                OrgRemoveBillingManagerAuditEntryReason = "SAML_EXTERNAL_IDENTITY_MISSING"                  // SAML external identity missing.
+	OrgRemoveBillingManagerAuditEntryReasonSamlSsoEnforcementRequiresExternalIdentity OrgRemoveBillingManagerAuditEntryReason = "SAML_SSO_ENFORCEMENT_REQUIRES_EXTERNAL_IDENTITY" // SAML SSO enforcement requires an external identity.
+)
+
+// OrgRemoveMemberAuditEntryMembershipType represents the type of membership a user has with an Organization.
+type OrgRemoveMemberAuditEntryMembershipType string
+
+// The type of membership a user has with an Organization.
+const (
+	OrgRemoveMemberAuditEntryMembershipTypeDirectMember        OrgRemoveMemberAuditEntryMembershipType = "DIRECT_MEMBER"        // A direct member is a user that is a member of the Organization.
+	OrgRemoveMemberAuditEntryMembershipTypeAdmin               OrgRemoveMemberAuditEntryMembershipType = "ADMIN"                // Organization administrators have full access and can change several settings, including the names of repositories that belong to the Organization and Owners team membership. In addition, organization admins can delete the organization and all of its repositories.
+	OrgRemoveMemberAuditEntryMembershipTypeBillingManager      OrgRemoveMemberAuditEntryMembershipType = "BILLING_MANAGER"      // A billing manager is a user who manages the billing settings for the Organization, such as updating payment information.
+	OrgRemoveMemberAuditEntryMembershipTypeUnaffiliated        OrgRemoveMemberAuditEntryMembershipType = "UNAFFILIATED"         // An unaffiliated collaborator is a person who is not a member of the Organization and does not have access to any repositories in the Organization.
+	OrgRemoveMemberAuditEntryMembershipTypeOutsideCollaborator OrgRemoveMemberAuditEntryMembershipType = "OUTSIDE_COLLABORATOR" // An outside collaborator is a person who isn't explicitly a member of the Organization, but who has Read, Write, or Admin permissions to one or more repositories in the organization.
+)
+
+// OrgRemoveMemberAuditEntryReason represents the reason a member was removed from an Organization.
+type OrgRemoveMemberAuditEntryReason string
+
+// The reason a member was removed from an Organization.
+const (
+	OrgRemoveMemberAuditEntryReasonTwoFactorRequirementNonCompliance          OrgRemoveMemberAuditEntryReason = "TWO_FACTOR_REQUIREMENT_NON_COMPLIANCE"           // The organization required 2FA of its billing managers and this user did not have 2FA enabled.
+	OrgRemoveMemberAuditEntryReasonSamlExternalIdentityMissing                OrgRemoveMemberAuditEntryReason = "SAML_EXTERNAL_IDENTITY_MISSING"                  // SAML external identity missing.
+	OrgRemoveMemberAuditEntryReasonSamlSsoEnforcementRequiresExternalIdentity OrgRemoveMemberAuditEntryReason = "SAML_SSO_ENFORCEMENT_REQUIRES_EXTERNAL_IDENTITY" // SAML SSO enforcement requires an external identity.
+)
+
+// OrgRemoveOutsideCollaboratorAuditEntryMembershipType represents the type of membership a user has with an Organization.
+type OrgRemoveOutsideCollaboratorAuditEntryMembershipType string
+
+// The type of membership a user has with an Organization.
+const (
+	OrgRemoveOutsideCollaboratorAuditEntryMembershipTypeOutsideCollaborator OrgRemoveOutsideCollaboratorAuditEntryMembershipType = "OUTSIDE_COLLABORATOR" // An outside collaborator is a person who isn't explicitly a member of the Organization, but who has Read, Write, or Admin permissions to one or more repositories in the organization.
+	OrgRemoveOutsideCollaboratorAuditEntryMembershipTypeUnaffiliated        OrgRemoveOutsideCollaboratorAuditEntryMembershipType = "UNAFFILIATED"         // An unaffiliated collaborator is a person who is not a member of the Organization and does not have access to any repositories in the organization.
+	OrgRemoveOutsideCollaboratorAuditEntryMembershipTypeBillingManager      OrgRemoveOutsideCollaboratorAuditEntryMembershipType = "BILLING_MANAGER"      // A billing manager is a user who manages the billing settings for the Organization, such as updating payment information.
+)
+
+// OrgRemoveOutsideCollaboratorAuditEntryReason represents the reason an outside collaborator was removed from an Organization.
+type OrgRemoveOutsideCollaboratorAuditEntryReason string
+
+// The reason an outside collaborator was removed from an Organization.
+const (
+	OrgRemoveOutsideCollaboratorAuditEntryReasonTwoFactorRequirementNonCompliance OrgRemoveOutsideCollaboratorAuditEntryReason = "TWO_FACTOR_REQUIREMENT_NON_COMPLIANCE" // The organization required 2FA of its billing managers and this user did not have 2FA enabled.
+	OrgRemoveOutsideCollaboratorAuditEntryReasonSamlExternalIdentityMissing       OrgRemoveOutsideCollaboratorAuditEntryReason = "SAML_EXTERNAL_IDENTITY_MISSING"        // SAML external identity missing.
+)
+
+// OrgUpdateDefaultRepositoryPermissionAuditEntryPermission represents the default permission a repository can have in an Organization.
+type OrgUpdateDefaultRepositoryPermissionAuditEntryPermission string
+
+// The default permission a repository can have in an Organization.
+const (
+	OrgUpdateDefaultRepositoryPermissionAuditEntryPermissionRead  OrgUpdateDefaultRepositoryPermissionAuditEntryPermission = "READ"  // Can read and clone repositories.
+	OrgUpdateDefaultRepositoryPermissionAuditEntryPermissionWrite OrgUpdateDefaultRepositoryPermissionAuditEntryPermission = "WRITE" // Can read, clone and push to repositories.
+	OrgUpdateDefaultRepositoryPermissionAuditEntryPermissionAdmin OrgUpdateDefaultRepositoryPermissionAuditEntryPermission = "ADMIN" // Can read, clone, push, and add collaborators to repositories.
+	OrgUpdateDefaultRepositoryPermissionAuditEntryPermissionNone  OrgUpdateDefaultRepositoryPermissionAuditEntryPermission = "NONE"  // No default permission value.
+)
+
+// OrgUpdateMemberAuditEntryPermission represents the permissions available to members on an Organization.
+type OrgUpdateMemberAuditEntryPermission string
+
+// The permissions available to members on an Organization.
+const (
+	OrgUpdateMemberAuditEntryPermissionRead  OrgUpdateMemberAuditEntryPermission = "READ"  // Can read and clone repositories.
+	OrgUpdateMemberAuditEntryPermissionAdmin OrgUpdateMemberAuditEntryPermission = "ADMIN" // Can read, clone, push, and add collaborators to repositories.
+)
+
+// OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibility represents the permissions available for repository creation on an Organization.
+type OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibility string
+
+// The permissions available for repository creation on an Organization.
+const (
+	OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibilityAll    OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibility = "ALL"    // All organization members are restricted from creating any repositories.
+	OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibilityPublic OrgUpdateMemberRepositoryCreationPermissionAuditEntryVisibility = "PUBLIC" // All organization members are restricted from creating public repositories.
 )
 
 // OrganizationInvitationRole represents the possible organization invitation roles.
@@ -383,6 +528,16 @@ const (
 	ProjectTemplateBugTriage              ProjectTemplate = "BUG_TRIAGE"               // Create a board to triage and prioritize bugs with To do, priority, and Done columns.
 )
 
+// PullRequestMergeMethod represents represents available types of methods to use when merging a pull request.
+type PullRequestMergeMethod string
+
+// Represents available types of methods to use when merging a pull request.
+const (
+	PullRequestMergeMethodMerge  PullRequestMergeMethod = "MERGE"  // Add all commits from the head branch to the base branch with a merge commit.
+	PullRequestMergeMethodSquash PullRequestMergeMethod = "SQUASH" // Combine all commits from the head branch into a single commit in the base branch.
+	PullRequestMergeMethodRebase PullRequestMergeMethod = "REBASE" // Add all commits from the head branch onto the base branch individually.
+)
+
 // PullRequestOrderField represents properties by which pull_requests connections can be ordered.
 type PullRequestOrderField string
 
@@ -478,6 +633,7 @@ const (
 	PullRequestTimelineItemsItemTypeDemilestonedEvent                 PullRequestTimelineItemsItemType = "DEMILESTONED_EVENT"                   // Represents a 'demilestoned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeLabeledEvent                      PullRequestTimelineItemsItemType = "LABELED_EVENT"                        // Represents a 'labeled' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeLockedEvent                       PullRequestTimelineItemsItemType = "LOCKED_EVENT"                         // Represents a 'locked' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypeMarkedAsDuplicateEvent            PullRequestTimelineItemsItemType = "MARKED_AS_DUPLICATE_EVENT"            // Represents a 'marked_as_duplicate' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeMentionedEvent                    PullRequestTimelineItemsItemType = "MENTIONED_EVENT"                      // Represents a 'mentioned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeMilestonedEvent                   PullRequestTimelineItemsItemType = "MILESTONED_EVENT"                     // Represents a 'milestoned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeMovedColumnsInProjectEvent        PullRequestTimelineItemsItemType = "MOVED_COLUMNS_IN_PROJECT_EVENT"       // Represents a 'moved_columns_in_project' event on a given issue or pull request.
@@ -501,14 +657,14 @@ type ReactionContent string
 
 // Emojis that can be attached to Issues, Pull Requests and Comments.
 const (
-	ReactionContentThumbsUp   ReactionContent = "THUMBS_UP"   // Represents the 👍 emoji.
-	ReactionContentThumbsDown ReactionContent = "THUMBS_DOWN" // Represents the 👎 emoji.
-	ReactionContentLaugh      ReactionContent = "LAUGH"       // Represents the 😄 emoji.
-	ReactionContentHooray     ReactionContent = "HOORAY"      // Represents the 🎉 emoji.
-	ReactionContentConfused   ReactionContent = "CONFUSED"    // Represents the 😕 emoji.
-	ReactionContentHeart      ReactionContent = "HEART"       // Represents the ❤️ emoji.
-	ReactionContentRocket     ReactionContent = "ROCKET"      // Represents the 🚀 emoji.
-	ReactionContentEyes       ReactionContent = "EYES"        // Represents the 👀 emoji.
+	ReactionContentThumbsUp   ReactionContent = "THUMBS_UP"   // Represents the `:+1:` emoji.
+	ReactionContentThumbsDown ReactionContent = "THUMBS_DOWN" // Represents the `:-1:` emoji.
+	ReactionContentLaugh      ReactionContent = "LAUGH"       // Represents the `:laugh:` emoji.
+	ReactionContentHooray     ReactionContent = "HOORAY"      // Represents the `:hooray:` emoji.
+	ReactionContentConfused   ReactionContent = "CONFUSED"    // Represents the `:confused:` emoji.
+	ReactionContentHeart      ReactionContent = "HEART"       // Represents the `:heart:` emoji.
+	ReactionContentRocket     ReactionContent = "ROCKET"      // Represents the `:rocket:` emoji.
+	ReactionContentEyes       ReactionContent = "EYES"        // Represents the `:eyes:` emoji.
 )
 
 // ReactionOrderField represents a list of fields that reactions can be ordered by.
@@ -528,6 +684,42 @@ const (
 	RefOrderFieldAlphabetical  RefOrderField = "ALPHABETICAL"    // Order refs by their alphanumeric name.
 )
 
+// RegistryPackageDependencyType represents the possible types of a registry package dependency.
+type RegistryPackageDependencyType string
+
+// The possible types of a registry package dependency.
+const (
+	RegistryPackageDependencyTypeDefault  RegistryPackageDependencyType = "DEFAULT"  // A default registry package dependency type.
+	RegistryPackageDependencyTypeDev      RegistryPackageDependencyType = "DEV"      // A dev registry package dependency type.
+	RegistryPackageDependencyTypeTest     RegistryPackageDependencyType = "TEST"     // A test registry package dependency type.
+	RegistryPackageDependencyTypePeer     RegistryPackageDependencyType = "PEER"     // A peer registry package dependency type.
+	RegistryPackageDependencyTypeOptional RegistryPackageDependencyType = "OPTIONAL" // An optional registry package dependency type.
+	RegistryPackageDependencyTypeBundled  RegistryPackageDependencyType = "BUNDLED"  // An optional registry package dependency type.
+)
+
+// RegistryPackageFileState represents the possible states of a registry package file.
+type RegistryPackageFileState string
+
+// The possible states of a registry package file.
+const (
+	RegistryPackageFileStateNew      RegistryPackageFileState = "NEW"      // Package file doesn't have a blob backing it.
+	RegistryPackageFileStateUploaded RegistryPackageFileState = "UPLOADED" // All Package file contents have been uploaded.
+)
+
+// RegistryPackageType represents the possible types of a registry package.
+type RegistryPackageType string
+
+// The possible types of a registry package.
+const (
+	RegistryPackageTypeNpm      RegistryPackageType = "NPM"      // An npm registry package.
+	RegistryPackageTypeRubygems RegistryPackageType = "RUBYGEMS" // A rubygems registry package.
+	RegistryPackageTypeMaven    RegistryPackageType = "MAVEN"    // A maven registry package.
+	RegistryPackageTypeDocker   RegistryPackageType = "DOCKER"   // A docker image.
+	RegistryPackageTypeDebian   RegistryPackageType = "DEBIAN"   // A debian package.
+	RegistryPackageTypeNuget    RegistryPackageType = "NUGET"    // A nuget package.
+	RegistryPackageTypePython   RegistryPackageType = "PYTHON"   // A python package.
+)
+
 // ReleaseOrderField represents properties by which release connections can be ordered.
 type ReleaseOrderField string
 
@@ -535,6 +727,76 @@ type ReleaseOrderField string
 const (
 	ReleaseOrderFieldCreatedAt ReleaseOrderField = "CREATED_AT" // Order releases by creation time.
 	ReleaseOrderFieldName      ReleaseOrderField = "NAME"       // Order releases alphabetically by name.
+)
+
+// RepoAccessAuditEntryVisibility represents the privacy of a repository.
+type RepoAccessAuditEntryVisibility string
+
+// The privacy of a repository.
+const (
+	RepoAccessAuditEntryVisibilityInternal RepoAccessAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoAccessAuditEntryVisibilityPrivate  RepoAccessAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepoAccessAuditEntryVisibilityPublic   RepoAccessAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
+)
+
+// RepoAddMemberAuditEntryVisibility represents the privacy of a repository.
+type RepoAddMemberAuditEntryVisibility string
+
+// The privacy of a repository.
+const (
+	RepoAddMemberAuditEntryVisibilityInternal RepoAddMemberAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoAddMemberAuditEntryVisibilityPrivate  RepoAddMemberAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepoAddMemberAuditEntryVisibilityPublic   RepoAddMemberAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
+)
+
+// RepoArchivedAuditEntryVisibility represents the privacy of a repository.
+type RepoArchivedAuditEntryVisibility string
+
+// The privacy of a repository.
+const (
+	RepoArchivedAuditEntryVisibilityInternal RepoArchivedAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoArchivedAuditEntryVisibilityPrivate  RepoArchivedAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepoArchivedAuditEntryVisibilityPublic   RepoArchivedAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
+)
+
+// RepoChangeMergeSettingAuditEntryMergeType represents the merge options available for pull requests to this repository.
+type RepoChangeMergeSettingAuditEntryMergeType string
+
+// The merge options available for pull requests to this repository.
+const (
+	RepoChangeMergeSettingAuditEntryMergeTypeMerge  RepoChangeMergeSettingAuditEntryMergeType = "MERGE"  // The pull request is added to the base branch in a merge commit.
+	RepoChangeMergeSettingAuditEntryMergeTypeRebase RepoChangeMergeSettingAuditEntryMergeType = "REBASE" // Commits from the pull request are added onto the base branch individually without a merge commit.
+	RepoChangeMergeSettingAuditEntryMergeTypeSquash RepoChangeMergeSettingAuditEntryMergeType = "SQUASH" // The pull request's commits are squashed into a single commit before they are merged to the base branch.
+)
+
+// RepoCreateAuditEntryVisibility represents the privacy of a repository.
+type RepoCreateAuditEntryVisibility string
+
+// The privacy of a repository.
+const (
+	RepoCreateAuditEntryVisibilityInternal RepoCreateAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoCreateAuditEntryVisibilityPrivate  RepoCreateAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepoCreateAuditEntryVisibilityPublic   RepoCreateAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
+)
+
+// RepoDestroyAuditEntryVisibility represents the privacy of a repository.
+type RepoDestroyAuditEntryVisibility string
+
+// The privacy of a repository.
+const (
+	RepoDestroyAuditEntryVisibilityInternal RepoDestroyAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoDestroyAuditEntryVisibilityPrivate  RepoDestroyAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepoDestroyAuditEntryVisibilityPublic   RepoDestroyAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
+)
+
+// RepoRemoveMemberAuditEntryVisibility represents the privacy of a repository.
+type RepoRemoveMemberAuditEntryVisibility string
+
+// The privacy of a repository.
+const (
+	RepoRemoveMemberAuditEntryVisibilityInternal RepoRemoveMemberAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoRemoveMemberAuditEntryVisibilityPrivate  RepoRemoveMemberAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
+	RepoRemoveMemberAuditEntryVisibilityPublic   RepoRemoveMemberAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
 )
 
 // ReportedContentClassifiers represents the reasons a piece of content can be reported or minimized.
@@ -634,6 +896,14 @@ const (
 	RepositoryVisibilityInternal RepositoryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
 )
 
+// SavedReplyOrderField represents properties by which saved reply connections can be ordered.
+type SavedReplyOrderField string
+
+// Properties by which saved reply connections can be ordered.
+const (
+	SavedReplyOrderFieldUpdatedAt SavedReplyOrderField = "UPDATED_AT" // Order saved reply by when they were updated.
+)
+
 // SearchType represents represents the individual results of a search.
 type SearchType string
 
@@ -654,6 +924,7 @@ const (
 	SecurityAdvisoryEcosystemPip      SecurityAdvisoryEcosystem = "PIP"      // Python packages hosted at PyPI.org.
 	SecurityAdvisoryEcosystemMaven    SecurityAdvisoryEcosystem = "MAVEN"    // Java artifacts hosted at the Maven central repository.
 	SecurityAdvisoryEcosystemNuget    SecurityAdvisoryEcosystem = "NUGET"    // .NET packages hosted at the NuGet Gallery.
+	SecurityAdvisoryEcosystemComposer SecurityAdvisoryEcosystem = "COMPOSER" // PHP packages hosted at packagist.org.
 )
 
 // SecurityAdvisoryIdentifierType represents identifier formats available for advisories.
@@ -693,6 +964,15 @@ const (
 	SecurityVulnerabilityOrderFieldUpdatedAt SecurityVulnerabilityOrderField = "UPDATED_AT" // Order vulnerability by update time.
 )
 
+// SponsorshipPrivacy represents the privacy of a sponsorship.
+type SponsorshipPrivacy string
+
+// The privacy of a sponsorship.
+const (
+	SponsorshipPrivacyPublic  SponsorshipPrivacy = "PUBLIC"  // Public.
+	SponsorshipPrivacyPrivate SponsorshipPrivacy = "PRIVATE" // Private.
+)
+
 // StarOrderField represents properties by which star connections can be ordered.
 type StarOrderField string
 
@@ -721,6 +1001,22 @@ const (
 	SubscriptionStateUnsubscribed SubscriptionState = "UNSUBSCRIBED" // The User is only notified when participating or @mentioned.
 	SubscriptionStateSubscribed   SubscriptionState = "SUBSCRIBED"   // The User is notified of all conversations.
 	SubscriptionStateIgnored      SubscriptionState = "IGNORED"      // The User is never notified.
+)
+
+// TeamDiscussionCommentOrderField represents properties by which team discussion comment connections can be ordered.
+type TeamDiscussionCommentOrderField string
+
+// Properties by which team discussion comment connections can be ordered.
+const (
+	TeamDiscussionCommentOrderFieldNumber TeamDiscussionCommentOrderField = "NUMBER" // Allows sequential ordering of team discussion comments (which is equivalent to chronological ordering).
+)
+
+// TeamDiscussionOrderField represents properties by which team discussion connections can be ordered.
+type TeamDiscussionOrderField string
+
+// Properties by which team discussion connections can be ordered.
+const (
+	TeamDiscussionOrderFieldCreatedAt TeamDiscussionOrderField = "CREATED_AT" // Allows chronological ordering of team discussions.
 )
 
 // TeamMemberOrderField represents properties by which team member connections can be ordered.
