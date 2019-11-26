@@ -2,6 +2,17 @@
 
 package githubv4
 
+// ActionExecutionCapabilitySetting represents the possible capabilities for action executions setting.
+type ActionExecutionCapabilitySetting string
+
+// The possible capabilities for action executions setting.
+const (
+	ActionExecutionCapabilitySettingDisabled         ActionExecutionCapabilitySetting = "DISABLED"           // All action executions are disabled.
+	ActionExecutionCapabilitySettingAllActions       ActionExecutionCapabilitySetting = "ALL_ACTIONS"        // All action executions are enabled.
+	ActionExecutionCapabilitySettingLocalActionsOnly ActionExecutionCapabilitySetting = "LOCAL_ACTIONS_ONLY" // Only actions defined within the repo are allowed.
+	ActionExecutionCapabilitySettingNoPolicy         ActionExecutionCapabilitySetting = "NO_POLICY"          // Organization administrators action execution capabilities.
+)
+
 // AuditLogOrderField represents properties by which Audit Log connections can be ordered.
 type AuditLogOrderField string
 
@@ -112,6 +123,183 @@ const (
 	DeploymentStatusStateError      DeploymentStatusState = "ERROR"       // The deployment experienced an error.
 	DeploymentStatusStateQueued     DeploymentStatusState = "QUEUED"      // The deployment is queued.
 	DeploymentStatusStateInProgress DeploymentStatusState = "IN_PROGRESS" // The deployment is in progress.
+)
+
+// EnterpriseAdministratorInvitationOrderField represents properties by which enterprise administrator invitation connections can be ordered.
+type EnterpriseAdministratorInvitationOrderField string
+
+// Properties by which enterprise administrator invitation connections can be ordered.
+const (
+	EnterpriseAdministratorInvitationOrderFieldCreatedAt EnterpriseAdministratorInvitationOrderField = "CREATED_AT" // Order enterprise administrator member invitations by creation time.
+)
+
+// EnterpriseAdministratorRole represents the possible administrator roles in an enterprise account.
+type EnterpriseAdministratorRole string
+
+// The possible administrator roles in an enterprise account.
+const (
+	EnterpriseAdministratorRoleOwner          EnterpriseAdministratorRole = "OWNER"           // Represents an owner of the enterprise account.
+	EnterpriseAdministratorRoleBillingManager EnterpriseAdministratorRole = "BILLING_MANAGER" // Represents a billing manager of the enterprise account.
+)
+
+// EnterpriseDefaultRepositoryPermissionSettingValue represents the possible values for the enterprise default repository permission setting.
+type EnterpriseDefaultRepositoryPermissionSettingValue string
+
+// The possible values for the enterprise default repository permission setting.
+const (
+	EnterpriseDefaultRepositoryPermissionSettingValueNoPolicy EnterpriseDefaultRepositoryPermissionSettingValue = "NO_POLICY" // Organizations in the enterprise choose default repository permissions for their members.
+	EnterpriseDefaultRepositoryPermissionSettingValueAdmin    EnterpriseDefaultRepositoryPermissionSettingValue = "ADMIN"     // Organization members will be able to clone, pull, push, and add new collaborators to all organization repositories.
+	EnterpriseDefaultRepositoryPermissionSettingValueWrite    EnterpriseDefaultRepositoryPermissionSettingValue = "WRITE"     // Organization members will be able to clone, pull, and push all organization repositories.
+	EnterpriseDefaultRepositoryPermissionSettingValueRead     EnterpriseDefaultRepositoryPermissionSettingValue = "READ"      // Organization members will be able to clone and pull all organization repositories.
+	EnterpriseDefaultRepositoryPermissionSettingValueNone     EnterpriseDefaultRepositoryPermissionSettingValue = "NONE"      // Organization members will only be able to clone and pull public repositories.
+)
+
+// EnterpriseEnabledDisabledSettingValue represents the possible values for an enabled/disabled enterprise setting.
+type EnterpriseEnabledDisabledSettingValue string
+
+// The possible values for an enabled/disabled enterprise setting.
+const (
+	EnterpriseEnabledDisabledSettingValueEnabled  EnterpriseEnabledDisabledSettingValue = "ENABLED"   // The setting is enabled for organizations in the enterprise.
+	EnterpriseEnabledDisabledSettingValueDisabled EnterpriseEnabledDisabledSettingValue = "DISABLED"  // The setting is disabled for organizations in the enterprise.
+	EnterpriseEnabledDisabledSettingValueNoPolicy EnterpriseEnabledDisabledSettingValue = "NO_POLICY" // There is no policy set for organizations in the enterprise.
+)
+
+// EnterpriseEnabledSettingValue represents the possible values for an enabled/no policy enterprise setting.
+type EnterpriseEnabledSettingValue string
+
+// The possible values for an enabled/no policy enterprise setting.
+const (
+	EnterpriseEnabledSettingValueEnabled  EnterpriseEnabledSettingValue = "ENABLED"   // The setting is enabled for organizations in the enterprise.
+	EnterpriseEnabledSettingValueNoPolicy EnterpriseEnabledSettingValue = "NO_POLICY" // There is no policy set for organizations in the enterprise.
+)
+
+// EnterpriseMemberOrderField represents properties by which enterprise member connections can be ordered.
+type EnterpriseMemberOrderField string
+
+// Properties by which enterprise member connections can be ordered.
+const (
+	EnterpriseMemberOrderFieldLogin     EnterpriseMemberOrderField = "LOGIN"      // Order enterprise members by login.
+	EnterpriseMemberOrderFieldCreatedAt EnterpriseMemberOrderField = "CREATED_AT" // Order enterprise members by creation time.
+)
+
+// EnterpriseMembersCanCreateRepositoriesSettingValue represents the possible values for the enterprise members can create repositories setting.
+type EnterpriseMembersCanCreateRepositoriesSettingValue string
+
+// The possible values for the enterprise members can create repositories setting.
+const (
+	EnterpriseMembersCanCreateRepositoriesSettingValueNoPolicy EnterpriseMembersCanCreateRepositoriesSettingValue = "NO_POLICY" // Organization administrators choose whether to allow members to create repositories.
+	EnterpriseMembersCanCreateRepositoriesSettingValueAll      EnterpriseMembersCanCreateRepositoriesSettingValue = "ALL"       // Members will be able to create public and private repositories.
+	EnterpriseMembersCanCreateRepositoriesSettingValuePublic   EnterpriseMembersCanCreateRepositoriesSettingValue = "PUBLIC"    // Members will be able to create only public repositories.
+	EnterpriseMembersCanCreateRepositoriesSettingValuePrivate  EnterpriseMembersCanCreateRepositoriesSettingValue = "PRIVATE"   // Members will be able to create only private repositories.
+	EnterpriseMembersCanCreateRepositoriesSettingValueDisabled EnterpriseMembersCanCreateRepositoriesSettingValue = "DISABLED"  // Members will not be able to create public or private repositories.
+)
+
+// EnterpriseMembersCanMakePurchasesSettingValue represents the possible values for the members can make purchases setting.
+type EnterpriseMembersCanMakePurchasesSettingValue string
+
+// The possible values for the members can make purchases setting.
+const (
+	EnterpriseMembersCanMakePurchasesSettingValueEnabled  EnterpriseMembersCanMakePurchasesSettingValue = "ENABLED"  // The setting is enabled for organizations in the enterprise.
+	EnterpriseMembersCanMakePurchasesSettingValueDisabled EnterpriseMembersCanMakePurchasesSettingValue = "DISABLED" // The setting is disabled for organizations in the enterprise.
+)
+
+// EnterpriseMembershipType represents the possible values we have for filtering Platform::Objects::User#enterprises.
+type EnterpriseMembershipType string
+
+// The possible values we have for filtering Platform::Objects::User#enterprises.
+const (
+	EnterpriseMembershipTypeAll            EnterpriseMembershipType = "ALL"             // Returns all enterprises in which the user is a member, admin, or billing manager.
+	EnterpriseMembershipTypeAdmin          EnterpriseMembershipType = "ADMIN"           // Returns all enterprises in which the user is an admin.
+	EnterpriseMembershipTypeBillingManager EnterpriseMembershipType = "BILLING_MANAGER" // Returns all enterprises in which the user is a billing manager.
+	EnterpriseMembershipTypeOrgMembership  EnterpriseMembershipType = "ORG_MEMBERSHIP"  // Returns all enterprises in which the user is a member of an org that is owned by the enterprise.
+)
+
+// EnterpriseOrderField represents properties by which enterprise connections can be ordered.
+type EnterpriseOrderField string
+
+// Properties by which enterprise connections can be ordered.
+const (
+	EnterpriseOrderFieldName EnterpriseOrderField = "NAME" // Order enterprises by name.
+)
+
+// EnterpriseServerInstallationOrderField represents properties by which Enterprise Server installation connections can be ordered.
+type EnterpriseServerInstallationOrderField string
+
+// Properties by which Enterprise Server installation connections can be ordered.
+const (
+	EnterpriseServerInstallationOrderFieldHostName     EnterpriseServerInstallationOrderField = "HOST_NAME"     // Order Enterprise Server installations by host name.
+	EnterpriseServerInstallationOrderFieldCustomerName EnterpriseServerInstallationOrderField = "CUSTOMER_NAME" // Order Enterprise Server installations by customer name.
+	EnterpriseServerInstallationOrderFieldCreatedAt    EnterpriseServerInstallationOrderField = "CREATED_AT"    // Order Enterprise Server installations by creation time.
+)
+
+// EnterpriseServerUserAccountEmailOrderField represents properties by which Enterprise Server user account email connections can be ordered.
+type EnterpriseServerUserAccountEmailOrderField string
+
+// Properties by which Enterprise Server user account email connections can be ordered.
+const (
+	EnterpriseServerUserAccountEmailOrderFieldEmail EnterpriseServerUserAccountEmailOrderField = "EMAIL" // Order emails by email.
+)
+
+// EnterpriseServerUserAccountOrderField represents properties by which Enterprise Server user account connections can be ordered.
+type EnterpriseServerUserAccountOrderField string
+
+// Properties by which Enterprise Server user account connections can be ordered.
+const (
+	EnterpriseServerUserAccountOrderFieldLogin           EnterpriseServerUserAccountOrderField = "LOGIN"             // Order user accounts by login.
+	EnterpriseServerUserAccountOrderFieldRemoteCreatedAt EnterpriseServerUserAccountOrderField = "REMOTE_CREATED_AT" // Order user accounts by creation time on the Enterprise Server installation.
+)
+
+// EnterpriseServerUserAccountsUploadOrderField represents properties by which Enterprise Server user accounts upload connections can be ordered.
+type EnterpriseServerUserAccountsUploadOrderField string
+
+// Properties by which Enterprise Server user accounts upload connections can be ordered.
+const (
+	EnterpriseServerUserAccountsUploadOrderFieldCreatedAt EnterpriseServerUserAccountsUploadOrderField = "CREATED_AT" // Order user accounts uploads by creation time.
+)
+
+// EnterpriseServerUserAccountsUploadSyncState represents synchronization state of the Enterprise Server user accounts upload.
+type EnterpriseServerUserAccountsUploadSyncState string
+
+// Synchronization state of the Enterprise Server user accounts upload.
+const (
+	EnterpriseServerUserAccountsUploadSyncStatePending EnterpriseServerUserAccountsUploadSyncState = "PENDING" // The synchronization of the upload is pending.
+	EnterpriseServerUserAccountsUploadSyncStateSuccess EnterpriseServerUserAccountsUploadSyncState = "SUCCESS" // The synchronization of the upload succeeded.
+	EnterpriseServerUserAccountsUploadSyncStateFailure EnterpriseServerUserAccountsUploadSyncState = "FAILURE" // The synchronization of the upload failed.
+)
+
+// EnterpriseUserAccountMembershipRole represents the possible roles for enterprise membership.
+type EnterpriseUserAccountMembershipRole string
+
+// The possible roles for enterprise membership.
+const (
+	EnterpriseUserAccountMembershipRoleMember EnterpriseUserAccountMembershipRole = "MEMBER" // The user is a member of the enterprise membership.
+	EnterpriseUserAccountMembershipRoleOwner  EnterpriseUserAccountMembershipRole = "OWNER"  // The user is an owner of the enterprise membership.
+)
+
+// EnterpriseUserDeployment represents the possible GitHub Enterprise deployments where this user can exist.
+type EnterpriseUserDeployment string
+
+// The possible GitHub Enterprise deployments where this user can exist.
+const (
+	EnterpriseUserDeploymentCloud  EnterpriseUserDeployment = "CLOUD"  // The user is part of a GitHub Enterprise Cloud deployment.
+	EnterpriseUserDeploymentServer EnterpriseUserDeployment = "SERVER" // The user is part of a GitHub Enterprise Server deployment.
+)
+
+// FundingPlatform represents the possible funding platforms for repository funding links.
+type FundingPlatform string
+
+// The possible funding platforms for repository funding links.
+const (
+	FundingPlatformGitHub          FundingPlatform = "GITHUB"           // GitHub funding platform.
+	FundingPlatformPatreon         FundingPlatform = "PATREON"          // Patreon funding platform.
+	FundingPlatformOpenCollective  FundingPlatform = "OPEN_COLLECTIVE"  // Open Collective funding platform.
+	FundingPlatformKoFi            FundingPlatform = "KO_FI"            // Ko-fi funding platform.
+	FundingPlatformTidelift        FundingPlatform = "TIDELIFT"         // Tidelift funding platform.
+	FundingPlatformCommunityBridge FundingPlatform = "COMMUNITY_BRIDGE" // Community Bridge funding platform.
+	FundingPlatformLiberapay       FundingPlatform = "LIBERAPAY"        // Liberapay funding platform.
+	FundingPlatformIssuehunt       FundingPlatform = "ISSUEHUNT"        // IssueHunt funding platform.
+	FundingPlatformOtechie         FundingPlatform = "OTECHIE"          // Otechie funding platform.
+	FundingPlatformCustom          FundingPlatform = "CUSTOM"           // Custom funding platform.
 )
 
 // GistOrderField represents properties by which gist connections can be ordered.
@@ -454,6 +642,25 @@ const (
 	OrganizationMemberRoleAdmin  OrganizationMemberRole = "ADMIN"  // The user is an administrator of the organization.
 )
 
+// OrganizationMembersCanCreateRepositoriesSettingValue represents the possible values for the members can create repositories setting on an organization.
+type OrganizationMembersCanCreateRepositoriesSettingValue string
+
+// The possible values for the members can create repositories setting on an organization.
+const (
+	OrganizationMembersCanCreateRepositoriesSettingValueAll      OrganizationMembersCanCreateRepositoriesSettingValue = "ALL"      // Members will be able to create public and private repositories.
+	OrganizationMembersCanCreateRepositoriesSettingValuePrivate  OrganizationMembersCanCreateRepositoriesSettingValue = "PRIVATE"  // Members will be able to create only private repositories.
+	OrganizationMembersCanCreateRepositoriesSettingValueDisabled OrganizationMembersCanCreateRepositoriesSettingValue = "DISABLED" // Members will not be able to create public or private repositories.
+)
+
+// OrganizationOrderField represents properties by which organization connections can be ordered.
+type OrganizationOrderField string
+
+// Properties by which organization connections can be ordered.
+const (
+	OrganizationOrderFieldCreatedAt OrganizationOrderField = "CREATED_AT" // Order organizations by creation time.
+	OrganizationOrderFieldLogin     OrganizationOrderField = "LOGIN"      // Order organizations by login.
+)
+
 // PinnableItemType represents represents items that can be pinned to a profile page or dashboard.
 type PinnableItemType string
 
@@ -652,6 +859,15 @@ const (
 	PullRequestTimelineItemsItemTypeUnsubscribedEvent                 PullRequestTimelineItemsItemType = "UNSUBSCRIBED_EVENT"                   // Represents an 'unsubscribed' event on a given `Subscribable`.
 )
 
+// PullRequestUpdateState represents the possible target states when updating a pull request.
+type PullRequestUpdateState string
+
+// The possible target states when updating a pull request.
+const (
+	PullRequestUpdateStateOpen   PullRequestUpdateState = "OPEN"   // A pull request that is still open.
+	PullRequestUpdateStateClosed PullRequestUpdateState = "CLOSED" // A pull request that has been closed without being merged.
+)
+
 // ReactionContent represents emojis that can be attached to Issues, Pull Requests and Comments.
 type ReactionContent string
 
@@ -842,6 +1058,15 @@ const (
 	RepositoryContributionTypePullRequestReview RepositoryContributionType = "PULL_REQUEST_REVIEW" // Reviewed a pull request.
 )
 
+// RepositoryInvitationOrderField represents properties by which repository invitation connections can be ordered.
+type RepositoryInvitationOrderField string
+
+// Properties by which repository invitation connections can be ordered.
+const (
+	RepositoryInvitationOrderFieldCreatedAt    RepositoryInvitationOrderField = "CREATED_AT"    // Order repository invitations by creation time.
+	RepositoryInvitationOrderFieldInviteeLogin RepositoryInvitationOrderField = "INVITEE_LOGIN" // Order repository invitations by invitee login.
+)
+
 // RepositoryLockReason represents the possible reasons a given repository could be in a locked state.
 type RepositoryLockReason string
 
@@ -894,6 +1119,28 @@ const (
 	RepositoryVisibilityPrivate  RepositoryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepositoryVisibilityPublic   RepositoryVisibility = "PUBLIC"   // The repository is visible to everyone.
 	RepositoryVisibilityInternal RepositoryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+)
+
+// SamlDigestAlgorithm represents the possible digest algorithms used to sign SAML requests for an identity provider.
+type SamlDigestAlgorithm string
+
+// The possible digest algorithms used to sign SAML requests for an identity provider.
+const (
+	SamlDigestAlgorithmSha1   SamlDigestAlgorithm = "SHA1"   // SHA1.
+	SamlDigestAlgorithmSha256 SamlDigestAlgorithm = "SHA256" // SHA256.
+	SamlDigestAlgorithmSha384 SamlDigestAlgorithm = "SHA384" // SHA384.
+	SamlDigestAlgorithmSha512 SamlDigestAlgorithm = "SHA512" // SHA512.
+)
+
+// SamlSignatureAlgorithm represents the possible signature algorithms used to sign SAML requests for a Identity Provider.
+type SamlSignatureAlgorithm string
+
+// The possible signature algorithms used to sign SAML requests for a Identity Provider.
+const (
+	SamlSignatureAlgorithmRsaSha1   SamlSignatureAlgorithm = "RSA_SHA1"   // RSA-SHA1.
+	SamlSignatureAlgorithmRsaSha256 SamlSignatureAlgorithm = "RSA_SHA256" // RSA-SHA256.
+	SamlSignatureAlgorithmRsaSha384 SamlSignatureAlgorithm = "RSA_SHA384" // RSA-SHA384.
+	SamlSignatureAlgorithmRsaSha512 SamlSignatureAlgorithm = "RSA_SHA512" // RSA-SHA512.
 )
 
 // SavedReplyOrderField represents properties by which saved reply connections can be ordered.
@@ -962,6 +1209,23 @@ type SecurityVulnerabilityOrderField string
 // Properties by which security vulnerability connections can be ordered.
 const (
 	SecurityVulnerabilityOrderFieldUpdatedAt SecurityVulnerabilityOrderField = "UPDATED_AT" // Order vulnerability by update time.
+)
+
+// SponsorsTierOrderField represents properties by which Sponsors tiers connections can be ordered.
+type SponsorsTierOrderField string
+
+// Properties by which Sponsors tiers connections can be ordered.
+const (
+	SponsorsTierOrderFieldCreatedAt           SponsorsTierOrderField = "CREATED_AT"             // Order tiers by creation time.
+	SponsorsTierOrderFieldMonthlyPriceInCents SponsorsTierOrderField = "MONTHLY_PRICE_IN_CENTS" // Order tiers by their monthly price in cents.
+)
+
+// SponsorshipOrderField represents properties by which sponsorship connections can be ordered.
+type SponsorshipOrderField string
+
+// Properties by which sponsorship connections can be ordered.
+const (
+	SponsorshipOrderFieldCreatedAt SponsorshipOrderField = "CREATED_AT" // Order sponsorship by creation time.
 )
 
 // SponsorshipPrivacy represents the privacy of a sponsorship.
