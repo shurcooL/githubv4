@@ -71,6 +71,10 @@ func loadSchema(githubToken string) (schema interface{}, err error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		body, _ := ioutil.ReadAll(resp.Body)
+		return nil, fmt.Errorf("non-200 OK status code: %v body: %q", resp.Status, body)
+	}
 	err = json.NewDecoder(resp.Body).Decode(&schema)
 	return schema, err
 }
