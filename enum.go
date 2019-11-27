@@ -285,6 +285,23 @@ const (
 	EnterpriseUserDeploymentServer EnterpriseUserDeployment = "SERVER" // The user is part of a GitHub Enterprise Server deployment.
 )
 
+// FundingPlatform represents the possible funding platforms for repository funding links.
+type FundingPlatform string
+
+// The possible funding platforms for repository funding links.
+const (
+	FundingPlatformGitHub          FundingPlatform = "GITHUB"           // GitHub funding platform.
+	FundingPlatformPatreon         FundingPlatform = "PATREON"          // Patreon funding platform.
+	FundingPlatformOpenCollective  FundingPlatform = "OPEN_COLLECTIVE"  // Open Collective funding platform.
+	FundingPlatformKoFi            FundingPlatform = "KO_FI"            // Ko-fi funding platform.
+	FundingPlatformTidelift        FundingPlatform = "TIDELIFT"         // Tidelift funding platform.
+	FundingPlatformCommunityBridge FundingPlatform = "COMMUNITY_BRIDGE" // Community Bridge funding platform.
+	FundingPlatformLiberapay       FundingPlatform = "LIBERAPAY"        // Liberapay funding platform.
+	FundingPlatformIssuehunt       FundingPlatform = "ISSUEHUNT"        // IssueHunt funding platform.
+	FundingPlatformOtechie         FundingPlatform = "OTECHIE"          // Otechie funding platform.
+	FundingPlatformCustom          FundingPlatform = "CUSTOM"           // Custom funding platform.
+)
+
 // GistOrderField represents properties by which gist connections can be ordered.
 type GistOrderField string
 
