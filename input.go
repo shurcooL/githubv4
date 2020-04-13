@@ -4,7 +4,7 @@ package githubv4
 
 // Input represents one of the Input structs:
 //
-// AcceptEnterpriseAdministratorInvitationInput, AcceptTopicSuggestionInput, AddAssigneesToAssignableInput, AddCommentInput, AddLabelsToLabelableInput, AddProjectCardInput, AddProjectColumnInput, AddPullRequestReviewCommentInput, AddPullRequestReviewInput, AddReactionInput, AddStarInput, ArchiveRepositoryInput, AuditLogOrder, CancelEnterpriseAdminInvitationInput, ChangeUserStatusInput, ClearLabelsFromLabelableInput, CloneProjectInput, CloneTemplateRepositoryInput, CloseIssueInput, ClosePullRequestInput, CommitAuthor, CommitContributionOrder, ContributionOrder, ConvertProjectCardNoteToIssueInput, CreateBranchProtectionRuleInput, CreateContentAttachmentInput, CreateEnterpriseOrganizationInput, CreateIssueInput, CreateProjectInput, CreatePullRequestInput, CreateRefInput, CreateRepositoryInput, CreateTeamDiscussionCommentInput, CreateTeamDiscussionInput, DeclineTopicSuggestionInput, DeleteBranchProtectionRuleInput, DeleteIssueCommentInput, DeleteIssueInput, DeletePackageVersionInput, DeleteProjectCardInput, DeleteProjectColumnInput, DeleteProjectInput, DeletePullRequestReviewCommentInput, DeletePullRequestReviewInput, DeleteRefInput, DeleteTeamDiscussionCommentInput, DeleteTeamDiscussionInput, DeploymentOrder, DismissPullRequestReviewInput, DraftPullRequestReviewComment, EnterpriseAdministratorInvitationOrder, EnterpriseMemberOrder, EnterpriseOrder, EnterpriseServerInstallationOrder, EnterpriseServerUserAccountEmailOrder, EnterpriseServerUserAccountOrder, EnterpriseServerUserAccountsUploadOrder, FollowUserInput, GistOrder, ImportProjectInput, InviteEnterpriseAdminInput, IssueFilters, IssueOrder, LanguageOrder, LinkRepositoryToProjectInput, LockLockableInput, MergeBranchInput, MergePullRequestInput, MilestoneOrder, MinimizeCommentInput, MoveProjectCardInput, MoveProjectColumnInput, OrganizationOrder, PinIssueInput, ProjectCardImport, ProjectColumnImport, ProjectOrder, PullRequestOrder, ReactionOrder, RefOrder, RegenerateEnterpriseIdentityProviderRecoveryCodesInput, RegistryPackageMetadatum, ReleaseOrder, RemoveAssigneesFromAssignableInput, RemoveEnterpriseAdminInput, RemoveEnterpriseOrganizationInput, RemoveLabelsFromLabelableInput, RemoveOutsideCollaboratorInput, RemoveReactionInput, RemoveStarInput, ReopenIssueInput, ReopenPullRequestInput, RepositoryInvitationOrder, RepositoryOrder, RequestReviewsInput, ResolveReviewThreadInput, SavedReplyOrder, SecurityAdvisoryIdentifierFilter, SecurityAdvisoryOrder, SecurityVulnerabilityOrder, SponsorsTierOrder, SponsorshipOrder, StarOrder, SubmitPullRequestReviewInput, TeamDiscussionCommentOrder, TeamDiscussionOrder, TeamMemberOrder, TeamOrder, TeamRepositoryOrder, TransferIssueInput, UnarchiveRepositoryInput, UnfollowUserInput, UnlinkRepositoryFromProjectInput, UnlockLockableInput, UnmarkIssueAsDuplicateInput, UnminimizeCommentInput, UnpinIssueInput, UnresolveReviewThreadInput, UpdateBranchProtectionRuleInput, UpdateEnterpriseActionExecutionCapabilitySettingInput, UpdateEnterpriseAdministratorRoleInput, UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput, UpdateEnterpriseDefaultRepositoryPermissionSettingInput, UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput, UpdateEnterpriseMembersCanCreateRepositoriesSettingInput, UpdateEnterpriseMembersCanDeleteIssuesSettingInput, UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput, UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput, UpdateEnterpriseMembersCanMakePurchasesSettingInput, UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput, UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput, UpdateEnterpriseOrganizationProjectsSettingInput, UpdateEnterpriseProfileInput, UpdateEnterpriseRepositoryProjectsSettingInput, UpdateEnterpriseTeamDiscussionsSettingInput, UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput, UpdateIssueCommentInput, UpdateIssueInput, UpdateProjectCardInput, UpdateProjectColumnInput, UpdateProjectInput, UpdatePullRequestInput, UpdatePullRequestReviewCommentInput, UpdatePullRequestReviewInput, UpdateRefInput, UpdateRepositoryInput, UpdateSubscriptionInput, UpdateTeamDiscussionCommentInput, UpdateTeamDiscussionInput, UpdateTopicsInput, UserStatusOrder.
+// AcceptEnterpriseAdministratorInvitationInput, AcceptTopicSuggestionInput, AddAssigneesToAssignableInput, AddCommentInput, AddLabelsToLabelableInput, AddProjectCardInput, AddProjectColumnInput, AddPullRequestReviewCommentInput, AddPullRequestReviewInput, AddPullRequestReviewThreadInput, AddReactionInput, AddStarInput, ArchiveRepositoryInput, AuditLogOrder, CancelEnterpriseAdminInvitationInput, ChangeUserStatusInput, ClearLabelsFromLabelableInput, CloneProjectInput, CloneTemplateRepositoryInput, CloseIssueInput, ClosePullRequestInput, CommitAuthor, CommitContributionOrder, ContributionOrder, ConvertProjectCardNoteToIssueInput, CreateBranchProtectionRuleInput, CreateEnterpriseOrganizationInput, CreateIpAllowListEntryInput, CreateIssueInput, CreateProjectInput, CreatePullRequestInput, CreateRefInput, CreateRepositoryInput, CreateTeamDiscussionCommentInput, CreateTeamDiscussionInput, DeclineTopicSuggestionInput, DeleteBranchProtectionRuleInput, DeleteDeploymentInput, DeleteIpAllowListEntryInput, DeleteIssueCommentInput, DeleteIssueInput, DeleteProjectCardInput, DeleteProjectColumnInput, DeleteProjectInput, DeletePullRequestReviewCommentInput, DeletePullRequestReviewInput, DeleteRefInput, DeleteTeamDiscussionCommentInput, DeleteTeamDiscussionInput, DeploymentOrder, DismissPullRequestReviewInput, DraftPullRequestReviewComment, DraftPullRequestReviewThread, EnterpriseAdministratorInvitationOrder, EnterpriseMemberOrder, EnterpriseServerInstallationOrder, EnterpriseServerUserAccountEmailOrder, EnterpriseServerUserAccountOrder, EnterpriseServerUserAccountsUploadOrder, FollowUserInput, GistOrder, InviteEnterpriseAdminInput, IpAllowListEntryOrder, IssueFilters, IssueOrder, LabelOrder, LanguageOrder, LinkRepositoryToProjectInput, LockLockableInput, MarkPullRequestReadyForReviewInput, MergeBranchInput, MergePullRequestInput, MilestoneOrder, MinimizeCommentInput, MoveProjectCardInput, MoveProjectColumnInput, OrganizationOrder, ProjectOrder, PullRequestOrder, ReactionOrder, RefOrder, RegenerateEnterpriseIdentityProviderRecoveryCodesInput, RegistryPackageMetadatum, ReleaseOrder, RemoveAssigneesFromAssignableInput, RemoveEnterpriseAdminInput, RemoveEnterpriseIdentityProviderInput, RemoveEnterpriseOrganizationInput, RemoveLabelsFromLabelableInput, RemoveOutsideCollaboratorInput, RemoveReactionInput, RemoveStarInput, ReopenIssueInput, ReopenPullRequestInput, RepositoryInvitationOrder, RepositoryOrder, RequestReviewsInput, ResolveReviewThreadInput, SavedReplyOrder, SecurityAdvisoryIdentifierFilter, SecurityAdvisoryOrder, SecurityVulnerabilityOrder, SetEnterpriseIdentityProviderInput, SponsorsTierOrder, SponsorshipOrder, StarOrder, SubmitPullRequestReviewInput, TeamDiscussionCommentOrder, TeamDiscussionOrder, TeamMemberOrder, TeamOrder, TeamRepositoryOrder, TransferIssueInput, UnarchiveRepositoryInput, UnfollowUserInput, UnlinkRepositoryFromProjectInput, UnlockLockableInput, UnmarkIssueAsDuplicateInput, UnminimizeCommentInput, UnresolveReviewThreadInput, UpdateBranchProtectionRuleInput, UpdateEnterpriseActionExecutionCapabilitySettingInput, UpdateEnterpriseAdministratorRoleInput, UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput, UpdateEnterpriseDefaultRepositoryPermissionSettingInput, UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput, UpdateEnterpriseMembersCanCreateRepositoriesSettingInput, UpdateEnterpriseMembersCanDeleteIssuesSettingInput, UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput, UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput, UpdateEnterpriseMembersCanMakePurchasesSettingInput, UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput, UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput, UpdateEnterpriseOrganizationProjectsSettingInput, UpdateEnterpriseProfileInput, UpdateEnterpriseRepositoryProjectsSettingInput, UpdateEnterpriseTeamDiscussionsSettingInput, UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput, UpdateIpAllowListEnabledSettingInput, UpdateIpAllowListEntryInput, UpdateIssueCommentInput, UpdateIssueInput, UpdateProjectCardInput, UpdateProjectColumnInput, UpdateProjectInput, UpdatePullRequestInput, UpdatePullRequestReviewCommentInput, UpdatePullRequestReviewInput, UpdateRefInput, UpdateRepositoryInput, UpdateSubscriptionInput, UpdateTeamDiscussionCommentInput, UpdateTeamDiscussionInput, UpdateTopicsInput, UserStatusOrder.
 type Input interface{}
 
 // AcceptEnterpriseAdministratorInvitationInput is an autogenerated input type of AcceptEnterpriseAdministratorInvitation.
@@ -86,11 +86,13 @@ type AddProjectColumnInput struct {
 
 // AddPullRequestReviewCommentInput is an autogenerated input type of AddPullRequestReviewComment.
 type AddPullRequestReviewCommentInput struct {
-	// The Node ID of the review to modify. (Required.)
-	PullRequestReviewID ID `json:"pullRequestReviewId"`
 	// The text of the comment. (Required.)
 	Body String `json:"body"`
 
+	// The node ID of the pull request reviewing. (Optional.)
+	PullRequestID *ID `json:"pullRequestId,omitempty"`
+	// The Node ID of the review to modify. (Optional.)
+	PullRequestReviewID *ID `json:"pullRequestReviewId,omitempty"`
 	// The SHA of the commit to comment on. (Optional.)
 	CommitOID *GitObjectID `json:"commitOID,omitempty"`
 	// The relative path of the file to comment on. (Optional.)
@@ -116,6 +118,29 @@ type AddPullRequestReviewInput struct {
 	Event *PullRequestReviewEvent `json:"event,omitempty"`
 	// The review line comments. (Optional.)
 	Comments *[]*DraftPullRequestReviewComment `json:"comments,omitempty"`
+	// The review line comment threads. (Optional.)
+	Threads *[]*DraftPullRequestReviewThread `json:"threads,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// AddPullRequestReviewThreadInput is an autogenerated input type of AddPullRequestReviewThread.
+type AddPullRequestReviewThreadInput struct {
+	// Path to the file being commented on. (Required.)
+	Path String `json:"path"`
+	// Body of the thread's first comment. (Required.)
+	Body String `json:"body"`
+	// The Node ID of the review to modify. (Required.)
+	PullRequestReviewID ID `json:"pullRequestReviewId"`
+	// The line of the blob to which the thread refers. The end of the line range for multi-line comments. (Required.)
+	Line Int `json:"line"`
+
+	// The side of the diff on which the line resides. For multi-line comments, this is the side for the end of the line range. (Optional.)
+	Side *DiffSide `json:"side,omitempty"`
+	// The first line of the range to which the comment refers. (Optional.)
+	StartLine *Int `json:"startLine,omitempty"`
+	// The side of the diff on which the start line resides. (Optional.)
+	StartSide *DiffSide `json:"startSide,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -325,19 +350,6 @@ type CreateBranchProtectionRuleInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
-// CreateContentAttachmentInput is an autogenerated input type of CreateContentAttachment.
-type CreateContentAttachmentInput struct {
-	// The node ID of the content_reference. (Required.)
-	ContentReferenceID ID `json:"contentReferenceId"`
-	// The title of the content attachment. (Required.)
-	Title String `json:"title"`
-	// The body of the content attachment, which may contain markdown. (Required.)
-	Body String `json:"body"`
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-}
-
 // CreateEnterpriseOrganizationInput is an autogenerated input type of CreateEnterpriseOrganization.
 type CreateEnterpriseOrganizationInput struct {
 	// The ID of the enterprise owning the new organization. (Required.)
@@ -351,6 +363,21 @@ type CreateEnterpriseOrganizationInput struct {
 	// The logins for the administrators of the new organization. (Required.)
 	AdminLogins []String `json:"adminLogins"`
 
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// CreateIpAllowListEntryInput is an autogenerated input type of CreateIpAllowListEntry.
+type CreateIpAllowListEntryInput struct {
+	// The ID of the owner for which to create the new IP allow list entry. (Required.)
+	OwnerID ID `json:"ownerId"`
+	// An IP address or range of addresses in CIDR notation. (Required.)
+	AllowListValue String `json:"allowListValue"`
+	// Whether the IP allow list entry is active when an IP allow list is enabled. (Required.)
+	IsActive Boolean `json:"isActive"`
+
+	// An optional name for the IP allow list entry. (Optional.)
+	Name *String `json:"name,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -408,6 +435,8 @@ type CreatePullRequestInput struct {
 	Body *String `json:"body,omitempty"`
 	// Indicates whether maintainers can modify the pull request. (Optional.)
 	MaintainerCanModify *Boolean `json:"maintainerCanModify,omitempty"`
+	// Indicates whether this pull request should be a draft. (Optional.)
+	Draft *Boolean `json:"draft,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -498,6 +527,24 @@ type DeleteBranchProtectionRuleInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// DeleteDeploymentInput is an autogenerated input type of DeleteDeployment.
+type DeleteDeploymentInput struct {
+	// The Node ID of the deployment to be deleted. (Required.)
+	ID ID `json:"id"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// DeleteIpAllowListEntryInput is an autogenerated input type of DeleteIpAllowListEntry.
+type DeleteIpAllowListEntryInput struct {
+	// The ID of the IP allow list entry to delete. (Required.)
+	IPAllowListEntryID ID `json:"ipAllowListEntryId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // DeleteIssueCommentInput is an autogenerated input type of DeleteIssueComment.
 type DeleteIssueCommentInput struct {
 	// The ID of the comment to delete. (Required.)
@@ -511,15 +558,6 @@ type DeleteIssueCommentInput struct {
 type DeleteIssueInput struct {
 	// The ID of the issue to delete. (Required.)
 	IssueID ID `json:"issueId"`
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-}
-
-// DeletePackageVersionInput is an autogenerated input type of DeletePackageVersion.
-type DeletePackageVersionInput struct {
-	// The ID of the package version to be deleted. (Required.)
-	PackageVersionID ID `json:"packageVersionId"`
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
@@ -626,6 +664,23 @@ type DraftPullRequestReviewComment struct {
 	Body String `json:"body"`
 }
 
+// DraftPullRequestReviewThread specifies a review comment thread to be left with a Pull Request Review.
+type DraftPullRequestReviewThread struct {
+	// Path to the file being commented on. (Required.)
+	Path String `json:"path"`
+	// The line of the blob to which the thread refers. The end of the line range for multi-line comments. (Required.)
+	Line Int `json:"line"`
+	// Body of the comment to leave. (Required.)
+	Body String `json:"body"`
+
+	// The side of the diff on which the line resides. For multi-line comments, this is the side for the end of the line range. (Optional.)
+	Side *DiffSide `json:"side,omitempty"`
+	// The first line of the range to which the comment refers. (Optional.)
+	StartLine *Int `json:"startLine,omitempty"`
+	// The side of the diff on which the start line resides. (Optional.)
+	StartSide *DiffSide `json:"startSide,omitempty"`
+}
+
 // EnterpriseAdministratorInvitationOrder represents ordering options for enterprise administrator invitation connections.
 type EnterpriseAdministratorInvitationOrder struct {
 	// The field to order enterprise administrator invitations by. (Required.)
@@ -638,14 +693,6 @@ type EnterpriseAdministratorInvitationOrder struct {
 type EnterpriseMemberOrder struct {
 	// The field to order enterprise members by. (Required.)
 	Field EnterpriseMemberOrderField `json:"field"`
-	// The ordering direction. (Required.)
-	Direction OrderDirection `json:"direction"`
-}
-
-// EnterpriseOrder represents ordering options for enterprises.
-type EnterpriseOrder struct {
-	// The field to order enterprises by. (Required.)
-	Field EnterpriseOrderField `json:"field"`
 	// The ordering direction. (Required.)
 	Direction OrderDirection `json:"direction"`
 }
@@ -699,23 +746,6 @@ type GistOrder struct {
 	Direction OrderDirection `json:"direction"`
 }
 
-// ImportProjectInput is an autogenerated input type of ImportProject.
-type ImportProjectInput struct {
-	// The name of the Organization or User to create the Project under. (Required.)
-	OwnerName String `json:"ownerName"`
-	// The name of Project. (Required.)
-	Name String `json:"name"`
-	// A list of columns containing issues and pull requests. (Required.)
-	ColumnImports []ProjectColumnImport `json:"columnImports"`
-
-	// The description of Project. (Optional.)
-	Body *String `json:"body,omitempty"`
-	// Whether the Project is public or not. (Optional.)
-	Public *Boolean `json:"public,omitempty"`
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-}
-
 // InviteEnterpriseAdminInput is an autogenerated input type of InviteEnterpriseAdmin.
 type InviteEnterpriseAdminInput struct {
 	// The ID of the enterprise to which you want to invite an administrator. (Required.)
@@ -729,6 +759,14 @@ type InviteEnterpriseAdminInput struct {
 	Role *EnterpriseAdministratorRole `json:"role,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// IpAllowListEntryOrder represents ordering options for IP allow list entry connections.
+type IpAllowListEntryOrder struct {
+	// The field to order IP allow list entries by. (Required.)
+	Field IpAllowListEntryOrderField `json:"field"`
+	// The ordering direction. (Required.)
+	Direction OrderDirection `json:"direction"`
 }
 
 // IssueFilters represents ways in which to filter lists of issues.
@@ -760,6 +798,14 @@ type IssueOrder struct {
 	Direction OrderDirection `json:"direction"`
 }
 
+// LabelOrder represents ways in which lists of labels can be ordered upon return.
+type LabelOrder struct {
+	// The field in which to order labels by. (Required.)
+	Field LabelOrderField `json:"field"`
+	// The direction in which to order labels by the specified field. (Required.)
+	Direction OrderDirection `json:"direction"`
+}
+
 // LanguageOrder represents ordering options for language connections.
 type LanguageOrder struct {
 	// The field to order languages by. (Required.)
@@ -786,6 +832,15 @@ type LockLockableInput struct {
 
 	// A reason for why the issue or pull request will be locked. (Optional.)
 	LockReason *LockReason `json:"lockReason,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// MarkPullRequestReadyForReviewInput is an autogenerated input type of MarkPullRequestReadyForReview.
+type MarkPullRequestReadyForReviewInput struct {
+	// ID of the pull request to be marked as ready for review. (Required.)
+	PullRequestID ID `json:"pullRequestId"`
+
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -873,34 +928,6 @@ type OrganizationOrder struct {
 	Direction OrderDirection `json:"direction"`
 }
 
-// PinIssueInput is an autogenerated input type of PinIssue.
-type PinIssueInput struct {
-	// The ID of the issue to be pinned. (Required.)
-	IssueID ID `json:"issueId"`
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-}
-
-// ProjectCardImport represents an issue or PR and its owning repository to be used in a project card.
-type ProjectCardImport struct {
-	// Repository name with owner (owner/repository). (Required.)
-	Repository String `json:"repository"`
-	// The issue or pull request number. (Required.)
-	Number Int `json:"number"`
-}
-
-// ProjectColumnImport represents a project column and a list of its issues and PRs.
-type ProjectColumnImport struct {
-	// The name of the column. (Required.)
-	ColumnName String `json:"columnName"`
-	// The position of the column, starting from 0. (Required.)
-	Position Int `json:"position"`
-
-	// A list of issues and pull requests in the column. (Optional.)
-	Issues *[]ProjectCardImport `json:"issues,omitempty"`
-}
-
 // ProjectOrder represents ways in which lists of projects can be ordered upon return.
 type ProjectOrder struct {
 	// The field in which to order projects by. (Required.)
@@ -978,6 +1005,15 @@ type RemoveEnterpriseAdminInput struct {
 	EnterpriseID ID `json:"enterpriseId"`
 	// The login of the user to remove as an administrator. (Required.)
 	Login String `json:"login"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// RemoveEnterpriseIdentityProviderInput is an autogenerated input type of RemoveEnterpriseIdentityProvider.
+type RemoveEnterpriseIdentityProviderInput struct {
+	// The ID of the enterprise from which to remove the identity provider. (Required.)
+	EnterpriseID ID `json:"enterpriseId"`
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
@@ -1126,6 +1162,25 @@ type SecurityVulnerabilityOrder struct {
 	Direction OrderDirection `json:"direction"`
 }
 
+// SetEnterpriseIdentityProviderInput is an autogenerated input type of SetEnterpriseIdentityProvider.
+type SetEnterpriseIdentityProviderInput struct {
+	// The ID of the enterprise on which to set an identity provider. (Required.)
+	EnterpriseID ID `json:"enterpriseId"`
+	// The URL endpoint for the identity provider's SAML SSO. (Required.)
+	SsoURL URI `json:"ssoUrl"`
+	// The x509 certificate used by the identity provider to sign assertions and responses. (Required.)
+	IdpCertificate String `json:"idpCertificate"`
+	// The signature algorithm used to sign SAML requests for the identity provider. (Required.)
+	SignatureMethod SamlSignatureAlgorithm `json:"signatureMethod"`
+	// The digest algorithm used to sign SAML requests for the identity provider. (Required.)
+	DigestMethod SamlDigestAlgorithm `json:"digestMethod"`
+
+	// The Issuer Entity ID for the SAML identity provider. (Optional.)
+	Issuer *String `json:"issuer,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // SponsorsTierOrder represents ordering options for Sponsors tiers connections.
 type SponsorsTierOrder struct {
 	// The field to order tiers by. (Required.)
@@ -1152,11 +1207,13 @@ type StarOrder struct {
 
 // SubmitPullRequestReviewInput is an autogenerated input type of SubmitPullRequestReview.
 type SubmitPullRequestReviewInput struct {
-	// The Pull Request Review ID to submit. (Required.)
-	PullRequestReviewID ID `json:"pullRequestReviewId"`
 	// The event to send to the Pull Request Review. (Required.)
 	Event PullRequestReviewEvent `json:"event"`
 
+	// The Pull Request ID to submit any pending reviews. (Optional.)
+	PullRequestID *ID `json:"pullRequestId,omitempty"`
+	// The Pull Request Review ID to submit. (Optional.)
+	PullRequestReviewID *ID `json:"pullRequestReviewId,omitempty"`
 	// The text field to set on the Pull Request Review. (Optional.)
 	Body *String `json:"body,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
@@ -1267,15 +1324,6 @@ type UnmarkIssueAsDuplicateInput struct {
 type UnminimizeCommentInput struct {
 	// The Node ID of the subject to modify. (Required.)
 	SubjectID ID `json:"subjectId"`
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-}
-
-// UnpinIssueInput is an autogenerated input type of UnpinIssue.
-type UnpinIssueInput struct {
-	// The ID of the issue to be unpinned. (Required.)
-	IssueID ID `json:"issueId"`
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
@@ -1526,6 +1574,32 @@ type UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput struct {
 	// The value for the two factor authentication required setting on the enterprise. (Required.)
 	SettingValue EnterpriseEnabledSettingValue `json:"settingValue"`
 
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// UpdateIpAllowListEnabledSettingInput is an autogenerated input type of UpdateIpAllowListEnabledSetting.
+type UpdateIpAllowListEnabledSettingInput struct {
+	// The ID of the owner on which to set the IP allow list enabled setting. (Required.)
+	OwnerID ID `json:"ownerId"`
+	// The value for the IP allow list enabled setting. (Required.)
+	SettingValue IpAllowListEnabledSettingValue `json:"settingValue"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// UpdateIpAllowListEntryInput is an autogenerated input type of UpdateIpAllowListEntry.
+type UpdateIpAllowListEntryInput struct {
+	// The ID of the IP allow list entry to update. (Required.)
+	IPAllowListEntryID ID `json:"ipAllowListEntryId"`
+	// An IP address or range of addresses in CIDR notation. (Required.)
+	AllowListValue String `json:"allowListValue"`
+	// Whether the IP allow list entry is active when an IP allow list is enabled. (Required.)
+	IsActive Boolean `json:"isActive"`
+
+	// An optional name for the IP allow list entry. (Optional.)
+	Name *String `json:"name,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
