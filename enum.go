@@ -125,6 +125,15 @@ const (
 	DeploymentStatusStateInProgress DeploymentStatusState = "IN_PROGRESS" // The deployment is in progress.
 )
 
+// DiffSide represents the possible sides of a diff.
+type DiffSide string
+
+// The possible sides of a diff.
+const (
+	DiffSideLeft  DiffSide = "LEFT"  // The left side of the diff.
+	DiffSideRight DiffSide = "RIGHT" // The right side of the diff.
+)
+
 // EnterpriseAdministratorInvitationOrderField represents properties by which enterprise administrator invitation connections can be ordered.
 type EnterpriseAdministratorInvitationOrderField string
 
@@ -201,25 +210,6 @@ type EnterpriseMembersCanMakePurchasesSettingValue string
 const (
 	EnterpriseMembersCanMakePurchasesSettingValueEnabled  EnterpriseMembersCanMakePurchasesSettingValue = "ENABLED"  // The setting is enabled for organizations in the enterprise.
 	EnterpriseMembersCanMakePurchasesSettingValueDisabled EnterpriseMembersCanMakePurchasesSettingValue = "DISABLED" // The setting is disabled for organizations in the enterprise.
-)
-
-// EnterpriseMembershipType represents the possible values we have for filtering Platform::Objects::User#enterprises.
-type EnterpriseMembershipType string
-
-// The possible values we have for filtering Platform::Objects::User#enterprises.
-const (
-	EnterpriseMembershipTypeAll            EnterpriseMembershipType = "ALL"             // Returns all enterprises in which the user is a member, admin, or billing manager.
-	EnterpriseMembershipTypeAdmin          EnterpriseMembershipType = "ADMIN"           // Returns all enterprises in which the user is an admin.
-	EnterpriseMembershipTypeBillingManager EnterpriseMembershipType = "BILLING_MANAGER" // Returns all enterprises in which the user is a billing manager.
-	EnterpriseMembershipTypeOrgMembership  EnterpriseMembershipType = "ORG_MEMBERSHIP"  // Returns all enterprises in which the user is a member of an org that is owned by the enterprise.
-)
-
-// EnterpriseOrderField represents properties by which enterprise connections can be ordered.
-type EnterpriseOrderField string
-
-// Properties by which enterprise connections can be ordered.
-const (
-	EnterpriseOrderFieldName EnterpriseOrderField = "NAME" // Order enterprises by name.
 )
 
 // EnterpriseServerInstallationOrderField represents properties by which Enterprise Server installation connections can be ordered.
@@ -356,6 +346,24 @@ const (
 	IdentityProviderConfigurationStateUnconfigured IdentityProviderConfigurationState = "UNCONFIGURED" // Authentication with an identity provider is not configured.
 )
 
+// IpAllowListEnabledSettingValue represents the possible values for the IP allow list enabled setting.
+type IpAllowListEnabledSettingValue string
+
+// The possible values for the IP allow list enabled setting.
+const (
+	IpAllowListEnabledSettingValueEnabled  IpAllowListEnabledSettingValue = "ENABLED"  // The setting is enabled for the owner.
+	IpAllowListEnabledSettingValueDisabled IpAllowListEnabledSettingValue = "DISABLED" // The setting is disabled for the owner.
+)
+
+// IpAllowListEntryOrderField represents properties by which IP allow list entry connections can be ordered.
+type IpAllowListEntryOrderField string
+
+// Properties by which IP allow list entry connections can be ordered.
+const (
+	IpAllowListEntryOrderFieldCreatedAt      IpAllowListEntryOrderField = "CREATED_AT"       // Order IP allow list entries by creation time.
+	IpAllowListEntryOrderFieldAllowListValue IpAllowListEntryOrderField = "ALLOW_LIST_VALUE" // Order IP allow list entries by the allow list value.
+)
+
 // IssueOrderField represents properties by which issue connections can be ordered.
 type IssueOrderField string
 
@@ -364,17 +372,6 @@ const (
 	IssueOrderFieldCreatedAt IssueOrderField = "CREATED_AT" // Order issues by creation time.
 	IssueOrderFieldUpdatedAt IssueOrderField = "UPDATED_AT" // Order issues by update time.
 	IssueOrderFieldComments  IssueOrderField = "COMMENTS"   // Order issues by comment count.
-)
-
-// IssuePubSubTopic represents the possible PubSub channels for an issue.
-type IssuePubSubTopic string
-
-// The possible PubSub channels for an issue.
-const (
-	IssuePubSubTopicUpdated    IssuePubSubTopic = "UPDATED"    // The channel ID for observing issue updates.
-	IssuePubSubTopicMarkasread IssuePubSubTopic = "MARKASREAD" // The channel ID for marking an issue as read.
-	IssuePubSubTopicTimeline   IssuePubSubTopic = "TIMELINE"   // The channel ID for updating items on the issue timeline.
-	IssuePubSubTopicState      IssuePubSubTopic = "STATE"      // The channel ID for observing issue state updates.
 )
 
 // IssueState represents the possible states of an issue.
@@ -397,8 +394,10 @@ const (
 	IssueTimelineItemsItemTypeAssignedEvent              IssueTimelineItemsItemType = "ASSIGNED_EVENT"                 // Represents an 'assigned' event on any assignable object.
 	IssueTimelineItemsItemTypeClosedEvent                IssueTimelineItemsItemType = "CLOSED_EVENT"                   // Represents a 'closed' event on any `Closable`.
 	IssueTimelineItemsItemTypeCommentDeletedEvent        IssueTimelineItemsItemType = "COMMENT_DELETED_EVENT"          // Represents a 'comment_deleted' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeConnectedEvent             IssueTimelineItemsItemType = "CONNECTED_EVENT"                // Represents a 'connected' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeConvertedNoteToIssueEvent  IssueTimelineItemsItemType = "CONVERTED_NOTE_TO_ISSUE_EVENT"  // Represents a 'converted_note_to_issue' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeDemilestonedEvent          IssueTimelineItemsItemType = "DEMILESTONED_EVENT"             // Represents a 'demilestoned' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeDisconnectedEvent          IssueTimelineItemsItemType = "DISCONNECTED_EVENT"             // Represents a 'disconnected' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeLabeledEvent               IssueTimelineItemsItemType = "LABELED_EVENT"                  // Represents a 'labeled' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeLockedEvent                IssueTimelineItemsItemType = "LOCKED_EVENT"                   // Represents a 'locked' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeMarkedAsDuplicateEvent     IssueTimelineItemsItemType = "MARKED_AS_DUPLICATE_EVENT"      // Represents a 'marked_as_duplicate' event on a given issue or pull request.
@@ -416,8 +415,18 @@ const (
 	IssueTimelineItemsItemTypeUnlabeledEvent             IssueTimelineItemsItemType = "UNLABELED_EVENT"                // Represents an 'unlabeled' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUnlockedEvent              IssueTimelineItemsItemType = "UNLOCKED_EVENT"                 // Represents an 'unlocked' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUserBlockedEvent           IssueTimelineItemsItemType = "USER_BLOCKED_EVENT"             // Represents a 'user_blocked' event on a given user.
+	IssueTimelineItemsItemTypeUnmarkedAsDuplicateEvent   IssueTimelineItemsItemType = "UNMARKED_AS_DUPLICATE_EVENT"    // Represents an 'unmarked_as_duplicate' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUnpinnedEvent              IssueTimelineItemsItemType = "UNPINNED_EVENT"                 // Represents an 'unpinned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUnsubscribedEvent          IssueTimelineItemsItemType = "UNSUBSCRIBED_EVENT"             // Represents an 'unsubscribed' event on a given `Subscribable`.
+)
+
+// LabelOrderField represents properties by which label connections can be ordered.
+type LabelOrderField string
+
+// Properties by which label connections can be ordered.
+const (
+	LabelOrderFieldName      LabelOrderField = "NAME"       // Order labels by name.
+	LabelOrderFieldCreatedAt LabelOrderField = "CREATED_AT" // Order labels by creation time.
 )
 
 // LanguageOrderField represents properties by which language connections can be ordered.
@@ -477,16 +486,6 @@ const (
 	OauthApplicationCreateAuditEntryStateActive          OauthApplicationCreateAuditEntryState = "ACTIVE"           // The OAuth Application was active and allowed to have OAuth Accesses.
 	OauthApplicationCreateAuditEntryStateSuspended       OauthApplicationCreateAuditEntryState = "SUSPENDED"        // The OAuth Application was suspended from generating OAuth Accesses due to abuse or security concerns.
 	OauthApplicationCreateAuditEntryStatePendingDeletion OauthApplicationCreateAuditEntryState = "PENDING_DELETION" // The OAuth Application was in the process of being deleted.
-)
-
-// OauthApplicationRevokeTokensAuditEntryState represents the state of an OAuth Application when its tokens were revoked.
-type OauthApplicationRevokeTokensAuditEntryState string
-
-// The state of an OAuth Application when its tokens were revoked.
-const (
-	OauthApplicationRevokeTokensAuditEntryStateActive          OauthApplicationRevokeTokensAuditEntryState = "ACTIVE"           // The OAuth Application was active and allowed to have OAuth Accesses.
-	OauthApplicationRevokeTokensAuditEntryStateSuspended       OauthApplicationRevokeTokensAuditEntryState = "SUSPENDED"        // The OAuth Application was suspended from generating OAuth Accesses due to abuse or security concerns.
-	OauthApplicationRevokeTokensAuditEntryStatePendingDeletion OauthApplicationRevokeTokensAuditEntryState = "PENDING_DELETION" // The OAuth Application was in the process of being deleted.
 )
 
 // OperationType represents the corresponding operation type for the action.
@@ -754,18 +753,6 @@ const (
 	PullRequestOrderFieldUpdatedAt PullRequestOrderField = "UPDATED_AT" // Order pull_requests by update time.
 )
 
-// PullRequestPubSubTopic represents the possible PubSub channels for a pull request.
-type PullRequestPubSubTopic string
-
-// The possible PubSub channels for a pull request.
-const (
-	PullRequestPubSubTopicUpdated    PullRequestPubSubTopic = "UPDATED"    // The channel ID for observing pull request updates.
-	PullRequestPubSubTopicMarkasread PullRequestPubSubTopic = "MARKASREAD" // The channel ID for marking an pull request as read.
-	PullRequestPubSubTopicHeadRef    PullRequestPubSubTopic = "HEAD_REF"   // The channel ID for observing head ref updates.
-	PullRequestPubSubTopicTimeline   PullRequestPubSubTopic = "TIMELINE"   // The channel ID for updating items on the pull request timeline.
-	PullRequestPubSubTopicState      PullRequestPubSubTopic = "STATE"      // The channel ID for observing pull request state updates.
-)
-
 // PullRequestReviewCommentState represents the possible states of a pull request review comment.
 type PullRequestReviewCommentState string
 
@@ -773,6 +760,16 @@ type PullRequestReviewCommentState string
 const (
 	PullRequestReviewCommentStatePending   PullRequestReviewCommentState = "PENDING"   // A comment that is part of a pending review.
 	PullRequestReviewCommentStateSubmitted PullRequestReviewCommentState = "SUBMITTED" // A comment that is part of a submitted review.
+)
+
+// PullRequestReviewDecision represents the review status of a pull request.
+type PullRequestReviewDecision string
+
+// The review status of a pull request.
+const (
+	PullRequestReviewDecisionChangesRequested PullRequestReviewDecision = "CHANGES_REQUESTED" // Changes have been requested on the pull request.
+	PullRequestReviewDecisionApproved         PullRequestReviewDecision = "APPROVED"          // The pull request has received an approving review.
+	PullRequestReviewDecisionReviewRequired   PullRequestReviewDecision = "REVIEW_REQUIRED"   // A review is required before the pull request can be merged.
 )
 
 // PullRequestReviewEvent represents the possible events to perform on a pull request review.
@@ -836,8 +833,10 @@ const (
 	PullRequestTimelineItemsItemTypeAssignedEvent                     PullRequestTimelineItemsItemType = "ASSIGNED_EVENT"                       // Represents an 'assigned' event on any assignable object.
 	PullRequestTimelineItemsItemTypeClosedEvent                       PullRequestTimelineItemsItemType = "CLOSED_EVENT"                         // Represents a 'closed' event on any `Closable`.
 	PullRequestTimelineItemsItemTypeCommentDeletedEvent               PullRequestTimelineItemsItemType = "COMMENT_DELETED_EVENT"                // Represents a 'comment_deleted' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypeConnectedEvent                    PullRequestTimelineItemsItemType = "CONNECTED_EVENT"                      // Represents a 'connected' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeConvertedNoteToIssueEvent         PullRequestTimelineItemsItemType = "CONVERTED_NOTE_TO_ISSUE_EVENT"        // Represents a 'converted_note_to_issue' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeDemilestonedEvent                 PullRequestTimelineItemsItemType = "DEMILESTONED_EVENT"                   // Represents a 'demilestoned' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypeDisconnectedEvent                 PullRequestTimelineItemsItemType = "DISCONNECTED_EVENT"                   // Represents a 'disconnected' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeLabeledEvent                      PullRequestTimelineItemsItemType = "LABELED_EVENT"                        // Represents a 'labeled' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeLockedEvent                       PullRequestTimelineItemsItemType = "LOCKED_EVENT"                         // Represents a 'locked' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeMarkedAsDuplicateEvent            PullRequestTimelineItemsItemType = "MARKED_AS_DUPLICATE_EVENT"            // Represents a 'marked_as_duplicate' event on a given issue or pull request.
@@ -855,6 +854,7 @@ const (
 	PullRequestTimelineItemsItemTypeUnlabeledEvent                    PullRequestTimelineItemsItemType = "UNLABELED_EVENT"                      // Represents an 'unlabeled' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnlockedEvent                     PullRequestTimelineItemsItemType = "UNLOCKED_EVENT"                       // Represents an 'unlocked' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUserBlockedEvent                  PullRequestTimelineItemsItemType = "USER_BLOCKED_EVENT"                   // Represents a 'user_blocked' event on a given user.
+	PullRequestTimelineItemsItemTypeUnmarkedAsDuplicateEvent          PullRequestTimelineItemsItemType = "UNMARKED_AS_DUPLICATE_EVENT"          // Represents an 'unmarked_as_duplicate' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnpinnedEvent                     PullRequestTimelineItemsItemType = "UNPINNED_EVENT"                       // Represents an 'unpinned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnsubscribedEvent                 PullRequestTimelineItemsItemType = "UNSUBSCRIBED_EVENT"                   // Represents an 'unsubscribed' event on a given `Subscribable`.
 )
@@ -911,15 +911,6 @@ const (
 	RegistryPackageDependencyTypePeer     RegistryPackageDependencyType = "PEER"     // A peer registry package dependency type.
 	RegistryPackageDependencyTypeOptional RegistryPackageDependencyType = "OPTIONAL" // An optional registry package dependency type.
 	RegistryPackageDependencyTypeBundled  RegistryPackageDependencyType = "BUNDLED"  // An optional registry package dependency type.
-)
-
-// RegistryPackageFileState represents the possible states of a registry package file.
-type RegistryPackageFileState string
-
-// The possible states of a registry package file.
-const (
-	RegistryPackageFileStateNew      RegistryPackageFileState = "NEW"      // Package file doesn't have a blob backing it.
-	RegistryPackageFileStateUploaded RegistryPackageFileState = "UPLOADED" // All Package file contents have been uploaded.
 )
 
 // RegistryPackageType represents the possible types of a registry package.
@@ -1020,11 +1011,12 @@ type ReportedContentClassifiers string
 
 // The reasons a piece of content can be reported or minimized.
 const (
-	ReportedContentClassifiersSpam     ReportedContentClassifiers = "SPAM"      // A spammy piece of content.
-	ReportedContentClassifiersAbuse    ReportedContentClassifiers = "ABUSE"     // An abusive or harassing piece of content.
-	ReportedContentClassifiersOffTopic ReportedContentClassifiers = "OFF_TOPIC" // An irrelevant piece of content.
-	ReportedContentClassifiersOutdated ReportedContentClassifiers = "OUTDATED"  // An outdated piece of content.
-	ReportedContentClassifiersResolved ReportedContentClassifiers = "RESOLVED"  // The content has been resolved.
+	ReportedContentClassifiersSpam      ReportedContentClassifiers = "SPAM"      // A spammy piece of content.
+	ReportedContentClassifiersAbuse     ReportedContentClassifiers = "ABUSE"     // An abusive or harassing piece of content.
+	ReportedContentClassifiersOffTopic  ReportedContentClassifiers = "OFF_TOPIC" // An irrelevant piece of content.
+	ReportedContentClassifiersOutdated  ReportedContentClassifiers = "OUTDATED"  // An outdated piece of content.
+	ReportedContentClassifiersDuplicate ReportedContentClassifiers = "DUPLICATE" // A duplicated piece of content.
+	ReportedContentClassifiersResolved  ReportedContentClassifiers = "RESOLVED"  // The content has been resolved.
 )
 
 // RepositoryAffiliation represents the affiliation of a user to a repository.
@@ -1035,15 +1027,6 @@ const (
 	RepositoryAffiliationOwner              RepositoryAffiliation = "OWNER"               // Repositories that are owned by the authenticated user.
 	RepositoryAffiliationCollaborator       RepositoryAffiliation = "COLLABORATOR"        // Repositories that the user has been added to as a collaborator.
 	RepositoryAffiliationOrganizationMember RepositoryAffiliation = "ORGANIZATION_MEMBER" // Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
-)
-
-// RepositoryCollaboratorAffiliation represents the affiliation type between collaborator and repository.
-type RepositoryCollaboratorAffiliation string
-
-// The affiliation type between collaborator and repository.
-const (
-	RepositoryCollaboratorAffiliationAll     RepositoryCollaboratorAffiliation = "ALL"     // All collaborators of the repository.
-	RepositoryCollaboratorAffiliationOutside RepositoryCollaboratorAffiliation = "OUTSIDE" // All outside collaborators of an organization-owned repository.
 )
 
 // RepositoryContributionType represents the reason a repository is listed as 'contributed'.
