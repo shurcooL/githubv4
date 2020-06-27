@@ -46,7 +46,7 @@ func main() {
 }
 ```
 
-If you are using GitHub Enterprise, use [`githubv4.NewEnterpriseClient`]`:
+If you are using GitHub Enterprise, use [`githubv4.NewEnterpriseClient`](https://godoc.org/github.com/shurcooL/githubv4#NewEnterpriseClient):
 
 ```Go
 client := githubv4.NewEnterpriseClient(os.Getenv("GITHUB_ENDPOINT"), httpClient)
