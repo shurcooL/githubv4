@@ -46,6 +46,13 @@ func main() {
 }
 ```
 
+If you are using GitHub Enterprise, use [`githubv4.NewEnterpriseClient`](https://godoc.org/github.com/shurcooL/githubv4#NewEnterpriseClient):
+
+```Go
+client := githubv4.NewEnterpriseClient(os.Getenv("GITHUB_ENDPOINT"), httpClient)
+// Use client...
+```
+
 ### Simple Query
 
 To make a query, you need to define a Go type that corresponds to the GitHub GraphQL schema, and contains the fields you're interested in querying. You can look up the GitHub GraphQL schema at https://developer.github.com/v4/query/.
