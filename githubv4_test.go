@@ -261,7 +261,106 @@ func TestClient_Mutate(t *testing.T) {
 	rg.Users.TotalCount = 3
 	want.AddReaction.Subject.ReactionGroups = []reactionGroup{rg}
 	if !reflect.DeepEqual(got, want) {
-		t.Errorf("client.Query got: %v, want: %v", got, want)
+		t.Errorf("client.Mutate got: %v, want: %v", got, want)
+	}
+}
+
+func TestClient_Mutate_multiple(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/graphql", func(w http.ResponseWriter, req *http.Request) {
+		if got, want := req.Method, http.MethodPost; got != want {
+			t.Errorf("got request method: %v, want: %v", got, want)
+		}
+		body := mustRead(req.Body)
+		if got, want := body, `{"query":"mutation($one:AddReactionInput!$two:AddReactionInput!){one:addReaction(input:$one){reaction{content},subject{id,reactionGroups{users{totalCount}}}},two:addReaction(input:$two){reaction{content},subject{id,reactionGroups{users{totalCount}}}}}","variables":{"one":{"subjectId":"MDU6SXNzdWUyMTc5NTQ0OTc=","content":"HOORAY"},"two":{"subjectId":"MDU6SXNzdWUyMTc5NTQ0OTc=","content":"LAUGH"}}}`+"\n"; got != want {
+			t.Errorf("got body: %v, want %v", got, want)
+		}
+		w.Header().Set("Content-Type", "application/json")
+		mustWrite(w, `{"data": {
+			"one": {
+				"reaction": {
+					"content": "HOORAY"
+				},
+				"subject": {
+					"id": "MDU6SXNzdWUyMTc5NTQ0OTc=",
+					"reactionGroups": [
+						{
+							"users": {"totalCount": 3}
+						}
+					]
+				}
+			},
+			"two": {
+				"reaction": {
+					"content": "LAUGH"
+				},
+				"subject": {
+					"id": "MDU6SXNzdWUyMTc5NTQ0OTc=",
+					"reactionGroups": [
+						{
+							"users": {"totalCount": 1}
+						}
+					]
+				}
+			}
+		}}`)
+	})
+	client := githubv4.NewClient(&http.Client{Transport: localRoundTripper{handler: mux}})
+
+	type reactionGroup struct {
+		Users struct {
+			TotalCount githubv4.Int
+		}
+	}
+
+	type addReaction struct {
+		Reaction struct {
+			Content githubv4.ReactionContent
+		}
+		Subject struct {
+			ID             githubv4.ID
+			ReactionGroups []reactionGroup
+		}
+	}
+
+	type mutation struct {
+		One addReaction `graphql:"one:addReaction(input:$one)"`
+		Two addReaction `graphql:"two:addReaction(input:$two)"`
+	}
+
+	var m mutation
+	variables := map[string]interface{}{
+		"one": githubv4.AddReactionInput{
+			SubjectID: "MDU6SXNzdWUyMTc5NTQ0OTc=",
+			Content:   githubv4.ReactionContentHooray,
+		},
+		"two": githubv4.AddReactionInput{
+			SubjectID: "MDU6SXNzdWUyMTc5NTQ0OTc=",
+			Content:   githubv4.ReactionContentLaugh,
+		},
+	}
+	err := client.Mutate(context.Background(), &m, nil, variables)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := m
+
+	var want mutation
+
+	want.One.Reaction.Content = githubv4.ReactionContentHooray
+	want.One.Subject.ID = "MDU6SXNzdWUyMTc5NTQ0OTc="
+	var rg1 reactionGroup
+	rg1.Users.TotalCount = 3
+	want.One.Subject.ReactionGroups = []reactionGroup{rg1}
+
+	want.Two.Reaction.Content = githubv4.ReactionContentLaugh
+	want.Two.Subject.ID = "MDU6SXNzdWUyMTc5NTQ0OTc="
+	var rg2 reactionGroup
+	rg2.Users.TotalCount = 1
+	want.Two.Subject.ReactionGroups = []reactionGroup{rg2}
+
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("client.Mutate got: %v, want: %v", got, want)
 	}
 }
 
