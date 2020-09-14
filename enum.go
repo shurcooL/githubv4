@@ -857,6 +857,7 @@ const (
 	PullRequestTimelineItemsItemTypeAutomaticBaseChangeSucceededEvent PullRequestTimelineItemsItemType = "AUTOMATIC_BASE_CHANGE_SUCCEEDED_EVENT" // Represents a 'automatic_base_change_succeeded' event on a given pull request.
 	PullRequestTimelineItemsItemTypeBaseRefChangedEvent               PullRequestTimelineItemsItemType = "BASE_REF_CHANGED_EVENT"                // Represents a 'base_ref_changed' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeBaseRefForcePushedEvent           PullRequestTimelineItemsItemType = "BASE_REF_FORCE_PUSHED_EVENT"           // Represents a 'base_ref_force_pushed' event on a given pull request.
+	PullRequestTimelineItemsItemTypeBaseRefDeletedEvent               PullRequestTimelineItemsItemType = "BASE_REF_DELETED_EVENT"                // Represents a 'base_ref_deleted' event on a given pull request.
 	PullRequestTimelineItemsItemTypeDeployedEvent                     PullRequestTimelineItemsItemType = "DEPLOYED_EVENT"                        // Represents a 'deployed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeDeploymentEnvironmentChangedEvent PullRequestTimelineItemsItemType = "DEPLOYMENT_ENVIRONMENT_CHANGED_EVENT"  // Represents a 'deployment_environment_changed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeHeadRefDeletedEvent               PullRequestTimelineItemsItemType = "HEAD_REF_DELETED_EVENT"                // Represents a 'head_ref_deleted' event on a given pull request.

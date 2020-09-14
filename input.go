@@ -130,11 +130,13 @@ type AddPullRequestReviewThreadInput struct {
 	Path String `json:"path"`
 	// Body of the thread's first comment. (Required.)
 	Body String `json:"body"`
-	// The Node ID of the review to modify. (Required.)
-	PullRequestReviewID ID `json:"pullRequestReviewId"`
 	// The line of the blob to which the thread refers. The end of the line range for multi-line comments. (Required.)
 	Line Int `json:"line"`
 
+	// The node ID of the pull request reviewing. (Optional.)
+	PullRequestID *ID `json:"pullRequestId,omitempty"`
+	// The Node ID of the review to modify. (Optional.)
+	PullRequestReviewID *ID `json:"pullRequestReviewId,omitempty"`
 	// The side of the diff on which the line resides. For multi-line comments, this is the side for the end of the line range. (Optional.)
 	Side *DiffSide `json:"side,omitempty"`
 	// The first line of the range to which the comment refers. (Optional.)
@@ -855,6 +857,8 @@ type MergeBranchInput struct {
 
 	// Message to use for the merge commit. If omitted, a default will be used. (Optional.)
 	CommitMessage *String `json:"commitMessage,omitempty"`
+	// The email address to associate with this commit. (Optional.)
+	AuthorEmail *String `json:"authorEmail,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -872,6 +876,8 @@ type MergePullRequestInput struct {
 	ExpectedHeadOid *GitObjectID `json:"expectedHeadOid,omitempty"`
 	// The merge method to use. If omitted, defaults to 'MERGE'. (Optional.)
 	MergeMethod *PullRequestMergeMethod `json:"mergeMethod,omitempty"`
+	// The email address to associate with this merge. (Optional.)
+	AuthorEmail *String `json:"authorEmail,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
