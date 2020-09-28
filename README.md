@@ -7,8 +7,6 @@ Package `githubv4` is a client library for accessing GitHub GraphQL API v4 (http
 
 If you're looking for a client library for GitHub REST API v3, the recommended package is [`github.com/google/go-github/github`](https://godoc.org/github.com/google/go-github/github).
 
-**Status:** In research and development. The API will change when opportunities for improvement are discovered; it is not yet frozen.
-
 Focus
 -----
 
