@@ -2,23 +2,58 @@
 
 package githubv4
 
-// ActionExecutionCapabilitySetting represents the possible capabilities for action executions setting.
-type ActionExecutionCapabilitySetting string
-
-// The possible capabilities for action executions setting.
-const (
-	ActionExecutionCapabilitySettingDisabled         ActionExecutionCapabilitySetting = "DISABLED"           // All action executions are disabled.
-	ActionExecutionCapabilitySettingAllActions       ActionExecutionCapabilitySetting = "ALL_ACTIONS"        // All action executions are enabled.
-	ActionExecutionCapabilitySettingLocalActionsOnly ActionExecutionCapabilitySetting = "LOCAL_ACTIONS_ONLY" // Only actions defined within the repo are allowed.
-	ActionExecutionCapabilitySettingNoPolicy         ActionExecutionCapabilitySetting = "NO_POLICY"          // Organization administrators action execution capabilities.
-)
-
 // AuditLogOrderField represents properties by which Audit Log connections can be ordered.
 type AuditLogOrderField string
 
 // Properties by which Audit Log connections can be ordered.
 const (
 	AuditLogOrderFieldCreatedAt AuditLogOrderField = "CREATED_AT" // Order audit log entries by timestamp.
+)
+
+// CheckAnnotationLevel represents represents an annotation's information level.
+type CheckAnnotationLevel string
+
+// Represents an annotation's information level.
+const (
+	CheckAnnotationLevelFailure CheckAnnotationLevel = "FAILURE" // An annotation indicating an inescapable error.
+	CheckAnnotationLevelNotice  CheckAnnotationLevel = "NOTICE"  // An annotation indicating some information.
+	CheckAnnotationLevelWarning CheckAnnotationLevel = "WARNING" // An annotation indicating an ignorable error.
+)
+
+// CheckConclusionState represents the possible states for a check suite or run conclusion.
+type CheckConclusionState string
+
+// The possible states for a check suite or run conclusion.
+const (
+	CheckConclusionStateActionRequired CheckConclusionState = "ACTION_REQUIRED" // The check suite or run requires action.
+	CheckConclusionStateTimedOut       CheckConclusionState = "TIMED_OUT"       // The check suite or run has timed out.
+	CheckConclusionStateCancelled      CheckConclusionState = "CANCELLED"       // The check suite or run has been cancelled.
+	CheckConclusionStateFailure        CheckConclusionState = "FAILURE"         // The check suite or run has failed.
+	CheckConclusionStateSuccess        CheckConclusionState = "SUCCESS"         // The check suite or run has succeeded.
+	CheckConclusionStateNeutral        CheckConclusionState = "NEUTRAL"         // The check suite or run was neutral.
+	CheckConclusionStateSkipped        CheckConclusionState = "SKIPPED"         // The check suite or run was skipped.
+	CheckConclusionStateStartupFailure CheckConclusionState = "STARTUP_FAILURE" // The check suite or run has failed at startup.
+	CheckConclusionStateStale          CheckConclusionState = "STALE"           // The check suite or run was marked stale by GitHub. Only GitHub can use this conclusion.
+)
+
+// CheckRunType represents the possible types of check runs.
+type CheckRunType string
+
+// The possible types of check runs.
+const (
+	CheckRunTypeAll    CheckRunType = "ALL"    // Every check run available.
+	CheckRunTypeLatest CheckRunType = "LATEST" // The latest check run.
+)
+
+// CheckStatusState represents the possible states for a check suite or run status.
+type CheckStatusState string
+
+// The possible states for a check suite or run status.
+const (
+	CheckStatusStateQueued     CheckStatusState = "QUEUED"      // The check suite or run has been queued.
+	CheckStatusStateInProgress CheckStatusState = "IN_PROGRESS" // The check suite or run is in progress.
+	CheckStatusStateCompleted  CheckStatusState = "COMPLETED"   // The check suite or run has been completed.
+	CheckStatusStateRequested  CheckStatusState = "REQUESTED"   // The check suite or run has been requested.
 )
 
 // CollaboratorAffiliation represents collaborators affiliation level with a subject.
@@ -38,6 +73,7 @@ type CommentAuthorAssociation string
 const (
 	CommentAuthorAssociationMember               CommentAuthorAssociation = "MEMBER"                 // Author is a member of the organization that owns the repository.
 	CommentAuthorAssociationOwner                CommentAuthorAssociation = "OWNER"                  // Author is the owner of the repository.
+	CommentAuthorAssociationMannequin            CommentAuthorAssociation = "MANNEQUIN"              // Author is a placeholder for an unclaimed user.
 	CommentAuthorAssociationCollaborator         CommentAuthorAssociation = "COLLABORATOR"           // Author has been invited to collaborate on the repository.
 	CommentAuthorAssociationContributor          CommentAuthorAssociation = "CONTRIBUTOR"            // Author has previously committed to the repository.
 	CommentAuthorAssociationFirstTimeContributor CommentAuthorAssociation = "FIRST_TIME_CONTRIBUTOR" // Author has not previously committed to the repository.
@@ -101,6 +137,7 @@ const (
 	DeploymentStatePending    DeploymentState = "PENDING"     // The deployment is pending.
 	DeploymentStateQueued     DeploymentState = "QUEUED"      // The deployment has queued.
 	DeploymentStateInProgress DeploymentState = "IN_PROGRESS" // The deployment is in progress.
+	DeploymentStateWaiting    DeploymentState = "WAITING"     // The deployment is waiting.
 )
 
 // DeploymentStatusState represents the possible states for a deployment status.
@@ -267,6 +304,16 @@ const (
 	EnterpriseUserDeploymentServer EnterpriseUserDeployment = "SERVER" // The user is part of a GitHub Enterprise Server deployment.
 )
 
+// FileViewedState represents the possible viewed states of a file .
+type FileViewedState string
+
+// The possible viewed states of a file .
+const (
+	FileViewedStateDismissed FileViewedState = "DISMISSED" // The file has new changes since last viewed.
+	FileViewedStateViewed    FileViewedState = "VIEWED"    // The file has been marked as viewed.
+	FileViewedStateUnviewed  FileViewedState = "UNVIEWED"  // The file has not been marked as viewed.
+)
+
 // FundingPlatform represents the possible funding platforms for repository funding links.
 type FundingPlatform string
 
@@ -354,6 +401,14 @@ type IpAllowListEntryOrderField string
 const (
 	IpAllowListEntryOrderFieldCreatedAt      IpAllowListEntryOrderField = "CREATED_AT"       // Order IP allow list entries by creation time.
 	IpAllowListEntryOrderFieldAllowListValue IpAllowListEntryOrderField = "ALLOW_LIST_VALUE" // Order IP allow list entries by the allow list value.
+)
+
+// IssueCommentOrderField represents properties by which issue comment connections can be ordered.
+type IssueCommentOrderField string
+
+// Properties by which issue comment connections can be ordered.
+const (
+	IssueCommentOrderFieldUpdatedAt IssueCommentOrderField = "UPDATED_AT" // Order issue comments by update time.
 )
 
 // IssueOrderField represents properties by which issue connections can be ordered.
@@ -1056,6 +1111,39 @@ const (
 	RepositoryContributionTypePullRequestReview RepositoryContributionType = "PULL_REQUEST_REVIEW" // Reviewed a pull request.
 )
 
+// RepositoryInteractionLimit represents a repository interaction limit.
+type RepositoryInteractionLimit string
+
+// A repository interaction limit.
+const (
+	RepositoryInteractionLimitExistingUsers     RepositoryInteractionLimit = "EXISTING_USERS"     // Users that have recently created their account will be unable to interact with the repository.
+	RepositoryInteractionLimitContributorsOnly  RepositoryInteractionLimit = "CONTRIBUTORS_ONLY"  // Users that have not previously committed to a repository’s default branch will be unable to interact with the repository.
+	RepositoryInteractionLimitCollaboratorsOnly RepositoryInteractionLimit = "COLLABORATORS_ONLY" // Users that are not collaborators will not be able to interact with the repository.
+	RepositoryInteractionLimitNoLimit           RepositoryInteractionLimit = "NO_LIMIT"           // No interaction limits are enabled.
+)
+
+// RepositoryInteractionLimitExpiry represents the length for a repository interaction limit to be enabled for.
+type RepositoryInteractionLimitExpiry string
+
+// The length for a repository interaction limit to be enabled for.
+const (
+	RepositoryInteractionLimitExpiryOneDay    RepositoryInteractionLimitExpiry = "ONE_DAY"    // The interaction limit will expire after 1 day.
+	RepositoryInteractionLimitExpiryThreeDays RepositoryInteractionLimitExpiry = "THREE_DAYS" // The interaction limit will expire after 3 days.
+	RepositoryInteractionLimitExpiryOneWeek   RepositoryInteractionLimitExpiry = "ONE_WEEK"   // The interaction limit will expire after 1 week.
+	RepositoryInteractionLimitExpiryOneMonth  RepositoryInteractionLimitExpiry = "ONE_MONTH"  // The interaction limit will expire after 1 month.
+	RepositoryInteractionLimitExpirySixMonths RepositoryInteractionLimitExpiry = "SIX_MONTHS" // The interaction limit will expire after 6 months.
+)
+
+// RepositoryInteractionLimitOrigin represents indicates where an interaction limit is configured.
+type RepositoryInteractionLimitOrigin string
+
+// Indicates where an interaction limit is configured.
+const (
+	RepositoryInteractionLimitOriginRepository   RepositoryInteractionLimitOrigin = "REPOSITORY"   // A limit that is configured at the repository level.
+	RepositoryInteractionLimitOriginOrganization RepositoryInteractionLimitOrigin = "ORGANIZATION" // A limit that is configured at the organization level.
+	RepositoryInteractionLimitOriginUser         RepositoryInteractionLimitOrigin = "USER"         // A limit that is configured at the user-wide level.
+)
+
 // RepositoryInvitationOrderField represents properties by which repository invitation connections can be ordered.
 type RepositoryInvitationOrderField string
 
@@ -1117,6 +1205,16 @@ const (
 	RepositoryVisibilityPrivate  RepositoryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepositoryVisibilityPublic   RepositoryVisibility = "PUBLIC"   // The repository is visible to everyone.
 	RepositoryVisibilityInternal RepositoryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+)
+
+// RequestableCheckStatusState represents the possible states that can be requested when creating a check run.
+type RequestableCheckStatusState string
+
+// The possible states that can be requested when creating a check run.
+const (
+	RequestableCheckStatusStateQueued     RequestableCheckStatusState = "QUEUED"      // The check suite or run has been queued.
+	RequestableCheckStatusStateInProgress RequestableCheckStatusState = "IN_PROGRESS" // The check suite or run is in progress.
+	RequestableCheckStatusStateCompleted  RequestableCheckStatusState = "COMPLETED"   // The check suite or run has been completed.
 )
 
 // SamlDigestAlgorithm represents the possible digest algorithms used to sign SAML requests for an identity provider.

@@ -4,7 +4,7 @@ package githubv4
 
 // Input represents one of the Input structs:
 //
-// AcceptEnterpriseAdministratorInvitationInput, AcceptTopicSuggestionInput, AddAssigneesToAssignableInput, AddCommentInput, AddLabelsToLabelableInput, AddProjectCardInput, AddProjectColumnInput, AddPullRequestReviewCommentInput, AddPullRequestReviewInput, AddPullRequestReviewThreadInput, AddReactionInput, AddStarInput, ArchiveRepositoryInput, AuditLogOrder, CancelEnterpriseAdminInvitationInput, ChangeUserStatusInput, ClearLabelsFromLabelableInput, CloneProjectInput, CloneTemplateRepositoryInput, CloseIssueInput, ClosePullRequestInput, CommitAuthor, CommitContributionOrder, ContributionOrder, ConvertProjectCardNoteToIssueInput, CreateBranchProtectionRuleInput, CreateEnterpriseOrganizationInput, CreateIpAllowListEntryInput, CreateIssueInput, CreateProjectInput, CreatePullRequestInput, CreateRefInput, CreateRepositoryInput, CreateTeamDiscussionCommentInput, CreateTeamDiscussionInput, DeclineTopicSuggestionInput, DeleteBranchProtectionRuleInput, DeleteDeploymentInput, DeleteIpAllowListEntryInput, DeleteIssueCommentInput, DeleteIssueInput, DeleteProjectCardInput, DeleteProjectColumnInput, DeleteProjectInput, DeletePullRequestReviewCommentInput, DeletePullRequestReviewInput, DeleteRefInput, DeleteTeamDiscussionCommentInput, DeleteTeamDiscussionInput, DeploymentOrder, DismissPullRequestReviewInput, DraftPullRequestReviewComment, DraftPullRequestReviewThread, EnterpriseAdministratorInvitationOrder, EnterpriseMemberOrder, EnterpriseServerInstallationOrder, EnterpriseServerUserAccountEmailOrder, EnterpriseServerUserAccountOrder, EnterpriseServerUserAccountsUploadOrder, FollowUserInput, GistOrder, InviteEnterpriseAdminInput, IpAllowListEntryOrder, IssueFilters, IssueOrder, LabelOrder, LanguageOrder, LinkRepositoryToProjectInput, LockLockableInput, MarkPullRequestReadyForReviewInput, MergeBranchInput, MergePullRequestInput, MilestoneOrder, MinimizeCommentInput, MoveProjectCardInput, MoveProjectColumnInput, OrganizationOrder, PackageFileOrder, PackageOrder, PackageVersionOrder, ProjectOrder, PullRequestOrder, ReactionOrder, RefOrder, RegenerateEnterpriseIdentityProviderRecoveryCodesInput, ReleaseOrder, RemoveAssigneesFromAssignableInput, RemoveEnterpriseAdminInput, RemoveEnterpriseIdentityProviderInput, RemoveEnterpriseOrganizationInput, RemoveLabelsFromLabelableInput, RemoveOutsideCollaboratorInput, RemoveReactionInput, RemoveStarInput, ReopenIssueInput, ReopenPullRequestInput, RepositoryInvitationOrder, RepositoryOrder, RequestReviewsInput, ResolveReviewThreadInput, SavedReplyOrder, SecurityAdvisoryIdentifierFilter, SecurityAdvisoryOrder, SecurityVulnerabilityOrder, SetEnterpriseIdentityProviderInput, SponsorsTierOrder, SponsorshipOrder, StarOrder, SubmitPullRequestReviewInput, TeamDiscussionCommentOrder, TeamDiscussionOrder, TeamMemberOrder, TeamOrder, TeamRepositoryOrder, TransferIssueInput, UnarchiveRepositoryInput, UnfollowUserInput, UnlinkRepositoryFromProjectInput, UnlockLockableInput, UnmarkIssueAsDuplicateInput, UnminimizeCommentInput, UnresolveReviewThreadInput, UpdateBranchProtectionRuleInput, UpdateEnterpriseActionExecutionCapabilitySettingInput, UpdateEnterpriseAdministratorRoleInput, UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput, UpdateEnterpriseDefaultRepositoryPermissionSettingInput, UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput, UpdateEnterpriseMembersCanCreateRepositoriesSettingInput, UpdateEnterpriseMembersCanDeleteIssuesSettingInput, UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput, UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput, UpdateEnterpriseMembersCanMakePurchasesSettingInput, UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput, UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput, UpdateEnterpriseOrganizationProjectsSettingInput, UpdateEnterpriseProfileInput, UpdateEnterpriseRepositoryProjectsSettingInput, UpdateEnterpriseTeamDiscussionsSettingInput, UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput, UpdateIpAllowListEnabledSettingInput, UpdateIpAllowListEntryInput, UpdateIssueCommentInput, UpdateIssueInput, UpdateProjectCardInput, UpdateProjectColumnInput, UpdateProjectInput, UpdatePullRequestInput, UpdatePullRequestReviewCommentInput, UpdatePullRequestReviewInput, UpdateRefInput, UpdateRepositoryInput, UpdateSubscriptionInput, UpdateTeamDiscussionCommentInput, UpdateTeamDiscussionInput, UpdateTopicsInput, UserStatusOrder.
+// AcceptEnterpriseAdministratorInvitationInput, AcceptTopicSuggestionInput, AddAssigneesToAssignableInput, AddCommentInput, AddLabelsToLabelableInput, AddProjectCardInput, AddProjectColumnInput, AddPullRequestReviewCommentInput, AddPullRequestReviewInput, AddPullRequestReviewThreadInput, AddReactionInput, AddStarInput, ArchiveRepositoryInput, AuditLogOrder, CancelEnterpriseAdminInvitationInput, ChangeUserStatusInput, CheckAnnotationData, CheckAnnotationRange, CheckRunAction, CheckRunFilter, CheckRunOutput, CheckRunOutputImage, CheckSuiteAutoTriggerPreference, CheckSuiteFilter, ClearLabelsFromLabelableInput, CloneProjectInput, CloneTemplateRepositoryInput, CloseIssueInput, ClosePullRequestInput, CommitAuthor, CommitContributionOrder, ContributionOrder, ConvertProjectCardNoteToIssueInput, CreateBranchProtectionRuleInput, CreateCheckRunInput, CreateCheckSuiteInput, CreateEnterpriseOrganizationInput, CreateIpAllowListEntryInput, CreateIssueInput, CreateProjectInput, CreatePullRequestInput, CreateRefInput, CreateRepositoryInput, CreateTeamDiscussionCommentInput, CreateTeamDiscussionInput, DeclineTopicSuggestionInput, DeleteBranchProtectionRuleInput, DeleteDeploymentInput, DeleteIpAllowListEntryInput, DeleteIssueCommentInput, DeleteIssueInput, DeleteProjectCardInput, DeleteProjectColumnInput, DeleteProjectInput, DeletePullRequestReviewCommentInput, DeletePullRequestReviewInput, DeleteRefInput, DeleteTeamDiscussionCommentInput, DeleteTeamDiscussionInput, DeploymentOrder, DismissPullRequestReviewInput, DraftPullRequestReviewComment, DraftPullRequestReviewThread, EnterpriseAdministratorInvitationOrder, EnterpriseMemberOrder, EnterpriseServerInstallationOrder, EnterpriseServerUserAccountEmailOrder, EnterpriseServerUserAccountOrder, EnterpriseServerUserAccountsUploadOrder, FollowUserInput, GistOrder, InviteEnterpriseAdminInput, IpAllowListEntryOrder, IssueCommentOrder, IssueFilters, IssueOrder, LabelOrder, LanguageOrder, LinkRepositoryToProjectInput, LockLockableInput, MarkFileAsViewedInput, MarkPullRequestReadyForReviewInput, MergeBranchInput, MergePullRequestInput, MilestoneOrder, MinimizeCommentInput, MoveProjectCardInput, MoveProjectColumnInput, OrganizationOrder, PackageFileOrder, PackageOrder, PackageVersionOrder, ProjectOrder, PullRequestOrder, ReactionOrder, RefOrder, RegenerateEnterpriseIdentityProviderRecoveryCodesInput, ReleaseOrder, RemoveAssigneesFromAssignableInput, RemoveEnterpriseAdminInput, RemoveEnterpriseIdentityProviderInput, RemoveEnterpriseOrganizationInput, RemoveLabelsFromLabelableInput, RemoveOutsideCollaboratorInput, RemoveReactionInput, RemoveStarInput, ReopenIssueInput, ReopenPullRequestInput, RepositoryInvitationOrder, RepositoryOrder, RequestReviewsInput, RerequestCheckSuiteInput, ResolveReviewThreadInput, SavedReplyOrder, SecurityAdvisoryIdentifierFilter, SecurityAdvisoryOrder, SecurityVulnerabilityOrder, SetEnterpriseIdentityProviderInput, SetOrganizationInteractionLimitInput, SetRepositoryInteractionLimitInput, SetUserInteractionLimitInput, SponsorsTierOrder, SponsorshipOrder, StarOrder, SubmitPullRequestReviewInput, TeamDiscussionCommentOrder, TeamDiscussionOrder, TeamMemberOrder, TeamOrder, TeamRepositoryOrder, TransferIssueInput, UnarchiveRepositoryInput, UnfollowUserInput, UnlinkRepositoryFromProjectInput, UnlockLockableInput, UnmarkFileAsViewedInput, UnmarkIssueAsDuplicateInput, UnminimizeCommentInput, UnresolveReviewThreadInput, UpdateBranchProtectionRuleInput, UpdateCheckRunInput, UpdateCheckSuitePreferencesInput, UpdateEnterpriseAdministratorRoleInput, UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput, UpdateEnterpriseDefaultRepositoryPermissionSettingInput, UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput, UpdateEnterpriseMembersCanCreateRepositoriesSettingInput, UpdateEnterpriseMembersCanDeleteIssuesSettingInput, UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput, UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput, UpdateEnterpriseMembersCanMakePurchasesSettingInput, UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput, UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput, UpdateEnterpriseOrganizationProjectsSettingInput, UpdateEnterpriseProfileInput, UpdateEnterpriseRepositoryProjectsSettingInput, UpdateEnterpriseTeamDiscussionsSettingInput, UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput, UpdateIpAllowListEnabledSettingInput, UpdateIpAllowListEntryInput, UpdateIssueCommentInput, UpdateIssueInput, UpdateProjectCardInput, UpdateProjectColumnInput, UpdateProjectInput, UpdatePullRequestInput, UpdatePullRequestReviewCommentInput, UpdatePullRequestReviewInput, UpdateRefInput, UpdateRepositoryInput, UpdateSubscriptionInput, UpdateTeamDiscussionCommentInput, UpdateTeamDiscussionInput, UpdateTopicsInput, UserStatusOrder.
 type Input interface{}
 
 // AcceptEnterpriseAdministratorInvitationInput is an autogenerated input type of AcceptEnterpriseAdministratorInvitation.
@@ -211,6 +211,102 @@ type ChangeUserStatusInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// CheckAnnotationData represents information from a check run analysis to specific lines of code.
+type CheckAnnotationData struct {
+	// The path of the file to add an annotation to. (Required.)
+	Path String `json:"path"`
+	// The location of the annotation. (Required.)
+	Location CheckAnnotationRange `json:"location"`
+	// Represents an annotation's information level. (Required.)
+	AnnotationLevel CheckAnnotationLevel `json:"annotationLevel"`
+	// A short description of the feedback for these lines of code. (Required.)
+	Message String `json:"message"`
+
+	// The title that represents the annotation. (Optional.)
+	Title *String `json:"title,omitempty"`
+	// Details about this annotation. (Optional.)
+	RawDetails *String `json:"rawDetails,omitempty"`
+}
+
+// CheckAnnotationRange represents information from a check run analysis to specific lines of code.
+type CheckAnnotationRange struct {
+	// The starting line of the range. (Required.)
+	StartLine Int `json:"startLine"`
+	// The ending line of the range. (Required.)
+	EndLine Int `json:"endLine"`
+
+	// The starting column of the range. (Optional.)
+	StartColumn *Int `json:"startColumn,omitempty"`
+	// The ending column of the range. (Optional.)
+	EndColumn *Int `json:"endColumn,omitempty"`
+}
+
+// CheckRunAction represents possible further actions the integrator can perform.
+type CheckRunAction struct {
+	// The text to be displayed on a button in the web UI. (Required.)
+	Label String `json:"label"`
+	// A short explanation of what this action would do. (Required.)
+	Description String `json:"description"`
+	// A reference for the action on the integrator's system. (Required.)
+	Identifier String `json:"identifier"`
+}
+
+// CheckRunFilter represents the filters that are available when fetching check runs.
+type CheckRunFilter struct {
+
+	// Filters the check runs by this type. (Optional.)
+	CheckType *CheckRunType `json:"checkType,omitempty"`
+	// Filters the check runs created by this application ID. (Optional.)
+	AppID *Int `json:"appId,omitempty"`
+	// Filters the check runs by this name. (Optional.)
+	CheckName *String `json:"checkName,omitempty"`
+	// Filters the check runs by this status. (Optional.)
+	Status *CheckStatusState `json:"status,omitempty"`
+}
+
+// CheckRunOutput represents descriptive details about the check run.
+type CheckRunOutput struct {
+	// A title to provide for this check run. (Required.)
+	Title String `json:"title"`
+	// The summary of the check run (supports Commonmark). (Required.)
+	Summary String `json:"summary"`
+
+	// The details of the check run (supports Commonmark). (Optional.)
+	Text *String `json:"text,omitempty"`
+	// The annotations that are made as part of the check run. (Optional.)
+	Annotations *[]CheckAnnotationData `json:"annotations,omitempty"`
+	// Images attached to the check run output displayed in the GitHub pull request UI. (Optional.)
+	Images *[]CheckRunOutputImage `json:"images,omitempty"`
+}
+
+// CheckRunOutputImage represents images attached to the check run output displayed in the GitHub pull request UI.
+type CheckRunOutputImage struct {
+	// The alternative text for the image. (Required.)
+	Alt String `json:"alt"`
+	// The full URL of the image. (Required.)
+	ImageURL URI `json:"imageUrl"`
+
+	// A short image description. (Optional.)
+	Caption *String `json:"caption,omitempty"`
+}
+
+// CheckSuiteAutoTriggerPreference represents the auto-trigger preferences that are available for check suites.
+type CheckSuiteAutoTriggerPreference struct {
+	// The node ID of the application that owns the check suite. (Required.)
+	AppID ID `json:"appId"`
+	// Set to `true` to enable automatic creation of CheckSuite events upon pushes to the repository. (Required.)
+	Setting Boolean `json:"setting"`
+}
+
+// CheckSuiteFilter represents the filters that are available when fetching check suites.
+type CheckSuiteFilter struct {
+
+	// Filters the check suites created by this application ID. (Optional.)
+	AppID *Int `json:"appId,omitempty"`
+	// Filters the check suites by this name. (Optional.)
+	CheckName *String `json:"checkName,omitempty"`
+}
+
 // ClearLabelsFromLabelableInput is an autogenerated input type of ClearLabelsFromLabelable.
 type ClearLabelsFromLabelableInput struct {
 	// The id of the labelable object to clear the labels from. (Required.)
@@ -327,6 +423,12 @@ type CreateBranchProtectionRuleInput struct {
 	RequiredApprovingReviewCount *Int `json:"requiredApprovingReviewCount,omitempty"`
 	// Are commits required to be signed. (Optional.)
 	RequiresCommitSignatures *Boolean `json:"requiresCommitSignatures,omitempty"`
+	// Are merge commits prohibited from being pushed to this branch. (Optional.)
+	RequiresLinearHistory *Boolean `json:"requiresLinearHistory,omitempty"`
+	// Are force pushes allowed on this branch. (Optional.)
+	AllowsForcePushes *Boolean `json:"allowsForcePushes,omitempty"`
+	// Can this branch be deleted. (Optional.)
+	AllowsDeletions *Boolean `json:"allowsDeletions,omitempty"`
 	// Can admins overwrite branch protection. (Optional.)
 	IsAdminEnforced *Boolean `json:"isAdminEnforced,omitempty"`
 	// Are status checks required to update matching branches. (Optional.)
@@ -347,6 +449,46 @@ type CreateBranchProtectionRuleInput struct {
 	PushActorIDs *[]ID `json:"pushActorIds,omitempty"`
 	// List of required status check contexts that must pass for commits to be accepted to matching branches. (Optional.)
 	RequiredStatusCheckContexts *[]String `json:"requiredStatusCheckContexts,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// CreateCheckRunInput is an autogenerated input type of CreateCheckRun.
+type CreateCheckRunInput struct {
+	// The node ID of the repository. (Required.)
+	RepositoryID ID `json:"repositoryId"`
+	// The name of the check. (Required.)
+	Name String `json:"name"`
+	// The SHA of the head commit. (Required.)
+	HeadSha GitObjectID `json:"headSha"`
+
+	// The URL of the integrator's site that has the full details of the check. (Optional.)
+	DetailsURL *URI `json:"detailsUrl,omitempty"`
+	// A reference for the run on the integrator's system. (Optional.)
+	ExternalID *String `json:"externalId,omitempty"`
+	// The current status. (Optional.)
+	Status *RequestableCheckStatusState `json:"status,omitempty"`
+	// The time that the check run began. (Optional.)
+	StartedAt *DateTime `json:"startedAt,omitempty"`
+	// The final conclusion of the check. (Optional.)
+	Conclusion *CheckConclusionState `json:"conclusion,omitempty"`
+	// The time that the check run finished. (Optional.)
+	CompletedAt *DateTime `json:"completedAt,omitempty"`
+	// Descriptive details about the run. (Optional.)
+	Output *CheckRunOutput `json:"output,omitempty"`
+	// Possible further actions the integrator can perform, which a user may trigger. (Optional.)
+	Actions *[]CheckRunAction `json:"actions,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// CreateCheckSuiteInput is an autogenerated input type of CreateCheckSuite.
+type CreateCheckSuiteInput struct {
+	// The Node ID of the repository. (Required.)
+	RepositoryID ID `json:"repositoryId"`
+	// The SHA of the head commit. (Required.)
+	HeadSha GitObjectID `json:"headSha"`
+
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -400,6 +542,8 @@ type CreateIssueInput struct {
 	LabelIDs *[]ID `json:"labelIds,omitempty"`
 	// An array of Node IDs for projects associated with this issue. (Optional.)
 	ProjectIDs *[]ID `json:"projectIds,omitempty"`
+	// The name of an issue template in the repository, assigns labels and assignees from the template to the issue. (Optional.)
+	IssueTemplate *String `json:"issueTemplate,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -770,6 +914,14 @@ type IpAllowListEntryOrder struct {
 	Direction OrderDirection `json:"direction"`
 }
 
+// IssueCommentOrder represents ways in which lists of issue comments can be ordered upon return.
+type IssueCommentOrder struct {
+	// The field in which to order issue comments by. (Required.)
+	Field IssueCommentOrderField `json:"field"`
+	// The direction in which to order issue comments by the specified field. (Required.)
+	Direction OrderDirection `json:"direction"`
+}
+
 // IssueFilters represents ways in which to filter lists of issues.
 type IssueFilters struct {
 
@@ -828,11 +980,22 @@ type LinkRepositoryToProjectInput struct {
 
 // LockLockableInput is an autogenerated input type of LockLockable.
 type LockLockableInput struct {
-	// ID of the issue or pull request to be locked. (Required.)
+	// ID of the item to be locked. (Required.)
 	LockableID ID `json:"lockableId"`
 
-	// A reason for why the issue or pull request will be locked. (Optional.)
+	// A reason for why the item will be locked. (Optional.)
 	LockReason *LockReason `json:"lockReason,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// MarkFileAsViewedInput is an autogenerated input type of MarkFileAsViewed.
+type MarkFileAsViewedInput struct {
+	// The Node ID of the pull request. (Required.)
+	PullRequestID ID `json:"pullRequestId"`
+	// The path of the file to mark as viewed. (Required.)
+	Path String `json:"path"`
+
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -1142,6 +1305,17 @@ type RequestReviewsInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// RerequestCheckSuiteInput is an autogenerated input type of RerequestCheckSuite.
+type RerequestCheckSuiteInput struct {
+	// The Node ID of the repository. (Required.)
+	RepositoryID ID `json:"repositoryId"`
+	// The Node ID of the check suite. (Required.)
+	CheckSuiteID ID `json:"checkSuiteId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // ResolveReviewThreadInput is an autogenerated input type of ResolveReviewThread.
 type ResolveReviewThreadInput struct {
 	// The ID of the thread to resolve. (Required.)
@@ -1198,6 +1372,45 @@ type SetEnterpriseIdentityProviderInput struct {
 
 	// The Issuer Entity ID for the SAML identity provider. (Optional.)
 	Issuer *String `json:"issuer,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// SetOrganizationInteractionLimitInput is an autogenerated input type of SetOrganizationInteractionLimit.
+type SetOrganizationInteractionLimitInput struct {
+	// The ID of the organization to set a limit for. (Required.)
+	OrganizationID ID `json:"organizationId"`
+	// The limit to set. (Required.)
+	Limit RepositoryInteractionLimit `json:"limit"`
+
+	// When this limit should expire. (Optional.)
+	Expiry *RepositoryInteractionLimitExpiry `json:"expiry,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// SetRepositoryInteractionLimitInput is an autogenerated input type of SetRepositoryInteractionLimit.
+type SetRepositoryInteractionLimitInput struct {
+	// The ID of the repository to set a limit for. (Required.)
+	RepositoryID ID `json:"repositoryId"`
+	// The limit to set. (Required.)
+	Limit RepositoryInteractionLimit `json:"limit"`
+
+	// When this limit should expire. (Optional.)
+	Expiry *RepositoryInteractionLimitExpiry `json:"expiry,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// SetUserInteractionLimitInput is an autogenerated input type of SetUserInteractionLimit.
+type SetUserInteractionLimitInput struct {
+	// The ID of the user to set a limit for. (Required.)
+	UserID ID `json:"userId"`
+	// The limit to set. (Required.)
+	Limit RepositoryInteractionLimit `json:"limit"`
+
+	// When this limit should expire. (Optional.)
+	Expiry *RepositoryInteractionLimitExpiry `json:"expiry,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -1323,8 +1536,19 @@ type UnlinkRepositoryFromProjectInput struct {
 
 // UnlockLockableInput is an autogenerated input type of UnlockLockable.
 type UnlockLockableInput struct {
-	// ID of the issue or pull request to be unlocked. (Required.)
+	// ID of the item to be unlocked. (Required.)
 	LockableID ID `json:"lockableId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// UnmarkFileAsViewedInput is an autogenerated input type of UnmarkFileAsViewed.
+type UnmarkFileAsViewedInput struct {
+	// The Node ID of the pull request. (Required.)
+	PullRequestID ID `json:"pullRequestId"`
+	// The path of the file to mark as unviewed. (Required.)
+	Path String `json:"path"`
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
@@ -1372,6 +1596,12 @@ type UpdateBranchProtectionRuleInput struct {
 	RequiredApprovingReviewCount *Int `json:"requiredApprovingReviewCount,omitempty"`
 	// Are commits required to be signed. (Optional.)
 	RequiresCommitSignatures *Boolean `json:"requiresCommitSignatures,omitempty"`
+	// Are merge commits prohibited from being pushed to this branch. (Optional.)
+	RequiresLinearHistory *Boolean `json:"requiresLinearHistory,omitempty"`
+	// Are force pushes allowed on this branch. (Optional.)
+	AllowsForcePushes *Boolean `json:"allowsForcePushes,omitempty"`
+	// Can this branch be deleted. (Optional.)
+	AllowsDeletions *Boolean `json:"allowsDeletions,omitempty"`
 	// Can admins overwrite branch protection. (Optional.)
 	IsAdminEnforced *Boolean `json:"isAdminEnforced,omitempty"`
 	// Are status checks required to update matching branches. (Optional.)
@@ -1396,12 +1626,41 @@ type UpdateBranchProtectionRuleInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
-// UpdateEnterpriseActionExecutionCapabilitySettingInput is an autogenerated input type of UpdateEnterpriseActionExecutionCapabilitySetting.
-type UpdateEnterpriseActionExecutionCapabilitySettingInput struct {
-	// The ID of the enterprise on which to set the members can create repositories setting. (Required.)
-	EnterpriseID ID `json:"enterpriseId"`
-	// The value for the action execution capability setting on the enterprise. (Required.)
-	Capability ActionExecutionCapabilitySetting `json:"capability"`
+// UpdateCheckRunInput is an autogenerated input type of UpdateCheckRun.
+type UpdateCheckRunInput struct {
+	// The node ID of the repository. (Required.)
+	RepositoryID ID `json:"repositoryId"`
+	// The node of the check. (Required.)
+	CheckRunID ID `json:"checkRunId"`
+
+	// The name of the check. (Optional.)
+	Name *String `json:"name,omitempty"`
+	// The URL of the integrator's site that has the full details of the check. (Optional.)
+	DetailsURL *URI `json:"detailsUrl,omitempty"`
+	// A reference for the run on the integrator's system. (Optional.)
+	ExternalID *String `json:"externalId,omitempty"`
+	// The current status. (Optional.)
+	Status *RequestableCheckStatusState `json:"status,omitempty"`
+	// The time that the check run began. (Optional.)
+	StartedAt *DateTime `json:"startedAt,omitempty"`
+	// The final conclusion of the check. (Optional.)
+	Conclusion *CheckConclusionState `json:"conclusion,omitempty"`
+	// The time that the check run finished. (Optional.)
+	CompletedAt *DateTime `json:"completedAt,omitempty"`
+	// Descriptive details about the run. (Optional.)
+	Output *CheckRunOutput `json:"output,omitempty"`
+	// Possible further actions the integrator can perform, which a user may trigger. (Optional.)
+	Actions *[]CheckRunAction `json:"actions,omitempty"`
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// UpdateCheckSuitePreferencesInput is an autogenerated input type of UpdateCheckSuitePreferences.
+type UpdateCheckSuitePreferencesInput struct {
+	// The Node ID of the repository. (Required.)
+	RepositoryID ID `json:"repositoryId"`
+	// The check suite preferences to modify. (Required.)
+	AutoTriggerPreferences []CheckSuiteAutoTriggerPreference `json:"autoTriggerPreferences"`
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
