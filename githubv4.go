@@ -18,8 +18,14 @@ type Client struct {
 // Note that GitHub GraphQL API v4 requires authentication, so
 // the provided http.Client is expected to take care of that.
 func NewClient(httpClient *http.Client) *Client {
+	return NewClientWithAcceptHeaders(httpClient, nil)
+}
+
+// NewClientWithAcceptHeaders is the same as NewClient but will add the given
+// acceptHeaders to any request done to GitHub.
+func NewClientWithAcceptHeaders(httpClient *http.Client, acceptHeaders []string) *Client {
 	return &Client{
-		client: graphql.NewClient("https://api.github.com/graphql", httpClient),
+		client: graphql.NewClientWithAcceptHeaders("https://api.github.com/graphql", httpClient, acceptHeaders),
 	}
 }
 
@@ -30,8 +36,14 @@ func NewClient(httpClient *http.Client) *Client {
 // Note that GitHub GraphQL API v4 requires authentication, so
 // the provided http.Client is expected to take care of that.
 func NewEnterpriseClient(url string, httpClient *http.Client) *Client {
+	return NewEnterpriseClientWithAcceptHeaders(url, httpClient, nil)
+}
+
+// NewEnterpriseClientWithAcceptHeaders is the same as NewEnterpriseClient
+// but will add the given acceptHeaders to any request done to GitHub.
+func NewEnterpriseClientWithAcceptHeaders(url string, httpClient *http.Client, acceptHeaders []string) *Client {
 	return &Client{
-		client: graphql.NewClient(url, httpClient),
+		client: graphql.NewClientWithAcceptHeaders(url, httpClient, acceptHeaders),
 	}
 }
 
