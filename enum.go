@@ -53,6 +53,7 @@ const (
 	CheckStatusStateQueued     CheckStatusState = "QUEUED"      // The check suite or run has been queued.
 	CheckStatusStateInProgress CheckStatusState = "IN_PROGRESS" // The check suite or run is in progress.
 	CheckStatusStateCompleted  CheckStatusState = "COMPLETED"   // The check suite or run has been completed.
+	CheckStatusStateWaiting    CheckStatusState = "WAITING"     // The check suite or run is in waiting state.
 	CheckStatusStateRequested  CheckStatusState = "REQUESTED"   // The check suite or run has been requested.
 )
 
@@ -104,6 +105,18 @@ const (
 	CommitContributionOrderFieldCommitCount CommitContributionOrderField = "COMMIT_COUNT" // Order commit contributions by how many commits they represent.
 )
 
+// ContributionLevel represents varying levels of contributions from none to many.
+type ContributionLevel string
+
+// Varying levels of contributions from none to many.
+const (
+	ContributionLevelNone           ContributionLevel = "NONE"            // No contributions occurred.
+	ContributionLevelFirstQuartile  ContributionLevel = "FIRST_QUARTILE"  // Lowest 25% of days of contributions.
+	ContributionLevelSecondQuartile ContributionLevel = "SECOND_QUARTILE" // Second lowest 25% of days of contributions. More contributions than the first quartile.
+	ContributionLevelThirdQuartile  ContributionLevel = "THIRD_QUARTILE"  // Second highest 25% of days of contributions. More contributions than second quartile, less than the fourth quartile.
+	ContributionLevelFourthQuartile ContributionLevel = "FOURTH_QUARTILE" // Highest 25% of days of contributions. More contributions than the third quartile.
+)
+
 // DefaultRepositoryPermissionField represents the possible default permissions for repositories.
 type DefaultRepositoryPermissionField string
 
@@ -152,6 +165,7 @@ const (
 	DeploymentStatusStateError      DeploymentStatusState = "ERROR"       // The deployment experienced an error.
 	DeploymentStatusStateQueued     DeploymentStatusState = "QUEUED"      // The deployment is queued.
 	DeploymentStatusStateInProgress DeploymentStatusState = "IN_PROGRESS" // The deployment is in progress.
+	DeploymentStatusStateWaiting    DeploymentStatusState = "WAITING"     // The deployment is waiting.
 )
 
 // DiffSide represents the possible sides of a diff.
@@ -370,7 +384,7 @@ const (
 	GitSignatureStateNotSigningKey        GitSignatureState = "NOT_SIGNING_KEY"       // The usage flags for the key that signed this don't allow signing.
 	GitSignatureStateExpiredKey           GitSignatureState = "EXPIRED_KEY"           // Signing key expired.
 	GitSignatureStateOcspPending          GitSignatureState = "OCSP_PENDING"          // Valid signature, pending certificate revocation checking.
-	GitSignatureStateOcspError            GitSignatureState = "OCSP_ERROR"            // Valid siganture, though certificate revocation check failed.
+	GitSignatureStateOcspError            GitSignatureState = "OCSP_ERROR"            // Valid signature, though certificate revocation check failed.
 	GitSignatureStateBadCert              GitSignatureState = "BAD_CERT"              // The signing certificate or its chain could not be verified.
 	GitSignatureStateOcspRevoked          GitSignatureState = "OCSP_REVOKED"          // One or more certificates in chain has been revoked.
 )
@@ -523,6 +537,15 @@ type MilestoneState string
 const (
 	MilestoneStateOpen   MilestoneState = "OPEN"   // A milestone that is still open.
 	MilestoneStateClosed MilestoneState = "CLOSED" // A milestone that has been closed.
+)
+
+// NotificationRestrictionSettingValue represents the possible values for the notification restriction setting.
+type NotificationRestrictionSettingValue string
+
+// The possible values for the notification restriction setting.
+const (
+	NotificationRestrictionSettingValueEnabled  NotificationRestrictionSettingValue = "ENABLED"  // The setting is enabled for the owner.
+	NotificationRestrictionSettingValueDisabled NotificationRestrictionSettingValue = "DISABLED" // The setting is disabled for the owner.
 )
 
 // OauthApplicationCreateAuditEntryState represents the state of an OAuth Application when it was created.
@@ -910,6 +933,10 @@ const (
 	PullRequestTimelineItemsItemTypePullRequestRevisionMarker         PullRequestTimelineItemsItemType = "PULL_REQUEST_REVISION_MARKER"          // Represents the latest point in the pull request timeline for which the viewer has seen the pull request's commits.
 	PullRequestTimelineItemsItemTypeAutomaticBaseChangeFailedEvent    PullRequestTimelineItemsItemType = "AUTOMATIC_BASE_CHANGE_FAILED_EVENT"    // Represents a 'automatic_base_change_failed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeAutomaticBaseChangeSucceededEvent PullRequestTimelineItemsItemType = "AUTOMATIC_BASE_CHANGE_SUCCEEDED_EVENT" // Represents a 'automatic_base_change_succeeded' event on a given pull request.
+	PullRequestTimelineItemsItemTypeAutoMergeDisabledEvent            PullRequestTimelineItemsItemType = "AUTO_MERGE_DISABLED_EVENT"             // Represents a 'auto_merge_disabled' event on a given pull request.
+	PullRequestTimelineItemsItemTypeAutoMergeEnabledEvent             PullRequestTimelineItemsItemType = "AUTO_MERGE_ENABLED_EVENT"              // Represents a 'auto_merge_enabled' event on a given pull request.
+	PullRequestTimelineItemsItemTypeAutoRebaseEnabledEvent            PullRequestTimelineItemsItemType = "AUTO_REBASE_ENABLED_EVENT"             // Represents a 'auto_rebase_enabled' event on a given pull request.
+	PullRequestTimelineItemsItemTypeAutoSquashEnabledEvent            PullRequestTimelineItemsItemType = "AUTO_SQUASH_ENABLED_EVENT"             // Represents a 'auto_squash_enabled' event on a given pull request.
 	PullRequestTimelineItemsItemTypeBaseRefChangedEvent               PullRequestTimelineItemsItemType = "BASE_REF_CHANGED_EVENT"                // Represents a 'base_ref_changed' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeBaseRefForcePushedEvent           PullRequestTimelineItemsItemType = "BASE_REF_FORCE_PUSHED_EVENT"           // Represents a 'base_ref_force_pushed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeBaseRefDeletedEvent               PullRequestTimelineItemsItemType = "BASE_REF_DELETED_EVENT"                // Represents a 'base_ref_deleted' event on a given pull request.
@@ -1215,6 +1242,7 @@ const (
 	RequestableCheckStatusStateQueued     RequestableCheckStatusState = "QUEUED"      // The check suite or run has been queued.
 	RequestableCheckStatusStateInProgress RequestableCheckStatusState = "IN_PROGRESS" // The check suite or run is in progress.
 	RequestableCheckStatusStateCompleted  RequestableCheckStatusState = "COMPLETED"   // The check suite or run has been completed.
+	RequestableCheckStatusStateWaiting    RequestableCheckStatusState = "WAITING"     // The check suite or run is in waiting state.
 )
 
 // SamlDigestAlgorithm represents the possible digest algorithms used to sign SAML requests for an identity provider.
@@ -1305,6 +1333,23 @@ type SecurityVulnerabilityOrderField string
 // Properties by which security vulnerability connections can be ordered.
 const (
 	SecurityVulnerabilityOrderFieldUpdatedAt SecurityVulnerabilityOrderField = "UPDATED_AT" // Order vulnerability by update time.
+)
+
+// SponsorableOrderField represents properties by which sponsorable connections can be ordered.
+type SponsorableOrderField string
+
+// Properties by which sponsorable connections can be ordered.
+const (
+	SponsorableOrderFieldLogin SponsorableOrderField = "LOGIN" // Order sponsorable entities by login (username).
+)
+
+// SponsorsGoalKind represents the different kinds of goals a GitHub Sponsors member can have.
+type SponsorsGoalKind string
+
+// The different kinds of goals a GitHub Sponsors member can have.
+const (
+	SponsorsGoalKindTotalSponsorsCount       SponsorsGoalKind = "TOTAL_SPONSORS_COUNT"       // The goal is about reaching a certain number of sponsors.
+	SponsorsGoalKindMonthlySponsorshipAmount SponsorsGoalKind = "MONTHLY_SPONSORSHIP_AMOUNT" // The goal is about getting a certain dollar amount from sponsorships each month.
 )
 
 // SponsorsTierOrderField represents properties by which Sponsors tiers connections can be ordered.
@@ -1475,4 +1520,13 @@ type UserStatusOrderField string
 // Properties by which user status connections can be ordered.
 const (
 	UserStatusOrderFieldUpdatedAt UserStatusOrderField = "UPDATED_AT" // Order user statuses by when they were updated.
+)
+
+// VerifiableDomainOrderField represents properties by which verifiable domain connections can be ordered.
+type VerifiableDomainOrderField string
+
+// Properties by which verifiable domain connections can be ordered.
+const (
+	VerifiableDomainOrderFieldDomain    VerifiableDomainOrderField = "DOMAIN"     // Order verifiable domains by the domain name.
+	VerifiableDomainOrderFieldCreatedAt VerifiableDomainOrderField = "CREATED_AT" // Order verifiable domains by their creation date.
 )
