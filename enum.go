@@ -118,10 +118,10 @@ const (
 	ContributionLevelFourthQuartile ContributionLevel = "FOURTH_QUARTILE" // Highest 25% of days of contributions. More contributions than the third quartile.
 )
 
-// DefaultRepositoryPermissionField represents the possible default permissions for repositories.
+// DefaultRepositoryPermissionField represents the possible base permissions for repositories.
 type DefaultRepositoryPermissionField string
 
-// The possible default permissions for repositories.
+// The possible base permissions for repositories.
 const (
 	DefaultRepositoryPermissionFieldNone  DefaultRepositoryPermissionField = "NONE"  // No access.
 	DefaultRepositoryPermissionFieldRead  DefaultRepositoryPermissionField = "READ"  // Can read repos by default.
@@ -222,12 +222,12 @@ const (
 	EnterpriseAdministratorRoleBillingManager EnterpriseAdministratorRole = "BILLING_MANAGER" // Represents a billing manager of the enterprise account.
 )
 
-// EnterpriseDefaultRepositoryPermissionSettingValue represents the possible values for the enterprise default repository permission setting.
+// EnterpriseDefaultRepositoryPermissionSettingValue represents the possible values for the enterprise base repository permission setting.
 type EnterpriseDefaultRepositoryPermissionSettingValue string
 
-// The possible values for the enterprise default repository permission setting.
+// The possible values for the enterprise base repository permission setting.
 const (
-	EnterpriseDefaultRepositoryPermissionSettingValueNoPolicy EnterpriseDefaultRepositoryPermissionSettingValue = "NO_POLICY" // Organizations in the enterprise choose default repository permissions for their members.
+	EnterpriseDefaultRepositoryPermissionSettingValueNoPolicy EnterpriseDefaultRepositoryPermissionSettingValue = "NO_POLICY" // Organizations in the enterprise choose base repository permissions for their members.
 	EnterpriseDefaultRepositoryPermissionSettingValueAdmin    EnterpriseDefaultRepositoryPermissionSettingValue = "ADMIN"     // Organization members will be able to clone, pull, push, and add new collaborators to all organization repositories.
 	EnterpriseDefaultRepositoryPermissionSettingValueWrite    EnterpriseDefaultRepositoryPermissionSettingValue = "WRITE"     // Organization members will be able to clone, pull, and push all organization repositories.
 	EnterpriseDefaultRepositoryPermissionSettingValueRead     EnterpriseDefaultRepositoryPermissionSettingValue = "READ"      // Organization members will be able to clone and pull all organization repositories.
@@ -763,6 +763,7 @@ type OrganizationMembersCanCreateRepositoriesSettingValue string
 const (
 	OrganizationMembersCanCreateRepositoriesSettingValueAll      OrganizationMembersCanCreateRepositoriesSettingValue = "ALL"      // Members will be able to create public and private repositories.
 	OrganizationMembersCanCreateRepositoriesSettingValuePrivate  OrganizationMembersCanCreateRepositoriesSettingValue = "PRIVATE"  // Members will be able to create only private repositories.
+	OrganizationMembersCanCreateRepositoriesSettingValueInternal OrganizationMembersCanCreateRepositoriesSettingValue = "INTERNAL" // Members will be able to create only internal repositories.
 	OrganizationMembersCanCreateRepositoriesSettingValueDisabled OrganizationMembersCanCreateRepositoriesSettingValue = "DISABLED" // Members will not be able to create public or private repositories.
 )
 
@@ -1361,7 +1362,6 @@ const (
 	SecurityAdvisoryEcosystemNuget    SecurityAdvisoryEcosystem = "NUGET"    // .NET packages hosted at the NuGet Gallery.
 	SecurityAdvisoryEcosystemPip      SecurityAdvisoryEcosystem = "PIP"      // Python packages hosted at PyPI.org.
 	SecurityAdvisoryEcosystemRubygems SecurityAdvisoryEcosystem = "RUBYGEMS" // Ruby gems hosted at RubyGems.org.
-	SecurityAdvisoryEcosystemOther    SecurityAdvisoryEcosystem = "OTHER"    // Applications, runtimes, operating systems and other kinds of software.
 )
 
 // SecurityAdvisoryIdentifierType represents identifier formats available for advisories.
@@ -1399,6 +1399,15 @@ type SecurityVulnerabilityOrderField string
 // Properties by which security vulnerability connections can be ordered.
 const (
 	SecurityVulnerabilityOrderFieldUpdatedAt SecurityVulnerabilityOrderField = "UPDATED_AT" // Order vulnerability by update time.
+)
+
+// SponsorOrderField represents properties by which sponsor connections can be ordered.
+type SponsorOrderField string
+
+// Properties by which sponsor connections can be ordered.
+const (
+	SponsorOrderFieldLogin     SponsorOrderField = "LOGIN"     // Order sponsorable entities by login (username).
+	SponsorOrderFieldRelevance SponsorOrderField = "RELEVANCE" // Order sponsors by their relevance to the viewer.
 )
 
 // SponsorableOrderField represents properties by which sponsorable connections can be ordered.
@@ -1447,7 +1456,7 @@ type SponsorsGoalKind string
 // The different kinds of goals a GitHub Sponsors member can have.
 const (
 	SponsorsGoalKindTotalSponsorsCount       SponsorsGoalKind = "TOTAL_SPONSORS_COUNT"       // The goal is about reaching a certain number of sponsors.
-	SponsorsGoalKindMonthlySponsorshipAmount SponsorsGoalKind = "MONTHLY_SPONSORSHIP_AMOUNT" // The goal is about getting a certain dollar amount from sponsorships each month.
+	SponsorsGoalKindMonthlySponsorshipAmount SponsorsGoalKind = "MONTHLY_SPONSORSHIP_AMOUNT" // The goal is about getting a certain amount in USD from sponsorships each month.
 )
 
 // SponsorsTierOrderField represents properties by which Sponsors tiers connections can be ordered.
@@ -1457,6 +1466,14 @@ type SponsorsTierOrderField string
 const (
 	SponsorsTierOrderFieldCreatedAt           SponsorsTierOrderField = "CREATED_AT"             // Order tiers by creation time.
 	SponsorsTierOrderFieldMonthlyPriceInCents SponsorsTierOrderField = "MONTHLY_PRICE_IN_CENTS" // Order tiers by their monthly price in cents.
+)
+
+// SponsorshipNewsletterOrderField represents properties by which sponsorship update connections can be ordered.
+type SponsorshipNewsletterOrderField string
+
+// Properties by which sponsorship update connections can be ordered.
+const (
+	SponsorshipNewsletterOrderFieldCreatedAt SponsorshipNewsletterOrderField = "CREATED_AT" // Order sponsorship newsletters by when they were created.
 )
 
 // SponsorshipOrderField represents properties by which sponsorship connections can be ordered.

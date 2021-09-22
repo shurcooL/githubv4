@@ -20,6 +20,9 @@ import (
 // is resolved, native Go types can completely replace these.
 
 type (
+	// Base64String is a (potentially binary) string encoded using base64.
+	Base64String string
+
 	// Boolean represents true or false values.
 	Boolean graphql.Boolean
 
@@ -101,6 +104,9 @@ func (x *X509Certificate) UnmarshalJSON(data []byte) error {
 	// TODO: Implement.
 	return fmt.Errorf("X509Certificate.UnmarshalJSON: not implemented")
 }
+
+// NewBase64String is a helper to make a new *Base64String.
+func NewBase64String(v Base64String) *Base64String { return &v }
 
 // NewBoolean is a helper to make a new *Boolean.
 func NewBoolean(v Boolean) *Boolean { return &v }

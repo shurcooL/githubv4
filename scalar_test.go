@@ -76,6 +76,9 @@ func equalError(a, b error) bool {
 }
 
 func TestNewScalars(t *testing.T) {
+	if got := githubv4.NewBase64String(""); got == nil {
+		t.Error("NewBase64String returned nil")
+	}
 	if got := githubv4.NewBoolean(false); got == nil {
 		t.Error("NewBoolean returned nil")
 	}
