@@ -205,6 +205,18 @@ const (
 	DiscussionOrderFieldUpdatedAt DiscussionOrderField = "UPDATED_AT" // Order discussions by most recent modification time.
 )
 
+// DismissReason represents the possible reasons that a Dependabot alert was dismissed.
+type DismissReason string
+
+// The possible reasons that a Dependabot alert was dismissed.
+const (
+	DismissReasonFixStarted    DismissReason = "FIX_STARTED"    // A fix has already been started.
+	DismissReasonNoBandwidth   DismissReason = "NO_BANDWIDTH"   // No bandwidth to fix this.
+	DismissReasonTolerableRisk DismissReason = "TOLERABLE_RISK" // Risk is tolerable to this project.
+	DismissReasonInaccurate    DismissReason = "INACCURATE"     // This alert is inaccurate or incorrect.
+	DismissReasonNotUsed       DismissReason = "NOT_USED"       // Vulnerable code is not actually used.
+)
+
 // EnterpriseAdministratorInvitationOrderField represents properties by which enterprise administrator invitation connections can be ordered.
 type EnterpriseAdministratorInvitationOrderField string
 
@@ -583,6 +595,14 @@ type NotificationRestrictionSettingValue string
 const (
 	NotificationRestrictionSettingValueEnabled  NotificationRestrictionSettingValue = "ENABLED"  // The setting is enabled for the owner.
 	NotificationRestrictionSettingValueDisabled NotificationRestrictionSettingValue = "DISABLED" // The setting is disabled for the owner.
+)
+
+// OIDCProviderType represents the OIDC identity provider type.
+type OIDCProviderType string
+
+// The OIDC identity provider type.
+const (
+	OIDCProviderTypeAad OIDCProviderType = "AAD" // Azure Active Directory.
 )
 
 // OauthApplicationCreateAuditEntryState represents the state of an OAuth Application when it was created.
@@ -1362,6 +1382,7 @@ const (
 	SecurityAdvisoryEcosystemNuget    SecurityAdvisoryEcosystem = "NUGET"    // .NET packages hosted at the NuGet Gallery.
 	SecurityAdvisoryEcosystemPip      SecurityAdvisoryEcosystem = "PIP"      // Python packages hosted at PyPI.org.
 	SecurityAdvisoryEcosystemRubygems SecurityAdvisoryEcosystem = "RUBYGEMS" // Ruby gems hosted at RubyGems.org.
+	SecurityAdvisoryEcosystemRust     SecurityAdvisoryEcosystem = "RUST"     // Rust crates.
 )
 
 // SecurityAdvisoryIdentifierType represents identifier formats available for advisories.
