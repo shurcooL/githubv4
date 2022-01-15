@@ -329,7 +329,7 @@ variables := map[string]interface{}{
 // Get comments from all pages.
 var allComments []comment
 for {
-	err := s.clQL.Query(ctx, &q, variables)
+	err := client.Query(ctx, &q, variables)
 	if err != nil {
 		return err
 	}
