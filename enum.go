@@ -2,6 +2,15 @@
 
 package githubv4
 
+// ActorType represents the actor's type.
+type ActorType string
+
+// The actor's type.
+const (
+	ActorTypeUser ActorType = "USER" // Indicates a user actor.
+	ActorTypeTeam ActorType = "TEAM" // Indicates a team actor.
+)
+
 // AuditLogOrderField represents properties by which Audit Log connections can be ordered.
 type AuditLogOrderField string
 
@@ -127,6 +136,21 @@ const (
 	DefaultRepositoryPermissionFieldRead  DefaultRepositoryPermissionField = "READ"  // Can read repos by default.
 	DefaultRepositoryPermissionFieldWrite DefaultRepositoryPermissionField = "WRITE" // Can read and write repos by default.
 	DefaultRepositoryPermissionFieldAdmin DefaultRepositoryPermissionField = "ADMIN" // Can read, write, and administrate repos by default.
+)
+
+// DependencyGraphEcosystem represents the possible ecosystems of a dependency graph package.
+type DependencyGraphEcosystem string
+
+// The possible ecosystems of a dependency graph package.
+const (
+	DependencyGraphEcosystemRubygems DependencyGraphEcosystem = "RUBYGEMS" // Ruby gems hosted at RubyGems.org.
+	DependencyGraphEcosystemNpm      DependencyGraphEcosystem = "NPM"      // JavaScript packages hosted at npmjs.com.
+	DependencyGraphEcosystemPip      DependencyGraphEcosystem = "PIP"      // Python packages hosted at PyPI.org.
+	DependencyGraphEcosystemMaven    DependencyGraphEcosystem = "MAVEN"    // Java artifacts hosted at the Maven central repository.
+	DependencyGraphEcosystemNuget    DependencyGraphEcosystem = "NUGET"    // .NET packages hosted at the NuGet Gallery.
+	DependencyGraphEcosystemComposer DependencyGraphEcosystem = "COMPOSER" // PHP packages hosted at packagist.org.
+	DependencyGraphEcosystemGo       DependencyGraphEcosystem = "GO"       // Go modules.
+	DependencyGraphEcosystemActions  DependencyGraphEcosystem = "ACTIONS"  // GitHub Actions.
 )
 
 // DeploymentOrderField represents properties by which deployment connections can be ordered.
@@ -380,8 +404,9 @@ const (
 	FundingPlatformTidelift        FundingPlatform = "TIDELIFT"         // Tidelift funding platform.
 	FundingPlatformCommunityBridge FundingPlatform = "COMMUNITY_BRIDGE" // Community Bridge funding platform.
 	FundingPlatformLiberapay       FundingPlatform = "LIBERAPAY"        // Liberapay funding platform.
-	FundingPlatformIssuehunt       FundingPlatform = "ISSUEHUNT"        // IssueHunt funding platform.
+	FundingPlatformIssueHunt       FundingPlatform = "ISSUEHUNT"        // IssueHunt funding platform.
 	FundingPlatformOtechie         FundingPlatform = "OTECHIE"          // Otechie funding platform.
+	FundingPlatformLFXCrowdfunding FundingPlatform = "LFX_CROWDFUNDING" // LFX Crowdfunding funding platform.
 	FundingPlatformCustom          FundingPlatform = "CUSTOM"           // Custom funding platform.
 )
 
@@ -567,6 +592,30 @@ const (
 	MergeableStateMergeable   MergeableState = "MERGEABLE"   // The pull request can be merged.
 	MergeableStateConflicting MergeableState = "CONFLICTING" // The pull request cannot be merged due to merge conflicts.
 	MergeableStateUnknown     MergeableState = "UNKNOWN"     // The mergeability of the pull request is still being calculated.
+)
+
+// MigrationSourceType represents represents the different Octoshift migration sources.
+type MigrationSourceType string
+
+// Represents the different Octoshift migration sources.
+const (
+	MigrationSourceTypeGitLab          MigrationSourceType = "GITLAB"           // A GitLab migration source.
+	MigrationSourceTypeAzureDevOps     MigrationSourceType = "AZURE_DEVOPS"     // An Azure DevOps migration source.
+	MigrationSourceTypeBitbucketServer MigrationSourceType = "BITBUCKET_SERVER" // A Bitbucket Server migration source.
+	MigrationSourceTypeGitHub          MigrationSourceType = "GITHUB"           // A GitHub migration source.
+	MigrationSourceTypeGitHubArchive   MigrationSourceType = "GITHUB_ARCHIVE"   // A GitHub Migration API source.
+)
+
+// MigrationState represents the Octoshift migration state.
+type MigrationState string
+
+// The Octoshift migration state.
+const (
+	MigrationStateNotStarted MigrationState = "NOT_STARTED" // The Octoshift migration has not started.
+	MigrationStateQueued     MigrationState = "QUEUED"      // The Octoshift migration has been queued.
+	MigrationStateInProgress MigrationState = "IN_PROGRESS" // The Octoshift migration is in progress.
+	MigrationStateSucceeded  MigrationState = "SUCCEEDED"   // The Octoshift migration has succeeded.
+	MigrationStateFailed     MigrationState = "FAILED"      // The Octoshift migration has failed.
 )
 
 // MilestoneOrderField represents properties by which milestone connections can be ordered.
@@ -843,6 +892,19 @@ const (
 	PackageVersionOrderFieldCreatedAt PackageVersionOrderField = "CREATED_AT" // Order package versions by creation time.
 )
 
+// PatchStatus represents the possible types of patch statuses.
+type PatchStatus string
+
+// The possible types of patch statuses.
+const (
+	PatchStatusAdded    PatchStatus = "ADDED"    // The file was added. Git status 'A'.
+	PatchStatusDeleted  PatchStatus = "DELETED"  // The file was deleted. Git status 'D'.
+	PatchStatusRenamed  PatchStatus = "RENAMED"  // The file was renamed. Git status 'R'.
+	PatchStatusCopied   PatchStatus = "COPIED"   // The file was copied. Git status 'C'.
+	PatchStatusModified PatchStatus = "MODIFIED" // The file's contents were changed. Git status 'M'.
+	PatchStatusChanged  PatchStatus = "CHANGED"  // The file's type was changed. Git status 'T'.
+)
+
 // PinnableItemType represents represents items that can be pinned to a profile page or dashboard.
 type PinnableItemType string
 
@@ -912,6 +974,37 @@ const (
 	ProjectColumnPurposeDone       ProjectColumnPurpose = "DONE"        // The column contains cards which are complete.
 )
 
+// ProjectItemType represents the type of a project item.
+type ProjectItemType string
+
+// The type of a project item.
+const (
+	ProjectItemTypeIssue       ProjectItemType = "ISSUE"        // Issue.
+	ProjectItemTypePullRequest ProjectItemType = "PULL_REQUEST" // Pull Request.
+	ProjectItemTypeDraftIssue  ProjectItemType = "DRAFT_ISSUE"  // Draft Issue.
+	ProjectItemTypeRedacted    ProjectItemType = "REDACTED"     // Redacted Item.
+)
+
+// ProjectNextFieldType represents the type of a project next field.
+type ProjectNextFieldType string
+
+// The type of a project next field.
+const (
+	ProjectNextFieldTypeAssignees          ProjectNextFieldType = "ASSIGNEES"            // Assignees.
+	ProjectNextFieldTypeLinkedPullRequests ProjectNextFieldType = "LINKED_PULL_REQUESTS" // Linked Pull Requests.
+	ProjectNextFieldTypeReviewers          ProjectNextFieldType = "REVIEWERS"            // Reviewers.
+	ProjectNextFieldTypeLabels             ProjectNextFieldType = "LABELS"               // Labels.
+	ProjectNextFieldTypeMilestone          ProjectNextFieldType = "MILESTONE"            // Milestone.
+	ProjectNextFieldTypeRepository         ProjectNextFieldType = "REPOSITORY"           // Repository.
+	ProjectNextFieldTypeTitle              ProjectNextFieldType = "TITLE"                // Title.
+	ProjectNextFieldTypeText               ProjectNextFieldType = "TEXT"                 // Text.
+	ProjectNextFieldTypeSingleSelect       ProjectNextFieldType = "SINGLE_SELECT"        // Single Select.
+	ProjectNextFieldTypeNumber             ProjectNextFieldType = "NUMBER"               // Number.
+	ProjectNextFieldTypeDate               ProjectNextFieldType = "DATE"                 // Date.
+	ProjectNextFieldTypeIteration          ProjectNextFieldType = "ITERATION"            // Iteration.
+	ProjectNextFieldTypeTracks             ProjectNextFieldType = "TRACKS"               // Tracks.
+)
+
 // ProjectNextOrderField represents properties by which the return project can be ordered.
 type ProjectNextOrderField string
 
@@ -951,6 +1044,15 @@ const (
 	ProjectTemplateAutomatedKanbanV2      ProjectTemplate = "AUTOMATED_KANBAN_V2"      // Create a board with v2 triggers to automatically move cards across To do, In progress and Done columns.
 	ProjectTemplateAutomatedReviewsKanban ProjectTemplate = "AUTOMATED_REVIEWS_KANBAN" // Create a board with triggers to automatically move cards across columns with review automation.
 	ProjectTemplateBugTriage              ProjectTemplate = "BUG_TRIAGE"               // Create a board to triage and prioritize bugs with To do, priority, and Done columns.
+)
+
+// ProjectViewLayout represents the layout of a project view.
+type ProjectViewLayout string
+
+// The layout of a project view.
+const (
+	ProjectViewLayoutBoardLayout ProjectViewLayout = "BOARD_LAYOUT" // Board layout.
+	ProjectViewLayoutTableLayout ProjectViewLayout = "TABLE_LAYOUT" // Table layout.
 )
 
 // PullRequestMergeMethod represents represents available types of methods to use when merging a pull request.
@@ -1054,6 +1156,8 @@ const (
 	PullRequestTimelineItemsItemTypeReviewRequestRemovedEvent         PullRequestTimelineItemsItemType = "REVIEW_REQUEST_REMOVED_EVENT"          // Represents an 'review_request_removed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeReadyForReviewEvent               PullRequestTimelineItemsItemType = "READY_FOR_REVIEW_EVENT"                // Represents a 'ready_for_review' event on a given pull request.
 	PullRequestTimelineItemsItemTypeConvertToDraftEvent               PullRequestTimelineItemsItemType = "CONVERT_TO_DRAFT_EVENT"                // Represents a 'convert_to_draft' event on a given pull request.
+	PullRequestTimelineItemsItemTypeAddedToMergeQueueEvent            PullRequestTimelineItemsItemType = "ADDED_TO_MERGE_QUEUE_EVENT"            // Represents an 'added_to_merge_queue' event on a given pull request.
+	PullRequestTimelineItemsItemTypeRemovedFromMergeQueueEvent        PullRequestTimelineItemsItemType = "REMOVED_FROM_MERGE_QUEUE_EVENT"        // Represents a 'removed_from_merge_queue' event on a given pull request.
 	PullRequestTimelineItemsItemTypeIssueComment                      PullRequestTimelineItemsItemType = "ISSUE_COMMENT"                         // Represents a comment on an Issue.
 	PullRequestTimelineItemsItemTypeCrossReferencedEvent              PullRequestTimelineItemsItemType = "CROSS_REFERENCED_EVENT"                // Represents a mention made by one issue or pull request to another.
 	PullRequestTimelineItemsItemTypeAddedToProjectEvent               PullRequestTimelineItemsItemType = "ADDED_TO_PROJECT_EVENT"                // Represents a 'added_to_project' event on a given issue or pull request.
@@ -1280,8 +1384,7 @@ type RepositoryInvitationOrderField string
 
 // Properties by which repository invitation connections can be ordered.
 const (
-	RepositoryInvitationOrderFieldCreatedAt    RepositoryInvitationOrderField = "CREATED_AT"    // Order repository invitations by creation time.
-	RepositoryInvitationOrderFieldInviteeLogin RepositoryInvitationOrderField = "INVITEE_LOGIN" // Order repository invitations by invitee login.
+	RepositoryInvitationOrderFieldCreatedAt RepositoryInvitationOrderField = "CREATED_AT" // Order repository invitations by creation time.
 )
 
 // RepositoryLockReason represents the possible reasons a given repository could be in a locked state.
@@ -1293,6 +1396,23 @@ const (
 	RepositoryLockReasonBilling   RepositoryLockReason = "BILLING"   // The repository is locked due to a billing related reason.
 	RepositoryLockReasonRename    RepositoryLockReason = "RENAME"    // The repository is locked due to a rename.
 	RepositoryLockReasonMigrating RepositoryLockReason = "MIGRATING" // The repository is locked due to a migration.
+)
+
+// RepositoryMigrationOrderDirection represents possible directions in which to order a list of repository migrations when provided an `orderBy` argument.
+type RepositoryMigrationOrderDirection string
+
+// Possible directions in which to order a list of repository migrations when provided an `orderBy` argument.
+const (
+	RepositoryMigrationOrderDirectionAsc  RepositoryMigrationOrderDirection = "ASC"  // Specifies an ascending order for a given `orderBy` argument.
+	RepositoryMigrationOrderDirectionDesc RepositoryMigrationOrderDirection = "DESC" // Specifies a descending order for a given `orderBy` argument.
+)
+
+// RepositoryMigrationOrderField represents properties by which repository migrations can be ordered.
+type RepositoryMigrationOrderField string
+
+// Properties by which repository migrations can be ordered.
+const (
+	RepositoryMigrationOrderFieldCreatedAt RepositoryMigrationOrderField = "CREATED_AT" // Order mannequins why when they were created.
 )
 
 // RepositoryOrderField represents properties by which repository connections can be ordered.
@@ -1336,6 +1456,16 @@ const (
 	RepositoryVisibilityPrivate  RepositoryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepositoryVisibilityPublic   RepositoryVisibility = "PUBLIC"   // The repository is visible to everyone.
 	RepositoryVisibilityInternal RepositoryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+)
+
+// RepositoryVulnerabilityAlertState represents the possible states of an alert.
+type RepositoryVulnerabilityAlertState string
+
+// The possible states of an alert.
+const (
+	RepositoryVulnerabilityAlertStateOpen      RepositoryVulnerabilityAlertState = "OPEN"      // An alert that is still open.
+	RepositoryVulnerabilityAlertStateFixed     RepositoryVulnerabilityAlertState = "FIXED"     // An alert that has been resolved by a code change.
+	RepositoryVulnerabilityAlertStateDismissed RepositoryVulnerabilityAlertState = "DISMISSED" // An alert that has been manually closed by a user.
 )
 
 // RequestableCheckStatusState represents the possible states that can be requested when creating a check run.
@@ -1667,6 +1797,15 @@ const (
 	TopicSuggestionDeclineReasonTooSpecific        TopicSuggestionDeclineReason = "TOO_SPECIFIC"        // The suggested topic is too specific for the repository (e.g. #ruby-on-rails-version-4-2-1).
 	TopicSuggestionDeclineReasonPersonalPreference TopicSuggestionDeclineReason = "PERSONAL_PREFERENCE" // The viewer does not like the suggested topic.
 	TopicSuggestionDeclineReasonTooGeneral         TopicSuggestionDeclineReason = "TOO_GENERAL"         // The suggested topic is too general for the repository.
+)
+
+// TrackedIssueStates represents the possible states of a tracked issue.
+type TrackedIssueStates string
+
+// The possible states of a tracked issue.
+const (
+	TrackedIssueStatesOpen   TrackedIssueStates = "OPEN"   // The tracked issue is open.
+	TrackedIssueStatesClosed TrackedIssueStates = "CLOSED" // The tracked issue is closed.
 )
 
 // UserBlockDuration represents the possible durations that a user can be blocked for.
