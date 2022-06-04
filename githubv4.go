@@ -49,7 +49,7 @@ func (c *Client) Query(ctx context.Context, q interface{}, variables map[string]
 func (c *Client) Mutate(ctx context.Context, m interface{}, input Input, variables map[string]interface{}) error {
 	if variables == nil {
 		variables = map[string]interface{}{"input": input}
-	} else {
+	} else if input != nil {
 		variables["input"] = input
 	}
 	return c.client.Mutate(ctx, m, variables)
