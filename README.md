@@ -1,11 +1,11 @@
 githubv4
 ========
 
-[![Build Status](https://travis-ci.org/shurcooL/githubv4.svg?branch=master)](https://travis-ci.org/shurcooL/githubv4) [![GoDoc](https://godoc.org/github.com/shurcooL/githubv4?status.svg)](https://godoc.org/github.com/shurcooL/githubv4)
+[![Go Reference](https://pkg.go.dev/badge/github.com/shurcooL/githubv4.svg)](https://pkg.go.dev/github.com/shurcooL/githubv4)
 
 Package `githubv4` is a client library for accessing GitHub GraphQL API v4 (https://docs.github.com/en/graphql).
 
-If you're looking for a client library for GitHub REST API v3, the recommended package is [`github.com/google/go-github/github`](https://godoc.org/github.com/google/go-github/github).
+If you're looking for a client library for GitHub REST API v3, the recommended package is [`github`](https://github.com/google/go-github#installation) (also known as `go-github`).
 
 Focus
 -----
@@ -17,10 +17,8 @@ Focus
 Installation
 ------------
 
-`githubv4` requires Go version 1.8 or later.
-
-```bash
-go get -u github.com/shurcooL/githubv4
+```sh
+go get github.com/shurcooL/githubv4
 ```
 
 Usage
@@ -403,9 +401,9 @@ fmt.Printf("Added a %v reaction to subject with ID %#v!\n", m.AddReaction.Reacti
 Directories
 -----------
 
-| Path                                                                                      | Synopsis                                                                            |
-|-------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| [example/githubv4dev](https://godoc.org/github.com/shurcooL/githubv4/example/githubv4dev) | githubv4dev is a test program currently being used for developing githubv4 package. |
+| Path                                                                                       | Synopsis                                                                            |
+|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| [example/githubv4dev](https://pkg.go.dev/github.com/shurcooL/githubv4/example/githubv4dev) | githubv4dev is a test program currently being used for developing githubv4 package. |
 
 License
 -------
