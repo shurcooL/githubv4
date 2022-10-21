@@ -136,6 +136,17 @@ const (
 	CommitContributionOrderFieldCommitCount CommitContributionOrderField = "COMMIT_COUNT" // Order commit contributions by how many commits they represent.
 )
 
+// ComparisonStatus represents the status of a git comparison between two refs.
+type ComparisonStatus string
+
+// The status of a git comparison between two refs.
+const (
+	ComparisonStatusDiverged  ComparisonStatus = "DIVERGED"  // The head ref is both ahead and behind of the base ref, indicating git history has diverged.
+	ComparisonStatusAhead     ComparisonStatus = "AHEAD"     // The head ref is ahead of the base ref.
+	ComparisonStatusBehind    ComparisonStatus = "BEHIND"    // The head ref is behind the base ref.
+	ComparisonStatusIdentical ComparisonStatus = "IDENTICAL" // The head ref and base ref are identical.
+)
+
 // ContributionLevel represents varying levels of contributions from none to many.
 type ContributionLevel string
 
@@ -173,6 +184,7 @@ const (
 	DependencyGraphEcosystemGo       DependencyGraphEcosystem = "GO"       // Go modules.
 	DependencyGraphEcosystemActions  DependencyGraphEcosystem = "ACTIONS"  // GitHub Actions.
 	DependencyGraphEcosystemRust     DependencyGraphEcosystem = "RUST"     // Rust crates.
+	DependencyGraphEcosystemPub      DependencyGraphEcosystem = "PUB"      // Dart packages hosted at pub.dev.
 )
 
 // DeploymentOrderField represents properties by which deployment connections can be ordered.
@@ -1733,6 +1745,7 @@ const (
 	SecurityAdvisoryEcosystemNpm      SecurityAdvisoryEcosystem = "NPM"      // JavaScript packages hosted at npmjs.com.
 	SecurityAdvisoryEcosystemNuget    SecurityAdvisoryEcosystem = "NUGET"    // .NET packages hosted at the NuGet Gallery.
 	SecurityAdvisoryEcosystemPip      SecurityAdvisoryEcosystem = "PIP"      // Python packages hosted at PyPI.org.
+	SecurityAdvisoryEcosystemPub      SecurityAdvisoryEcosystem = "PUB"      // Dart packages hosted at pub.dev.
 	SecurityAdvisoryEcosystemRubygems SecurityAdvisoryEcosystem = "RUBYGEMS" // Ruby gems hosted at RubyGems.org.
 	SecurityAdvisoryEcosystemRust     SecurityAdvisoryEcosystem = "RUST"     // Rust crates.
 )
