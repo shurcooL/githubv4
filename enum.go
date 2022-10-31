@@ -1099,6 +1099,7 @@ const (
 	ProjectNextFieldTypeDate               ProjectNextFieldType = "DATE"                 // Date.
 	ProjectNextFieldTypeIteration          ProjectNextFieldType = "ITERATION"            // Iteration.
 	ProjectNextFieldTypeTracks             ProjectNextFieldType = "TRACKS"               // Tracks.
+	ProjectNextFieldTypeTrackedBy          ProjectNextFieldType = "TRACKED_BY"           // Tracked by.
 )
 
 // ProjectNextOrderField represents properties by which the return project can be ordered.
@@ -1170,6 +1171,7 @@ const (
 	ProjectV2FieldTypeDate               ProjectV2FieldType = "DATE"                 // Date.
 	ProjectV2FieldTypeIteration          ProjectV2FieldType = "ITERATION"            // Iteration.
 	ProjectV2FieldTypeTracks             ProjectV2FieldType = "TRACKS"               // Tracks.
+	ProjectV2FieldTypeTrackedBy          ProjectV2FieldType = "TRACKED_BY"           // Tracked by.
 )
 
 // ProjectV2ItemFieldValueOrderField represents properties by which project v2 item field value connections can be ordered.

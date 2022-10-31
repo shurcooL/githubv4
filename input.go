@@ -658,6 +658,12 @@ type CreateBranchProtectionRuleInput struct {
 	RequiredStatusChecks *[]RequiredStatusCheckInput `json:"requiredStatusChecks,omitempty"`
 	// Are conversations required to be resolved before merging. (Optional.)
 	RequiresConversationResolution *Boolean `json:"requiresConversationResolution,omitempty"`
+	// Whether someone other than the person who last pushed to the branch must approve this pull request. (Optional.)
+	RequireLastPushApproval *Boolean `json:"requireLastPushApproval,omitempty"`
+	// Whether to set the branch as read-only. If this is true, users will not be able to push to the branch. (Optional.)
+	LockBranch *Boolean `json:"lockBranch,omitempty"`
+	// Whether users can pull changes from upstream when the branch is locked. Set to `true` to allow fork syncing. Set to `false` to prevent fork syncing. (Optional.)
+	LockAllowsFetchAndMerge *Boolean `json:"lockAllowsFetchAndMerge,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -2413,6 +2419,12 @@ type UpdateBranchProtectionRuleInput struct {
 	RequiredStatusChecks *[]RequiredStatusCheckInput `json:"requiredStatusChecks,omitempty"`
 	// Are conversations required to be resolved before merging. (Optional.)
 	RequiresConversationResolution *Boolean `json:"requiresConversationResolution,omitempty"`
+	// Whether someone other than the person who last pushed to the branch must approve this pull request. (Optional.)
+	RequireLastPushApproval *Boolean `json:"requireLastPushApproval,omitempty"`
+	// Whether to set the branch as read-only. If this is true, users will not be able to push to the branch. (Optional.)
+	LockBranch *Boolean `json:"lockBranch,omitempty"`
+	// Whether users can pull changes from upstream when the branch is locked. Set to `true` to allow fork syncing. Set to `false` to prevent fork syncing. (Optional.)
+	LockAllowsFetchAndMerge *Boolean `json:"lockAllowsFetchAndMerge,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
@@ -3051,6 +3063,8 @@ type UpdateRepositoryInput struct {
 	HasIssuesEnabled *Boolean `json:"hasIssuesEnabled,omitempty"`
 	// Indicates if the repository should have the project boards feature enabled. (Optional.)
 	HasProjectsEnabled *Boolean `json:"hasProjectsEnabled,omitempty"`
+	// Indicates if the repository should have the discussions feature enabled. (Optional.)
+	HasDiscussionsEnabled *Boolean `json:"hasDiscussionsEnabled,omitempty"`
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
