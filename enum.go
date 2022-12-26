@@ -660,6 +660,15 @@ const (
 	LockReasonSpam      LockReason = "SPAM"       // The issue or pull request was locked because the conversation was spam.
 )
 
+// MannequinOrderField represents properties by which mannequins can be ordered.
+type MannequinOrderField string
+
+// Properties by which mannequins can be ordered.
+const (
+	MannequinOrderFieldLogin     MannequinOrderField = "LOGIN"      // Order mannequins alphabetically by their source login.
+	MannequinOrderFieldCreatedAt MannequinOrderField = "CREATED_AT" // Order mannequins why when they were created.
+)
+
 // MergeCommitMessage represents the possible default commit messages for merges.
 type MergeCommitMessage string
 
@@ -689,28 +698,28 @@ const (
 	MergeableStateUnknown     MergeableState = "UNKNOWN"     // The mergeability of the pull request is still being calculated.
 )
 
-// MigrationSourceType represents represents the different Octoshift migration sources.
+// MigrationSourceType represents represents the different GitHub Enterprise Importer (GEI) migration sources.
 type MigrationSourceType string
 
-// Represents the different Octoshift migration sources.
+// Represents the different GitHub Enterprise Importer (GEI) migration sources.
 const (
 	MigrationSourceTypeAzureDevOps     MigrationSourceType = "AZURE_DEVOPS"     // An Azure DevOps migration source.
 	MigrationSourceTypeBitbucketServer MigrationSourceType = "BITBUCKET_SERVER" // A Bitbucket Server migration source.
 	MigrationSourceTypeGitHubArchive   MigrationSourceType = "GITHUB_ARCHIVE"   // A GitHub Migration API source.
 )
 
-// MigrationState represents the Octoshift migration state.
+// MigrationState represents the GitHub Enterprise Importer (GEI) migration state.
 type MigrationState string
 
-// The Octoshift migration state.
+// The GitHub Enterprise Importer (GEI) migration state.
 const (
-	MigrationStateNotStarted        MigrationState = "NOT_STARTED"        // The Octoshift migration has not started.
-	MigrationStateQueued            MigrationState = "QUEUED"             // The Octoshift migration has been queued.
-	MigrationStateInProgress        MigrationState = "IN_PROGRESS"        // The Octoshift migration is in progress.
-	MigrationStateSucceeded         MigrationState = "SUCCEEDED"          // The Octoshift migration has succeeded.
-	MigrationStateFailed            MigrationState = "FAILED"             // The Octoshift migration has failed.
-	MigrationStatePendingValidation MigrationState = "PENDING_VALIDATION" // The Octoshift migration needs to have its credentials validated.
-	MigrationStateFailedValidation  MigrationState = "FAILED_VALIDATION"  // The Octoshift migration has invalid credentials.
+	MigrationStateNotStarted        MigrationState = "NOT_STARTED"        // The migration has not started.
+	MigrationStateQueued            MigrationState = "QUEUED"             // The migration has been queued.
+	MigrationStateInProgress        MigrationState = "IN_PROGRESS"        // The migration is in progress.
+	MigrationStateSucceeded         MigrationState = "SUCCEEDED"          // The migration has succeeded.
+	MigrationStateFailed            MigrationState = "FAILED"             // The migration has failed.
+	MigrationStatePendingValidation MigrationState = "PENDING_VALIDATION" // The migration needs to have its credentials validated.
+	MigrationStateFailedValidation  MigrationState = "FAILED_VALIDATION"  // The migration has invalid credentials.
 )
 
 // MilestoneOrderField represents properties by which milestone connections can be ordered.
@@ -1586,10 +1595,11 @@ type RepositoryLockReason string
 
 // The possible reasons a given repository could be in a locked state.
 const (
-	RepositoryLockReasonMoving    RepositoryLockReason = "MOVING"    // The repository is locked due to a move.
-	RepositoryLockReasonBilling   RepositoryLockReason = "BILLING"   // The repository is locked due to a billing related reason.
-	RepositoryLockReasonRename    RepositoryLockReason = "RENAME"    // The repository is locked due to a rename.
-	RepositoryLockReasonMigrating RepositoryLockReason = "MIGRATING" // The repository is locked due to a migration.
+	RepositoryLockReasonMoving           RepositoryLockReason = "MOVING"            // The repository is locked due to a move.
+	RepositoryLockReasonBilling          RepositoryLockReason = "BILLING"           // The repository is locked due to a billing related reason.
+	RepositoryLockReasonRename           RepositoryLockReason = "RENAME"            // The repository is locked due to a rename.
+	RepositoryLockReasonMigrating        RepositoryLockReason = "MIGRATING"         // The repository is locked due to a migration.
+	RepositoryLockReasonTradeRestriction RepositoryLockReason = "TRADE_RESTRICTION" // The repository is locked due to a trade controls related reason.
 )
 
 // RepositoryMigrationOrderDirection represents possible directions in which to order a list of repository migrations when provided an `orderBy` argument.
@@ -1845,6 +1855,259 @@ const (
 	SponsorsActivityPeriodWeek  SponsorsActivityPeriod = "WEEK"  // The previous seven days.
 	SponsorsActivityPeriodMonth SponsorsActivityPeriod = "MONTH" // The previous thirty days.
 	SponsorsActivityPeriodAll   SponsorsActivityPeriod = "ALL"   // Don't restrict the activity to any date range, include all activity.
+)
+
+// SponsorsCountryOrRegionCode represents represents countries or regions for billing and residence for a GitHub Sponsors profile.
+type SponsorsCountryOrRegionCode string
+
+// Represents countries or regions for billing and residence for a GitHub Sponsors profile.
+const (
+	SponsorsCountryOrRegionCodeAf SponsorsCountryOrRegionCode = "AF" // Afghanistan.
+	SponsorsCountryOrRegionCodeAx SponsorsCountryOrRegionCode = "AX" // Åland.
+	SponsorsCountryOrRegionCodeAl SponsorsCountryOrRegionCode = "AL" // Albania.
+	SponsorsCountryOrRegionCodeDz SponsorsCountryOrRegionCode = "DZ" // Algeria.
+	SponsorsCountryOrRegionCodeAs SponsorsCountryOrRegionCode = "AS" // American Samoa.
+	SponsorsCountryOrRegionCodeAd SponsorsCountryOrRegionCode = "AD" // Andorra.
+	SponsorsCountryOrRegionCodeAo SponsorsCountryOrRegionCode = "AO" // Angola.
+	SponsorsCountryOrRegionCodeAi SponsorsCountryOrRegionCode = "AI" // Anguilla.
+	SponsorsCountryOrRegionCodeAq SponsorsCountryOrRegionCode = "AQ" // Antarctica.
+	SponsorsCountryOrRegionCodeAg SponsorsCountryOrRegionCode = "AG" // Antigua and Barbuda.
+	SponsorsCountryOrRegionCodeAr SponsorsCountryOrRegionCode = "AR" // Argentina.
+	SponsorsCountryOrRegionCodeAm SponsorsCountryOrRegionCode = "AM" // Armenia.
+	SponsorsCountryOrRegionCodeAw SponsorsCountryOrRegionCode = "AW" // Aruba.
+	SponsorsCountryOrRegionCodeAu SponsorsCountryOrRegionCode = "AU" // Australia.
+	SponsorsCountryOrRegionCodeAt SponsorsCountryOrRegionCode = "AT" // Austria.
+	SponsorsCountryOrRegionCodeAz SponsorsCountryOrRegionCode = "AZ" // Azerbaijan.
+	SponsorsCountryOrRegionCodeBs SponsorsCountryOrRegionCode = "BS" // Bahamas.
+	SponsorsCountryOrRegionCodeBh SponsorsCountryOrRegionCode = "BH" // Bahrain.
+	SponsorsCountryOrRegionCodeBd SponsorsCountryOrRegionCode = "BD" // Bangladesh.
+	SponsorsCountryOrRegionCodeBb SponsorsCountryOrRegionCode = "BB" // Barbados.
+	SponsorsCountryOrRegionCodeBy SponsorsCountryOrRegionCode = "BY" // Belarus.
+	SponsorsCountryOrRegionCodeBe SponsorsCountryOrRegionCode = "BE" // Belgium.
+	SponsorsCountryOrRegionCodeBz SponsorsCountryOrRegionCode = "BZ" // Belize.
+	SponsorsCountryOrRegionCodeBj SponsorsCountryOrRegionCode = "BJ" // Benin.
+	SponsorsCountryOrRegionCodeBm SponsorsCountryOrRegionCode = "BM" // Bermuda.
+	SponsorsCountryOrRegionCodeBt SponsorsCountryOrRegionCode = "BT" // Bhutan.
+	SponsorsCountryOrRegionCodeBo SponsorsCountryOrRegionCode = "BO" // Bolivia.
+	SponsorsCountryOrRegionCodeBq SponsorsCountryOrRegionCode = "BQ" // Bonaire, Sint Eustatius and Saba.
+	SponsorsCountryOrRegionCodeBa SponsorsCountryOrRegionCode = "BA" // Bosnia and Herzegovina.
+	SponsorsCountryOrRegionCodeBw SponsorsCountryOrRegionCode = "BW" // Botswana.
+	SponsorsCountryOrRegionCodeBv SponsorsCountryOrRegionCode = "BV" // Bouvet Island.
+	SponsorsCountryOrRegionCodeBr SponsorsCountryOrRegionCode = "BR" // Brazil.
+	SponsorsCountryOrRegionCodeIo SponsorsCountryOrRegionCode = "IO" // British Indian Ocean Territory.
+	SponsorsCountryOrRegionCodeBn SponsorsCountryOrRegionCode = "BN" // Brunei Darussalam.
+	SponsorsCountryOrRegionCodeBg SponsorsCountryOrRegionCode = "BG" // Bulgaria.
+	SponsorsCountryOrRegionCodeBf SponsorsCountryOrRegionCode = "BF" // Burkina Faso.
+	SponsorsCountryOrRegionCodeBi SponsorsCountryOrRegionCode = "BI" // Burundi.
+	SponsorsCountryOrRegionCodeKh SponsorsCountryOrRegionCode = "KH" // Cambodia.
+	SponsorsCountryOrRegionCodeCm SponsorsCountryOrRegionCode = "CM" // Cameroon.
+	SponsorsCountryOrRegionCodeCa SponsorsCountryOrRegionCode = "CA" // Canada.
+	SponsorsCountryOrRegionCodeCv SponsorsCountryOrRegionCode = "CV" // Cape Verde.
+	SponsorsCountryOrRegionCodeKy SponsorsCountryOrRegionCode = "KY" // Cayman Islands.
+	SponsorsCountryOrRegionCodeCf SponsorsCountryOrRegionCode = "CF" // Central African Republic.
+	SponsorsCountryOrRegionCodeTd SponsorsCountryOrRegionCode = "TD" // Chad.
+	SponsorsCountryOrRegionCodeCl SponsorsCountryOrRegionCode = "CL" // Chile.
+	SponsorsCountryOrRegionCodeCn SponsorsCountryOrRegionCode = "CN" // China.
+	SponsorsCountryOrRegionCodeCx SponsorsCountryOrRegionCode = "CX" // Christmas Island.
+	SponsorsCountryOrRegionCodeCc SponsorsCountryOrRegionCode = "CC" // Cocos (Keeling) Islands.
+	SponsorsCountryOrRegionCodeCo SponsorsCountryOrRegionCode = "CO" // Colombia.
+	SponsorsCountryOrRegionCodeKm SponsorsCountryOrRegionCode = "KM" // Comoros.
+	SponsorsCountryOrRegionCodeCg SponsorsCountryOrRegionCode = "CG" // Congo (Brazzaville).
+	SponsorsCountryOrRegionCodeCd SponsorsCountryOrRegionCode = "CD" // Congo (Kinshasa).
+	SponsorsCountryOrRegionCodeCk SponsorsCountryOrRegionCode = "CK" // Cook Islands.
+	SponsorsCountryOrRegionCodeCr SponsorsCountryOrRegionCode = "CR" // Costa Rica.
+	SponsorsCountryOrRegionCodeCi SponsorsCountryOrRegionCode = "CI" // Côte d'Ivoire.
+	SponsorsCountryOrRegionCodeHr SponsorsCountryOrRegionCode = "HR" // Croatia.
+	SponsorsCountryOrRegionCodeCw SponsorsCountryOrRegionCode = "CW" // Curaçao.
+	SponsorsCountryOrRegionCodeCy SponsorsCountryOrRegionCode = "CY" // Cyprus.
+	SponsorsCountryOrRegionCodeCz SponsorsCountryOrRegionCode = "CZ" // Czech Republic.
+	SponsorsCountryOrRegionCodeDk SponsorsCountryOrRegionCode = "DK" // Denmark.
+	SponsorsCountryOrRegionCodeDj SponsorsCountryOrRegionCode = "DJ" // Djibouti.
+	SponsorsCountryOrRegionCodeDm SponsorsCountryOrRegionCode = "DM" // Dominica.
+	SponsorsCountryOrRegionCodeDo SponsorsCountryOrRegionCode = "DO" // Dominican Republic.
+	SponsorsCountryOrRegionCodeEc SponsorsCountryOrRegionCode = "EC" // Ecuador.
+	SponsorsCountryOrRegionCodeEg SponsorsCountryOrRegionCode = "EG" // Egypt.
+	SponsorsCountryOrRegionCodeSv SponsorsCountryOrRegionCode = "SV" // El Salvador.
+	SponsorsCountryOrRegionCodeGq SponsorsCountryOrRegionCode = "GQ" // Equatorial Guinea.
+	SponsorsCountryOrRegionCodeEr SponsorsCountryOrRegionCode = "ER" // Eritrea.
+	SponsorsCountryOrRegionCodeEe SponsorsCountryOrRegionCode = "EE" // Estonia.
+	SponsorsCountryOrRegionCodeEt SponsorsCountryOrRegionCode = "ET" // Ethiopia.
+	SponsorsCountryOrRegionCodeFk SponsorsCountryOrRegionCode = "FK" // Falkland Islands.
+	SponsorsCountryOrRegionCodeFo SponsorsCountryOrRegionCode = "FO" // Faroe Islands.
+	SponsorsCountryOrRegionCodeFj SponsorsCountryOrRegionCode = "FJ" // Fiji.
+	SponsorsCountryOrRegionCodeFi SponsorsCountryOrRegionCode = "FI" // Finland.
+	SponsorsCountryOrRegionCodeFr SponsorsCountryOrRegionCode = "FR" // France.
+	SponsorsCountryOrRegionCodeGf SponsorsCountryOrRegionCode = "GF" // French Guiana.
+	SponsorsCountryOrRegionCodePf SponsorsCountryOrRegionCode = "PF" // French Polynesia.
+	SponsorsCountryOrRegionCodeTf SponsorsCountryOrRegionCode = "TF" // French Southern Lands.
+	SponsorsCountryOrRegionCodeGa SponsorsCountryOrRegionCode = "GA" // Gabon.
+	SponsorsCountryOrRegionCodeGm SponsorsCountryOrRegionCode = "GM" // Gambia.
+	SponsorsCountryOrRegionCodeGe SponsorsCountryOrRegionCode = "GE" // Georgia.
+	SponsorsCountryOrRegionCodeDe SponsorsCountryOrRegionCode = "DE" // Germany.
+	SponsorsCountryOrRegionCodeGh SponsorsCountryOrRegionCode = "GH" // Ghana.
+	SponsorsCountryOrRegionCodeGi SponsorsCountryOrRegionCode = "GI" // Gibraltar.
+	SponsorsCountryOrRegionCodeGr SponsorsCountryOrRegionCode = "GR" // Greece.
+	SponsorsCountryOrRegionCodeGl SponsorsCountryOrRegionCode = "GL" // Greenland.
+	SponsorsCountryOrRegionCodeGd SponsorsCountryOrRegionCode = "GD" // Grenada.
+	SponsorsCountryOrRegionCodeGp SponsorsCountryOrRegionCode = "GP" // Guadeloupe.
+	SponsorsCountryOrRegionCodeGu SponsorsCountryOrRegionCode = "GU" // Guam.
+	SponsorsCountryOrRegionCodeGt SponsorsCountryOrRegionCode = "GT" // Guatemala.
+	SponsorsCountryOrRegionCodeGg SponsorsCountryOrRegionCode = "GG" // Guernsey.
+	SponsorsCountryOrRegionCodeGn SponsorsCountryOrRegionCode = "GN" // Guinea.
+	SponsorsCountryOrRegionCodeGw SponsorsCountryOrRegionCode = "GW" // Guinea-Bissau.
+	SponsorsCountryOrRegionCodeGy SponsorsCountryOrRegionCode = "GY" // Guyana.
+	SponsorsCountryOrRegionCodeHt SponsorsCountryOrRegionCode = "HT" // Haiti.
+	SponsorsCountryOrRegionCodeHm SponsorsCountryOrRegionCode = "HM" // Heard and McDonald Islands.
+	SponsorsCountryOrRegionCodeHn SponsorsCountryOrRegionCode = "HN" // Honduras.
+	SponsorsCountryOrRegionCodeHk SponsorsCountryOrRegionCode = "HK" // Hong Kong.
+	SponsorsCountryOrRegionCodeHu SponsorsCountryOrRegionCode = "HU" // Hungary.
+	SponsorsCountryOrRegionCodeIs SponsorsCountryOrRegionCode = "IS" // Iceland.
+	SponsorsCountryOrRegionCodeIn SponsorsCountryOrRegionCode = "IN" // India.
+	SponsorsCountryOrRegionCodeID SponsorsCountryOrRegionCode = "ID" // Indonesia.
+	SponsorsCountryOrRegionCodeIr SponsorsCountryOrRegionCode = "IR" // Iran.
+	SponsorsCountryOrRegionCodeIq SponsorsCountryOrRegionCode = "IQ" // Iraq.
+	SponsorsCountryOrRegionCodeIe SponsorsCountryOrRegionCode = "IE" // Ireland.
+	SponsorsCountryOrRegionCodeIm SponsorsCountryOrRegionCode = "IM" // Isle of Man.
+	SponsorsCountryOrRegionCodeIl SponsorsCountryOrRegionCode = "IL" // Israel.
+	SponsorsCountryOrRegionCodeIt SponsorsCountryOrRegionCode = "IT" // Italy.
+	SponsorsCountryOrRegionCodeJm SponsorsCountryOrRegionCode = "JM" // Jamaica.
+	SponsorsCountryOrRegionCodeJp SponsorsCountryOrRegionCode = "JP" // Japan.
+	SponsorsCountryOrRegionCodeJe SponsorsCountryOrRegionCode = "JE" // Jersey.
+	SponsorsCountryOrRegionCodeJo SponsorsCountryOrRegionCode = "JO" // Jordan.
+	SponsorsCountryOrRegionCodeKz SponsorsCountryOrRegionCode = "KZ" // Kazakhstan.
+	SponsorsCountryOrRegionCodeKe SponsorsCountryOrRegionCode = "KE" // Kenya.
+	SponsorsCountryOrRegionCodeKi SponsorsCountryOrRegionCode = "KI" // Kiribati.
+	SponsorsCountryOrRegionCodeKr SponsorsCountryOrRegionCode = "KR" // Korea, South.
+	SponsorsCountryOrRegionCodeKw SponsorsCountryOrRegionCode = "KW" // Kuwait.
+	SponsorsCountryOrRegionCodeKg SponsorsCountryOrRegionCode = "KG" // Kyrgyzstan.
+	SponsorsCountryOrRegionCodeLa SponsorsCountryOrRegionCode = "LA" // Laos.
+	SponsorsCountryOrRegionCodeLv SponsorsCountryOrRegionCode = "LV" // Latvia.
+	SponsorsCountryOrRegionCodeLb SponsorsCountryOrRegionCode = "LB" // Lebanon.
+	SponsorsCountryOrRegionCodeLs SponsorsCountryOrRegionCode = "LS" // Lesotho.
+	SponsorsCountryOrRegionCodeLr SponsorsCountryOrRegionCode = "LR" // Liberia.
+	SponsorsCountryOrRegionCodeLy SponsorsCountryOrRegionCode = "LY" // Libya.
+	SponsorsCountryOrRegionCodeLi SponsorsCountryOrRegionCode = "LI" // Liechtenstein.
+	SponsorsCountryOrRegionCodeLt SponsorsCountryOrRegionCode = "LT" // Lithuania.
+	SponsorsCountryOrRegionCodeLu SponsorsCountryOrRegionCode = "LU" // Luxembourg.
+	SponsorsCountryOrRegionCodeMo SponsorsCountryOrRegionCode = "MO" // Macau.
+	SponsorsCountryOrRegionCodeMk SponsorsCountryOrRegionCode = "MK" // Macedonia.
+	SponsorsCountryOrRegionCodeMg SponsorsCountryOrRegionCode = "MG" // Madagascar.
+	SponsorsCountryOrRegionCodeMw SponsorsCountryOrRegionCode = "MW" // Malawi.
+	SponsorsCountryOrRegionCodeMy SponsorsCountryOrRegionCode = "MY" // Malaysia.
+	SponsorsCountryOrRegionCodeMv SponsorsCountryOrRegionCode = "MV" // Maldives.
+	SponsorsCountryOrRegionCodeMl SponsorsCountryOrRegionCode = "ML" // Mali.
+	SponsorsCountryOrRegionCodeMt SponsorsCountryOrRegionCode = "MT" // Malta.
+	SponsorsCountryOrRegionCodeMh SponsorsCountryOrRegionCode = "MH" // Marshall Islands.
+	SponsorsCountryOrRegionCodeMq SponsorsCountryOrRegionCode = "MQ" // Martinique.
+	SponsorsCountryOrRegionCodeMr SponsorsCountryOrRegionCode = "MR" // Mauritania.
+	SponsorsCountryOrRegionCodeMu SponsorsCountryOrRegionCode = "MU" // Mauritius.
+	SponsorsCountryOrRegionCodeYt SponsorsCountryOrRegionCode = "YT" // Mayotte.
+	SponsorsCountryOrRegionCodeMx SponsorsCountryOrRegionCode = "MX" // Mexico.
+	SponsorsCountryOrRegionCodeFm SponsorsCountryOrRegionCode = "FM" // Micronesia.
+	SponsorsCountryOrRegionCodeMd SponsorsCountryOrRegionCode = "MD" // Moldova.
+	SponsorsCountryOrRegionCodeMc SponsorsCountryOrRegionCode = "MC" // Monaco.
+	SponsorsCountryOrRegionCodeMn SponsorsCountryOrRegionCode = "MN" // Mongolia.
+	SponsorsCountryOrRegionCodeMe SponsorsCountryOrRegionCode = "ME" // Montenegro.
+	SponsorsCountryOrRegionCodeMs SponsorsCountryOrRegionCode = "MS" // Montserrat.
+	SponsorsCountryOrRegionCodeMa SponsorsCountryOrRegionCode = "MA" // Morocco.
+	SponsorsCountryOrRegionCodeMz SponsorsCountryOrRegionCode = "MZ" // Mozambique.
+	SponsorsCountryOrRegionCodeMm SponsorsCountryOrRegionCode = "MM" // Myanmar.
+	SponsorsCountryOrRegionCodeNa SponsorsCountryOrRegionCode = "NA" // Namibia.
+	SponsorsCountryOrRegionCodeNr SponsorsCountryOrRegionCode = "NR" // Nauru.
+	SponsorsCountryOrRegionCodeNp SponsorsCountryOrRegionCode = "NP" // Nepal.
+	SponsorsCountryOrRegionCodeNl SponsorsCountryOrRegionCode = "NL" // Netherlands.
+	SponsorsCountryOrRegionCodeNc SponsorsCountryOrRegionCode = "NC" // New Caledonia.
+	SponsorsCountryOrRegionCodeNz SponsorsCountryOrRegionCode = "NZ" // New Zealand.
+	SponsorsCountryOrRegionCodeNi SponsorsCountryOrRegionCode = "NI" // Nicaragua.
+	SponsorsCountryOrRegionCodeNe SponsorsCountryOrRegionCode = "NE" // Niger.
+	SponsorsCountryOrRegionCodeNg SponsorsCountryOrRegionCode = "NG" // Nigeria.
+	SponsorsCountryOrRegionCodeNu SponsorsCountryOrRegionCode = "NU" // Niue.
+	SponsorsCountryOrRegionCodeNf SponsorsCountryOrRegionCode = "NF" // Norfolk Island.
+	SponsorsCountryOrRegionCodeMp SponsorsCountryOrRegionCode = "MP" // Northern Mariana Islands.
+	SponsorsCountryOrRegionCodeNo SponsorsCountryOrRegionCode = "NO" // Norway.
+	SponsorsCountryOrRegionCodeOm SponsorsCountryOrRegionCode = "OM" // Oman.
+	SponsorsCountryOrRegionCodePk SponsorsCountryOrRegionCode = "PK" // Pakistan.
+	SponsorsCountryOrRegionCodePw SponsorsCountryOrRegionCode = "PW" // Palau.
+	SponsorsCountryOrRegionCodePs SponsorsCountryOrRegionCode = "PS" // Palestine.
+	SponsorsCountryOrRegionCodePa SponsorsCountryOrRegionCode = "PA" // Panama.
+	SponsorsCountryOrRegionCodePg SponsorsCountryOrRegionCode = "PG" // Papua New Guinea.
+	SponsorsCountryOrRegionCodePy SponsorsCountryOrRegionCode = "PY" // Paraguay.
+	SponsorsCountryOrRegionCodePe SponsorsCountryOrRegionCode = "PE" // Peru.
+	SponsorsCountryOrRegionCodePh SponsorsCountryOrRegionCode = "PH" // Philippines.
+	SponsorsCountryOrRegionCodePn SponsorsCountryOrRegionCode = "PN" // Pitcairn.
+	SponsorsCountryOrRegionCodePl SponsorsCountryOrRegionCode = "PL" // Poland.
+	SponsorsCountryOrRegionCodePt SponsorsCountryOrRegionCode = "PT" // Portugal.
+	SponsorsCountryOrRegionCodePr SponsorsCountryOrRegionCode = "PR" // Puerto Rico.
+	SponsorsCountryOrRegionCodeQa SponsorsCountryOrRegionCode = "QA" // Qatar.
+	SponsorsCountryOrRegionCodeRe SponsorsCountryOrRegionCode = "RE" // Reunion.
+	SponsorsCountryOrRegionCodeRo SponsorsCountryOrRegionCode = "RO" // Romania.
+	SponsorsCountryOrRegionCodeRu SponsorsCountryOrRegionCode = "RU" // Russian Federation.
+	SponsorsCountryOrRegionCodeRw SponsorsCountryOrRegionCode = "RW" // Rwanda.
+	SponsorsCountryOrRegionCodeBl SponsorsCountryOrRegionCode = "BL" // Saint Barthélemy.
+	SponsorsCountryOrRegionCodeSh SponsorsCountryOrRegionCode = "SH" // Saint Helena.
+	SponsorsCountryOrRegionCodeKn SponsorsCountryOrRegionCode = "KN" // Saint Kitts and Nevis.
+	SponsorsCountryOrRegionCodeLc SponsorsCountryOrRegionCode = "LC" // Saint Lucia.
+	SponsorsCountryOrRegionCodeMf SponsorsCountryOrRegionCode = "MF" // Saint Martin (French part).
+	SponsorsCountryOrRegionCodePm SponsorsCountryOrRegionCode = "PM" // Saint Pierre and Miquelon.
+	SponsorsCountryOrRegionCodeVc SponsorsCountryOrRegionCode = "VC" // Saint Vincent and the Grenadines.
+	SponsorsCountryOrRegionCodeWs SponsorsCountryOrRegionCode = "WS" // Samoa.
+	SponsorsCountryOrRegionCodeSm SponsorsCountryOrRegionCode = "SM" // San Marino.
+	SponsorsCountryOrRegionCodeSt SponsorsCountryOrRegionCode = "ST" // Sao Tome and Principe.
+	SponsorsCountryOrRegionCodeSa SponsorsCountryOrRegionCode = "SA" // Saudi Arabia.
+	SponsorsCountryOrRegionCodeSn SponsorsCountryOrRegionCode = "SN" // Senegal.
+	SponsorsCountryOrRegionCodeRs SponsorsCountryOrRegionCode = "RS" // Serbia.
+	SponsorsCountryOrRegionCodeSc SponsorsCountryOrRegionCode = "SC" // Seychelles.
+	SponsorsCountryOrRegionCodeSl SponsorsCountryOrRegionCode = "SL" // Sierra Leone.
+	SponsorsCountryOrRegionCodeSg SponsorsCountryOrRegionCode = "SG" // Singapore.
+	SponsorsCountryOrRegionCodeSx SponsorsCountryOrRegionCode = "SX" // Sint Maarten (Dutch part).
+	SponsorsCountryOrRegionCodeSk SponsorsCountryOrRegionCode = "SK" // Slovakia.
+	SponsorsCountryOrRegionCodeSi SponsorsCountryOrRegionCode = "SI" // Slovenia.
+	SponsorsCountryOrRegionCodeSb SponsorsCountryOrRegionCode = "SB" // Solomon Islands.
+	SponsorsCountryOrRegionCodeSo SponsorsCountryOrRegionCode = "SO" // Somalia.
+	SponsorsCountryOrRegionCodeZa SponsorsCountryOrRegionCode = "ZA" // South Africa.
+	SponsorsCountryOrRegionCodeGs SponsorsCountryOrRegionCode = "GS" // South Georgia and South Sandwich Islands.
+	SponsorsCountryOrRegionCodeSs SponsorsCountryOrRegionCode = "SS" // South Sudan.
+	SponsorsCountryOrRegionCodeEs SponsorsCountryOrRegionCode = "ES" // Spain.
+	SponsorsCountryOrRegionCodeLk SponsorsCountryOrRegionCode = "LK" // Sri Lanka.
+	SponsorsCountryOrRegionCodeSd SponsorsCountryOrRegionCode = "SD" // Sudan.
+	SponsorsCountryOrRegionCodeSr SponsorsCountryOrRegionCode = "SR" // Suriname.
+	SponsorsCountryOrRegionCodeSj SponsorsCountryOrRegionCode = "SJ" // Svalbard and Jan Mayen Islands.
+	SponsorsCountryOrRegionCodeSz SponsorsCountryOrRegionCode = "SZ" // Swaziland.
+	SponsorsCountryOrRegionCodeSe SponsorsCountryOrRegionCode = "SE" // Sweden.
+	SponsorsCountryOrRegionCodeCh SponsorsCountryOrRegionCode = "CH" // Switzerland.
+	SponsorsCountryOrRegionCodeTw SponsorsCountryOrRegionCode = "TW" // Taiwan.
+	SponsorsCountryOrRegionCodeTj SponsorsCountryOrRegionCode = "TJ" // Tajikistan.
+	SponsorsCountryOrRegionCodeTz SponsorsCountryOrRegionCode = "TZ" // Tanzania.
+	SponsorsCountryOrRegionCodeTh SponsorsCountryOrRegionCode = "TH" // Thailand.
+	SponsorsCountryOrRegionCodeTl SponsorsCountryOrRegionCode = "TL" // Timor-Leste.
+	SponsorsCountryOrRegionCodeTg SponsorsCountryOrRegionCode = "TG" // Togo.
+	SponsorsCountryOrRegionCodeTk SponsorsCountryOrRegionCode = "TK" // Tokelau.
+	SponsorsCountryOrRegionCodeTo SponsorsCountryOrRegionCode = "TO" // Tonga.
+	SponsorsCountryOrRegionCodeTt SponsorsCountryOrRegionCode = "TT" // Trinidad and Tobago.
+	SponsorsCountryOrRegionCodeTn SponsorsCountryOrRegionCode = "TN" // Tunisia.
+	SponsorsCountryOrRegionCodeTr SponsorsCountryOrRegionCode = "TR" // Turkey.
+	SponsorsCountryOrRegionCodeTm SponsorsCountryOrRegionCode = "TM" // Turkmenistan.
+	SponsorsCountryOrRegionCodeTc SponsorsCountryOrRegionCode = "TC" // Turks and Caicos Islands.
+	SponsorsCountryOrRegionCodeTv SponsorsCountryOrRegionCode = "TV" // Tuvalu.
+	SponsorsCountryOrRegionCodeUg SponsorsCountryOrRegionCode = "UG" // Uganda.
+	SponsorsCountryOrRegionCodeUa SponsorsCountryOrRegionCode = "UA" // Ukraine.
+	SponsorsCountryOrRegionCodeAe SponsorsCountryOrRegionCode = "AE" // United Arab Emirates.
+	SponsorsCountryOrRegionCodeGb SponsorsCountryOrRegionCode = "GB" // United Kingdom.
+	SponsorsCountryOrRegionCodeUm SponsorsCountryOrRegionCode = "UM" // United States Minor Outlying Islands.
+	SponsorsCountryOrRegionCodeUs SponsorsCountryOrRegionCode = "US" // United States of America.
+	SponsorsCountryOrRegionCodeUy SponsorsCountryOrRegionCode = "UY" // Uruguay.
+	SponsorsCountryOrRegionCodeUz SponsorsCountryOrRegionCode = "UZ" // Uzbekistan.
+	SponsorsCountryOrRegionCodeVu SponsorsCountryOrRegionCode = "VU" // Vanuatu.
+	SponsorsCountryOrRegionCodeVa SponsorsCountryOrRegionCode = "VA" // Vatican City.
+	SponsorsCountryOrRegionCodeVe SponsorsCountryOrRegionCode = "VE" // Venezuela.
+	SponsorsCountryOrRegionCodeVn SponsorsCountryOrRegionCode = "VN" // Vietnam.
+	SponsorsCountryOrRegionCodeVg SponsorsCountryOrRegionCode = "VG" // Virgin Islands, British.
+	SponsorsCountryOrRegionCodeVi SponsorsCountryOrRegionCode = "VI" // Virgin Islands, U.S.
+	SponsorsCountryOrRegionCodeWf SponsorsCountryOrRegionCode = "WF" // Wallis and Futuna Islands.
+	SponsorsCountryOrRegionCodeEh SponsorsCountryOrRegionCode = "EH" // Western Sahara.
+	SponsorsCountryOrRegionCodeYe SponsorsCountryOrRegionCode = "YE" // Yemen.
+	SponsorsCountryOrRegionCodeZm SponsorsCountryOrRegionCode = "ZM" // Zambia.
+	SponsorsCountryOrRegionCodeZw SponsorsCountryOrRegionCode = "ZW" // Zimbabwe.
 )
 
 // SponsorsGoalKind represents the different kinds of goals a GitHub Sponsors member can have.
