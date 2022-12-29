@@ -96,7 +96,7 @@ type {{.name}} string
 
 // {{.description | clean | fullSentence}}
 const ({{range .enumValues}}
-	{{$.name}}{{.name | enumIdentifier}} {{$.name}} = {{.name | quote}} // {{.description | clean | fullSentence}}{{end}}
+	{{enumIdentifier $.name .name}} {{$.name}} = {{.name | quote}} // {{.description | clean | fullSentence}}{{end}}
 )
 {{- end -}}
 `),
@@ -169,10 +169,17 @@ func t(text string) *template.Template {
 			sort.Strings(names)
 			return names
 		},
-		"identifier":     func(name string) string { return ident.ParseLowerCamelCase(name).ToMixedCaps() },
-		"enumIdentifier": func(name string) string { return ident.ParseScreamingSnakeCase(name).ToMixedCaps() },
-		"type":           typeString,
-		"clean":          func(s string) string { return strings.Join(strings.Fields(s), " ") },
+		"identifier": func(name string) string { return ident.ParseLowerCamelCase(name).ToMixedCaps() },
+		"enumIdentifier": func(enum, value string) string {
+			if enum == "SponsorsCountryOrRegionCode" {
+				// These enum values are country/region codes like "CA" or "US"
+				// rather than words, so don't try to convert them to mixed caps.
+				return enum + value
+			}
+			return enum + ident.ParseScreamingSnakeCase(value).ToMixedCaps()
+		},
+		"type":  typeString,
+		"clean": func(s string) string { return strings.Join(strings.Fields(s), " ") },
 		"endSentence": func(s string) string {
 			s = strings.ToLower(s[0:1]) + s[1:]
 			switch {
