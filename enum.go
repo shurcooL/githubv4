@@ -921,6 +921,16 @@ const (
 	OrganizationInvitationRoleReinstate      OrganizationInvitationRole = "REINSTATE"       // The user's previous role will be reinstated.
 )
 
+// OrganizationInvitationSource represents the possible organization invitation sources.
+type OrganizationInvitationSource string
+
+// The possible organization invitation sources.
+const (
+	OrganizationInvitationSourceUnknown OrganizationInvitationSource = "UNKNOWN" // The invitation was sent before this feature was added.
+	OrganizationInvitationSourceMember  OrganizationInvitationSource = "MEMBER"  // The invitation was created from the web interface or from API.
+	OrganizationInvitationSourceSCIM    OrganizationInvitationSource = "SCIM"    // The invitation was created from SCIM.
+)
+
 // OrganizationInvitationType represents the possible organization invitation types.
 type OrganizationInvitationType string
 
@@ -948,6 +958,21 @@ const (
 	OrganizationMembersCanCreateRepositoriesSettingValuePrivate  OrganizationMembersCanCreateRepositoriesSettingValue = "PRIVATE"  // Members will be able to create only private repositories.
 	OrganizationMembersCanCreateRepositoriesSettingValueInternal OrganizationMembersCanCreateRepositoriesSettingValue = "INTERNAL" // Members will be able to create only internal repositories.
 	OrganizationMembersCanCreateRepositoriesSettingValueDisabled OrganizationMembersCanCreateRepositoriesSettingValue = "DISABLED" // Members will not be able to create public or private repositories.
+)
+
+// OrganizationMigrationState represents the Octoshift Organization migration state.
+type OrganizationMigrationState string
+
+// The Octoshift Organization migration state.
+const (
+	OrganizationMigrationStateNotStarted        OrganizationMigrationState = "NOT_STARTED"         // The Octoshift migration has not started.
+	OrganizationMigrationStateQueued            OrganizationMigrationState = "QUEUED"              // The Octoshift migration has been queued.
+	OrganizationMigrationStateInProgress        OrganizationMigrationState = "IN_PROGRESS"         // The Octoshift migration is in progress.
+	OrganizationMigrationStatePreRepoMigration  OrganizationMigrationState = "PRE_REPO_MIGRATION"  // The Octoshift migration is performing pre repository migrations.
+	OrganizationMigrationStateRepoMigration     OrganizationMigrationState = "REPO_MIGRATION"      // The Octoshift org migration is performing repository migrations.
+	OrganizationMigrationStatePostRepoMigration OrganizationMigrationState = "POST_REPO_MIGRATION" // The Octoshift migration is performing post repository migrations.
+	OrganizationMigrationStateSucceeded         OrganizationMigrationState = "SUCCEEDED"           // The Octoshift migration has succeeded.
+	OrganizationMigrationStateFailed            OrganizationMigrationState = "FAILED"              // The Octoshift migration has failed.
 )
 
 // OrganizationOrderField represents properties by which organization connections can be ordered.
@@ -1079,49 +1104,6 @@ const (
 	ProjectColumnPurposeDone       ProjectColumnPurpose = "DONE"        // The column contains cards which are complete.
 )
 
-// ProjectItemType represents the type of a project item.
-type ProjectItemType string
-
-// The type of a project item.
-const (
-	ProjectItemTypeIssue       ProjectItemType = "ISSUE"        // Issue.
-	ProjectItemTypePullRequest ProjectItemType = "PULL_REQUEST" // Pull Request.
-	ProjectItemTypeDraftIssue  ProjectItemType = "DRAFT_ISSUE"  // Draft Issue.
-	ProjectItemTypeRedacted    ProjectItemType = "REDACTED"     // Redacted Item.
-)
-
-// ProjectNextFieldType represents the type of a project next field.
-type ProjectNextFieldType string
-
-// The type of a project next field.
-const (
-	ProjectNextFieldTypeAssignees          ProjectNextFieldType = "ASSIGNEES"            // Assignees.
-	ProjectNextFieldTypeLinkedPullRequests ProjectNextFieldType = "LINKED_PULL_REQUESTS" // Linked Pull Requests.
-	ProjectNextFieldTypeReviewers          ProjectNextFieldType = "REVIEWERS"            // Reviewers.
-	ProjectNextFieldTypeLabels             ProjectNextFieldType = "LABELS"               // Labels.
-	ProjectNextFieldTypeMilestone          ProjectNextFieldType = "MILESTONE"            // Milestone.
-	ProjectNextFieldTypeRepository         ProjectNextFieldType = "REPOSITORY"           // Repository.
-	ProjectNextFieldTypeTitle              ProjectNextFieldType = "TITLE"                // Title.
-	ProjectNextFieldTypeText               ProjectNextFieldType = "TEXT"                 // Text.
-	ProjectNextFieldTypeSingleSelect       ProjectNextFieldType = "SINGLE_SELECT"        // Single Select.
-	ProjectNextFieldTypeNumber             ProjectNextFieldType = "NUMBER"               // Number.
-	ProjectNextFieldTypeDate               ProjectNextFieldType = "DATE"                 // Date.
-	ProjectNextFieldTypeIteration          ProjectNextFieldType = "ITERATION"            // Iteration.
-	ProjectNextFieldTypeTracks             ProjectNextFieldType = "TRACKS"               // Tracks.
-	ProjectNextFieldTypeTrackedBy          ProjectNextFieldType = "TRACKED_BY"           // Tracked by.
-)
-
-// ProjectNextOrderField represents properties by which the return project can be ordered.
-type ProjectNextOrderField string
-
-// Properties by which the return project can be ordered.
-const (
-	ProjectNextOrderFieldTitle     ProjectNextOrderField = "TITLE"      // The project's title.
-	ProjectNextOrderFieldNumber    ProjectNextOrderField = "NUMBER"     // The project's number.
-	ProjectNextOrderFieldUpdatedAt ProjectNextOrderField = "UPDATED_AT" // The project's date and time of update.
-	ProjectNextOrderFieldCreatedAt ProjectNextOrderField = "CREATED_AT" // The project's date and time of creation.
-)
-
 // ProjectOrderField represents properties by which project connections can be ordered.
 type ProjectOrderField string
 
@@ -1249,13 +1231,15 @@ const (
 	ProjectV2ViewOrderFieldName      ProjectV2ViewOrderField = "NAME"       // Order project v2 views by name.
 )
 
-// ProjectViewLayout represents the layout of a project view.
-type ProjectViewLayout string
+// ProjectV2WorkflowsOrderField represents properties by which project workflows can be ordered.
+type ProjectV2WorkflowsOrderField string
 
-// The layout of a project view.
+// Properties by which project workflows can be ordered.
 const (
-	ProjectViewLayoutBoardLayout ProjectViewLayout = "BOARD_LAYOUT" // Board layout.
-	ProjectViewLayoutTableLayout ProjectViewLayout = "TABLE_LAYOUT" // Table layout.
+	ProjectV2WorkflowsOrderFieldName      ProjectV2WorkflowsOrderField = "NAME"       // The workflows' name.
+	ProjectV2WorkflowsOrderFieldNumber    ProjectV2WorkflowsOrderField = "NUMBER"     // The workflows' number.
+	ProjectV2WorkflowsOrderFieldUpdatedAt ProjectV2WorkflowsOrderField = "UPDATED_AT" // The workflows' date and time of update.
+	ProjectV2WorkflowsOrderFieldCreatedAt ProjectV2WorkflowsOrderField = "CREATED_AT" // The workflows' date and time of creation.
 )
 
 // PullRequestMergeMethod represents represents available types of methods to use when merging a pull request.

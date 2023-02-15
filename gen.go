@@ -171,12 +171,18 @@ func t(text string) *template.Template {
 		},
 		"identifier": func(name string) string { return ident.ParseLowerCamelCase(name).ToMixedCaps() },
 		"enumIdentifier": func(enum, value string) string {
-			if enum == "SponsorsCountryOrRegionCode" {
+			switch {
+			case enum == "SponsorsCountryOrRegionCode":
 				// These enum values are country/region codes like "CA" or "US"
 				// rather than words, so don't try to convert them to mixed caps.
 				return enum + value
+			case value == "SCIM":
+				// An initialism or acronym that ident doesn't know about.
+				// Use it as is to preserve its consistent case (https://go.dev/s/style#initialisms).
+				return enum + value
+			default:
+				return enum + ident.ParseScreamingSnakeCase(value).ToMixedCaps()
 			}
-			return enum + ident.ParseScreamingSnakeCase(value).ToMixedCaps()
 		},
 		"type":  typeString,
 		"clean": func(s string) string { return strings.Join(strings.Fields(s), " ") },
