@@ -171,7 +171,11 @@ func t(text string) *template.Template {
 		},
 		"identifier": func(name string) string { return ident.ParseLowerCamelCase(name).ToMixedCaps() },
 		"enumIdentifier": func(enum, value string) string {
-			switch {
+			var brandNames = map[string]string{ // Augments the list in ident.
+				"LINKEDIN": "LinkedIn",
+				"YOUTUBE":  "YouTube",
+			}
+			switch brand, isBrand := brandNames[value]; {
 			case enum == "SponsorsCountryOrRegionCode":
 				// These enum values are country/region codes like "CA" or "US"
 				// rather than words, so don't try to convert them to mixed caps.
@@ -180,6 +184,9 @@ func t(text string) *template.Template {
 				// An initialism or acronym that ident doesn't know about.
 				// Use it as is to preserve its consistent case (https://go.dev/s/style#initialisms).
 				return enum + value
+			case isBrand:
+				// Brand name that ident doesn't know about.
+				return enum + brand
 			default:
 				return enum + ident.ParseScreamingSnakeCase(value).ToMixedCaps()
 			}

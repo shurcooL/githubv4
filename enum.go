@@ -1134,6 +1134,17 @@ const (
 	ProjectTemplateBugTriage              ProjectTemplate = "BUG_TRIAGE"               // Create a board to triage and prioritize bugs with To do, priority, and Done columns.
 )
 
+// ProjectV2CustomFieldType represents the type of a project field.
+type ProjectV2CustomFieldType string
+
+// The type of a project field.
+const (
+	ProjectV2CustomFieldTypeText         ProjectV2CustomFieldType = "TEXT"          // Text.
+	ProjectV2CustomFieldTypeSingleSelect ProjectV2CustomFieldType = "SINGLE_SELECT" // Single Select.
+	ProjectV2CustomFieldTypeNumber       ProjectV2CustomFieldType = "NUMBER"        // Number.
+	ProjectV2CustomFieldTypeDate         ProjectV2CustomFieldType = "DATE"          // Date.
+)
+
 // ProjectV2FieldOrderField represents properties by which project v2 field connections can be ordered.
 type ProjectV2FieldOrderField string
 
@@ -1203,6 +1214,21 @@ const (
 	ProjectV2OrderFieldCreatedAt ProjectV2OrderField = "CREATED_AT" // The project's date and time of creation.
 )
 
+// ProjectV2SingleSelectFieldOptionColor represents the display color of a single-select field option.
+type ProjectV2SingleSelectFieldOptionColor string
+
+// The display color of a single-select field option.
+const (
+	ProjectV2SingleSelectFieldOptionColorGray   ProjectV2SingleSelectFieldOptionColor = "GRAY"   // GRAY.
+	ProjectV2SingleSelectFieldOptionColorBlue   ProjectV2SingleSelectFieldOptionColor = "BLUE"   // BLUE.
+	ProjectV2SingleSelectFieldOptionColorGreen  ProjectV2SingleSelectFieldOptionColor = "GREEN"  // GREEN.
+	ProjectV2SingleSelectFieldOptionColorYellow ProjectV2SingleSelectFieldOptionColor = "YELLOW" // YELLOW.
+	ProjectV2SingleSelectFieldOptionColorOrange ProjectV2SingleSelectFieldOptionColor = "ORANGE" // ORANGE.
+	ProjectV2SingleSelectFieldOptionColorRed    ProjectV2SingleSelectFieldOptionColor = "RED"    // RED.
+	ProjectV2SingleSelectFieldOptionColorPink   ProjectV2SingleSelectFieldOptionColor = "PINK"   // PINK.
+	ProjectV2SingleSelectFieldOptionColorPurple ProjectV2SingleSelectFieldOptionColor = "PURPLE" // PURPLE.
+)
+
 // ProjectV2State represents the possible states of a project v2.
 type ProjectV2State string
 
@@ -1217,8 +1243,9 @@ type ProjectV2ViewLayout string
 
 // The layout of a project v2 view.
 const (
-	ProjectV2ViewLayoutBoardLayout ProjectV2ViewLayout = "BOARD_LAYOUT" // Board layout.
-	ProjectV2ViewLayoutTableLayout ProjectV2ViewLayout = "TABLE_LAYOUT" // Table layout.
+	ProjectV2ViewLayoutBoardLayout   ProjectV2ViewLayout = "BOARD_LAYOUT"   // Board layout.
+	ProjectV2ViewLayoutTableLayout   ProjectV2ViewLayout = "TABLE_LAYOUT"   // Table layout.
+	ProjectV2ViewLayoutRoadmapLayout ProjectV2ViewLayout = "ROADMAP_LAYOUT" // Roadmap layout.
 )
 
 // ProjectV2ViewOrderField represents properties by which project v2 view connections can be ordered.
@@ -1790,6 +1817,23 @@ type SecurityVulnerabilityOrderField string
 // Properties by which security vulnerability connections can be ordered.
 const (
 	SecurityVulnerabilityOrderFieldUpdatedAt SecurityVulnerabilityOrderField = "UPDATED_AT" // Order vulnerability by update time.
+)
+
+// SocialAccountProvider represents software or company that hosts social media accounts.
+type SocialAccountProvider string
+
+// Software or company that hosts social media accounts.
+const (
+	SocialAccountProviderGeneric   SocialAccountProvider = "GENERIC"   // Catch-all for social media providers that do not yet have specific handling.
+	SocialAccountProviderFacebook  SocialAccountProvider = "FACEBOOK"  // Social media and networking website.
+	SocialAccountProviderHometown  SocialAccountProvider = "HOMETOWN"  // Fork of Mastodon with a greater focus on local posting.
+	SocialAccountProviderInstagram SocialAccountProvider = "INSTAGRAM" // Social media website with a focus on photo and video sharing.
+	SocialAccountProviderLinkedIn  SocialAccountProvider = "LINKEDIN"  // Professional networking website.
+	SocialAccountProviderMastodon  SocialAccountProvider = "MASTODON"  // Open-source federated microblogging service.
+	SocialAccountProviderReddit    SocialAccountProvider = "REDDIT"    // Social news aggregation and discussion website.
+	SocialAccountProviderTwitch    SocialAccountProvider = "TWITCH"    // Live-streaming service.
+	SocialAccountProviderTwitter   SocialAccountProvider = "TWITTER"   // Microblogging website.
+	SocialAccountProviderYouTube   SocialAccountProvider = "YOUTUBE"   // Online video platform.
 )
 
 // SponsorOrderField represents properties by which sponsor connections can be ordered.
