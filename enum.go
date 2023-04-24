@@ -225,6 +225,7 @@ const (
 	DeploymentStateFailure    DeploymentState = "FAILURE"     // The deployment has failed.
 	DeploymentStateInactive   DeploymentState = "INACTIVE"    // The deployment is inactive.
 	DeploymentStatePending    DeploymentState = "PENDING"     // The deployment is pending.
+	DeploymentStateSuccess    DeploymentState = "SUCCESS"     // The deployment was successful.
 	DeploymentStateQueued     DeploymentState = "QUEUED"      // The deployment has queued.
 	DeploymentStateInProgress DeploymentState = "IN_PROGRESS" // The deployment is in progress.
 	DeploymentStateWaiting    DeploymentState = "WAITING"     // The deployment is waiting.
@@ -254,6 +255,16 @@ const (
 	DiffSideRight DiffSide = "RIGHT" // The right side of the diff.
 )
 
+// DiscussionCloseReason represents the possible reasons for closing a discussion.
+type DiscussionCloseReason string
+
+// The possible reasons for closing a discussion.
+const (
+	DiscussionCloseReasonResolved  DiscussionCloseReason = "RESOLVED"  // The discussion has been resolved.
+	DiscussionCloseReasonOutdated  DiscussionCloseReason = "OUTDATED"  // The discussion is no longer relevant.
+	DiscussionCloseReasonDuplicate DiscussionCloseReason = "DUPLICATE" // The discussion is a duplicate of another.
+)
+
 // DiscussionOrderField represents properties by which discussion connections can be ordered.
 type DiscussionOrderField string
 
@@ -270,6 +281,26 @@ type DiscussionPollOptionOrderField string
 const (
 	DiscussionPollOptionOrderFieldAuthoredOrder DiscussionPollOptionOrderField = "AUTHORED_ORDER" // Order poll options by the order that the poll author specified when creating the poll.
 	DiscussionPollOptionOrderFieldVoteCount     DiscussionPollOptionOrderField = "VOTE_COUNT"     // Order poll options by the number of votes it has.
+)
+
+// DiscussionState represents the possible states of a discussion.
+type DiscussionState string
+
+// The possible states of a discussion.
+const (
+	DiscussionStateOpen   DiscussionState = "OPEN"   // A discussion that is open.
+	DiscussionStateClosed DiscussionState = "CLOSED" // A discussion that has been closed.
+)
+
+// DiscussionStateReason represents the possible state reasons of a discussion.
+type DiscussionStateReason string
+
+// The possible state reasons of a discussion.
+const (
+	DiscussionStateReasonResolved  DiscussionStateReason = "RESOLVED"  // The discussion has been resolved.
+	DiscussionStateReasonOutdated  DiscussionStateReason = "OUTDATED"  // The discussion is no longer relevant.
+	DiscussionStateReasonDuplicate DiscussionStateReason = "DUPLICATE" // The discussion is a duplicate of another.
+	DiscussionStateReasonReopened  DiscussionStateReason = "REOPENED"  // The discussion was reopened.
 )
 
 // DismissReason represents the possible reasons that a Dependabot alert was dismissed.
@@ -686,6 +717,27 @@ type MergeCommitTitle string
 const (
 	MergeCommitTitlePrTitle      MergeCommitTitle = "PR_TITLE"      // Default to the pull request's title.
 	MergeCommitTitleMergeMessage MergeCommitTitle = "MERGE_MESSAGE" // Default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+)
+
+// MergeQueueEntryState represents the possible states for a merge queue entry.
+type MergeQueueEntryState string
+
+// The possible states for a merge queue entry.
+const (
+	MergeQueueEntryStateQueued         MergeQueueEntryState = "QUEUED"          // The entry is currently queued.
+	MergeQueueEntryStateAwaitingChecks MergeQueueEntryState = "AWAITING_CHECKS" // The entry is currently waiting for checks to pass.
+	MergeQueueEntryStateMergeable      MergeQueueEntryState = "MERGEABLE"       // The entry is currently mergeable.
+	MergeQueueEntryStateUnmergeable    MergeQueueEntryState = "UNMERGEABLE"     // The entry is currently unmergeable.
+	MergeQueueEntryStateLocked         MergeQueueEntryState = "LOCKED"          // The entry is currently locked.
+)
+
+// MergeQueueMergingStrategy represents the possible merging strategies for a merge queue.
+type MergeQueueMergingStrategy string
+
+// The possible merging strategies for a merge queue.
+const (
+	MergeQueueMergingStrategyAllgreen  MergeQueueMergingStrategy = "ALLGREEN"  // Entries only allowed to merge if they are passing.
+	MergeQueueMergingStrategyHeadgreen MergeQueueMergingStrategy = "HEADGREEN" // Failing Entires are allowed to merge if they are with a passing entry.
 )
 
 // MergeableState represents whether or not a PullRequest can be merged.
@@ -1330,6 +1382,15 @@ const (
 	PullRequestReviewStateDismissed        PullRequestReviewState = "DISMISSED"         // A review that has been dismissed.
 )
 
+// PullRequestReviewThreadSubjectType represents the possible subject types of a pull request review comment.
+type PullRequestReviewThreadSubjectType string
+
+// The possible subject types of a pull request review comment.
+const (
+	PullRequestReviewThreadSubjectTypeLine PullRequestReviewThreadSubjectType = "LINE" // A comment that has been made against the line of a pull request.
+	PullRequestReviewThreadSubjectTypeFile PullRequestReviewThreadSubjectType = "FILE" // A comment that has been made against the file of a pull request.
+)
+
 // PullRequestState represents the possible states of a pull request.
 type PullRequestState string
 
@@ -1663,6 +1724,36 @@ const (
 	RepositoryPrivacyPrivate RepositoryPrivacy = "PRIVATE" // Private.
 )
 
+// RepositoryRuleType represents the rule types supported in rulesets.
+type RepositoryRuleType string
+
+// The rule types supported in rulesets.
+const (
+	RepositoryRuleTypeCreation                 RepositoryRuleType = "CREATION"                    // Creation.
+	RepositoryRuleTypeUpdate                   RepositoryRuleType = "UPDATE"                      // Update.
+	RepositoryRuleTypeDeletion                 RepositoryRuleType = "DELETION"                    // Deletion.
+	RepositoryRuleTypeRequiredLinearHistory    RepositoryRuleType = "REQUIRED_LINEAR_HISTORY"     // Required linear history.
+	RepositoryRuleTypeRequiredDeployments      RepositoryRuleType = "REQUIRED_DEPLOYMENTS"        // Required deployments.
+	RepositoryRuleTypeRequiredSignatures       RepositoryRuleType = "REQUIRED_SIGNATURES"         // Required signatures.
+	RepositoryRuleTypePullRequest              RepositoryRuleType = "PULL_REQUEST"                // Pull request.
+	RepositoryRuleTypeRequiredStatusChecks     RepositoryRuleType = "REQUIRED_STATUS_CHECKS"      // Required status checks.
+	RepositoryRuleTypeNonFastForward           RepositoryRuleType = "NON_FAST_FORWARD"            // Non fast forward.
+	RepositoryRuleTypeCommitMessagePattern     RepositoryRuleType = "COMMIT_MESSAGE_PATTERN"      // Commit message pattern.
+	RepositoryRuleTypeCommitAuthorEmailPattern RepositoryRuleType = "COMMIT_AUTHOR_EMAIL_PATTERN" // Commit author email pattern.
+	RepositoryRuleTypeCommitterEmailPattern    RepositoryRuleType = "COMMITTER_EMAIL_PATTERN"     // Committer email pattern.
+	RepositoryRuleTypeBranchNamePattern        RepositoryRuleType = "BRANCH_NAME_PATTERN"         // Branch name pattern.
+	RepositoryRuleTypeTagNamePattern           RepositoryRuleType = "TAG_NAME_PATTERN"            // Tag name pattern.
+)
+
+// RepositoryRulesetTarget represents the targets supported for rulesets.
+type RepositoryRulesetTarget string
+
+// The targets supported for rulesets.
+const (
+	RepositoryRulesetTargetBranch RepositoryRulesetTarget = "BRANCH" // Branch.
+	RepositoryRulesetTargetTag    RepositoryRulesetTarget = "TAG"    // Tag.
+)
+
 // RepositoryVisibility represents the repository's visibility level.
 type RepositoryVisibility string
 
@@ -1687,9 +1778,10 @@ type RepositoryVulnerabilityAlertState string
 
 // The possible states of an alert.
 const (
-	RepositoryVulnerabilityAlertStateOpen      RepositoryVulnerabilityAlertState = "OPEN"      // An alert that is still open.
-	RepositoryVulnerabilityAlertStateFixed     RepositoryVulnerabilityAlertState = "FIXED"     // An alert that has been resolved by a code change.
-	RepositoryVulnerabilityAlertStateDismissed RepositoryVulnerabilityAlertState = "DISMISSED" // An alert that has been manually closed by a user.
+	RepositoryVulnerabilityAlertStateOpen          RepositoryVulnerabilityAlertState = "OPEN"           // An alert that is still open.
+	RepositoryVulnerabilityAlertStateFixed         RepositoryVulnerabilityAlertState = "FIXED"          // An alert that has been resolved by a code change.
+	RepositoryVulnerabilityAlertStateDismissed     RepositoryVulnerabilityAlertState = "DISMISSED"      // An alert that has been manually closed by a user.
+	RepositoryVulnerabilityAlertStateAutoDismissed RepositoryVulnerabilityAlertState = "AUTO_DISMISSED" // An alert that has been automatically closed by Dependabot.
 )
 
 // RequestableCheckStatusState represents the possible states that can be requested when creating a check run.
@@ -1712,6 +1804,26 @@ const (
 	RoleInOrganizationOwner        RoleInOrganization = "OWNER"         // A user with full administrative access to the organization.
 	RoleInOrganizationDirectMember RoleInOrganization = "DIRECT_MEMBER" // A user who is a direct member of the organization.
 	RoleInOrganizationUnaffiliated RoleInOrganization = "UNAFFILIATED"  // A user who is unaffiliated with the organization.
+)
+
+// RuleBypassMode represents the bypass mode for a rule or ruleset.
+type RuleBypassMode string
+
+// The bypass mode for a rule or ruleset.
+const (
+	RuleBypassModeNone         RuleBypassMode = "NONE"         // Bypassing is disabled.
+	RuleBypassModeRepository   RuleBypassMode = "REPOSITORY"   // Those with bypass permission at the repository level can bypass.
+	RuleBypassModeOrganization RuleBypassMode = "ORGANIZATION" // Those with bypass permission at the organization level can bypass.
+)
+
+// RuleEnforcement represents the level of enforcement for a rule or ruleset.
+type RuleEnforcement string
+
+// The level of enforcement for a rule or ruleset.
+const (
+	RuleEnforcementDisabled RuleEnforcement = "DISABLED" // Do not evaluate or enforce rules.
+	RuleEnforcementActive   RuleEnforcement = "ACTIVE"   // Rules will be enforced.
+	RuleEnforcementEvaluate RuleEnforcement = "EVALUATE" // Allow admins to test rules before enforcing them. Admins can view insights on the Rule Insights page (`evaluate` is only available with GitHub Enterprise).
 )
 
 // SamlDigestAlgorithm represents the possible digest algorithms used to sign SAML requests for an identity provider.
@@ -2283,6 +2395,15 @@ const (
 	TeamMembershipTypeAll       TeamMembershipType = "ALL"        // Includes immediate and child team members for the team.
 )
 
+// TeamNotificationSetting represents the possible team notification values.
+type TeamNotificationSetting string
+
+// The possible team notification values.
+const (
+	TeamNotificationSettingNotificationsEnabled  TeamNotificationSetting = "NOTIFICATIONS_ENABLED"  // Everyone will receive notifications when the team is @mentioned.
+	TeamNotificationSettingNotificationsDisabled TeamNotificationSetting = "NOTIFICATIONS_DISABLED" // No one will receive notifications.
+)
+
 // TeamOrderField represents properties by which team connections can be ordered.
 type TeamOrderField string
 
@@ -2377,4 +2498,16 @@ type WorkflowRunOrderField string
 // Properties by which workflow run connections can be ordered.
 const (
 	WorkflowRunOrderFieldCreatedAt WorkflowRunOrderField = "CREATED_AT" // Order workflow runs by most recently created.
+)
+
+// WorkflowState represents the possible states for a workflow.
+type WorkflowState string
+
+// The possible states for a workflow.
+const (
+	WorkflowStateActive             WorkflowState = "ACTIVE"              // The workflow is active.
+	WorkflowStateDeleted            WorkflowState = "DELETED"             // The workflow was deleted from the git repository.
+	WorkflowStateDisabledFork       WorkflowState = "DISABLED_FORK"       // The workflow was disabled by default on a fork.
+	WorkflowStateDisabledInactivity WorkflowState = "DISABLED_INACTIVITY" // The workflow was disabled for inactivity in the repository.
+	WorkflowStateDisabledManually   WorkflowState = "DISABLED_MANUALLY"   // The workflow was disabled manually.
 )
