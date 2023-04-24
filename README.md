@@ -400,6 +400,21 @@ fmt.Printf("Added a %v reaction to subject with ID %#v!\n", m.AddReaction.Reacti
 // Added a HOORAY reaction to subject with ID "MDU6SXNzdWUyMTc5NTQ0OTc="!
 ```
 
+Test
+----
+
+You need to have [docker-compose](https://docs.docker.com/compose/) and [make](https://www.gnu.org/software/make/manual/make.html) in order to run the tests inside a container.
+
+```text
+make test
+```
+
+You can run the target as well directly on your machine without docker.
+
+```text
+make _test
+```
+
 Directories
 -----------
 
