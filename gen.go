@@ -8,7 +8,7 @@ import (
 	"flag"
 	"fmt"
 	"go/format"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -51,7 +51,7 @@ func run() error {
 			out = []byte("// gofmt error: " + err.Error() + "\n\n" + buf.String())
 		}
 		fmt.Println("writing", filename)
-		err = ioutil.WriteFile(filename, out, 0644)
+		err = os.WriteFile(filename, out, 0644)
 		if err != nil {
 			return err
 		}
@@ -72,7 +72,7 @@ func loadSchema(githubToken string) (schema interface{}, err error) {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		body, _ := ioutil.ReadAll(resp.Body)
+		body, _ := io.ReadAll(resp.Body)
 		return nil, fmt.Errorf("non-200 OK status code: %v body: %q", resp.Status, body)
 	}
 	err = json.NewDecoder(resp.Body).Decode(&schema)
