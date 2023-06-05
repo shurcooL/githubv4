@@ -185,6 +185,7 @@ const (
 	DependencyGraphEcosystemActions  DependencyGraphEcosystem = "ACTIONS"  // GitHub Actions.
 	DependencyGraphEcosystemRust     DependencyGraphEcosystem = "RUST"     // Rust crates.
 	DependencyGraphEcosystemPub      DependencyGraphEcosystem = "PUB"      // Dart packages hosted at pub.dev.
+	DependencyGraphEcosystemSwift    DependencyGraphEcosystem = "SWIFT"    // Swift packages.
 )
 
 // DeploymentOrderField represents properties by which deployment connections can be ordered.
@@ -811,14 +812,14 @@ const (
 	OIDCProviderTypeAad OIDCProviderType = "AAD" // Azure Active Directory.
 )
 
-// OauthApplicationCreateAuditEntryState represents the state of an OAuth Application when it was created.
+// OauthApplicationCreateAuditEntryState represents the state of an OAuth application when it was created.
 type OauthApplicationCreateAuditEntryState string
 
-// The state of an OAuth Application when it was created.
+// The state of an OAuth application when it was created.
 const (
-	OauthApplicationCreateAuditEntryStateActive          OauthApplicationCreateAuditEntryState = "ACTIVE"           // The OAuth Application was active and allowed to have OAuth Accesses.
-	OauthApplicationCreateAuditEntryStateSuspended       OauthApplicationCreateAuditEntryState = "SUSPENDED"        // The OAuth Application was suspended from generating OAuth Accesses due to abuse or security concerns.
-	OauthApplicationCreateAuditEntryStatePendingDeletion OauthApplicationCreateAuditEntryState = "PENDING_DELETION" // The OAuth Application was in the process of being deleted.
+	OauthApplicationCreateAuditEntryStateActive          OauthApplicationCreateAuditEntryState = "ACTIVE"           // The OAuth application was active and allowed to have OAuth Accesses.
+	OauthApplicationCreateAuditEntryStateSuspended       OauthApplicationCreateAuditEntryState = "SUSPENDED"        // The OAuth application was suspended from generating OAuth Accesses due to abuse or security concerns.
+	OauthApplicationCreateAuditEntryStatePendingDeletion OauthApplicationCreateAuditEntryState = "PENDING_DELETION" // The OAuth application was in the process of being deleted.
 )
 
 // OperationType represents the corresponding operation type for the action.
@@ -1025,6 +1026,8 @@ const (
 	OrganizationMigrationStatePostRepoMigration OrganizationMigrationState = "POST_REPO_MIGRATION" // The Octoshift migration is performing post repository migrations.
 	OrganizationMigrationStateSucceeded         OrganizationMigrationState = "SUCCEEDED"           // The Octoshift migration has succeeded.
 	OrganizationMigrationStateFailed            OrganizationMigrationState = "FAILED"              // The Octoshift migration has failed.
+	OrganizationMigrationStatePendingValidation OrganizationMigrationState = "PENDING_VALIDATION"  // The Octoshift migration needs to have its credentials validated.
+	OrganizationMigrationStateFailedValidation  OrganizationMigrationState = "FAILED_VALIDATION"   // The Octoshift migration has invalid credentials.
 )
 
 // OrganizationOrderField represents properties by which organization connections can be ordered.
@@ -1264,6 +1267,17 @@ const (
 	ProjectV2OrderFieldNumber    ProjectV2OrderField = "NUMBER"     // The project's number.
 	ProjectV2OrderFieldUpdatedAt ProjectV2OrderField = "UPDATED_AT" // The project's date and time of update.
 	ProjectV2OrderFieldCreatedAt ProjectV2OrderField = "CREATED_AT" // The project's date and time of creation.
+)
+
+// ProjectV2Roles represents the possible roles of a collaborator on a project.
+type ProjectV2Roles string
+
+// The possible roles of a collaborator on a project.
+const (
+	ProjectV2RolesNone   ProjectV2Roles = "NONE"   // The collaborator has no direct access to the project.
+	ProjectV2RolesReader ProjectV2Roles = "READER" // The collaborator can view the project.
+	ProjectV2RolesWriter ProjectV2Roles = "WRITER" // The collaborator can view and edit the project.
+	ProjectV2RolesAdmin  ProjectV2Roles = "ADMIN"  // The collaborator can view, edit, and maange the settings of the project.
 )
 
 // ProjectV2SingleSelectFieldOptionColor represents the display color of a single-select field option.
@@ -1729,20 +1743,29 @@ type RepositoryRuleType string
 
 // The rule types supported in rulesets.
 const (
-	RepositoryRuleTypeCreation                 RepositoryRuleType = "CREATION"                    // Creation.
-	RepositoryRuleTypeUpdate                   RepositoryRuleType = "UPDATE"                      // Update.
-	RepositoryRuleTypeDeletion                 RepositoryRuleType = "DELETION"                    // Deletion.
-	RepositoryRuleTypeRequiredLinearHistory    RepositoryRuleType = "REQUIRED_LINEAR_HISTORY"     // Required linear history.
-	RepositoryRuleTypeRequiredDeployments      RepositoryRuleType = "REQUIRED_DEPLOYMENTS"        // Required deployments.
-	RepositoryRuleTypeRequiredSignatures       RepositoryRuleType = "REQUIRED_SIGNATURES"         // Required signatures.
-	RepositoryRuleTypePullRequest              RepositoryRuleType = "PULL_REQUEST"                // Pull request.
-	RepositoryRuleTypeRequiredStatusChecks     RepositoryRuleType = "REQUIRED_STATUS_CHECKS"      // Required status checks.
-	RepositoryRuleTypeNonFastForward           RepositoryRuleType = "NON_FAST_FORWARD"            // Non fast forward.
+	RepositoryRuleTypeCreation                 RepositoryRuleType = "CREATION"                    // Only allow users with bypass permission to create matching refs.
+	RepositoryRuleTypeUpdate                   RepositoryRuleType = "UPDATE"                      // Only allow users with bypass permission to update matching refs.
+	RepositoryRuleTypeDeletion                 RepositoryRuleType = "DELETION"                    // Only allow users with bypass permissions to delete matching refs.
+	RepositoryRuleTypeRequiredLinearHistory    RepositoryRuleType = "REQUIRED_LINEAR_HISTORY"     // Prevent merge commits from being pushed to matching branches.
+	RepositoryRuleTypeRequiredDeployments      RepositoryRuleType = "REQUIRED_DEPLOYMENTS"        // Choose which environments must be successfully deployed to before branches can be merged into a branch that matches this rule.
+	RepositoryRuleTypeRequiredSignatures       RepositoryRuleType = "REQUIRED_SIGNATURES"         // Commits pushed to matching branches must have verified signatures.
+	RepositoryRuleTypePullRequest              RepositoryRuleType = "PULL_REQUEST"                // Require all commits be made to a non-target branch and submitted via a pull request before they can be merged.
+	RepositoryRuleTypeRequiredStatusChecks     RepositoryRuleType = "REQUIRED_STATUS_CHECKS"      // Choose which status checks must pass before branches can be merged into a branch that matches this rule. When enabled, commits must first be pushed to another branch, then merged or pushed directly to a branch that matches this rule after status checks have passed.
+	RepositoryRuleTypeNonFastForward           RepositoryRuleType = "NON_FAST_FORWARD"            // Prevent users with push access from force pushing to branches.
 	RepositoryRuleTypeCommitMessagePattern     RepositoryRuleType = "COMMIT_MESSAGE_PATTERN"      // Commit message pattern.
 	RepositoryRuleTypeCommitAuthorEmailPattern RepositoryRuleType = "COMMIT_AUTHOR_EMAIL_PATTERN" // Commit author email pattern.
 	RepositoryRuleTypeCommitterEmailPattern    RepositoryRuleType = "COMMITTER_EMAIL_PATTERN"     // Committer email pattern.
 	RepositoryRuleTypeBranchNamePattern        RepositoryRuleType = "BRANCH_NAME_PATTERN"         // Branch name pattern.
 	RepositoryRuleTypeTagNamePattern           RepositoryRuleType = "TAG_NAME_PATTERN"            // Tag name pattern.
+)
+
+// RepositoryRulesetBypassActorBypassMode represents the bypass mode for a specific actor on a ruleset.
+type RepositoryRulesetBypassActorBypassMode string
+
+// The bypass mode for a specific actor on a ruleset.
+const (
+	RepositoryRulesetBypassActorBypassModeAlways      RepositoryRulesetBypassActorBypassMode = "ALWAYS"       // The actor can always bypass rules.
+	RepositoryRulesetBypassActorBypassModePullRequest RepositoryRulesetBypassActorBypassMode = "PULL_REQUEST" // The actor can only bypass rules via a pull request.
 )
 
 // RepositoryRulesetTarget represents the targets supported for rulesets.
@@ -1804,16 +1827,6 @@ const (
 	RoleInOrganizationOwner        RoleInOrganization = "OWNER"         // A user with full administrative access to the organization.
 	RoleInOrganizationDirectMember RoleInOrganization = "DIRECT_MEMBER" // A user who is a direct member of the organization.
 	RoleInOrganizationUnaffiliated RoleInOrganization = "UNAFFILIATED"  // A user who is unaffiliated with the organization.
-)
-
-// RuleBypassMode represents the bypass mode for a rule or ruleset.
-type RuleBypassMode string
-
-// The bypass mode for a rule or ruleset.
-const (
-	RuleBypassModeNone         RuleBypassMode = "NONE"         // Bypassing is disabled.
-	RuleBypassModeRepository   RuleBypassMode = "REPOSITORY"   // Those with bypass permission at the repository level can bypass.
-	RuleBypassModeOrganization RuleBypassMode = "ORGANIZATION" // Those with bypass permission at the organization level can bypass.
 )
 
 // RuleEnforcement represents the level of enforcement for a rule or ruleset.
@@ -1892,6 +1905,7 @@ const (
 	SecurityAdvisoryEcosystemPub      SecurityAdvisoryEcosystem = "PUB"      // Dart packages hosted at pub.dev.
 	SecurityAdvisoryEcosystemRubygems SecurityAdvisoryEcosystem = "RUBYGEMS" // Ruby gems hosted at RubyGems.org.
 	SecurityAdvisoryEcosystemRust     SecurityAdvisoryEcosystem = "RUST"     // Rust crates.
+	SecurityAdvisoryEcosystemSwift    SecurityAdvisoryEcosystem = "SWIFT"    // Swift packages.
 )
 
 // SecurityAdvisoryIdentifierType represents identifier formats available for advisories.
