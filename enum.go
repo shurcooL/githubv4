@@ -391,7 +391,7 @@ type EnterpriseMembersCanCreateRepositoriesSettingValue string
 
 // The possible values for the enterprise members can create repositories setting.
 const (
-	EnterpriseMembersCanCreateRepositoriesSettingValueNoPolicy EnterpriseMembersCanCreateRepositoriesSettingValue = "NO_POLICY" // Organization administrators choose whether to allow members to create repositories.
+	EnterpriseMembersCanCreateRepositoriesSettingValueNoPolicy EnterpriseMembersCanCreateRepositoriesSettingValue = "NO_POLICY" // Organization owners choose whether to allow members to create repositories.
 	EnterpriseMembersCanCreateRepositoriesSettingValueAll      EnterpriseMembersCanCreateRepositoriesSettingValue = "ALL"       // Members will be able to create public and private repositories.
 	EnterpriseMembersCanCreateRepositoriesSettingValuePublic   EnterpriseMembersCanCreateRepositoriesSettingValue = "PUBLIC"    // Members will be able to create only public repositories.
 	EnterpriseMembersCanCreateRepositoriesSettingValuePrivate  EnterpriseMembersCanCreateRepositoriesSettingValue = "PRIVATE"   // Members will be able to create only private repositories.
@@ -405,6 +405,25 @@ type EnterpriseMembersCanMakePurchasesSettingValue string
 const (
 	EnterpriseMembersCanMakePurchasesSettingValueEnabled  EnterpriseMembersCanMakePurchasesSettingValue = "ENABLED"  // The setting is enabled for organizations in the enterprise.
 	EnterpriseMembersCanMakePurchasesSettingValueDisabled EnterpriseMembersCanMakePurchasesSettingValue = "DISABLED" // The setting is disabled for organizations in the enterprise.
+)
+
+// EnterpriseMembershipType represents the possible values we have for filtering Platform::Objects::User#enterprises.
+type EnterpriseMembershipType string
+
+// The possible values we have for filtering Platform::Objects::User#enterprises.
+const (
+	EnterpriseMembershipTypeAll            EnterpriseMembershipType = "ALL"             // Returns all enterprises in which the user is a member, admin, or billing manager.
+	EnterpriseMembershipTypeAdmin          EnterpriseMembershipType = "ADMIN"           // Returns all enterprises in which the user is an admin.
+	EnterpriseMembershipTypeBillingManager EnterpriseMembershipType = "BILLING_MANAGER" // Returns all enterprises in which the user is a billing manager.
+	EnterpriseMembershipTypeOrgMembership  EnterpriseMembershipType = "ORG_MEMBERSHIP"  // Returns all enterprises in which the user is a member of an org that is owned by the enterprise.
+)
+
+// EnterpriseOrderField represents properties by which enterprise connections can be ordered.
+type EnterpriseOrderField string
+
+// Properties by which enterprise connections can be ordered.
+const (
+	EnterpriseOrderFieldName EnterpriseOrderField = "NAME" // Order enterprises by name.
 )
 
 // EnterpriseServerInstallationOrderField represents properties by which Enterprise Server installation connections can be ordered.
@@ -469,6 +488,14 @@ type EnterpriseUserDeployment string
 const (
 	EnterpriseUserDeploymentCloud  EnterpriseUserDeployment = "CLOUD"  // The user is part of a GitHub Enterprise Cloud deployment.
 	EnterpriseUserDeploymentServer EnterpriseUserDeployment = "SERVER" // The user is part of a GitHub Enterprise Server deployment.
+)
+
+// EnvironmentOrderField represents properties by which environments connections can be ordered.
+type EnvironmentOrderField string
+
+// Properties by which environments connections can be ordered.
+const (
+	EnvironmentOrderFieldName EnvironmentOrderField = "NAME" // Order environments by name.
 )
 
 // FileViewedState represents the possible viewed states of a file .
@@ -891,7 +918,7 @@ type OrgRemoveMemberAuditEntryMembershipType string
 const (
 	OrgRemoveMemberAuditEntryMembershipTypeSuspended           OrgRemoveMemberAuditEntryMembershipType = "SUSPENDED"            // A suspended member.
 	OrgRemoveMemberAuditEntryMembershipTypeDirectMember        OrgRemoveMemberAuditEntryMembershipType = "DIRECT_MEMBER"        // A direct member is a user that is a member of the Organization.
-	OrgRemoveMemberAuditEntryMembershipTypeAdmin               OrgRemoveMemberAuditEntryMembershipType = "ADMIN"                // Organization administrators have full access and can change several settings, including the names of repositories that belong to the Organization and Owners team membership. In addition, organization admins can delete the organization and all of its repositories.
+	OrgRemoveMemberAuditEntryMembershipTypeAdmin               OrgRemoveMemberAuditEntryMembershipType = "ADMIN"                // Organization owners have full access and can change several settings, including the names of repositories that belong to the Organization and Owners team membership. In addition, organization owners can delete the organization and all of its repositories.
 	OrgRemoveMemberAuditEntryMembershipTypeBillingManager      OrgRemoveMemberAuditEntryMembershipType = "BILLING_MANAGER"      // A billing manager is a user who manages the billing settings for the Organization, such as updating payment information.
 	OrgRemoveMemberAuditEntryMembershipTypeUnaffiliated        OrgRemoveMemberAuditEntryMembershipType = "UNAFFILIATED"         // An unaffiliated collaborator is a person who is not a member of the Organization and does not have access to any repositories in the Organization.
 	OrgRemoveMemberAuditEntryMembershipTypeOutsideCollaborator OrgRemoveMemberAuditEntryMembershipType = "OUTSIDE_COLLABORATOR" // An outside collaborator is a person who isn't explicitly a member of the Organization, but who has Read, Write, or Admin permissions to one or more repositories in the organization.
@@ -1329,10 +1356,19 @@ type ProjectV2WorkflowsOrderField string
 
 // Properties by which project workflows can be ordered.
 const (
-	ProjectV2WorkflowsOrderFieldName      ProjectV2WorkflowsOrderField = "NAME"       // The workflows' name.
-	ProjectV2WorkflowsOrderFieldNumber    ProjectV2WorkflowsOrderField = "NUMBER"     // The workflows' number.
-	ProjectV2WorkflowsOrderFieldUpdatedAt ProjectV2WorkflowsOrderField = "UPDATED_AT" // The workflows' date and time of update.
-	ProjectV2WorkflowsOrderFieldCreatedAt ProjectV2WorkflowsOrderField = "CREATED_AT" // The workflows' date and time of creation.
+	ProjectV2WorkflowsOrderFieldName      ProjectV2WorkflowsOrderField = "NAME"       // The name of the workflow.
+	ProjectV2WorkflowsOrderFieldNumber    ProjectV2WorkflowsOrderField = "NUMBER"     // The number of the workflow.
+	ProjectV2WorkflowsOrderFieldUpdatedAt ProjectV2WorkflowsOrderField = "UPDATED_AT" // The date and time of the workflow update.
+	ProjectV2WorkflowsOrderFieldCreatedAt ProjectV2WorkflowsOrderField = "CREATED_AT" // The date and time of the workflow creation.
+)
+
+// PullRequestBranchUpdateMethod represents the possible methods for updating a pull request's head branch with the base branch.
+type PullRequestBranchUpdateMethod string
+
+// The possible methods for updating a pull request's head branch with the base branch.
+const (
+	PullRequestBranchUpdateMethodMerge  PullRequestBranchUpdateMethod = "MERGE"  // Update branch via merge.
+	PullRequestBranchUpdateMethodRebase PullRequestBranchUpdateMethod = "REBASE" // Update branch via rebase.
 )
 
 // PullRequestMergeMethod represents represents available types of methods to use when merging a pull request.
@@ -1681,11 +1717,12 @@ type RepositoryLockReason string
 
 // The possible reasons a given repository could be in a locked state.
 const (
-	RepositoryLockReasonMoving           RepositoryLockReason = "MOVING"            // The repository is locked due to a move.
-	RepositoryLockReasonBilling          RepositoryLockReason = "BILLING"           // The repository is locked due to a billing related reason.
-	RepositoryLockReasonRename           RepositoryLockReason = "RENAME"            // The repository is locked due to a rename.
-	RepositoryLockReasonMigrating        RepositoryLockReason = "MIGRATING"         // The repository is locked due to a migration.
-	RepositoryLockReasonTradeRestriction RepositoryLockReason = "TRADE_RESTRICTION" // The repository is locked due to a trade controls related reason.
+	RepositoryLockReasonMoving                RepositoryLockReason = "MOVING"                 // The repository is locked due to a move.
+	RepositoryLockReasonBilling               RepositoryLockReason = "BILLING"                // The repository is locked due to a billing related reason.
+	RepositoryLockReasonRename                RepositoryLockReason = "RENAME"                 // The repository is locked due to a rename.
+	RepositoryLockReasonMigrating             RepositoryLockReason = "MIGRATING"              // The repository is locked due to a migration.
+	RepositoryLockReasonTradeRestriction      RepositoryLockReason = "TRADE_RESTRICTION"      // The repository is locked due to a trade controls related reason.
+	RepositoryLockReasonTransferringOwnership RepositoryLockReason = "TRANSFERRING_OWNERSHIP" // The repository is locked due to an ownership transfer.
 )
 
 // RepositoryMigrationOrderDirection represents possible directions in which to order a list of repository migrations when provided an `orderBy` argument.
@@ -1743,20 +1780,32 @@ type RepositoryRuleType string
 
 // The rule types supported in rulesets.
 const (
-	RepositoryRuleTypeCreation                 RepositoryRuleType = "CREATION"                    // Only allow users with bypass permission to create matching refs.
-	RepositoryRuleTypeUpdate                   RepositoryRuleType = "UPDATE"                      // Only allow users with bypass permission to update matching refs.
-	RepositoryRuleTypeDeletion                 RepositoryRuleType = "DELETION"                    // Only allow users with bypass permissions to delete matching refs.
-	RepositoryRuleTypeRequiredLinearHistory    RepositoryRuleType = "REQUIRED_LINEAR_HISTORY"     // Prevent merge commits from being pushed to matching branches.
-	RepositoryRuleTypeRequiredDeployments      RepositoryRuleType = "REQUIRED_DEPLOYMENTS"        // Choose which environments must be successfully deployed to before branches can be merged into a branch that matches this rule.
-	RepositoryRuleTypeRequiredSignatures       RepositoryRuleType = "REQUIRED_SIGNATURES"         // Commits pushed to matching branches must have verified signatures.
-	RepositoryRuleTypePullRequest              RepositoryRuleType = "PULL_REQUEST"                // Require all commits be made to a non-target branch and submitted via a pull request before they can be merged.
-	RepositoryRuleTypeRequiredStatusChecks     RepositoryRuleType = "REQUIRED_STATUS_CHECKS"      // Choose which status checks must pass before branches can be merged into a branch that matches this rule. When enabled, commits must first be pushed to another branch, then merged or pushed directly to a branch that matches this rule after status checks have passed.
-	RepositoryRuleTypeNonFastForward           RepositoryRuleType = "NON_FAST_FORWARD"            // Prevent users with push access from force pushing to branches.
-	RepositoryRuleTypeCommitMessagePattern     RepositoryRuleType = "COMMIT_MESSAGE_PATTERN"      // Commit message pattern.
-	RepositoryRuleTypeCommitAuthorEmailPattern RepositoryRuleType = "COMMIT_AUTHOR_EMAIL_PATTERN" // Commit author email pattern.
-	RepositoryRuleTypeCommitterEmailPattern    RepositoryRuleType = "COMMITTER_EMAIL_PATTERN"     // Committer email pattern.
-	RepositoryRuleTypeBranchNamePattern        RepositoryRuleType = "BRANCH_NAME_PATTERN"         // Branch name pattern.
-	RepositoryRuleTypeTagNamePattern           RepositoryRuleType = "TAG_NAME_PATTERN"            // Tag name pattern.
+	RepositoryRuleTypeCreation                       RepositoryRuleType = "CREATION"                          // Only allow users with bypass permission to create matching refs.
+	RepositoryRuleTypeUpdate                         RepositoryRuleType = "UPDATE"                            // Only allow users with bypass permission to update matching refs.
+	RepositoryRuleTypeDeletion                       RepositoryRuleType = "DELETION"                          // Only allow users with bypass permissions to delete matching refs.
+	RepositoryRuleTypeRequiredLinearHistory          RepositoryRuleType = "REQUIRED_LINEAR_HISTORY"           // Prevent merge commits from being pushed to matching refs.
+	RepositoryRuleTypeMergeQueue                     RepositoryRuleType = "MERGE_QUEUE"                       // Merges must be performed via a merge queue.
+	RepositoryRuleTypeRequiredReviewThreadResolution RepositoryRuleType = "REQUIRED_REVIEW_THREAD_RESOLUTION" // When enabled, all conversations on code must be resolved before a pull request can be merged into a branch that matches this rule.
+	RepositoryRuleTypeRequiredDeployments            RepositoryRuleType = "REQUIRED_DEPLOYMENTS"              // Choose which environments must be successfully deployed to before refs can be pushed into a ref that matches this rule.
+	RepositoryRuleTypeRequiredSignatures             RepositoryRuleType = "REQUIRED_SIGNATURES"               // Commits pushed to matching refs must have verified signatures.
+	RepositoryRuleTypePullRequest                    RepositoryRuleType = "PULL_REQUEST"                      // Require all commits be made to a non-target branch and submitted via a pull request before they can be merged.
+	RepositoryRuleTypeRequiredStatusChecks           RepositoryRuleType = "REQUIRED_STATUS_CHECKS"            // Choose which status checks must pass before the ref is updated. When enabled, commits must first be pushed to another ref where the checks pass.
+	RepositoryRuleTypeRequiredWorkflowStatusChecks   RepositoryRuleType = "REQUIRED_WORKFLOW_STATUS_CHECKS"   // Require all commits be made to a non-target branch and submitted via a pull request and required workflow checks to pass before they can be merged.
+	RepositoryRuleTypeNonFastForward                 RepositoryRuleType = "NON_FAST_FORWARD"                  // Prevent users with push access from force pushing to refs.
+	RepositoryRuleTypeAuthorization                  RepositoryRuleType = "AUTHORIZATION"                     // Authorization.
+	RepositoryRuleTypeTag                            RepositoryRuleType = "TAG"                               // Tag.
+	RepositoryRuleTypeMergeQueueLockedRef            RepositoryRuleType = "MERGE_QUEUE_LOCKED_REF"            // Merge queue locked ref.
+	RepositoryRuleTypeLockBranch                     RepositoryRuleType = "LOCK_BRANCH"                       // Branch is read-only. Users cannot push to the branch.
+	RepositoryRuleTypeMaxRefUpdates                  RepositoryRuleType = "MAX_REF_UPDATES"                   // Max ref updates.
+	RepositoryRuleTypeCommitMessagePattern           RepositoryRuleType = "COMMIT_MESSAGE_PATTERN"            // Commit message pattern.
+	RepositoryRuleTypeCommitAuthorEmailPattern       RepositoryRuleType = "COMMIT_AUTHOR_EMAIL_PATTERN"       // Commit author email pattern.
+	RepositoryRuleTypeCommitterEmailPattern          RepositoryRuleType = "COMMITTER_EMAIL_PATTERN"           // Committer email pattern.
+	RepositoryRuleTypeBranchNamePattern              RepositoryRuleType = "BRANCH_NAME_PATTERN"               // Branch name pattern.
+	RepositoryRuleTypeTagNamePattern                 RepositoryRuleType = "TAG_NAME_PATTERN"                  // Tag name pattern.
+	RepositoryRuleTypeWorkflows                      RepositoryRuleType = "WORKFLOWS"                         // Require all changes made to a targeted branch to pass the specified workflows before they can be merged.
+	RepositoryRuleTypeRulesetRequiredSignatures      RepositoryRuleType = "RULESET_REQUIRED_SIGNATURES"       // Commits pushed to matching refs must have verified signatures.
+	RepositoryRuleTypeSecretScanning                 RepositoryRuleType = "SECRET_SCANNING"                   // Secret scanning.
+	RepositoryRuleTypeWorkflowUpdates                RepositoryRuleType = "WORKFLOW_UPDATES"                  // Workflow files cannot be modified.
 )
 
 // RepositoryRulesetBypassActorBypassMode represents the bypass mode for a specific actor on a ruleset.
@@ -1960,6 +2009,7 @@ const (
 	SocialAccountProviderTwitch    SocialAccountProvider = "TWITCH"    // Live-streaming service.
 	SocialAccountProviderTwitter   SocialAccountProvider = "TWITTER"   // Microblogging website.
 	SocialAccountProviderYouTube   SocialAccountProvider = "YOUTUBE"   // Online video platform.
+	SocialAccountProviderNpm       SocialAccountProvider = "NPM"       // JavaScript package registry.
 )
 
 // SponsorOrderField represents properties by which sponsor connections can be ordered.
@@ -2239,7 +2289,7 @@ const (
 	SponsorsCountryOrRegionCodeTO SponsorsCountryOrRegionCode = "TO" // Tonga.
 	SponsorsCountryOrRegionCodeTT SponsorsCountryOrRegionCode = "TT" // Trinidad and Tobago.
 	SponsorsCountryOrRegionCodeTN SponsorsCountryOrRegionCode = "TN" // Tunisia.
-	SponsorsCountryOrRegionCodeTR SponsorsCountryOrRegionCode = "TR" // Turkey.
+	SponsorsCountryOrRegionCodeTR SponsorsCountryOrRegionCode = "TR" // Türkiye.
 	SponsorsCountryOrRegionCodeTM SponsorsCountryOrRegionCode = "TM" // Turkmenistan.
 	SponsorsCountryOrRegionCodeTC SponsorsCountryOrRegionCode = "TC" // Turks and Caicos Islands.
 	SponsorsCountryOrRegionCodeTV SponsorsCountryOrRegionCode = "TV" // Tuvalu.
@@ -2305,6 +2355,15 @@ type SponsorshipOrderField string
 // Properties by which sponsorship connections can be ordered.
 const (
 	SponsorshipOrderFieldCreatedAt SponsorshipOrderField = "CREATED_AT" // Order sponsorship by creation time.
+)
+
+// SponsorshipPaymentSource represents how payment was made for funding a GitHub Sponsors sponsorship.
+type SponsorshipPaymentSource string
+
+// How payment was made for funding a GitHub Sponsors sponsorship.
+const (
+	SponsorshipPaymentSourceGitHub  SponsorshipPaymentSource = "GITHUB"  // Payment was made through GitHub.
+	SponsorshipPaymentSourcePatreon SponsorshipPaymentSource = "PATREON" // Payment was made through Patreon.
 )
 
 // SponsorshipPrivacy represents the privacy of a sponsorship.
@@ -2455,6 +2514,32 @@ type TeamRole string
 const (
 	TeamRoleAdmin  TeamRole = "ADMIN"  // User has admin rights on the team.
 	TeamRoleMember TeamRole = "MEMBER" // User is a member of the team.
+)
+
+// ThreadSubscriptionFormAction represents the possible states of a thread subscription form action.
+type ThreadSubscriptionFormAction string
+
+// The possible states of a thread subscription form action.
+const (
+	ThreadSubscriptionFormActionNone        ThreadSubscriptionFormAction = "NONE"        // The User cannot subscribe or unsubscribe to the thread.
+	ThreadSubscriptionFormActionSubscribe   ThreadSubscriptionFormAction = "SUBSCRIBE"   // The User can subscribe to the thread.
+	ThreadSubscriptionFormActionUnsubscribe ThreadSubscriptionFormAction = "UNSUBSCRIBE" // The User can unsubscribe to the thread.
+)
+
+// ThreadSubscriptionState represents the possible states of a subscription.
+type ThreadSubscriptionState string
+
+// The possible states of a subscription.
+const (
+	ThreadSubscriptionStateUnavailable              ThreadSubscriptionState = "UNAVAILABLE"                 // The subscription status is currently unavailable.
+	ThreadSubscriptionStateDisabled                 ThreadSubscriptionState = "DISABLED"                    // The subscription status is currently disabled.
+	ThreadSubscriptionStateIgnoringList             ThreadSubscriptionState = "IGNORING_LIST"               // The User is never notified because they are ignoring the list.
+	ThreadSubscriptionStateSubscribedToThreadEvents ThreadSubscriptionState = "SUBSCRIBED_TO_THREAD_EVENTS" // The User is notified because they chose custom settings for this thread.
+	ThreadSubscriptionStateIgnoringThread           ThreadSubscriptionState = "IGNORING_THREAD"             // The User is never notified because they are ignoring the thread.
+	ThreadSubscriptionStateSubscribedToList         ThreadSubscriptionState = "SUBSCRIBED_TO_LIST"          // The User is notified becuase they are watching the list.
+	ThreadSubscriptionStateSubscribedToThreadType   ThreadSubscriptionState = "SUBSCRIBED_TO_THREAD_TYPE"   // The User is notified because they chose custom settings for this thread.
+	ThreadSubscriptionStateSubscribedToThread       ThreadSubscriptionState = "SUBSCRIBED_TO_THREAD"        // The User is notified because they are subscribed to the thread.
+	ThreadSubscriptionStateNone                     ThreadSubscriptionState = "NONE"                        // The User is not recieving notifications from this thread.
 )
 
 // TopicSuggestionDeclineReason represents reason that the suggested topic is declined.
