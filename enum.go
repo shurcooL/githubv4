@@ -1775,6 +1775,16 @@ const (
 	RepositoryPrivacyPrivate RepositoryPrivacy = "PRIVATE" // Private.
 )
 
+// RepositoryRuleOrderField represents properties by which repository rule connections can be ordered.
+type RepositoryRuleOrderField string
+
+// Properties by which repository rule connections can be ordered.
+const (
+	RepositoryRuleOrderFieldUpdatedAt RepositoryRuleOrderField = "UPDATED_AT" // Order repository rules by updated time.
+	RepositoryRuleOrderFieldCreatedAt RepositoryRuleOrderField = "CREATED_AT" // Order repository rules by created time.
+	RepositoryRuleOrderFieldType      RepositoryRuleOrderField = "TYPE"       // Order repository rules by type.
+)
+
 // RepositoryRuleType represents the rule types supported in rulesets.
 type RepositoryRuleType string
 
