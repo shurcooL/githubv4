@@ -40,6 +40,9 @@ type (
 	// "912ec1990bd09f8fc128c3fa6b59105085aabc03".
 	GitObjectID string
 
+	// GitRefname is a fully qualified reference name (e.g., refs/heads/main).
+	GitRefname string
+
 	// GitTimestamp is an ISO-8601 encoded date.
 	// Unlike the DateTime type, GitTimestamp is not converted in UTC.
 	GitTimestamp struct{ time.Time }
@@ -122,6 +125,9 @@ func NewFloat(v Float) *Float { return &v }
 
 // NewGitObjectID is a helper to make a new *GitObjectID.
 func NewGitObjectID(v GitObjectID) *GitObjectID { return &v }
+
+// NewGitRefname is a helper to make a new *GitRefname.
+func NewGitRefname(v GitRefname) *GitRefname { return &v }
 
 // NewGitTimestamp is a helper to make a new *GitTimestamp.
 func NewGitTimestamp(v GitTimestamp) *GitTimestamp { return &v }

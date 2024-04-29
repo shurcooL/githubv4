@@ -94,6 +94,9 @@ func TestNewScalars(t *testing.T) {
 	if got := githubv4.NewGitObjectID(""); got == nil {
 		t.Error("NewGitObjectID returned nil")
 	}
+	if got := githubv4.NewGitRefname(""); got == nil {
+		t.Error("NewGitRefname returned nil")
+	}
 	if got := githubv4.NewGitTimestamp(githubv4.GitTimestamp{}); got == nil {
 		t.Error("NewGitTimestamp returned nil")
 	}

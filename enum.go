@@ -80,12 +80,12 @@ type CheckStatusState string
 
 // The possible states for a check suite or run status.
 const (
+	CheckStatusStateRequested  CheckStatusState = "REQUESTED"   // The check suite or run has been requested.
 	CheckStatusStateQueued     CheckStatusState = "QUEUED"      // The check suite or run has been queued.
 	CheckStatusStateInProgress CheckStatusState = "IN_PROGRESS" // The check suite or run is in progress.
 	CheckStatusStateCompleted  CheckStatusState = "COMPLETED"   // The check suite or run has been completed.
 	CheckStatusStateWaiting    CheckStatusState = "WAITING"     // The check suite or run is in waiting state.
 	CheckStatusStatePending    CheckStatusState = "PENDING"     // The check suite or run is in pending state.
-	CheckStatusStateRequested  CheckStatusState = "REQUESTED"   // The check suite or run has been requested.
 )
 
 // CollaboratorAffiliation represents collaborators affiliation level with a subject.
@@ -521,8 +521,9 @@ const (
 	FundingPlatformCommunityBridge FundingPlatform = "COMMUNITY_BRIDGE" // Community Bridge funding platform.
 	FundingPlatformLiberapay       FundingPlatform = "LIBERAPAY"        // Liberapay funding platform.
 	FundingPlatformIssueHunt       FundingPlatform = "ISSUEHUNT"        // IssueHunt funding platform.
-	FundingPlatformOtechie         FundingPlatform = "OTECHIE"          // Otechie funding platform.
 	FundingPlatformLFXCrowdfunding FundingPlatform = "LFX_CROWDFUNDING" // LFX Crowdfunding funding platform.
+	FundingPlatformPolar           FundingPlatform = "POLAR"            // Polar funding platform.
+	FundingPlatformBuyMeACoffee    FundingPlatform = "BUY_ME_A_COFFEE"  // Buy Me a Coffee funding platform.
 	FundingPlatformCustom          FundingPlatform = "CUSTOM"           // Custom funding platform.
 )
 
@@ -766,6 +767,21 @@ type MergeQueueMergingStrategy string
 const (
 	MergeQueueMergingStrategyAllgreen  MergeQueueMergingStrategy = "ALLGREEN"  // Entries only allowed to merge if they are passing.
 	MergeQueueMergingStrategyHeadgreen MergeQueueMergingStrategy = "HEADGREEN" // Failing Entires are allowed to merge if they are with a passing entry.
+)
+
+// MergeStateStatus represents detailed status information about a pull request merge.
+type MergeStateStatus string
+
+// Detailed status information about a pull request merge.
+const (
+	MergeStateStatusDirty    MergeStateStatus = "DIRTY"     // The merge commit cannot be cleanly created.
+	MergeStateStatusUnknown  MergeStateStatus = "UNKNOWN"   // The state cannot currently be determined.
+	MergeStateStatusBlocked  MergeStateStatus = "BLOCKED"   // The merge is blocked.
+	MergeStateStatusBehind   MergeStateStatus = "BEHIND"    // The head ref is out of date.
+	MergeStateStatusDraft    MergeStateStatus = "DRAFT"     // The merge is blocked due to the pull request being a draft.
+	MergeStateStatusUnstable MergeStateStatus = "UNSTABLE"  // Mergeable with non-passing commit status.
+	MergeStateStatusHasHooks MergeStateStatus = "HAS_HOOKS" // Mergeable with passing commit status and pre-receive hooks.
+	MergeStateStatusClean    MergeStateStatus = "CLEAN"     // Mergeable and passing commit status.
 )
 
 // MergeableState represents whether or not a PullRequest can be merged.
@@ -1812,8 +1828,11 @@ const (
 	RepositoryRuleTypeCommitterEmailPattern          RepositoryRuleType = "COMMITTER_EMAIL_PATTERN"           // Committer email pattern.
 	RepositoryRuleTypeBranchNamePattern              RepositoryRuleType = "BRANCH_NAME_PATTERN"               // Branch name pattern.
 	RepositoryRuleTypeTagNamePattern                 RepositoryRuleType = "TAG_NAME_PATTERN"                  // Tag name pattern.
+	RepositoryRuleTypeFilePathRestriction            RepositoryRuleType = "FILE_PATH_RESTRICTION"             // Prevent commits that include changes in specified file paths from being pushed to the commit graph. NOTE: Thie rule is in beta and subject to change.
+	RepositoryRuleTypeMaxFilePathLength              RepositoryRuleType = "MAX_FILE_PATH_LENGTH"              // Prevent commits that include file paths that exceed a specified character limit from being pushed to the commit graph. NOTE: Thie rule is in beta and subject to change.
+	RepositoryRuleTypeFileExtensionRestriction       RepositoryRuleType = "FILE_EXTENSION_RESTRICTION"        // Prevent commits that include files with specified file extensions from being pushed to the commit graph. NOTE: Thie rule is in beta and subject to change.
+	RepositoryRuleTypeMaxFileSize                    RepositoryRuleType = "MAX_FILE_SIZE"                     // Prevent commits that exceed a specified file size limit from being pushed to the commit. NOTE: Thie rule is in beta and subject to change.
 	RepositoryRuleTypeWorkflows                      RepositoryRuleType = "WORKFLOWS"                         // Require all changes made to a targeted branch to pass the specified workflows before they can be merged.
-	RepositoryRuleTypeRulesetRequiredSignatures      RepositoryRuleType = "RULESET_REQUIRED_SIGNATURES"       // Commits pushed to matching refs must have verified signatures.
 	RepositoryRuleTypeSecretScanning                 RepositoryRuleType = "SECRET_SCANNING"                   // Secret scanning.
 	RepositoryRuleTypeWorkflowUpdates                RepositoryRuleType = "WORKFLOW_UPDATES"                  // Workflow files cannot be modified.
 )
@@ -1827,13 +1846,14 @@ const (
 	RepositoryRulesetBypassActorBypassModePullRequest RepositoryRulesetBypassActorBypassMode = "PULL_REQUEST" // The actor can only bypass rules via a pull request.
 )
 
-// RepositoryRulesetTarget represents the targets supported for rulesets.
+// RepositoryRulesetTarget represents the targets supported for rulesets. NOTE: The push target is in beta and subject to change.
 type RepositoryRulesetTarget string
 
-// The targets supported for rulesets.
+// The targets supported for rulesets. NOTE: The push target is in beta and subject to change.
 const (
 	RepositoryRulesetTargetBranch RepositoryRulesetTarget = "BRANCH" // Branch.
 	RepositoryRulesetTargetTag    RepositoryRulesetTarget = "TAG"    // Tag.
+	RepositoryRulesetTargetPush   RepositoryRulesetTarget = "PUSH"   // Push.
 )
 
 // RepositoryVisibility represents the repository's visibility level.
@@ -2020,6 +2040,16 @@ const (
 	SocialAccountProviderTwitter   SocialAccountProvider = "TWITTER"   // Microblogging website.
 	SocialAccountProviderYouTube   SocialAccountProvider = "YOUTUBE"   // Online video platform.
 	SocialAccountProviderNpm       SocialAccountProvider = "NPM"       // JavaScript package registry.
+)
+
+// SponsorAndLifetimeValueOrderField represents properties by which sponsor and lifetime value connections can be ordered.
+type SponsorAndLifetimeValueOrderField string
+
+// Properties by which sponsor and lifetime value connections can be ordered.
+const (
+	SponsorAndLifetimeValueOrderFieldSponsorLogin     SponsorAndLifetimeValueOrderField = "SPONSOR_LOGIN"     // Order results by the sponsor's login (username).
+	SponsorAndLifetimeValueOrderFieldSponsorRelevance SponsorAndLifetimeValueOrderField = "SPONSOR_RELEVANCE" // Order results by the sponsor's relevance to the viewer.
+	SponsorAndLifetimeValueOrderFieldLifetimeValue    SponsorAndLifetimeValueOrderField = "LIFETIME_VALUE"    // Order results by how much money the sponsor has paid in total.
 )
 
 // SponsorOrderField represents properties by which sponsor connections can be ordered.
@@ -2515,6 +2545,15 @@ const (
 	TeamRepositoryOrderFieldName       TeamRepositoryOrderField = "NAME"       // Order repositories by name.
 	TeamRepositoryOrderFieldPermission TeamRepositoryOrderField = "PERMISSION" // Order repositories by permission.
 	TeamRepositoryOrderFieldStargazers TeamRepositoryOrderField = "STARGAZERS" // Order repositories by number of stargazers.
+)
+
+// TeamReviewAssignmentAlgorithm represents the possible team review assignment algorithms.
+type TeamReviewAssignmentAlgorithm string
+
+// The possible team review assignment algorithms.
+const (
+	TeamReviewAssignmentAlgorithmRoundRobin  TeamReviewAssignmentAlgorithm = "ROUND_ROBIN"  // Alternate reviews between each team member.
+	TeamReviewAssignmentAlgorithmLoadBalance TeamReviewAssignmentAlgorithm = "LOAD_BALANCE" // Balance review load across the entire team.
 )
 
 // TeamRole represents the role of a user on a team.
