@@ -4,7 +4,7 @@ package githubv4
 
 // Input represents one of the Input structs:
 //
-// AbortQueuedMigrationsInput, AbortRepositoryMigrationInput, AcceptEnterpriseAdministratorInvitationInput, AcceptTopicSuggestionInput, AddAssigneesToAssignableInput, AddCommentInput, AddDiscussionCommentInput, AddDiscussionPollVoteInput, AddEnterpriseOrganizationMemberInput, AddEnterpriseSupportEntitlementInput, AddLabelsToLabelableInput, AddProjectCardInput, AddProjectColumnInput, AddProjectV2DraftIssueInput, AddProjectV2ItemByIdInput, AddPullRequestReviewCommentInput, AddPullRequestReviewInput, AddPullRequestReviewThreadInput, AddPullRequestReviewThreadReplyInput, AddReactionInput, AddStarInput, AddUpvoteInput, AddVerifiableDomainInput, ApproveDeploymentsInput, ApproveVerifiableDomainInput, ArchiveProjectV2ItemInput, ArchiveRepositoryInput, AuditLogOrder, BranchNamePatternParametersInput, BulkSponsorship, CancelEnterpriseAdminInvitationInput, CancelSponsorshipInput, ChangeUserStatusInput, CheckAnnotationData, CheckAnnotationRange, CheckRunAction, CheckRunFilter, CheckRunOutput, CheckRunOutputImage, CheckSuiteAutoTriggerPreference, CheckSuiteFilter, ClearLabelsFromLabelableInput, ClearProjectV2ItemFieldValueInput, CloneProjectInput, CloneTemplateRepositoryInput, CloseDiscussionInput, CloseIssueInput, ClosePullRequestInput, CommitAuthor, CommitAuthorEmailPatternParametersInput, CommitContributionOrder, CommitMessage, CommitMessagePatternParametersInput, CommittableBranch, CommitterEmailPatternParametersInput, ContributionOrder, ConvertProjectCardNoteToIssueInput, ConvertPullRequestToDraftInput, CopyProjectV2Input, CreateAttributionInvitationInput, CreateBranchProtectionRuleInput, CreateCheckRunInput, CreateCheckSuiteInput, CreateCommitOnBranchInput, CreateDeploymentInput, CreateDeploymentStatusInput, CreateDiscussionInput, CreateEnterpriseOrganizationInput, CreateEnvironmentInput, CreateIpAllowListEntryInput, CreateIssueInput, CreateLabelInput, CreateLinkedBranchInput, CreateMigrationSourceInput, CreateProjectInput, CreateProjectV2FieldInput, CreateProjectV2Input, CreatePullRequestInput, CreateRefInput, CreateRepositoryInput, CreateRepositoryRulesetInput, CreateSponsorsListingInput, CreateSponsorsTierInput, CreateSponsorshipInput, CreateSponsorshipsInput, CreateTeamDiscussionCommentInput, CreateTeamDiscussionInput, CreateUserListInput, DeclineTopicSuggestionInput, DeleteBranchProtectionRuleInput, DeleteDeploymentInput, DeleteDiscussionCommentInput, DeleteDiscussionInput, DeleteEnvironmentInput, DeleteIpAllowListEntryInput, DeleteIssueCommentInput, DeleteIssueInput, DeleteLabelInput, DeleteLinkedBranchInput, DeletePackageVersionInput, DeleteProjectCardInput, DeleteProjectColumnInput, DeleteProjectInput, DeleteProjectV2FieldInput, DeleteProjectV2Input, DeleteProjectV2ItemInput, DeleteProjectV2WorkflowInput, DeletePullRequestReviewCommentInput, DeletePullRequestReviewInput, DeleteRefInput, DeleteRepositoryRulesetInput, DeleteTeamDiscussionCommentInput, DeleteTeamDiscussionInput, DeleteUserListInput, DeleteVerifiableDomainInput, DeploymentOrder, DequeuePullRequestInput, DisablePullRequestAutoMergeInput, DiscussionOrder, DiscussionPollOptionOrder, DismissPullRequestReviewInput, DismissRepositoryVulnerabilityAlertInput, DraftPullRequestReviewComment, DraftPullRequestReviewThread, EnablePullRequestAutoMergeInput, EnqueuePullRequestInput, EnterpriseAdministratorInvitationOrder, EnterpriseMemberOrder, EnterpriseOrder, EnterpriseServerInstallationOrder, EnterpriseServerUserAccountEmailOrder, EnterpriseServerUserAccountOrder, EnterpriseServerUserAccountsUploadOrder, Environments, FileAddition, FileChanges, FileDeletion, FileExtensionRestrictionParametersInput, FilePathRestrictionParametersInput, FollowOrganizationInput, FollowUserInput, GistOrder, GrantEnterpriseOrganizationsMigratorRoleInput, GrantMigratorRoleInput, ImportProjectInput, InviteEnterpriseAdminInput, IpAllowListEntryOrder, IssueCommentOrder, IssueFilters, IssueOrder, LabelOrder, LanguageOrder, LinkProjectV2ToRepositoryInput, LinkProjectV2ToTeamInput, LinkRepositoryToProjectInput, LockLockableInput, MannequinOrder, MarkDiscussionCommentAsAnswerInput, MarkFileAsViewedInput, MarkNotificationAsDoneInput, MarkProjectV2AsTemplateInput, MarkPullRequestReadyForReviewInput, MaxFilePathLengthParametersInput, MaxFileSizeParametersInput, MergeBranchInput, MergePullRequestInput, MilestoneOrder, MinimizeCommentInput, MoveProjectCardInput, MoveProjectColumnInput, OrgEnterpriseOwnerOrder, OrganizationOrder, PackageFileOrder, PackageOrder, PackageVersionOrder, PinIssueInput, ProjectCardImport, ProjectColumnImport, ProjectOrder, ProjectV2Collaborator, ProjectV2FieldOrder, ProjectV2FieldValue, ProjectV2Filters, ProjectV2ItemFieldValueOrder, ProjectV2ItemOrder, ProjectV2Order, ProjectV2SingleSelectFieldOptionInput, ProjectV2ViewOrder, ProjectV2WorkflowOrder, PropertyTargetDefinitionInput, PublishSponsorsTierInput, PullRequestOrder, PullRequestParametersInput, ReactionOrder, RefNameConditionTargetInput, RefOrder, RefUpdate, RegenerateEnterpriseIdentityProviderRecoveryCodesInput, RegenerateVerifiableDomainTokenInput, RejectDeploymentsInput, ReleaseOrder, RemoveAssigneesFromAssignableInput, RemoveEnterpriseAdminInput, RemoveEnterpriseIdentityProviderInput, RemoveEnterpriseMemberInput, RemoveEnterpriseOrganizationInput, RemoveEnterpriseSupportEntitlementInput, RemoveLabelsFromLabelableInput, RemoveOutsideCollaboratorInput, RemoveReactionInput, RemoveStarInput, RemoveUpvoteInput, ReopenDiscussionInput, ReopenIssueInput, ReopenPullRequestInput, RepositoryIdConditionTargetInput, RepositoryInvitationOrder, RepositoryMigrationOrder, RepositoryNameConditionTargetInput, RepositoryOrder, RepositoryPropertyConditionTargetInput, RepositoryRuleConditionsInput, RepositoryRuleInput, RepositoryRuleOrder, RepositoryRulesetBypassActorInput, RequestReviewsInput, RequiredDeploymentsParametersInput, RequiredStatusCheckInput, RequiredStatusChecksParametersInput, RerequestCheckSuiteInput, ResolveReviewThreadInput, RetireSponsorsTierInput, RevertPullRequestInput, RevokeEnterpriseOrganizationsMigratorRoleInput, RevokeMigratorRoleInput, RuleParametersInput, SavedReplyOrder, SecurityAdvisoryIdentifierFilter, SecurityAdvisoryOrder, SecurityVulnerabilityOrder, SetEnterpriseIdentityProviderInput, SetOrganizationInteractionLimitInput, SetRepositoryInteractionLimitInput, SetUserInteractionLimitInput, SponsorAndLifetimeValueOrder, SponsorOrder, SponsorableOrder, SponsorsActivityOrder, SponsorsTierOrder, SponsorshipNewsletterOrder, SponsorshipOrder, StarOrder, StartOrganizationMigrationInput, StartRepositoryMigrationInput, StatusCheckConfigurationInput, SubmitPullRequestReviewInput, TagNamePatternParametersInput, TeamDiscussionCommentOrder, TeamDiscussionOrder, TeamMemberOrder, TeamOrder, TeamRepositoryOrder, TransferEnterpriseOrganizationInput, TransferIssueInput, UnarchiveProjectV2ItemInput, UnarchiveRepositoryInput, UnfollowOrganizationInput, UnfollowUserInput, UnlinkProjectV2FromRepositoryInput, UnlinkProjectV2FromTeamInput, UnlinkRepositoryFromProjectInput, UnlockLockableInput, UnmarkDiscussionCommentAsAnswerInput, UnmarkFileAsViewedInput, UnmarkIssueAsDuplicateInput, UnmarkProjectV2AsTemplateInput, UnminimizeCommentInput, UnpinIssueInput, UnresolveReviewThreadInput, UnsubscribeFromNotificationsInput, UpdateBranchProtectionRuleInput, UpdateCheckRunInput, UpdateCheckSuitePreferencesInput, UpdateDiscussionCommentInput, UpdateDiscussionInput, UpdateEnterpriseAdministratorRoleInput, UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput, UpdateEnterpriseDefaultRepositoryPermissionSettingInput, UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput, UpdateEnterpriseMembersCanCreateRepositoriesSettingInput, UpdateEnterpriseMembersCanDeleteIssuesSettingInput, UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput, UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput, UpdateEnterpriseMembersCanMakePurchasesSettingInput, UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput, UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput, UpdateEnterpriseOrganizationProjectsSettingInput, UpdateEnterpriseOwnerOrganizationRoleInput, UpdateEnterpriseProfileInput, UpdateEnterpriseRepositoryProjectsSettingInput, UpdateEnterpriseTeamDiscussionsSettingInput, UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput, UpdateEnvironmentInput, UpdateIpAllowListEnabledSettingInput, UpdateIpAllowListEntryInput, UpdateIpAllowListForInstalledAppsEnabledSettingInput, UpdateIssueCommentInput, UpdateIssueInput, UpdateLabelInput, UpdateNotificationRestrictionSettingInput, UpdateOrganizationAllowPrivateRepositoryForkingSettingInput, UpdateOrganizationWebCommitSignoffSettingInput, UpdateParametersInput, UpdatePatreonSponsorabilityInput, UpdateProjectCardInput, UpdateProjectColumnInput, UpdateProjectInput, UpdateProjectV2CollaboratorsInput, UpdateProjectV2DraftIssueInput, UpdateProjectV2Input, UpdateProjectV2ItemFieldValueInput, UpdateProjectV2ItemPositionInput, UpdatePullRequestBranchInput, UpdatePullRequestInput, UpdatePullRequestReviewCommentInput, UpdatePullRequestReviewInput, UpdateRefInput, UpdateRefsInput, UpdateRepositoryInput, UpdateRepositoryRulesetInput, UpdateRepositoryWebCommitSignoffSettingInput, UpdateSponsorshipPreferencesInput, UpdateSubscriptionInput, UpdateTeamDiscussionCommentInput, UpdateTeamDiscussionInput, UpdateTeamReviewAssignmentInput, UpdateTeamsRepositoryInput, UpdateTopicsInput, UpdateUserListInput, UpdateUserListsForItemInput, UserStatusOrder, VerifiableDomainOrder, VerifyVerifiableDomainInput, WorkflowFileReferenceInput, WorkflowRunOrder, WorkflowsParametersInput.
+// AbortQueuedMigrationsInput, AbortRepositoryMigrationInput, AcceptEnterpriseAdministratorInvitationInput, AcceptEnterpriseMemberInvitationInput, AcceptTopicSuggestionInput, AddAssigneesToAssignableInput, AddCommentInput, AddDiscussionCommentInput, AddDiscussionPollVoteInput, AddEnterpriseOrganizationMemberInput, AddEnterpriseSupportEntitlementInput, AddLabelsToLabelableInput, AddProjectCardInput, AddProjectColumnInput, AddProjectV2DraftIssueInput, AddProjectV2ItemByIdInput, AddPullRequestReviewCommentInput, AddPullRequestReviewInput, AddPullRequestReviewThreadInput, AddPullRequestReviewThreadReplyInput, AddReactionInput, AddStarInput, AddUpvoteInput, AddVerifiableDomainInput, ApproveDeploymentsInput, ApproveVerifiableDomainInput, ArchiveProjectV2ItemInput, ArchiveRepositoryInput, AuditLogOrder, BranchNamePatternParametersInput, BulkSponsorship, CancelEnterpriseAdminInvitationInput, CancelEnterpriseMemberInvitationInput, CancelSponsorshipInput, ChangeUserStatusInput, CheckAnnotationData, CheckAnnotationRange, CheckRunAction, CheckRunFilter, CheckRunOutput, CheckRunOutputImage, CheckSuiteAutoTriggerPreference, CheckSuiteFilter, ClearLabelsFromLabelableInput, ClearProjectV2ItemFieldValueInput, CloneProjectInput, CloneTemplateRepositoryInput, CloseDiscussionInput, CloseIssueInput, ClosePullRequestInput, CodeScanningParametersInput, CodeScanningToolInput, CommitAuthor, CommitAuthorEmailPatternParametersInput, CommitContributionOrder, CommitMessage, CommitMessagePatternParametersInput, CommittableBranch, CommitterEmailPatternParametersInput, ContributionOrder, ConvertProjectCardNoteToIssueInput, ConvertProjectV2DraftIssueItemToIssueInput, ConvertPullRequestToDraftInput, CopyProjectV2Input, CreateAttributionInvitationInput, CreateBranchProtectionRuleInput, CreateCheckRunInput, CreateCheckSuiteInput, CreateCommitOnBranchInput, CreateDeploymentInput, CreateDeploymentStatusInput, CreateDiscussionInput, CreateEnterpriseOrganizationInput, CreateEnvironmentInput, CreateIpAllowListEntryInput, CreateIssueInput, CreateLabelInput, CreateLinkedBranchInput, CreateMigrationSourceInput, CreateProjectInput, CreateProjectV2FieldInput, CreateProjectV2Input, CreateProjectV2StatusUpdateInput, CreatePullRequestInput, CreateRefInput, CreateRepositoryInput, CreateRepositoryRulesetInput, CreateSponsorsListingInput, CreateSponsorsTierInput, CreateSponsorshipInput, CreateSponsorshipsInput, CreateTeamDiscussionCommentInput, CreateTeamDiscussionInput, CreateUserListInput, DeclineTopicSuggestionInput, DeleteBranchProtectionRuleInput, DeleteDeploymentInput, DeleteDiscussionCommentInput, DeleteDiscussionInput, DeleteEnvironmentInput, DeleteIpAllowListEntryInput, DeleteIssueCommentInput, DeleteIssueInput, DeleteLabelInput, DeleteLinkedBranchInput, DeletePackageVersionInput, DeleteProjectCardInput, DeleteProjectColumnInput, DeleteProjectInput, DeleteProjectV2FieldInput, DeleteProjectV2Input, DeleteProjectV2ItemInput, DeleteProjectV2StatusUpdateInput, DeleteProjectV2WorkflowInput, DeletePullRequestReviewCommentInput, DeletePullRequestReviewInput, DeleteRefInput, DeleteRepositoryRulesetInput, DeleteTeamDiscussionCommentInput, DeleteTeamDiscussionInput, DeleteUserListInput, DeleteVerifiableDomainInput, DeploymentOrder, DequeuePullRequestInput, DisablePullRequestAutoMergeInput, DiscussionOrder, DiscussionPollOptionOrder, DismissPullRequestReviewInput, DismissRepositoryVulnerabilityAlertInput, DraftPullRequestReviewComment, DraftPullRequestReviewThread, EnablePullRequestAutoMergeInput, EnqueuePullRequestInput, EnterpriseAdministratorInvitationOrder, EnterpriseMemberInvitationOrder, EnterpriseMemberOrder, EnterpriseOrder, EnterpriseServerInstallationOrder, EnterpriseServerUserAccountEmailOrder, EnterpriseServerUserAccountOrder, EnterpriseServerUserAccountsUploadOrder, Environments, FileAddition, FileChanges, FileDeletion, FileExtensionRestrictionParametersInput, FilePathRestrictionParametersInput, FollowOrganizationInput, FollowUserInput, GistOrder, GrantEnterpriseOrganizationsMigratorRoleInput, GrantMigratorRoleInput, ImportProjectInput, InviteEnterpriseAdminInput, InviteEnterpriseMemberInput, IpAllowListEntryOrder, IssueCommentOrder, IssueFilters, IssueOrder, LabelOrder, LanguageOrder, LinkProjectV2ToRepositoryInput, LinkProjectV2ToTeamInput, LinkRepositoryToProjectInput, LockLockableInput, MannequinOrder, MarkDiscussionCommentAsAnswerInput, MarkFileAsViewedInput, MarkNotificationAsDoneInput, MarkProjectV2AsTemplateInput, MarkPullRequestReadyForReviewInput, MaxFilePathLengthParametersInput, MaxFileSizeParametersInput, MergeBranchInput, MergePullRequestInput, MergeQueueParametersInput, MilestoneOrder, MinimizeCommentInput, MoveProjectCardInput, MoveProjectColumnInput, OrgEnterpriseOwnerOrder, OrganizationOrder, PackageFileOrder, PackageOrder, PackageVersionOrder, PinEnvironmentInput, PinIssueInput, PinnedEnvironmentOrder, ProjectCardImport, ProjectColumnImport, ProjectOrder, ProjectV2Collaborator, ProjectV2FieldOrder, ProjectV2FieldValue, ProjectV2Filters, ProjectV2ItemFieldValueOrder, ProjectV2ItemOrder, ProjectV2Order, ProjectV2SingleSelectFieldOptionInput, ProjectV2StatusOrder, ProjectV2ViewOrder, ProjectV2WorkflowOrder, PropertyTargetDefinitionInput, PublishSponsorsTierInput, PullRequestOrder, PullRequestParametersInput, ReactionOrder, RefNameConditionTargetInput, RefOrder, RefUpdate, RegenerateEnterpriseIdentityProviderRecoveryCodesInput, RegenerateVerifiableDomainTokenInput, RejectDeploymentsInput, ReleaseOrder, RemoveAssigneesFromAssignableInput, RemoveEnterpriseAdminInput, RemoveEnterpriseIdentityProviderInput, RemoveEnterpriseMemberInput, RemoveEnterpriseOrganizationInput, RemoveEnterpriseSupportEntitlementInput, RemoveLabelsFromLabelableInput, RemoveOutsideCollaboratorInput, RemoveReactionInput, RemoveStarInput, RemoveUpvoteInput, ReopenDiscussionInput, ReopenIssueInput, ReopenPullRequestInput, ReorderEnvironmentInput, RepositoryIdConditionTargetInput, RepositoryInvitationOrder, RepositoryMigrationOrder, RepositoryNameConditionTargetInput, RepositoryOrder, RepositoryPropertyConditionTargetInput, RepositoryRuleConditionsInput, RepositoryRuleInput, RepositoryRuleOrder, RepositoryRulesetBypassActorInput, RequestReviewsInput, RequiredDeploymentsParametersInput, RequiredStatusCheckInput, RequiredStatusChecksParametersInput, RerequestCheckSuiteInput, ResolveReviewThreadInput, RetireSponsorsTierInput, RevertPullRequestInput, RevokeEnterpriseOrganizationsMigratorRoleInput, RevokeMigratorRoleInput, RuleParametersInput, SavedReplyOrder, SecurityAdvisoryIdentifierFilter, SecurityAdvisoryOrder, SecurityVulnerabilityOrder, SetEnterpriseIdentityProviderInput, SetOrganizationInteractionLimitInput, SetRepositoryInteractionLimitInput, SetUserInteractionLimitInput, SponsorAndLifetimeValueOrder, SponsorOrder, SponsorableOrder, SponsorsActivityOrder, SponsorsTierOrder, SponsorshipNewsletterOrder, SponsorshipOrder, StarOrder, StartOrganizationMigrationInput, StartRepositoryMigrationInput, StatusCheckConfigurationInput, SubmitPullRequestReviewInput, TagNamePatternParametersInput, TeamDiscussionCommentOrder, TeamDiscussionOrder, TeamMemberOrder, TeamOrder, TeamRepositoryOrder, TransferEnterpriseOrganizationInput, TransferIssueInput, UnarchiveProjectV2ItemInput, UnarchiveRepositoryInput, UnfollowOrganizationInput, UnfollowUserInput, UnlinkProjectV2FromRepositoryInput, UnlinkProjectV2FromTeamInput, UnlinkRepositoryFromProjectInput, UnlockLockableInput, UnmarkDiscussionCommentAsAnswerInput, UnmarkFileAsViewedInput, UnmarkIssueAsDuplicateInput, UnmarkProjectV2AsTemplateInput, UnminimizeCommentInput, UnpinIssueInput, UnresolveReviewThreadInput, UnsubscribeFromNotificationsInput, UpdateBranchProtectionRuleInput, UpdateCheckRunInput, UpdateCheckSuitePreferencesInput, UpdateDiscussionCommentInput, UpdateDiscussionInput, UpdateEnterpriseAdministratorRoleInput, UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput, UpdateEnterpriseDefaultRepositoryPermissionSettingInput, UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput, UpdateEnterpriseMembersCanCreateRepositoriesSettingInput, UpdateEnterpriseMembersCanDeleteIssuesSettingInput, UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput, UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput, UpdateEnterpriseMembersCanMakePurchasesSettingInput, UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput, UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput, UpdateEnterpriseOrganizationProjectsSettingInput, UpdateEnterpriseOwnerOrganizationRoleInput, UpdateEnterpriseProfileInput, UpdateEnterpriseRepositoryProjectsSettingInput, UpdateEnterpriseTeamDiscussionsSettingInput, UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput, UpdateEnvironmentInput, UpdateIpAllowListEnabledSettingInput, UpdateIpAllowListEntryInput, UpdateIpAllowListForInstalledAppsEnabledSettingInput, UpdateIssueCommentInput, UpdateIssueInput, UpdateLabelInput, UpdateNotificationRestrictionSettingInput, UpdateOrganizationAllowPrivateRepositoryForkingSettingInput, UpdateOrganizationWebCommitSignoffSettingInput, UpdateParametersInput, UpdatePatreonSponsorabilityInput, UpdateProjectCardInput, UpdateProjectColumnInput, UpdateProjectInput, UpdateProjectV2CollaboratorsInput, UpdateProjectV2DraftIssueInput, UpdateProjectV2Input, UpdateProjectV2ItemFieldValueInput, UpdateProjectV2ItemPositionInput, UpdateProjectV2StatusUpdateInput, UpdatePullRequestBranchInput, UpdatePullRequestInput, UpdatePullRequestReviewCommentInput, UpdatePullRequestReviewInput, UpdateRefInput, UpdateRefsInput, UpdateRepositoryInput, UpdateRepositoryRulesetInput, UpdateRepositoryWebCommitSignoffSettingInput, UpdateSponsorshipPreferencesInput, UpdateSubscriptionInput, UpdateTeamDiscussionCommentInput, UpdateTeamDiscussionInput, UpdateTeamReviewAssignmentInput, UpdateTeamsRepositoryInput, UpdateTopicsInput, UpdateUserListInput, UpdateUserListsForItemInput, UserStatusOrder, VerifiableDomainOrder, VerifyVerifiableDomainInput, WorkflowFileReferenceInput, WorkflowRunOrder, WorkflowsParametersInput.
 type Input interface{}
 
 // AbortQueuedMigrationsInput is an autogenerated input type of AbortQueuedMigrations.
@@ -27,6 +27,15 @@ type AbortRepositoryMigrationInput struct {
 
 // AcceptEnterpriseAdministratorInvitationInput is an autogenerated input type of AcceptEnterpriseAdministratorInvitation.
 type AcceptEnterpriseAdministratorInvitationInput struct {
+	// The id of the invitation being accepted. (Required.)
+	InvitationID ID `json:"invitationId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// AcceptEnterpriseMemberInvitationInput is an autogenerated input type of AcceptEnterpriseMemberInvitation.
+type AcceptEnterpriseMemberInvitationInput struct {
 	// The id of the invitation being accepted. (Required.)
 	InvitationID ID `json:"invitationId"`
 
@@ -378,6 +387,15 @@ type CancelEnterpriseAdminInvitationInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// CancelEnterpriseMemberInvitationInput is an autogenerated input type of CancelEnterpriseMemberInvitation.
+type CancelEnterpriseMemberInvitationInput struct {
+	// The Node ID of the pending enterprise member invitation. (Required.)
+	InvitationID ID `json:"invitationId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // CancelSponsorshipInput is an autogenerated input type of CancelSponsorship.
 type CancelSponsorshipInput struct {
 
@@ -601,6 +619,22 @@ type ClosePullRequestInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// CodeScanningParametersInput represents choose which tools must provide code scanning results before the reference is updated. When configured, code scanning must be enabled and have results for both the commit and the reference being updated.
+type CodeScanningParametersInput struct {
+	// Tools that must provide code scanning results for this rule to pass. (Required.)
+	CodeScanningTools []CodeScanningToolInput `json:"codeScanningTools"`
+}
+
+// CodeScanningToolInput represents a tool that must provide code scanning results for this rule to pass.
+type CodeScanningToolInput struct {
+	// The severity level at which code scanning results that raise alerts block a reference update. For more information on alert severity levels, see "[About code scanning alerts](${externalDocsUrl}/code-security/code-scanning/managing-code-scanning-alerts/about-code-scanning-alerts#about-alert-severity-and-security-severity-levels).". (Required.)
+	AlertsThreshold String `json:"alertsThreshold"`
+	// The severity level at which code scanning results that raise security alerts block a reference update. For more information on security severity levels, see "[About code scanning alerts](${externalDocsUrl}/code-security/code-scanning/managing-code-scanning-alerts/about-code-scanning-alerts#about-alert-severity-and-security-severity-levels).". (Required.)
+	SecurityAlertsThreshold String `json:"securityAlertsThreshold"`
+	// The name of a code scanning tool. (Required.)
+	Tool String `json:"tool"`
+}
+
 // CommitAuthor specifies an author for filtering Git commits.
 type CommitAuthor struct {
 
@@ -696,6 +730,17 @@ type ConvertProjectCardNoteToIssueInput struct {
 	Title *String `json:"title,omitempty"`
 	// The body of the newly created issue. (Optional.)
 	Body *String `json:"body,omitempty"`
+}
+
+// ConvertProjectV2DraftIssueItemToIssueInput is an autogenerated input type of ConvertProjectV2DraftIssueItemToIssue.
+type ConvertProjectV2DraftIssueItemToIssueInput struct {
+	// The ID of the draft issue ProjectV2Item to convert. (Required.)
+	ItemID ID `json:"itemId"`
+	// The ID of the repository to create the issue in. (Required.)
+	RepositoryID ID `json:"repositoryId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
 // ConvertPullRequestToDraftInput is an autogenerated input type of ConvertPullRequestToDraft.
@@ -1072,6 +1117,23 @@ type CreateProjectV2Input struct {
 	RepositoryID *ID `json:"repositoryId,omitempty"`
 	// The team to link the project to. The team will be granted read permissions. (Optional.)
 	TeamID *ID `json:"teamId,omitempty"`
+}
+
+// CreateProjectV2StatusUpdateInput is an autogenerated input type of CreateProjectV2StatusUpdate.
+type CreateProjectV2StatusUpdateInput struct {
+	// The ID of the Project to create the status update in. (Required.)
+	ProjectID ID `json:"projectId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+	// The start date of the status update. (Optional.)
+	StartDate *Date `json:"startDate,omitempty"`
+	// The target date of the status update. (Optional.)
+	TargetDate *Date `json:"targetDate,omitempty"`
+	// The status of the status update. (Optional.)
+	Status *ProjectV2StatusUpdateStatus `json:"status,omitempty"`
+	// The body of the status update. (Optional.)
+	Body *String `json:"body,omitempty"`
 }
 
 // CreatePullRequestInput is an autogenerated input type of CreatePullRequest.
@@ -1453,6 +1515,15 @@ type DeleteProjectV2ItemInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// DeleteProjectV2StatusUpdateInput is an autogenerated input type of DeleteProjectV2StatusUpdate.
+type DeleteProjectV2StatusUpdateInput struct {
+	// The ID of the status update to be removed. (Required.)
+	StatusUpdateID ID `json:"statusUpdateId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // DeleteProjectV2WorkflowInput is an autogenerated input type of DeleteProjectV2Workflow.
 type DeleteProjectV2WorkflowInput struct {
 	// The ID of the workflow to be removed. (Required.)
@@ -1665,6 +1736,14 @@ type EnterpriseAdministratorInvitationOrder struct {
 	Direction OrderDirection `json:"direction"`
 }
 
+// EnterpriseMemberInvitationOrder represents ordering options for enterprise administrator invitation connections.
+type EnterpriseMemberInvitationOrder struct {
+	// The field to order enterprise member invitations by. (Required.)
+	Field EnterpriseMemberInvitationOrderField `json:"field"`
+	// The ordering direction. (Required.)
+	Direction OrderDirection `json:"direction"`
+}
+
 // EnterpriseMemberOrder represents ordering options for enterprise member connections.
 type EnterpriseMemberOrder struct {
 	// The field to order enterprise members by. (Required.)
@@ -1836,6 +1915,19 @@ type InviteEnterpriseAdminInput struct {
 	Email *String `json:"email,omitempty"`
 	// The role of the administrator. (Optional.)
 	Role *EnterpriseAdministratorRole `json:"role,omitempty"`
+}
+
+// InviteEnterpriseMemberInput is an autogenerated input type of InviteEnterpriseMember.
+type InviteEnterpriseMemberInput struct {
+	// The ID of the enterprise to which you want to invite an unaffiliated member. (Required.)
+	EnterpriseID ID `json:"enterpriseId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+	// The login of a user to invite as an unaffiliated member. (Optional.)
+	Invitee *String `json:"invitee,omitempty"`
+	// The email of the person to invite as an unaffiliated member. (Optional.)
+	Email *String `json:"email,omitempty"`
 }
 
 // IpAllowListEntryOrder represents ordering options for IP allow list entry connections.
@@ -2048,6 +2140,24 @@ type MergePullRequestInput struct {
 	AuthorEmail *String `json:"authorEmail,omitempty"`
 }
 
+// MergeQueueParametersInput represents merges must be performed via a merge queue.
+type MergeQueueParametersInput struct {
+	// Maximum time for a required status check to report a conclusion. After this much time has elapsed, checks that have not reported a conclusion will be assumed to have failed. (Required.)
+	CheckResponseTimeoutMinutes Int `json:"checkResponseTimeoutMinutes"`
+	// When set to ALLGREEN, the merge commit created by merge queue for each PR in the group must pass all required checks to merge. When set to HEADGREEN, only the commit at the head of the merge group, i.e. the commit containing changes from all of the PRs in the group, must pass its required checks to merge. (Required.)
+	GroupingStrategy MergeQueueGroupingStrategy `json:"groupingStrategy"`
+	// Limit the number of queued pull requests requesting checks and workflow runs at the same time. (Required.)
+	MaxEntriesToBuild Int `json:"maxEntriesToBuild"`
+	// The maximum number of PRs that will be merged together in a group. (Required.)
+	MaxEntriesToMerge Int `json:"maxEntriesToMerge"`
+	// Method to use when merging changes from queued pull requests. (Required.)
+	MergeMethod MergeQueueMergeMethod `json:"mergeMethod"`
+	// The minimum number of PRs that will be merged together in a group. (Required.)
+	MinEntriesToMerge Int `json:"minEntriesToMerge"`
+	// The time merge queue should wait after the first PR is added to the queue for the minimum group size to be met. After this time has elapsed, the minimum group size will be ignored and a smaller group will be merged. (Required.)
+	MinEntriesToMergeWaitMinutes Int `json:"minEntriesToMergeWaitMinutes"`
+}
+
 // MilestoneOrder represents ordering options for milestone connections.
 type MilestoneOrder struct {
 	// The field to order milestones by. (Required.)
@@ -2134,6 +2244,17 @@ type PackageVersionOrder struct {
 	Direction *OrderDirection `json:"direction,omitempty"`
 }
 
+// PinEnvironmentInput is an autogenerated input type of PinEnvironment.
+type PinEnvironmentInput struct {
+	// The ID of the environment to modify. (Required.)
+	EnvironmentID ID `json:"environmentId"`
+	// The desired state of the environment. If true, environment will be pinned. If false, it will be unpinned. (Required.)
+	Pinned Boolean `json:"pinned"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // PinIssueInput is an autogenerated input type of PinIssue.
 type PinIssueInput struct {
 	// The ID of the issue to be pinned. (Required.)
@@ -2141,6 +2262,14 @@ type PinIssueInput struct {
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
+// PinnedEnvironmentOrder represents ordering options for pinned environments.
+type PinnedEnvironmentOrder struct {
+	// The field to order pinned environments by. (Required.)
+	Field PinnedEnvironmentOrderField `json:"field"`
+	// The direction in which to order pinned environments by the specified field. (Required.)
+	Direction OrderDirection `json:"direction"`
 }
 
 // ProjectCardImport represents an issue or PR and its owning repository to be used in a project card.
@@ -2245,6 +2374,14 @@ type ProjectV2SingleSelectFieldOptionInput struct {
 	Description String `json:"description"`
 }
 
+// ProjectV2StatusOrder represents ways in which project v2 status updates can be ordered.
+type ProjectV2StatusOrder struct {
+	// The field by which to order nodes. (Required.)
+	Field ProjectV2StatusUpdateOrderField `json:"field"`
+	// The direction in which to order nodes. (Required.)
+	Direction OrderDirection `json:"direction"`
+}
+
 // ProjectV2ViewOrder represents ordering options for project v2 view connections.
 type ProjectV2ViewOrder struct {
 	// The field to order the project v2 views by. (Required.)
@@ -2267,6 +2404,9 @@ type PropertyTargetDefinitionInput struct {
 	Name String `json:"name"`
 	// The values to match for. (Required.)
 	PropertyValues []String `json:"propertyValues"`
+
+	// The source of the property. Choose 'custom' or 'system'. Defaults to 'custom' if not specified. (Optional.)
+	Source *String `json:"source,omitempty"`
 }
 
 // PublishSponsorsTierInput is an autogenerated input type of PublishSponsorsTier.
@@ -2518,6 +2658,17 @@ type ReopenPullRequestInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// ReorderEnvironmentInput is an autogenerated input type of ReorderEnvironment.
+type ReorderEnvironmentInput struct {
+	// The ID of the environment to modify. (Required.)
+	EnvironmentID ID `json:"environmentId"`
+	// The desired position of the environment. (Required.)
+	Position Int `json:"position"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // RepositoryIdConditionTargetInput represents parameters to be used for the repository_id condition.
 type RepositoryIdConditionTargetInput struct {
 	// One of these repo IDs must match the repo. (Required.)
@@ -2650,6 +2801,9 @@ type RequiredStatusChecksParametersInput struct {
 	RequiredStatusChecks []StatusCheckConfigurationInput `json:"requiredStatusChecks"`
 	// Whether pull requests targeting a matching branch must be tested with the latest code. This setting will not take effect unless at least one status check is enabled. (Required.)
 	StrictRequiredStatusChecksPolicy Boolean `json:"strictRequiredStatusChecksPolicy"`
+
+	// Allow repositories and branches to be created if a check would otherwise prohibit it. (Optional.)
+	DoNotEnforceOnCreate *Boolean `json:"doNotEnforceOnCreate,omitempty"`
 }
 
 // RerequestCheckSuiteInput is an autogenerated input type of RerequestCheckSuite.
@@ -2725,6 +2879,8 @@ type RuleParametersInput struct {
 
 	// Parameters used for the `update` rule type. (Optional.)
 	Update *UpdateParametersInput `json:"update,omitempty"`
+	// Parameters used for the `merge_queue` rule type. (Optional.)
+	MergeQueue *MergeQueueParametersInput `json:"mergeQueue,omitempty"`
 	// Parameters used for the `required_deployments` rule type. (Optional.)
 	RequiredDeployments *RequiredDeploymentsParametersInput `json:"requiredDeployments,omitempty"`
 	// Parameters used for the `pull_request` rule type. (Optional.)
@@ -2751,6 +2907,8 @@ type RuleParametersInput struct {
 	MaxFileSize *MaxFileSizeParametersInput `json:"maxFileSize,omitempty"`
 	// Parameters used for the `workflows` rule type. (Optional.)
 	Workflows *WorkflowsParametersInput `json:"workflows,omitempty"`
+	// Parameters used for the `code_scanning` rule type. (Optional.)
+	CodeScanning *CodeScanningParametersInput `json:"codeScanning,omitempty"`
 }
 
 // SavedReplyOrder represents ordering options for saved reply connections.
@@ -3811,6 +3969,23 @@ type UpdateProjectV2ItemPositionInput struct {
 	AfterID *ID `json:"afterId,omitempty"`
 }
 
+// UpdateProjectV2StatusUpdateInput is an autogenerated input type of UpdateProjectV2StatusUpdate.
+type UpdateProjectV2StatusUpdateInput struct {
+	// The ID of the status update to be updated. (Required.)
+	StatusUpdateID ID `json:"statusUpdateId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+	// The start date of the status update. (Optional.)
+	StartDate *Date `json:"startDate,omitempty"`
+	// The target date of the status update. (Optional.)
+	TargetDate *Date `json:"targetDate,omitempty"`
+	// The status of the status update. (Optional.)
+	Status *ProjectV2StatusUpdateStatus `json:"status,omitempty"`
+	// The body of the status update. (Optional.)
+	Body *String `json:"body,omitempty"`
+}
+
 // UpdatePullRequestBranchInput is an autogenerated input type of UpdatePullRequestBranch.
 type UpdatePullRequestBranchInput struct {
 	// The Node ID of the pull request. (Required.)
@@ -4143,4 +4318,7 @@ type WorkflowRunOrder struct {
 type WorkflowsParametersInput struct {
 	// Workflows that must pass for this rule to pass. (Required.)
 	Workflows []WorkflowFileReferenceInput `json:"workflows"`
+
+	// Allow repositories and branches to be created if a check would otherwise prohibit it. (Optional.)
+	DoNotEnforceOnCreate *Boolean `json:"doNotEnforceOnCreate,omitempty"`
 }

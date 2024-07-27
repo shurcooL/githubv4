@@ -203,6 +203,7 @@ type DeploymentProtectionRuleType string
 const (
 	DeploymentProtectionRuleTypeRequiredReviewers DeploymentProtectionRuleType = "REQUIRED_REVIEWERS" // Required reviewers.
 	DeploymentProtectionRuleTypeWaitTimer         DeploymentProtectionRuleType = "WAIT_TIMER"         // Wait timer.
+	DeploymentProtectionRuleTypeBranchPolicy      DeploymentProtectionRuleType = "BRANCH_POLICY"      // Branch policy.
 )
 
 // DeploymentReviewState represents the possible states for a deployment review.
@@ -377,6 +378,14 @@ const (
 	EnterpriseEnabledSettingValueNoPolicy EnterpriseEnabledSettingValue = "NO_POLICY" // There is no policy set for organizations in the enterprise.
 )
 
+// EnterpriseMemberInvitationOrderField represents properties by which enterprise member invitation connections can be ordered.
+type EnterpriseMemberInvitationOrderField string
+
+// Properties by which enterprise member invitation connections can be ordered.
+const (
+	EnterpriseMemberInvitationOrderFieldCreatedAt EnterpriseMemberInvitationOrderField = "CREATED_AT" // Order enterprise member invitations by creation time.
+)
+
 // EnterpriseMemberOrderField represents properties by which enterprise member connections can be ordered.
 type EnterpriseMemberOrderField string
 
@@ -496,6 +505,16 @@ type EnvironmentOrderField string
 // Properties by which environments connections can be ordered.
 const (
 	EnvironmentOrderFieldName EnvironmentOrderField = "NAME" // Order environments by name.
+)
+
+// EnvironmentPinnedFilterField represents properties by which environments connections can be ordered.
+type EnvironmentPinnedFilterField string
+
+// Properties by which environments connections can be ordered.
+const (
+	EnvironmentPinnedFilterFieldAll  EnvironmentPinnedFilterField = "ALL"  // All environments will be returned.
+	EnvironmentPinnedFilterFieldOnly EnvironmentPinnedFilterField = "ONLY" // Only pinned environment will be returned.
+	EnvironmentPinnedFilterFieldNone EnvironmentPinnedFilterField = "NONE" // Environments exclude pinned will be returned.
 )
 
 // FileViewedState represents the possible viewed states of a file .
@@ -758,6 +777,25 @@ const (
 	MergeQueueEntryStateMergeable      MergeQueueEntryState = "MERGEABLE"       // The entry is currently mergeable.
 	MergeQueueEntryStateUnmergeable    MergeQueueEntryState = "UNMERGEABLE"     // The entry is currently unmergeable.
 	MergeQueueEntryStateLocked         MergeQueueEntryState = "LOCKED"          // The entry is currently locked.
+)
+
+// MergeQueueGroupingStrategy represents when set to ALLGREEN, the merge commit created by merge queue for each PR in the group must pass all required checks to merge. When set to HEADGREEN, only the commit at the head of the merge group, i.e. the commit containing changes from all of the PRs in the group, must pass its required checks to merge.
+type MergeQueueGroupingStrategy string
+
+// When set to ALLGREEN, the merge commit created by merge queue for each PR in the group must pass all required checks to merge. When set to HEADGREEN, only the commit at the head of the merge group, i.e. the commit containing changes from all of the PRs in the group, must pass its required checks to merge.
+const (
+	MergeQueueGroupingStrategyAllgreen  MergeQueueGroupingStrategy = "ALLGREEN"  // The merge commit created by merge queue for each PR in the group must pass all required checks to merge.
+	MergeQueueGroupingStrategyHeadgreen MergeQueueGroupingStrategy = "HEADGREEN" // Only the commit at the head of the merge group must pass its required checks to merge.
+)
+
+// MergeQueueMergeMethod represents method to use when merging changes from queued pull requests.
+type MergeQueueMergeMethod string
+
+// Method to use when merging changes from queued pull requests.
+const (
+	MergeQueueMergeMethodMerge  MergeQueueMergeMethod = "MERGE"  // Merge commit.
+	MergeQueueMergeMethodSquash MergeQueueMergeMethod = "SQUASH" // Squash and merge.
+	MergeQueueMergeMethodRebase MergeQueueMergeMethod = "REBASE" // Rebase and merge.
 )
 
 // MergeQueueMergingStrategy represents the possible merging strategies for a merge queue.
@@ -1173,6 +1211,14 @@ const (
 	PinnedDiscussionPatternHeartFill PinnedDiscussionPattern = "HEART_FILL" // A heart pattern.
 )
 
+// PinnedEnvironmentOrderField represents properties by which pinned environments connections can be ordered.
+type PinnedEnvironmentOrderField string
+
+// Properties by which pinned environments connections can be ordered.
+const (
+	PinnedEnvironmentOrderFieldPosition PinnedEnvironmentOrderField = "POSITION" // Order pinned environments by position.
+)
+
 // ProjectCardArchivedState represents the possible archived states of a project card.
 type ProjectCardArchivedState string
 
@@ -1312,6 +1358,16 @@ const (
 	ProjectV2OrderFieldCreatedAt ProjectV2OrderField = "CREATED_AT" // The project's date and time of creation.
 )
 
+// ProjectV2PermissionLevel represents the possible roles of a collaborator on a project.
+type ProjectV2PermissionLevel string
+
+// The possible roles of a collaborator on a project.
+const (
+	ProjectV2PermissionLevelRead  ProjectV2PermissionLevel = "READ"  // The collaborator can view the project.
+	ProjectV2PermissionLevelWrite ProjectV2PermissionLevel = "WRITE" // The collaborator can view and edit the project.
+	ProjectV2PermissionLevelAdmin ProjectV2PermissionLevel = "ADMIN" // The collaborator can view, edit, and maange the settings of the project.
+)
+
 // ProjectV2Roles represents the possible roles of a collaborator on a project.
 type ProjectV2Roles string
 
@@ -1345,6 +1401,26 @@ type ProjectV2State string
 const (
 	ProjectV2StateOpen   ProjectV2State = "OPEN"   // A project v2 that is still open.
 	ProjectV2StateClosed ProjectV2State = "CLOSED" // A project v2 that has been closed.
+)
+
+// ProjectV2StatusUpdateOrderField represents properties by which project v2 status updates can be ordered.
+type ProjectV2StatusUpdateOrderField string
+
+// Properties by which project v2 status updates can be ordered.
+const (
+	ProjectV2StatusUpdateOrderFieldCreatedAt ProjectV2StatusUpdateOrderField = "CREATED_AT" // Allows chronological ordering of project v2 status updates.
+)
+
+// ProjectV2StatusUpdateStatus represents the possible statuses of a project v2.
+type ProjectV2StatusUpdateStatus string
+
+// The possible statuses of a project v2.
+const (
+	ProjectV2StatusUpdateStatusInactive ProjectV2StatusUpdateStatus = "INACTIVE"  // A project v2 that is inactive.
+	ProjectV2StatusUpdateStatusOnTrack  ProjectV2StatusUpdateStatus = "ON_TRACK"  // A project v2 that is on track with no risks.
+	ProjectV2StatusUpdateStatusAtRisk   ProjectV2StatusUpdateStatus = "AT_RISK"   // A project v2 that is at risk and encountering some challenges.
+	ProjectV2StatusUpdateStatusOffTrack ProjectV2StatusUpdateStatus = "OFF_TRACK" // A project v2 that is off track and needs attention.
+	ProjectV2StatusUpdateStatusComplete ProjectV2StatusUpdateStatus = "COMPLETE"  // A project v2 that is complete.
 )
 
 // ProjectV2ViewLayout represents the layout of a project v2 view.
@@ -1828,13 +1904,14 @@ const (
 	RepositoryRuleTypeCommitterEmailPattern          RepositoryRuleType = "COMMITTER_EMAIL_PATTERN"           // Committer email pattern.
 	RepositoryRuleTypeBranchNamePattern              RepositoryRuleType = "BRANCH_NAME_PATTERN"               // Branch name pattern.
 	RepositoryRuleTypeTagNamePattern                 RepositoryRuleType = "TAG_NAME_PATTERN"                  // Tag name pattern.
-	RepositoryRuleTypeFilePathRestriction            RepositoryRuleType = "FILE_PATH_RESTRICTION"             // Prevent commits that include changes in specified file paths from being pushed to the commit graph. NOTE: Thie rule is in beta and subject to change.
-	RepositoryRuleTypeMaxFilePathLength              RepositoryRuleType = "MAX_FILE_PATH_LENGTH"              // Prevent commits that include file paths that exceed a specified character limit from being pushed to the commit graph. NOTE: Thie rule is in beta and subject to change.
-	RepositoryRuleTypeFileExtensionRestriction       RepositoryRuleType = "FILE_EXTENSION_RESTRICTION"        // Prevent commits that include files with specified file extensions from being pushed to the commit graph. NOTE: Thie rule is in beta and subject to change.
-	RepositoryRuleTypeMaxFileSize                    RepositoryRuleType = "MAX_FILE_SIZE"                     // Prevent commits that exceed a specified file size limit from being pushed to the commit. NOTE: Thie rule is in beta and subject to change.
+	RepositoryRuleTypeFilePathRestriction            RepositoryRuleType = "FILE_PATH_RESTRICTION"             // Prevent commits that include changes in specified file paths from being pushed to the commit graph. NOTE: This rule is in beta and subject to change.
+	RepositoryRuleTypeMaxFilePathLength              RepositoryRuleType = "MAX_FILE_PATH_LENGTH"              // Prevent commits that include file paths that exceed a specified character limit from being pushed to the commit graph. NOTE: This rule is in beta and subject to change.
+	RepositoryRuleTypeFileExtensionRestriction       RepositoryRuleType = "FILE_EXTENSION_RESTRICTION"        // Prevent commits that include files with specified file extensions from being pushed to the commit graph. NOTE: This rule is in beta and subject to change.
+	RepositoryRuleTypeMaxFileSize                    RepositoryRuleType = "MAX_FILE_SIZE"                     // Prevent commits that exceed a specified file size limit from being pushed to the commit. NOTE: This rule is in beta and subject to change.
 	RepositoryRuleTypeWorkflows                      RepositoryRuleType = "WORKFLOWS"                         // Require all changes made to a targeted branch to pass the specified workflows before they can be merged.
 	RepositoryRuleTypeSecretScanning                 RepositoryRuleType = "SECRET_SCANNING"                   // Secret scanning.
 	RepositoryRuleTypeWorkflowUpdates                RepositoryRuleType = "WORKFLOW_UPDATES"                  // Workflow files cannot be modified.
+	RepositoryRuleTypeCodeScanning                   RepositoryRuleType = "CODE_SCANNING"                     // Choose which tools must provide code scanning results before the reference is updated. When configured, code scanning must be enabled and have results for both the commit and the reference being updated.
 )
 
 // RepositoryRulesetBypassActorBypassMode represents the bypass mode for a specific actor on a ruleset.
