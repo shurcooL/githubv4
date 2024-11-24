@@ -359,6 +359,15 @@ const (
 	EnterpriseDefaultRepositoryPermissionSettingValueNone     EnterpriseDefaultRepositoryPermissionSettingValue = "NONE"      // Organization members will only be able to clone and pull public repositories.
 )
 
+// EnterpriseDisallowedMethodsSettingValue represents the possible values for an enabled/no policy enterprise setting.
+type EnterpriseDisallowedMethodsSettingValue string
+
+// The possible values for an enabled/no policy enterprise setting.
+const (
+	EnterpriseDisallowedMethodsSettingValueInsecure EnterpriseDisallowedMethodsSettingValue = "INSECURE"  // The setting prevents insecure 2FA methods from being used by members of the enterprise.
+	EnterpriseDisallowedMethodsSettingValueNoPolicy EnterpriseDisallowedMethodsSettingValue = "NO_POLICY" // There is no policy set for preventing insecure 2FA methods from being used by members of the enterprise.
+)
+
 // EnterpriseEnabledDisabledSettingValue represents the possible values for an enabled/disabled enterprise setting.
 type EnterpriseEnabledDisabledSettingValue string
 
@@ -543,6 +552,7 @@ const (
 	FundingPlatformLFXCrowdfunding FundingPlatform = "LFX_CROWDFUNDING" // LFX Crowdfunding funding platform.
 	FundingPlatformPolar           FundingPlatform = "POLAR"            // Polar funding platform.
 	FundingPlatformBuyMeACoffee    FundingPlatform = "BUY_ME_A_COFFEE"  // Buy Me a Coffee funding platform.
+	FundingPlatformThanksDev       FundingPlatform = "THANKS_DEV"       // thanks.dev funding platform.
 	FundingPlatformCustom          FundingPlatform = "CUSTOM"           // Custom funding platform.
 )
 
@@ -634,6 +644,7 @@ type IssueClosedStateReason string
 const (
 	IssueClosedStateReasonCompleted  IssueClosedStateReason = "COMPLETED"   // An issue that has been closed as completed.
 	IssueClosedStateReasonNotPlanned IssueClosedStateReason = "NOT_PLANNED" // An issue that has been closed as not planned.
+	IssueClosedStateReasonDuplicate  IssueClosedStateReason = "DUPLICATE"   // An issue that has been closed as a duplicate.
 )
 
 // IssueCommentOrderField represents properties by which issue comment connections can be ordered.
@@ -671,6 +682,7 @@ const (
 	IssueStateReasonReopened   IssueStateReason = "REOPENED"    // An issue that has been reopened.
 	IssueStateReasonNotPlanned IssueStateReason = "NOT_PLANNED" // An issue that has been closed as not planned.
 	IssueStateReasonCompleted  IssueStateReason = "COMPLETED"   // An issue that has been closed as completed.
+	IssueStateReasonDuplicate  IssueStateReason = "DUPLICATE"   // An issue that has been closed as a duplicate.
 )
 
 // IssueTimelineItemsItemType represents the possible item types found in a timeline.
@@ -1904,10 +1916,10 @@ const (
 	RepositoryRuleTypeCommitterEmailPattern          RepositoryRuleType = "COMMITTER_EMAIL_PATTERN"           // Committer email pattern.
 	RepositoryRuleTypeBranchNamePattern              RepositoryRuleType = "BRANCH_NAME_PATTERN"               // Branch name pattern.
 	RepositoryRuleTypeTagNamePattern                 RepositoryRuleType = "TAG_NAME_PATTERN"                  // Tag name pattern.
-	RepositoryRuleTypeFilePathRestriction            RepositoryRuleType = "FILE_PATH_RESTRICTION"             // Prevent commits that include changes in specified file paths from being pushed to the commit graph. NOTE: This rule is in beta and subject to change.
-	RepositoryRuleTypeMaxFilePathLength              RepositoryRuleType = "MAX_FILE_PATH_LENGTH"              // Prevent commits that include file paths that exceed a specified character limit from being pushed to the commit graph. NOTE: This rule is in beta and subject to change.
-	RepositoryRuleTypeFileExtensionRestriction       RepositoryRuleType = "FILE_EXTENSION_RESTRICTION"        // Prevent commits that include files with specified file extensions from being pushed to the commit graph. NOTE: This rule is in beta and subject to change.
-	RepositoryRuleTypeMaxFileSize                    RepositoryRuleType = "MAX_FILE_SIZE"                     // Prevent commits that exceed a specified file size limit from being pushed to the commit. NOTE: This rule is in beta and subject to change.
+	RepositoryRuleTypeFilePathRestriction            RepositoryRuleType = "FILE_PATH_RESTRICTION"             // Prevent commits that include changes in specified file paths from being pushed to the commit graph.
+	RepositoryRuleTypeMaxFilePathLength              RepositoryRuleType = "MAX_FILE_PATH_LENGTH"              // Prevent commits that include file paths that exceed a specified character limit from being pushed to the commit graph.
+	RepositoryRuleTypeFileExtensionRestriction       RepositoryRuleType = "FILE_EXTENSION_RESTRICTION"        // Prevent commits that include files with specified file extensions from being pushed to the commit graph.
+	RepositoryRuleTypeMaxFileSize                    RepositoryRuleType = "MAX_FILE_SIZE"                     // Prevent commits that exceed a specified file size limit from being pushed to the commit.
 	RepositoryRuleTypeWorkflows                      RepositoryRuleType = "WORKFLOWS"                         // Require all changes made to a targeted branch to pass the specified workflows before they can be merged.
 	RepositoryRuleTypeSecretScanning                 RepositoryRuleType = "SECRET_SCANNING"                   // Secret scanning.
 	RepositoryRuleTypeWorkflowUpdates                RepositoryRuleType = "WORKFLOW_UPDATES"                  // Workflow files cannot be modified.
@@ -1923,10 +1935,10 @@ const (
 	RepositoryRulesetBypassActorBypassModePullRequest RepositoryRulesetBypassActorBypassMode = "PULL_REQUEST" // The actor can only bypass rules via a pull request.
 )
 
-// RepositoryRulesetTarget represents the targets supported for rulesets. NOTE: The push target is in beta and subject to change.
+// RepositoryRulesetTarget represents the targets supported for rulesets.
 type RepositoryRulesetTarget string
 
-// The targets supported for rulesets. NOTE: The push target is in beta and subject to change.
+// The targets supported for rulesets.
 const (
 	RepositoryRulesetTargetBranch RepositoryRulesetTarget = "BRANCH" // Branch.
 	RepositoryRulesetTargetTag    RepositoryRulesetTarget = "TAG"    // Tag.
@@ -2078,8 +2090,10 @@ type SecurityAdvisoryOrderField string
 
 // Properties by which security advisory connections can be ordered.
 const (
-	SecurityAdvisoryOrderFieldPublishedAt SecurityAdvisoryOrderField = "PUBLISHED_AT" // Order advisories by publication time.
-	SecurityAdvisoryOrderFieldUpdatedAt   SecurityAdvisoryOrderField = "UPDATED_AT"   // Order advisories by update time.
+	SecurityAdvisoryOrderFieldPublishedAt    SecurityAdvisoryOrderField = "PUBLISHED_AT"    // Order advisories by publication time.
+	SecurityAdvisoryOrderFieldUpdatedAt      SecurityAdvisoryOrderField = "UPDATED_AT"      // Order advisories by update time.
+	SecurityAdvisoryOrderFieldEPSSPercentage SecurityAdvisoryOrderField = "EPSS_PERCENTAGE" // Order advisories by EPSS percentage.
+	SecurityAdvisoryOrderFieldEPSSPercentile SecurityAdvisoryOrderField = "EPSS_PERCENTILE" // Order advisories by EPSS percentile.
 )
 
 // SecurityAdvisorySeverity represents severity of the vulnerability.
@@ -2116,6 +2130,7 @@ const (
 	SocialAccountProviderTwitch    SocialAccountProvider = "TWITCH"    // Live-streaming service.
 	SocialAccountProviderTwitter   SocialAccountProvider = "TWITTER"   // Microblogging website.
 	SocialAccountProviderYouTube   SocialAccountProvider = "YOUTUBE"   // Online video platform.
+	SocialAccountProviderBluesky   SocialAccountProvider = "BLUESKY"   // Decentralized microblogging social platform.
 	SocialAccountProviderNpm       SocialAccountProvider = "NPM"       // JavaScript package registry.
 )
 
@@ -2688,6 +2703,16 @@ const (
 	TrackedIssueStatesClosed TrackedIssueStates = "CLOSED" // The tracked issue is closed.
 )
 
+// TwoFactorCredentialSecurityType represents filters by whether or not 2FA is enabled and if the method configured is considered secure or insecure.
+type TwoFactorCredentialSecurityType string
+
+// Filters by whether or not 2FA is enabled and if the method configured is considered secure or insecure.
+const (
+	TwoFactorCredentialSecurityTypeSecure   TwoFactorCredentialSecurityType = "SECURE"   // Has only secure methods of two-factor authentication.
+	TwoFactorCredentialSecurityTypeInsecure TwoFactorCredentialSecurityType = "INSECURE" // Has an insecure method of two-factor authentication. GitHub currently defines this as SMS two-factor authentication.
+	TwoFactorCredentialSecurityTypeDisabled TwoFactorCredentialSecurityType = "DISABLED" // No method of two-factor authentication.
+)
+
 // UserBlockDuration represents the possible durations that a user can be blocked for.
 type UserBlockDuration string
 
@@ -2706,6 +2731,15 @@ type UserStatusOrderField string
 // Properties by which user status connections can be ordered.
 const (
 	UserStatusOrderFieldUpdatedAt UserStatusOrderField = "UPDATED_AT" // Order user statuses by when they were updated.
+)
+
+// UserViewType represents whether a user being viewed contains public or private information.
+type UserViewType string
+
+// Whether a user being viewed contains public or private information.
+const (
+	UserViewTypePublic  UserViewType = "PUBLIC"  // A user that is publicly visible.
+	UserViewTypePrivate UserViewType = "PRIVATE" // A user containing information only visible to the authenticated user.
 )
 
 // VerifiableDomainOrderField represents properties by which verifiable domain connections can be ordered.
