@@ -682,7 +682,7 @@ const (
 	IssueStateReasonReopened   IssueStateReason = "REOPENED"    // An issue that has been reopened.
 	IssueStateReasonNotPlanned IssueStateReason = "NOT_PLANNED" // An issue that has been closed as not planned.
 	IssueStateReasonCompleted  IssueStateReason = "COMPLETED"   // An issue that has been closed as completed.
-	IssueStateReasonDuplicate  IssueStateReason = "DUPLICATE"   // An issue that has been closed as a duplicate.
+	IssueStateReasonDuplicate  IssueStateReason = "DUPLICATE"   // An issue that has been closed as a duplicate. To retrieve this value, set `(enableDuplicate: true)` when querying the stateReason field.
 )
 
 // IssueTimelineItemsItemType represents the possible item types found in a timeline.
@@ -721,6 +721,10 @@ const (
 	IssueTimelineItemsItemTypeUnmarkedAsDuplicateEvent   IssueTimelineItemsItemType = "UNMARKED_AS_DUPLICATE_EVENT"    // Represents an 'unmarked_as_duplicate' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUnpinnedEvent              IssueTimelineItemsItemType = "UNPINNED_EVENT"                 // Represents an 'unpinned' event on a given issue or pull request.
 	IssueTimelineItemsItemTypeUnsubscribedEvent          IssueTimelineItemsItemType = "UNSUBSCRIBED_EVENT"             // Represents an 'unsubscribed' event on a given `Subscribable`.
+	IssueTimelineItemsItemTypeSubIssueAddedEvent         IssueTimelineItemsItemType = "SUB_ISSUE_ADDED_EVENT"          // Represents a 'sub_issue_added' event on a given issue.
+	IssueTimelineItemsItemTypeSubIssueRemovedEvent       IssueTimelineItemsItemType = "SUB_ISSUE_REMOVED_EVENT"        // Represents a 'sub_issue_removed' event on a given issue.
+	IssueTimelineItemsItemTypeParentIssueAddedEvent      IssueTimelineItemsItemType = "PARENT_ISSUE_ADDED_EVENT"       // Represents a 'parent_issue_added' event on a given issue.
+	IssueTimelineItemsItemTypeParentIssueRemovedEvent    IssueTimelineItemsItemType = "PARENT_ISSUE_REMOVED_EVENT"     // Represents a 'parent_issue_removed' event on a given issue.
 )
 
 // LabelOrderField represents properties by which label connections can be ordered.
@@ -1618,6 +1622,10 @@ const (
 	PullRequestTimelineItemsItemTypeUnmarkedAsDuplicateEvent          PullRequestTimelineItemsItemType = "UNMARKED_AS_DUPLICATE_EVENT"           // Represents an 'unmarked_as_duplicate' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnpinnedEvent                     PullRequestTimelineItemsItemType = "UNPINNED_EVENT"                        // Represents an 'unpinned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnsubscribedEvent                 PullRequestTimelineItemsItemType = "UNSUBSCRIBED_EVENT"                    // Represents an 'unsubscribed' event on a given `Subscribable`.
+	PullRequestTimelineItemsItemTypeSubIssueAddedEvent                PullRequestTimelineItemsItemType = "SUB_ISSUE_ADDED_EVENT"                 // Represents a 'sub_issue_added' event on a given issue.
+	PullRequestTimelineItemsItemTypeSubIssueRemovedEvent              PullRequestTimelineItemsItemType = "SUB_ISSUE_REMOVED_EVENT"               // Represents a 'sub_issue_removed' event on a given issue.
+	PullRequestTimelineItemsItemTypeParentIssueAddedEvent             PullRequestTimelineItemsItemType = "PARENT_ISSUE_ADDED_EVENT"              // Represents a 'parent_issue_added' event on a given issue.
+	PullRequestTimelineItemsItemTypeParentIssueRemovedEvent           PullRequestTimelineItemsItemType = "PARENT_ISSUE_REMOVED_EVENT"            // Represents a 'parent_issue_removed' event on a given issue.
 )
 
 // PullRequestUpdateState represents the possible target states when updating a pull request.
@@ -1940,9 +1948,10 @@ type RepositoryRulesetTarget string
 
 // The targets supported for rulesets.
 const (
-	RepositoryRulesetTargetBranch RepositoryRulesetTarget = "BRANCH" // Branch.
-	RepositoryRulesetTargetTag    RepositoryRulesetTarget = "TAG"    // Tag.
-	RepositoryRulesetTargetPush   RepositoryRulesetTarget = "PUSH"   // Push.
+	RepositoryRulesetTargetBranch     RepositoryRulesetTarget = "BRANCH"     // Branch.
+	RepositoryRulesetTargetTag        RepositoryRulesetTarget = "TAG"        // Tag.
+	RepositoryRulesetTargetPush       RepositoryRulesetTarget = "PUSH"       // Push.
+	RepositoryRulesetTargetRepository RepositoryRulesetTarget = "REPOSITORY" // repository.
 )
 
 // RepositoryVisibility represents the repository's visibility level.
