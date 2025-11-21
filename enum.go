@@ -332,6 +332,7 @@ type EnterpriseAdministratorRole string
 const (
 	EnterpriseAdministratorRoleOwner          EnterpriseAdministratorRole = "OWNER"           // Represents an owner of the enterprise account.
 	EnterpriseAdministratorRoleBillingManager EnterpriseAdministratorRole = "BILLING_MANAGER" // Represents a billing manager of the enterprise account.
+	EnterpriseAdministratorRoleUnaffiliated   EnterpriseAdministratorRole = "UNAFFILIATED"    // Unaffiliated member of the enterprise account without an admin role.
 )
 
 // EnterpriseAllowPrivateRepositoryForkingPolicyValue represents the possible values for the enterprise allow private repository forking policy value.
@@ -357,6 +358,15 @@ const (
 	EnterpriseDefaultRepositoryPermissionSettingValueWrite    EnterpriseDefaultRepositoryPermissionSettingValue = "WRITE"     // Organization members will be able to clone, pull, and push all organization repositories.
 	EnterpriseDefaultRepositoryPermissionSettingValueRead     EnterpriseDefaultRepositoryPermissionSettingValue = "READ"      // Organization members will be able to clone and pull all organization repositories.
 	EnterpriseDefaultRepositoryPermissionSettingValueNone     EnterpriseDefaultRepositoryPermissionSettingValue = "NONE"      // Organization members will only be able to clone and pull public repositories.
+)
+
+// EnterpriseDisallowedMethodsSettingValue represents the possible values for an enabled/no policy enterprise setting.
+type EnterpriseDisallowedMethodsSettingValue string
+
+// The possible values for an enabled/no policy enterprise setting.
+const (
+	EnterpriseDisallowedMethodsSettingValueInsecure EnterpriseDisallowedMethodsSettingValue = "INSECURE"  // The setting prevents insecure 2FA methods from being used by members of the enterprise.
+	EnterpriseDisallowedMethodsSettingValueNoPolicy EnterpriseDisallowedMethodsSettingValue = "NO_POLICY" // There is no policy set for preventing insecure 2FA methods from being used by members of the enterprise.
 )
 
 // EnterpriseEnabledDisabledSettingValue represents the possible values for an enabled/disabled enterprise setting.
@@ -543,6 +553,7 @@ const (
 	FundingPlatformLFXCrowdfunding FundingPlatform = "LFX_CROWDFUNDING" // LFX Crowdfunding funding platform.
 	FundingPlatformPolar           FundingPlatform = "POLAR"            // Polar funding platform.
 	FundingPlatformBuyMeACoffee    FundingPlatform = "BUY_ME_A_COFFEE"  // Buy Me a Coffee funding platform.
+	FundingPlatformThanksDev       FundingPlatform = "THANKS_DEV"       // thanks.dev funding platform.
 	FundingPlatformCustom          FundingPlatform = "CUSTOM"           // Custom funding platform.
 )
 
@@ -634,6 +645,7 @@ type IssueClosedStateReason string
 const (
 	IssueClosedStateReasonCompleted  IssueClosedStateReason = "COMPLETED"   // An issue that has been closed as completed.
 	IssueClosedStateReasonNotPlanned IssueClosedStateReason = "NOT_PLANNED" // An issue that has been closed as not planned.
+	IssueClosedStateReasonDuplicate  IssueClosedStateReason = "DUPLICATE"   // An issue that has been closed as a duplicate.
 )
 
 // IssueCommentOrderField represents properties by which issue comment connections can be ordered.
@@ -642,6 +654,15 @@ type IssueCommentOrderField string
 // Properties by which issue comment connections can be ordered.
 const (
 	IssueCommentOrderFieldUpdatedAt IssueCommentOrderField = "UPDATED_AT" // Order issue comments by update time.
+)
+
+// IssueDependencyOrderField represents properties by which issue dependencies can be ordered.
+type IssueDependencyOrderField string
+
+// Properties by which issue dependencies can be ordered.
+const (
+	IssueDependencyOrderFieldDependencyAddedAt IssueDependencyOrderField = "DEPENDENCY_ADDED_AT" // Order issue dependencies by time of when the dependency relationship was added.
+	IssueDependencyOrderFieldCreatedAt         IssueDependencyOrderField = "CREATED_AT"          // Order issue dependencies by the creation time of the dependent issue.
 )
 
 // IssueOrderField represents properties by which issue connections can be ordered.
@@ -671,6 +692,7 @@ const (
 	IssueStateReasonReopened   IssueStateReason = "REOPENED"    // An issue that has been reopened.
 	IssueStateReasonNotPlanned IssueStateReason = "NOT_PLANNED" // An issue that has been closed as not planned.
 	IssueStateReasonCompleted  IssueStateReason = "COMPLETED"   // An issue that has been closed as completed.
+	IssueStateReasonDuplicate  IssueStateReason = "DUPLICATE"   // An issue that has been closed as a duplicate.
 )
 
 // IssueTimelineItemsItemType represents the possible item types found in a timeline.
@@ -678,37 +700,76 @@ type IssueTimelineItemsItemType string
 
 // The possible item types found in a timeline.
 const (
-	IssueTimelineItemsItemTypeIssueComment               IssueTimelineItemsItemType = "ISSUE_COMMENT"                  // Represents a comment on an Issue.
-	IssueTimelineItemsItemTypeCrossReferencedEvent       IssueTimelineItemsItemType = "CROSS_REFERENCED_EVENT"         // Represents a mention made by one issue or pull request to another.
-	IssueTimelineItemsItemTypeAddedToProjectEvent        IssueTimelineItemsItemType = "ADDED_TO_PROJECT_EVENT"         // Represents a 'added_to_project' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeAssignedEvent              IssueTimelineItemsItemType = "ASSIGNED_EVENT"                 // Represents an 'assigned' event on any assignable object.
-	IssueTimelineItemsItemTypeClosedEvent                IssueTimelineItemsItemType = "CLOSED_EVENT"                   // Represents a 'closed' event on any `Closable`.
-	IssueTimelineItemsItemTypeCommentDeletedEvent        IssueTimelineItemsItemType = "COMMENT_DELETED_EVENT"          // Represents a 'comment_deleted' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeConnectedEvent             IssueTimelineItemsItemType = "CONNECTED_EVENT"                // Represents a 'connected' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeConvertedNoteToIssueEvent  IssueTimelineItemsItemType = "CONVERTED_NOTE_TO_ISSUE_EVENT"  // Represents a 'converted_note_to_issue' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeConvertedToDiscussionEvent IssueTimelineItemsItemType = "CONVERTED_TO_DISCUSSION_EVENT"  // Represents a 'converted_to_discussion' event on a given issue.
-	IssueTimelineItemsItemTypeDemilestonedEvent          IssueTimelineItemsItemType = "DEMILESTONED_EVENT"             // Represents a 'demilestoned' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeDisconnectedEvent          IssueTimelineItemsItemType = "DISCONNECTED_EVENT"             // Represents a 'disconnected' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeLabeledEvent               IssueTimelineItemsItemType = "LABELED_EVENT"                  // Represents a 'labeled' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeLockedEvent                IssueTimelineItemsItemType = "LOCKED_EVENT"                   // Represents a 'locked' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeMarkedAsDuplicateEvent     IssueTimelineItemsItemType = "MARKED_AS_DUPLICATE_EVENT"      // Represents a 'marked_as_duplicate' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeMentionedEvent             IssueTimelineItemsItemType = "MENTIONED_EVENT"                // Represents a 'mentioned' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeMilestonedEvent            IssueTimelineItemsItemType = "MILESTONED_EVENT"               // Represents a 'milestoned' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeMovedColumnsInProjectEvent IssueTimelineItemsItemType = "MOVED_COLUMNS_IN_PROJECT_EVENT" // Represents a 'moved_columns_in_project' event on a given issue or pull request.
-	IssueTimelineItemsItemTypePinnedEvent                IssueTimelineItemsItemType = "PINNED_EVENT"                   // Represents a 'pinned' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeReferencedEvent            IssueTimelineItemsItemType = "REFERENCED_EVENT"               // Represents a 'referenced' event on a given `ReferencedSubject`.
-	IssueTimelineItemsItemTypeRemovedFromProjectEvent    IssueTimelineItemsItemType = "REMOVED_FROM_PROJECT_EVENT"     // Represents a 'removed_from_project' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeRenamedTitleEvent          IssueTimelineItemsItemType = "RENAMED_TITLE_EVENT"            // Represents a 'renamed' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeReopenedEvent              IssueTimelineItemsItemType = "REOPENED_EVENT"                 // Represents a 'reopened' event on any `Closable`.
-	IssueTimelineItemsItemTypeSubscribedEvent            IssueTimelineItemsItemType = "SUBSCRIBED_EVENT"               // Represents a 'subscribed' event on a given `Subscribable`.
-	IssueTimelineItemsItemTypeTransferredEvent           IssueTimelineItemsItemType = "TRANSFERRED_EVENT"              // Represents a 'transferred' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeUnassignedEvent            IssueTimelineItemsItemType = "UNASSIGNED_EVENT"               // Represents an 'unassigned' event on any assignable object.
-	IssueTimelineItemsItemTypeUnlabeledEvent             IssueTimelineItemsItemType = "UNLABELED_EVENT"                // Represents an 'unlabeled' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeUnlockedEvent              IssueTimelineItemsItemType = "UNLOCKED_EVENT"                 // Represents an 'unlocked' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeUserBlockedEvent           IssueTimelineItemsItemType = "USER_BLOCKED_EVENT"             // Represents a 'user_blocked' event on a given user.
-	IssueTimelineItemsItemTypeUnmarkedAsDuplicateEvent   IssueTimelineItemsItemType = "UNMARKED_AS_DUPLICATE_EVENT"    // Represents an 'unmarked_as_duplicate' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeUnpinnedEvent              IssueTimelineItemsItemType = "UNPINNED_EVENT"                 // Represents an 'unpinned' event on a given issue or pull request.
-	IssueTimelineItemsItemTypeUnsubscribedEvent          IssueTimelineItemsItemType = "UNSUBSCRIBED_EVENT"             // Represents an 'unsubscribed' event on a given `Subscribable`.
+	IssueTimelineItemsItemTypeIssueComment                    IssueTimelineItemsItemType = "ISSUE_COMMENT"                        // Represents a comment on an Issue.
+	IssueTimelineItemsItemTypeCrossReferencedEvent            IssueTimelineItemsItemType = "CROSS_REFERENCED_EVENT"               // Represents a mention made by one issue or pull request to another.
+	IssueTimelineItemsItemTypeAddedToProjectEvent             IssueTimelineItemsItemType = "ADDED_TO_PROJECT_EVENT"               // Represents a 'added_to_project' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeAddedToProjectV2Event           IssueTimelineItemsItemType = "ADDED_TO_PROJECT_V2_EVENT"            // Represents a 'added_to_project_v2' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeAssignedEvent                   IssueTimelineItemsItemType = "ASSIGNED_EVENT"                       // Represents an 'assigned' event on any assignable object.
+	IssueTimelineItemsItemTypeClosedEvent                     IssueTimelineItemsItemType = "CLOSED_EVENT"                         // Represents a 'closed' event on any `Closable`.
+	IssueTimelineItemsItemTypeCommentDeletedEvent             IssueTimelineItemsItemType = "COMMENT_DELETED_EVENT"                // Represents a 'comment_deleted' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeConnectedEvent                  IssueTimelineItemsItemType = "CONNECTED_EVENT"                      // Represents a 'connected' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeConvertedFromDraftEvent         IssueTimelineItemsItemType = "CONVERTED_FROM_DRAFT_EVENT"           // Represents a 'converted_from_draft' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeConvertedNoteToIssueEvent       IssueTimelineItemsItemType = "CONVERTED_NOTE_TO_ISSUE_EVENT"        // Represents a 'converted_note_to_issue' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeConvertedToDiscussionEvent      IssueTimelineItemsItemType = "CONVERTED_TO_DISCUSSION_EVENT"        // Represents a 'converted_to_discussion' event on a given issue.
+	IssueTimelineItemsItemTypeDemilestonedEvent               IssueTimelineItemsItemType = "DEMILESTONED_EVENT"                   // Represents a 'demilestoned' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeDisconnectedEvent               IssueTimelineItemsItemType = "DISCONNECTED_EVENT"                   // Represents a 'disconnected' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeLabeledEvent                    IssueTimelineItemsItemType = "LABELED_EVENT"                        // Represents a 'labeled' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeLockedEvent                     IssueTimelineItemsItemType = "LOCKED_EVENT"                         // Represents a 'locked' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeMarkedAsDuplicateEvent          IssueTimelineItemsItemType = "MARKED_AS_DUPLICATE_EVENT"            // Represents a 'marked_as_duplicate' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeMentionedEvent                  IssueTimelineItemsItemType = "MENTIONED_EVENT"                      // Represents a 'mentioned' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeMilestonedEvent                 IssueTimelineItemsItemType = "MILESTONED_EVENT"                     // Represents a 'milestoned' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeMovedColumnsInProjectEvent      IssueTimelineItemsItemType = "MOVED_COLUMNS_IN_PROJECT_EVENT"       // Represents a 'moved_columns_in_project' event on a given issue or pull request.
+	IssueTimelineItemsItemTypePinnedEvent                     IssueTimelineItemsItemType = "PINNED_EVENT"                         // Represents a 'pinned' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeProjectV2ItemStatusChangedEvent IssueTimelineItemsItemType = "PROJECT_V2_ITEM_STATUS_CHANGED_EVENT" // Represents a 'project_v2_item_status_changed' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeReferencedEvent                 IssueTimelineItemsItemType = "REFERENCED_EVENT"                     // Represents a 'referenced' event on a given `ReferencedSubject`.
+	IssueTimelineItemsItemTypeRemovedFromProjectEvent         IssueTimelineItemsItemType = "REMOVED_FROM_PROJECT_EVENT"           // Represents a 'removed_from_project' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeRemovedFromProjectV2Event       IssueTimelineItemsItemType = "REMOVED_FROM_PROJECT_V2_EVENT"        // Represents a 'removed_from_project_v2' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeRenamedTitleEvent               IssueTimelineItemsItemType = "RENAMED_TITLE_EVENT"                  // Represents a 'renamed' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeReopenedEvent                   IssueTimelineItemsItemType = "REOPENED_EVENT"                       // Represents a 'reopened' event on any `Closable`.
+	IssueTimelineItemsItemTypeSubscribedEvent                 IssueTimelineItemsItemType = "SUBSCRIBED_EVENT"                     // Represents a 'subscribed' event on a given `Subscribable`.
+	IssueTimelineItemsItemTypeTransferredEvent                IssueTimelineItemsItemType = "TRANSFERRED_EVENT"                    // Represents a 'transferred' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeUnassignedEvent                 IssueTimelineItemsItemType = "UNASSIGNED_EVENT"                     // Represents an 'unassigned' event on any assignable object.
+	IssueTimelineItemsItemTypeUnlabeledEvent                  IssueTimelineItemsItemType = "UNLABELED_EVENT"                      // Represents an 'unlabeled' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeUnlockedEvent                   IssueTimelineItemsItemType = "UNLOCKED_EVENT"                       // Represents an 'unlocked' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeUserBlockedEvent                IssueTimelineItemsItemType = "USER_BLOCKED_EVENT"                   // Represents a 'user_blocked' event on a given user.
+	IssueTimelineItemsItemTypeUnmarkedAsDuplicateEvent        IssueTimelineItemsItemType = "UNMARKED_AS_DUPLICATE_EVENT"          // Represents an 'unmarked_as_duplicate' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeUnpinnedEvent                   IssueTimelineItemsItemType = "UNPINNED_EVENT"                       // Represents an 'unpinned' event on a given issue or pull request.
+	IssueTimelineItemsItemTypeUnsubscribedEvent               IssueTimelineItemsItemType = "UNSUBSCRIBED_EVENT"                   // Represents an 'unsubscribed' event on a given `Subscribable`.
+	IssueTimelineItemsItemTypeIssueTypeAddedEvent             IssueTimelineItemsItemType = "ISSUE_TYPE_ADDED_EVENT"               // Represents a 'issue_type_added' event on a given issue.
+	IssueTimelineItemsItemTypeIssueTypeRemovedEvent           IssueTimelineItemsItemType = "ISSUE_TYPE_REMOVED_EVENT"             // Represents a 'issue_type_removed' event on a given issue.
+	IssueTimelineItemsItemTypeIssueTypeChangedEvent           IssueTimelineItemsItemType = "ISSUE_TYPE_CHANGED_EVENT"             // Represents a 'issue_type_changed' event on a given issue.
+	IssueTimelineItemsItemTypeSubIssueAddedEvent              IssueTimelineItemsItemType = "SUB_ISSUE_ADDED_EVENT"                // Represents a 'sub_issue_added' event on a given issue.
+	IssueTimelineItemsItemTypeSubIssueRemovedEvent            IssueTimelineItemsItemType = "SUB_ISSUE_REMOVED_EVENT"              // Represents a 'sub_issue_removed' event on a given issue.
+	IssueTimelineItemsItemTypeParentIssueAddedEvent           IssueTimelineItemsItemType = "PARENT_ISSUE_ADDED_EVENT"             // Represents a 'parent_issue_added' event on a given issue.
+	IssueTimelineItemsItemTypeParentIssueRemovedEvent         IssueTimelineItemsItemType = "PARENT_ISSUE_REMOVED_EVENT"           // Represents a 'parent_issue_removed' event on a given issue.
+	IssueTimelineItemsItemTypeBlockedByAddedEvent             IssueTimelineItemsItemType = "BLOCKED_BY_ADDED_EVENT"               // Represents a 'blocked_by_added' event on a given issue.
+	IssueTimelineItemsItemTypeBlockingAddedEvent              IssueTimelineItemsItemType = "BLOCKING_ADDED_EVENT"                 // Represents a 'blocking_added' event on a given issue.
+	IssueTimelineItemsItemTypeBlockedByRemovedEvent           IssueTimelineItemsItemType = "BLOCKED_BY_REMOVED_EVENT"             // Represents a 'blocked_by_removed' event on a given issue.
+	IssueTimelineItemsItemTypeBlockingRemovedEvent            IssueTimelineItemsItemType = "BLOCKING_REMOVED_EVENT"               // Represents a 'blocking_removed' event on a given issue.
+)
+
+// IssueTypeColor represents the possible color for an issue type.
+type IssueTypeColor string
+
+// The possible color for an issue type.
+const (
+	IssueTypeColorGray   IssueTypeColor = "GRAY"   // gray.
+	IssueTypeColorBlue   IssueTypeColor = "BLUE"   // blue.
+	IssueTypeColorGreen  IssueTypeColor = "GREEN"  // green.
+	IssueTypeColorYellow IssueTypeColor = "YELLOW" // yellow.
+	IssueTypeColorOrange IssueTypeColor = "ORANGE" // orange.
+	IssueTypeColorRed    IssueTypeColor = "RED"    // red.
+	IssueTypeColorPink   IssueTypeColor = "PINK"   // pink.
+	IssueTypeColorPurple IssueTypeColor = "PURPLE" // purple.
+)
+
+// IssueTypeOrderField represents properties by which issue type connections can be ordered.
+type IssueTypeOrderField string
+
+// Properties by which issue type connections can be ordered.
+const (
+	IssueTypeOrderFieldCreatedAt IssueTypeOrderField = "CREATED_AT" // Order issue types by creation time.
+	IssueTypeOrderFieldName      IssueTypeOrderField = "NAME"       // Order issue types by name.
 )
 
 // LabelOrderField represents properties by which label connections can be ordered.
@@ -716,8 +777,9 @@ type LabelOrderField string
 
 // Properties by which label connections can be ordered.
 const (
-	LabelOrderFieldName      LabelOrderField = "NAME"       // Order labels by name.
-	LabelOrderFieldCreatedAt LabelOrderField = "CREATED_AT" // Order labels by creation time.
+	LabelOrderFieldName       LabelOrderField = "NAME"        // Order labels by name.
+	LabelOrderFieldCreatedAt  LabelOrderField = "CREATED_AT"  // Order labels by creation time.
+	LabelOrderFieldIssueCount LabelOrderField = "ISSUE_COUNT" // Order labels by issue count.
 )
 
 // LanguageOrderField represents properties by which language connections can be ordered.
@@ -1287,6 +1349,7 @@ const (
 	ProjectV2CustomFieldTypeSingleSelect ProjectV2CustomFieldType = "SINGLE_SELECT" // Single Select.
 	ProjectV2CustomFieldTypeNumber       ProjectV2CustomFieldType = "NUMBER"        // Number.
 	ProjectV2CustomFieldTypeDate         ProjectV2CustomFieldType = "DATE"          // Date.
+	ProjectV2CustomFieldTypeIteration    ProjectV2CustomFieldType = "ITERATION"     // Iteration.
 )
 
 // ProjectV2FieldOrderField represents properties by which project v2 field connections can be ordered.
@@ -1318,6 +1381,9 @@ const (
 	ProjectV2FieldTypeIteration          ProjectV2FieldType = "ITERATION"            // Iteration.
 	ProjectV2FieldTypeTracks             ProjectV2FieldType = "TRACKS"               // Tracks.
 	ProjectV2FieldTypeTrackedBy          ProjectV2FieldType = "TRACKED_BY"           // Tracked by.
+	ProjectV2FieldTypeIssueType          ProjectV2FieldType = "ISSUE_TYPE"           // Issue type.
+	ProjectV2FieldTypeParentIssue        ProjectV2FieldType = "PARENT_ISSUE"         // Parent issue.
+	ProjectV2FieldTypeSubIssuesProgress  ProjectV2FieldType = "SUB_ISSUES_PROGRESS"  // Sub-issues progress.
 )
 
 // ProjectV2ItemFieldValueOrderField represents properties by which project v2 item field value connections can be ordered.
@@ -1454,6 +1520,16 @@ const (
 	ProjectV2WorkflowsOrderFieldCreatedAt ProjectV2WorkflowsOrderField = "CREATED_AT" // The date and time of the workflow creation.
 )
 
+// PullRequestAllowedMergeMethods represents array of allowed merge methods. Allowed values include `merge`, `squash`, and `rebase`. At least one option must be enabled.
+type PullRequestAllowedMergeMethods string
+
+// Array of allowed merge methods. Allowed values include `merge`, `squash`, and `rebase`. At least one option must be enabled.
+const (
+	PullRequestAllowedMergeMethodsMerge  PullRequestAllowedMergeMethods = "MERGE"  // Add all commits from the head branch to the base branch with a merge commit.
+	PullRequestAllowedMergeMethodsSquash PullRequestAllowedMergeMethods = "SQUASH" // Combine all commits from the head branch into a single commit in the base branch.
+	PullRequestAllowedMergeMethodsRebase PullRequestAllowedMergeMethods = "REBASE" // Add all commits from the head branch onto the base branch individually.
+)
+
 // PullRequestBranchUpdateMethod represents the possible methods for updating a pull request's head branch with the base branch.
 type PullRequestBranchUpdateMethod string
 
@@ -1553,6 +1629,7 @@ const (
 	PullRequestTimelineItemsItemTypePullRequestReview                 PullRequestTimelineItemsItemType = "PULL_REQUEST_REVIEW"                   // A review object for a given pull request.
 	PullRequestTimelineItemsItemTypePullRequestReviewThread           PullRequestTimelineItemsItemType = "PULL_REQUEST_REVIEW_THREAD"            // A threaded list of comments for a given pull request.
 	PullRequestTimelineItemsItemTypePullRequestRevisionMarker         PullRequestTimelineItemsItemType = "PULL_REQUEST_REVISION_MARKER"          // Represents the latest point in the pull request timeline for which the viewer has seen the pull request's commits.
+	PullRequestTimelineItemsItemTypeAddedToMergeQueueEvent            PullRequestTimelineItemsItemType = "ADDED_TO_MERGE_QUEUE_EVENT"            // Represents an 'added_to_merge_queue' event on a given pull request.
 	PullRequestTimelineItemsItemTypeAutomaticBaseChangeFailedEvent    PullRequestTimelineItemsItemType = "AUTOMATIC_BASE_CHANGE_FAILED_EVENT"    // Represents a 'automatic_base_change_failed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeAutomaticBaseChangeSucceededEvent PullRequestTimelineItemsItemType = "AUTOMATIC_BASE_CHANGE_SUCCEEDED_EVENT" // Represents a 'automatic_base_change_succeeded' event on a given pull request.
 	PullRequestTimelineItemsItemTypeAutoMergeDisabledEvent            PullRequestTimelineItemsItemType = "AUTO_MERGE_DISABLED_EVENT"             // Represents a 'auto_merge_disabled' event on a given pull request.
@@ -1562,26 +1639,27 @@ const (
 	PullRequestTimelineItemsItemTypeBaseRefChangedEvent               PullRequestTimelineItemsItemType = "BASE_REF_CHANGED_EVENT"                // Represents a 'base_ref_changed' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeBaseRefForcePushedEvent           PullRequestTimelineItemsItemType = "BASE_REF_FORCE_PUSHED_EVENT"           // Represents a 'base_ref_force_pushed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeBaseRefDeletedEvent               PullRequestTimelineItemsItemType = "BASE_REF_DELETED_EVENT"                // Represents a 'base_ref_deleted' event on a given pull request.
+	PullRequestTimelineItemsItemTypeConvertToDraftEvent               PullRequestTimelineItemsItemType = "CONVERT_TO_DRAFT_EVENT"                // Represents a 'convert_to_draft' event on a given pull request.
 	PullRequestTimelineItemsItemTypeDeployedEvent                     PullRequestTimelineItemsItemType = "DEPLOYED_EVENT"                        // Represents a 'deployed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeDeploymentEnvironmentChangedEvent PullRequestTimelineItemsItemType = "DEPLOYMENT_ENVIRONMENT_CHANGED_EVENT"  // Represents a 'deployment_environment_changed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeHeadRefDeletedEvent               PullRequestTimelineItemsItemType = "HEAD_REF_DELETED_EVENT"                // Represents a 'head_ref_deleted' event on a given pull request.
 	PullRequestTimelineItemsItemTypeHeadRefForcePushedEvent           PullRequestTimelineItemsItemType = "HEAD_REF_FORCE_PUSHED_EVENT"           // Represents a 'head_ref_force_pushed' event on a given pull request.
 	PullRequestTimelineItemsItemTypeHeadRefRestoredEvent              PullRequestTimelineItemsItemType = "HEAD_REF_RESTORED_EVENT"               // Represents a 'head_ref_restored' event on a given pull request.
 	PullRequestTimelineItemsItemTypeMergedEvent                       PullRequestTimelineItemsItemType = "MERGED_EVENT"                          // Represents a 'merged' event on a given pull request.
+	PullRequestTimelineItemsItemTypeReadyForReviewEvent               PullRequestTimelineItemsItemType = "READY_FOR_REVIEW_EVENT"                // Represents a 'ready_for_review' event on a given pull request.
+	PullRequestTimelineItemsItemTypeRemovedFromMergeQueueEvent        PullRequestTimelineItemsItemType = "REMOVED_FROM_MERGE_QUEUE_EVENT"        // Represents a 'removed_from_merge_queue' event on a given pull request.
 	PullRequestTimelineItemsItemTypeReviewDismissedEvent              PullRequestTimelineItemsItemType = "REVIEW_DISMISSED_EVENT"                // Represents a 'review_dismissed' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeReviewRequestedEvent              PullRequestTimelineItemsItemType = "REVIEW_REQUESTED_EVENT"                // Represents an 'review_requested' event on a given pull request.
 	PullRequestTimelineItemsItemTypeReviewRequestRemovedEvent         PullRequestTimelineItemsItemType = "REVIEW_REQUEST_REMOVED_EVENT"          // Represents an 'review_request_removed' event on a given pull request.
-	PullRequestTimelineItemsItemTypeReadyForReviewEvent               PullRequestTimelineItemsItemType = "READY_FOR_REVIEW_EVENT"                // Represents a 'ready_for_review' event on a given pull request.
-	PullRequestTimelineItemsItemTypeConvertToDraftEvent               PullRequestTimelineItemsItemType = "CONVERT_TO_DRAFT_EVENT"                // Represents a 'convert_to_draft' event on a given pull request.
-	PullRequestTimelineItemsItemTypeAddedToMergeQueueEvent            PullRequestTimelineItemsItemType = "ADDED_TO_MERGE_QUEUE_EVENT"            // Represents an 'added_to_merge_queue' event on a given pull request.
-	PullRequestTimelineItemsItemTypeRemovedFromMergeQueueEvent        PullRequestTimelineItemsItemType = "REMOVED_FROM_MERGE_QUEUE_EVENT"        // Represents a 'removed_from_merge_queue' event on a given pull request.
 	PullRequestTimelineItemsItemTypeIssueComment                      PullRequestTimelineItemsItemType = "ISSUE_COMMENT"                         // Represents a comment on an Issue.
 	PullRequestTimelineItemsItemTypeCrossReferencedEvent              PullRequestTimelineItemsItemType = "CROSS_REFERENCED_EVENT"                // Represents a mention made by one issue or pull request to another.
 	PullRequestTimelineItemsItemTypeAddedToProjectEvent               PullRequestTimelineItemsItemType = "ADDED_TO_PROJECT_EVENT"                // Represents a 'added_to_project' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypeAddedToProjectV2Event             PullRequestTimelineItemsItemType = "ADDED_TO_PROJECT_V2_EVENT"             // Represents a 'added_to_project_v2' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeAssignedEvent                     PullRequestTimelineItemsItemType = "ASSIGNED_EVENT"                        // Represents an 'assigned' event on any assignable object.
 	PullRequestTimelineItemsItemTypeClosedEvent                       PullRequestTimelineItemsItemType = "CLOSED_EVENT"                          // Represents a 'closed' event on any `Closable`.
 	PullRequestTimelineItemsItemTypeCommentDeletedEvent               PullRequestTimelineItemsItemType = "COMMENT_DELETED_EVENT"                 // Represents a 'comment_deleted' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeConnectedEvent                    PullRequestTimelineItemsItemType = "CONNECTED_EVENT"                       // Represents a 'connected' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypeConvertedFromDraftEvent           PullRequestTimelineItemsItemType = "CONVERTED_FROM_DRAFT_EVENT"            // Represents a 'converted_from_draft' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeConvertedNoteToIssueEvent         PullRequestTimelineItemsItemType = "CONVERTED_NOTE_TO_ISSUE_EVENT"         // Represents a 'converted_note_to_issue' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeConvertedToDiscussionEvent        PullRequestTimelineItemsItemType = "CONVERTED_TO_DISCUSSION_EVENT"         // Represents a 'converted_to_discussion' event on a given issue.
 	PullRequestTimelineItemsItemTypeDemilestonedEvent                 PullRequestTimelineItemsItemType = "DEMILESTONED_EVENT"                    // Represents a 'demilestoned' event on a given issue or pull request.
@@ -1593,8 +1671,10 @@ const (
 	PullRequestTimelineItemsItemTypeMilestonedEvent                   PullRequestTimelineItemsItemType = "MILESTONED_EVENT"                      // Represents a 'milestoned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeMovedColumnsInProjectEvent        PullRequestTimelineItemsItemType = "MOVED_COLUMNS_IN_PROJECT_EVENT"        // Represents a 'moved_columns_in_project' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypePinnedEvent                       PullRequestTimelineItemsItemType = "PINNED_EVENT"                          // Represents a 'pinned' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypeProjectV2ItemStatusChangedEvent   PullRequestTimelineItemsItemType = "PROJECT_V2_ITEM_STATUS_CHANGED_EVENT"  // Represents a 'project_v2_item_status_changed' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeReferencedEvent                   PullRequestTimelineItemsItemType = "REFERENCED_EVENT"                      // Represents a 'referenced' event on a given `ReferencedSubject`.
 	PullRequestTimelineItemsItemTypeRemovedFromProjectEvent           PullRequestTimelineItemsItemType = "REMOVED_FROM_PROJECT_EVENT"            // Represents a 'removed_from_project' event on a given issue or pull request.
+	PullRequestTimelineItemsItemTypeRemovedFromProjectV2Event         PullRequestTimelineItemsItemType = "REMOVED_FROM_PROJECT_V2_EVENT"         // Represents a 'removed_from_project_v2' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeRenamedTitleEvent                 PullRequestTimelineItemsItemType = "RENAMED_TITLE_EVENT"                   // Represents a 'renamed' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeReopenedEvent                     PullRequestTimelineItemsItemType = "REOPENED_EVENT"                        // Represents a 'reopened' event on any `Closable`.
 	PullRequestTimelineItemsItemTypeSubscribedEvent                   PullRequestTimelineItemsItemType = "SUBSCRIBED_EVENT"                      // Represents a 'subscribed' event on a given `Subscribable`.
@@ -1606,6 +1686,17 @@ const (
 	PullRequestTimelineItemsItemTypeUnmarkedAsDuplicateEvent          PullRequestTimelineItemsItemType = "UNMARKED_AS_DUPLICATE_EVENT"           // Represents an 'unmarked_as_duplicate' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnpinnedEvent                     PullRequestTimelineItemsItemType = "UNPINNED_EVENT"                        // Represents an 'unpinned' event on a given issue or pull request.
 	PullRequestTimelineItemsItemTypeUnsubscribedEvent                 PullRequestTimelineItemsItemType = "UNSUBSCRIBED_EVENT"                    // Represents an 'unsubscribed' event on a given `Subscribable`.
+	PullRequestTimelineItemsItemTypeIssueTypeAddedEvent               PullRequestTimelineItemsItemType = "ISSUE_TYPE_ADDED_EVENT"                // Represents a 'issue_type_added' event on a given issue.
+	PullRequestTimelineItemsItemTypeIssueTypeRemovedEvent             PullRequestTimelineItemsItemType = "ISSUE_TYPE_REMOVED_EVENT"              // Represents a 'issue_type_removed' event on a given issue.
+	PullRequestTimelineItemsItemTypeIssueTypeChangedEvent             PullRequestTimelineItemsItemType = "ISSUE_TYPE_CHANGED_EVENT"              // Represents a 'issue_type_changed' event on a given issue.
+	PullRequestTimelineItemsItemTypeSubIssueAddedEvent                PullRequestTimelineItemsItemType = "SUB_ISSUE_ADDED_EVENT"                 // Represents a 'sub_issue_added' event on a given issue.
+	PullRequestTimelineItemsItemTypeSubIssueRemovedEvent              PullRequestTimelineItemsItemType = "SUB_ISSUE_REMOVED_EVENT"               // Represents a 'sub_issue_removed' event on a given issue.
+	PullRequestTimelineItemsItemTypeParentIssueAddedEvent             PullRequestTimelineItemsItemType = "PARENT_ISSUE_ADDED_EVENT"              // Represents a 'parent_issue_added' event on a given issue.
+	PullRequestTimelineItemsItemTypeParentIssueRemovedEvent           PullRequestTimelineItemsItemType = "PARENT_ISSUE_REMOVED_EVENT"            // Represents a 'parent_issue_removed' event on a given issue.
+	PullRequestTimelineItemsItemTypeBlockedByAddedEvent               PullRequestTimelineItemsItemType = "BLOCKED_BY_ADDED_EVENT"                // Represents a 'blocked_by_added' event on a given issue.
+	PullRequestTimelineItemsItemTypeBlockingAddedEvent                PullRequestTimelineItemsItemType = "BLOCKING_ADDED_EVENT"                  // Represents a 'blocking_added' event on a given issue.
+	PullRequestTimelineItemsItemTypeBlockedByRemovedEvent             PullRequestTimelineItemsItemType = "BLOCKED_BY_REMOVED_EVENT"              // Represents a 'blocked_by_removed' event on a given issue.
+	PullRequestTimelineItemsItemTypeBlockingRemovedEvent              PullRequestTimelineItemsItemType = "BLOCKING_REMOVED_EVENT"                // Represents a 'blocking_removed' event on a given issue.
 )
 
 // PullRequestUpdateState represents the possible target states when updating a pull request.
@@ -1663,7 +1754,7 @@ type RepoAccessAuditEntryVisibility string
 
 // The privacy of a repository.
 const (
-	RepoAccessAuditEntryVisibilityInternal RepoAccessAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoAccessAuditEntryVisibilityInternal RepoAccessAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same enterprise.
 	RepoAccessAuditEntryVisibilityPrivate  RepoAccessAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepoAccessAuditEntryVisibilityPublic   RepoAccessAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
 )
@@ -1673,7 +1764,7 @@ type RepoAddMemberAuditEntryVisibility string
 
 // The privacy of a repository.
 const (
-	RepoAddMemberAuditEntryVisibilityInternal RepoAddMemberAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoAddMemberAuditEntryVisibilityInternal RepoAddMemberAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same enterprise.
 	RepoAddMemberAuditEntryVisibilityPrivate  RepoAddMemberAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepoAddMemberAuditEntryVisibilityPublic   RepoAddMemberAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
 )
@@ -1683,7 +1774,7 @@ type RepoArchivedAuditEntryVisibility string
 
 // The privacy of a repository.
 const (
-	RepoArchivedAuditEntryVisibilityInternal RepoArchivedAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoArchivedAuditEntryVisibilityInternal RepoArchivedAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same enterprise.
 	RepoArchivedAuditEntryVisibilityPrivate  RepoArchivedAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepoArchivedAuditEntryVisibilityPublic   RepoArchivedAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
 )
@@ -1703,7 +1794,7 @@ type RepoCreateAuditEntryVisibility string
 
 // The privacy of a repository.
 const (
-	RepoCreateAuditEntryVisibilityInternal RepoCreateAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoCreateAuditEntryVisibilityInternal RepoCreateAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same enterprise.
 	RepoCreateAuditEntryVisibilityPrivate  RepoCreateAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepoCreateAuditEntryVisibilityPublic   RepoCreateAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
 )
@@ -1713,7 +1804,7 @@ type RepoDestroyAuditEntryVisibility string
 
 // The privacy of a repository.
 const (
-	RepoDestroyAuditEntryVisibilityInternal RepoDestroyAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoDestroyAuditEntryVisibilityInternal RepoDestroyAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same enterprise.
 	RepoDestroyAuditEntryVisibilityPrivate  RepoDestroyAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepoDestroyAuditEntryVisibilityPublic   RepoDestroyAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
 )
@@ -1723,7 +1814,7 @@ type RepoRemoveMemberAuditEntryVisibility string
 
 // The privacy of a repository.
 const (
-	RepoRemoveMemberAuditEntryVisibilityInternal RepoRemoveMemberAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepoRemoveMemberAuditEntryVisibilityInternal RepoRemoveMemberAuditEntryVisibility = "INTERNAL" // The repository is visible only to users in the same enterprise.
 	RepoRemoveMemberAuditEntryVisibilityPrivate  RepoRemoveMemberAuditEntryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepoRemoveMemberAuditEntryVisibilityPublic   RepoRemoveMemberAuditEntryVisibility = "PUBLIC"   // The repository is visible to everyone.
 )
@@ -1904,14 +1995,15 @@ const (
 	RepositoryRuleTypeCommitterEmailPattern          RepositoryRuleType = "COMMITTER_EMAIL_PATTERN"           // Committer email pattern.
 	RepositoryRuleTypeBranchNamePattern              RepositoryRuleType = "BRANCH_NAME_PATTERN"               // Branch name pattern.
 	RepositoryRuleTypeTagNamePattern                 RepositoryRuleType = "TAG_NAME_PATTERN"                  // Tag name pattern.
-	RepositoryRuleTypeFilePathRestriction            RepositoryRuleType = "FILE_PATH_RESTRICTION"             // Prevent commits that include changes in specified file paths from being pushed to the commit graph. NOTE: This rule is in beta and subject to change.
-	RepositoryRuleTypeMaxFilePathLength              RepositoryRuleType = "MAX_FILE_PATH_LENGTH"              // Prevent commits that include file paths that exceed a specified character limit from being pushed to the commit graph. NOTE: This rule is in beta and subject to change.
-	RepositoryRuleTypeFileExtensionRestriction       RepositoryRuleType = "FILE_EXTENSION_RESTRICTION"        // Prevent commits that include files with specified file extensions from being pushed to the commit graph. NOTE: This rule is in beta and subject to change.
-	RepositoryRuleTypeMaxFileSize                    RepositoryRuleType = "MAX_FILE_SIZE"                     // Prevent commits that exceed a specified file size limit from being pushed to the commit. NOTE: This rule is in beta and subject to change.
+	RepositoryRuleTypeFilePathRestriction            RepositoryRuleType = "FILE_PATH_RESTRICTION"             // Prevent commits that include changes in specified file and folder paths from being pushed to the commit graph. This includes absolute paths that contain file names.
+	RepositoryRuleTypeMaxFilePathLength              RepositoryRuleType = "MAX_FILE_PATH_LENGTH"              // Prevent commits that include file paths that exceed the specified character limit from being pushed to the commit graph.
+	RepositoryRuleTypeFileExtensionRestriction       RepositoryRuleType = "FILE_EXTENSION_RESTRICTION"        // Prevent commits that include files with specified file extensions from being pushed to the commit graph.
+	RepositoryRuleTypeMaxFileSize                    RepositoryRuleType = "MAX_FILE_SIZE"                     // Prevent commits with individual files that exceed the specified limit from being pushed to the commit graph.
 	RepositoryRuleTypeWorkflows                      RepositoryRuleType = "WORKFLOWS"                         // Require all changes made to a targeted branch to pass the specified workflows before they can be merged.
 	RepositoryRuleTypeSecretScanning                 RepositoryRuleType = "SECRET_SCANNING"                   // Secret scanning.
 	RepositoryRuleTypeWorkflowUpdates                RepositoryRuleType = "WORKFLOW_UPDATES"                  // Workflow files cannot be modified.
 	RepositoryRuleTypeCodeScanning                   RepositoryRuleType = "CODE_SCANNING"                     // Choose which tools must provide code scanning results before the reference is updated. When configured, code scanning must be enabled and have results for both the commit and the reference being updated.
+	RepositoryRuleTypeCopilotCodeReview              RepositoryRuleType = "COPILOT_CODE_REVIEW"               // Request Copilot code review for new pull requests automatically if the author has access to Copilot code review.
 )
 
 // RepositoryRulesetBypassActorBypassMode represents the bypass mode for a specific actor on a ruleset.
@@ -1921,16 +2013,27 @@ type RepositoryRulesetBypassActorBypassMode string
 const (
 	RepositoryRulesetBypassActorBypassModeAlways      RepositoryRulesetBypassActorBypassMode = "ALWAYS"       // The actor can always bypass rules.
 	RepositoryRulesetBypassActorBypassModePullRequest RepositoryRulesetBypassActorBypassMode = "PULL_REQUEST" // The actor can only bypass rules via a pull request.
+	RepositoryRulesetBypassActorBypassModeExempt      RepositoryRulesetBypassActorBypassMode = "EXEMPT"       // The actor is exempt from rules without generating a pass / fail result.
 )
 
-// RepositoryRulesetTarget represents the targets supported for rulesets. NOTE: The push target is in beta and subject to change.
+// RepositoryRulesetTarget represents the targets supported for rulesets.
 type RepositoryRulesetTarget string
 
-// The targets supported for rulesets. NOTE: The push target is in beta and subject to change.
+// The targets supported for rulesets.
 const (
-	RepositoryRulesetTargetBranch RepositoryRulesetTarget = "BRANCH" // Branch.
-	RepositoryRulesetTargetTag    RepositoryRulesetTarget = "TAG"    // Tag.
-	RepositoryRulesetTargetPush   RepositoryRulesetTarget = "PUSH"   // Push.
+	RepositoryRulesetTargetBranch     RepositoryRulesetTarget = "BRANCH"     // Branch.
+	RepositoryRulesetTargetTag        RepositoryRulesetTarget = "TAG"        // Tag.
+	RepositoryRulesetTargetPush       RepositoryRulesetTarget = "PUSH"       // Push.
+	RepositoryRulesetTargetRepository RepositoryRulesetTarget = "REPOSITORY" // repository.
+)
+
+// RepositorySuggestedActorFilter represents the possible filters for suggested actors in a repository.
+type RepositorySuggestedActorFilter string
+
+// The possible filters for suggested actors in a repository.
+const (
+	RepositorySuggestedActorFilterCanBeAssigned RepositorySuggestedActorFilter = "CAN_BE_ASSIGNED" // Actors that can be assigned to issues and pull requests.
+	RepositorySuggestedActorFilterCanBeAuthor   RepositorySuggestedActorFilter = "CAN_BE_AUTHOR"   // Actors that can be the author of issues and pull requests.
 )
 
 // RepositoryVisibility represents the repository's visibility level.
@@ -1940,7 +2043,18 @@ type RepositoryVisibility string
 const (
 	RepositoryVisibilityPrivate  RepositoryVisibility = "PRIVATE"  // The repository is visible only to those with explicit access.
 	RepositoryVisibilityPublic   RepositoryVisibility = "PUBLIC"   // The repository is visible to everyone.
-	RepositoryVisibilityInternal RepositoryVisibility = "INTERNAL" // The repository is visible only to users in the same business.
+	RepositoryVisibilityInternal RepositoryVisibility = "INTERNAL" // The repository is visible only to users in the same enterprise.
+)
+
+// RepositoryVulnerabilityAlertDependencyRelationship represents the possible relationships of an alert's dependency.
+type RepositoryVulnerabilityAlertDependencyRelationship string
+
+// The possible relationships of an alert's dependency.
+const (
+	RepositoryVulnerabilityAlertDependencyRelationshipUnknown      RepositoryVulnerabilityAlertDependencyRelationship = "UNKNOWN"      // The relationship is unknown.
+	RepositoryVulnerabilityAlertDependencyRelationshipDirect       RepositoryVulnerabilityAlertDependencyRelationship = "DIRECT"       // A direct dependency of your project.
+	RepositoryVulnerabilityAlertDependencyRelationshipTransitive   RepositoryVulnerabilityAlertDependencyRelationship = "TRANSITIVE"   // A transitive dependency of your project.
+	RepositoryVulnerabilityAlertDependencyRelationshipInconclusive RepositoryVulnerabilityAlertDependencyRelationship = "INCONCLUSIVE" // The relationship could not be determined.
 )
 
 // RepositoryVulnerabilityAlertDependencyScope represents the possible scopes of an alert's dependency.
@@ -2030,10 +2144,11 @@ type SearchType string
 
 // Represents the individual results of a search.
 const (
-	SearchTypeIssue      SearchType = "ISSUE"      // Returns results matching issues in repositories.
-	SearchTypeRepository SearchType = "REPOSITORY" // Returns results matching repositories.
-	SearchTypeUser       SearchType = "USER"       // Returns results matching users and organizations on GitHub.
-	SearchTypeDiscussion SearchType = "DISCUSSION" // Returns matching discussions in repositories.
+	SearchTypeIssue         SearchType = "ISSUE"          // Returns results matching issues in repositories.
+	SearchTypeIssueAdvanced SearchType = "ISSUE_ADVANCED" // Returns results matching issues in repositories.
+	SearchTypeRepository    SearchType = "REPOSITORY"     // Returns results matching repositories.
+	SearchTypeUser          SearchType = "USER"           // Returns results matching users and organizations on GitHub.
+	SearchTypeDiscussion    SearchType = "DISCUSSION"     // Returns matching discussions in repositories.
 )
 
 // SecurityAdvisoryClassification represents classification of the advisory.
@@ -2078,8 +2193,10 @@ type SecurityAdvisoryOrderField string
 
 // Properties by which security advisory connections can be ordered.
 const (
-	SecurityAdvisoryOrderFieldPublishedAt SecurityAdvisoryOrderField = "PUBLISHED_AT" // Order advisories by publication time.
-	SecurityAdvisoryOrderFieldUpdatedAt   SecurityAdvisoryOrderField = "UPDATED_AT"   // Order advisories by update time.
+	SecurityAdvisoryOrderFieldPublishedAt    SecurityAdvisoryOrderField = "PUBLISHED_AT"    // Order advisories by publication time.
+	SecurityAdvisoryOrderFieldUpdatedAt      SecurityAdvisoryOrderField = "UPDATED_AT"      // Order advisories by update time.
+	SecurityAdvisoryOrderFieldEpssPercentage SecurityAdvisoryOrderField = "EPSS_PERCENTAGE" // Order advisories by EPSS percentage.
+	SecurityAdvisoryOrderFieldEpssPercentile SecurityAdvisoryOrderField = "EPSS_PERCENTILE" // Order advisories by EPSS percentile.
 )
 
 // SecurityAdvisorySeverity represents severity of the vulnerability.
@@ -2116,6 +2233,7 @@ const (
 	SocialAccountProviderTwitch    SocialAccountProvider = "TWITCH"    // Live-streaming service.
 	SocialAccountProviderTwitter   SocialAccountProvider = "TWITTER"   // Microblogging website.
 	SocialAccountProviderYouTube   SocialAccountProvider = "YOUTUBE"   // Online video platform.
+	SocialAccountProviderBluesky   SocialAccountProvider = "BLUESKY"   // Decentralized microblogging social platform.
 	SocialAccountProviderNpm       SocialAccountProvider = "NPM"       // JavaScript package registry.
 )
 
@@ -2396,6 +2514,7 @@ const (
 	SponsorsCountryOrRegionCodeSZ SponsorsCountryOrRegionCode = "SZ" // Swaziland.
 	SponsorsCountryOrRegionCodeSE SponsorsCountryOrRegionCode = "SE" // Sweden.
 	SponsorsCountryOrRegionCodeCH SponsorsCountryOrRegionCode = "CH" // Switzerland.
+	SponsorsCountryOrRegionCodeSY SponsorsCountryOrRegionCode = "SY" // Syria.
 	SponsorsCountryOrRegionCodeTW SponsorsCountryOrRegionCode = "TW" // Taiwan.
 	SponsorsCountryOrRegionCodeTJ SponsorsCountryOrRegionCode = "TJ" // Tajikistan.
 	SponsorsCountryOrRegionCodeTZ SponsorsCountryOrRegionCode = "TZ" // Tanzania.
@@ -2688,6 +2807,16 @@ const (
 	TrackedIssueStatesClosed TrackedIssueStates = "CLOSED" // The tracked issue is closed.
 )
 
+// TwoFactorCredentialSecurityType represents filters by whether or not 2FA is enabled and if the method configured is considered secure or insecure.
+type TwoFactorCredentialSecurityType string
+
+// Filters by whether or not 2FA is enabled and if the method configured is considered secure or insecure.
+const (
+	TwoFactorCredentialSecurityTypeSecure   TwoFactorCredentialSecurityType = "SECURE"   // Has only secure methods of two-factor authentication.
+	TwoFactorCredentialSecurityTypeInsecure TwoFactorCredentialSecurityType = "INSECURE" // Has an insecure method of two-factor authentication. GitHub currently defines this as SMS two-factor authentication.
+	TwoFactorCredentialSecurityTypeDisabled TwoFactorCredentialSecurityType = "DISABLED" // No method of two-factor authentication.
+)
+
 // UserBlockDuration represents the possible durations that a user can be blocked for.
 type UserBlockDuration string
 
@@ -2706,6 +2835,15 @@ type UserStatusOrderField string
 // Properties by which user status connections can be ordered.
 const (
 	UserStatusOrderFieldUpdatedAt UserStatusOrderField = "UPDATED_AT" // Order user statuses by when they were updated.
+)
+
+// UserViewType represents whether a user being viewed contains public or private information.
+type UserViewType string
+
+// Whether a user being viewed contains public or private information.
+const (
+	UserViewTypePublic  UserViewType = "PUBLIC"  // A user that is publicly visible.
+	UserViewTypePrivate UserViewType = "PRIVATE" // A user containing information only visible to the authenticated user.
 )
 
 // VerifiableDomainOrderField represents properties by which verifiable domain connections can be ordered.
