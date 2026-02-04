@@ -4,7 +4,7 @@ package githubv4
 
 // Input represents one of the Input structs:
 //
-// AbortQueuedMigrationsInput, AbortRepositoryMigrationInput, AcceptEnterpriseAdministratorInvitationInput, AcceptEnterpriseMemberInvitationInput, AcceptTopicSuggestionInput, AccessUserNamespaceRepositoryInput, AddAssigneesToAssignableInput, AddBlockedByInput, AddCommentInput, AddDiscussionCommentInput, AddDiscussionPollVoteInput, AddEnterpriseOrganizationMemberInput, AddEnterpriseSupportEntitlementInput, AddLabelsToLabelableInput, AddProjectCardInput, AddProjectColumnInput, AddProjectV2DraftIssueInput, AddProjectV2ItemByIdInput, AddPullRequestReviewCommentInput, AddPullRequestReviewInput, AddPullRequestReviewThreadInput, AddPullRequestReviewThreadReplyInput, AddReactionInput, AddStarInput, AddSubIssueInput, AddUpvoteInput, AddVerifiableDomainInput, ApproveDeploymentsInput, ApproveVerifiableDomainInput, ArchiveProjectV2ItemInput, ArchiveRepositoryInput, AuditLogOrder, BranchNamePatternParametersInput, BulkSponsorship, CancelEnterpriseAdminInvitationInput, CancelEnterpriseMemberInvitationInput, CancelSponsorshipInput, ChangeUserStatusInput, CheckAnnotationData, CheckAnnotationRange, CheckRunAction, CheckRunFilter, CheckRunOutput, CheckRunOutputImage, CheckSuiteAutoTriggerPreference, CheckSuiteFilter, ClearLabelsFromLabelableInput, ClearProjectV2ItemFieldValueInput, CloneProjectInput, CloneTemplateRepositoryInput, CloseDiscussionInput, CloseIssueInput, ClosePullRequestInput, CodeScanningParametersInput, CodeScanningToolInput, CommitAuthor, CommitAuthorEmailPatternParametersInput, CommitContributionOrder, CommitMessage, CommitMessagePatternParametersInput, CommittableBranch, CommitterEmailPatternParametersInput, ContributionOrder, ConvertProjectCardNoteToIssueInput, ConvertProjectV2DraftIssueItemToIssueInput, ConvertPullRequestToDraftInput, CopilotCodeReviewParametersInput, CopyProjectV2Input, CreateAttributionInvitationInput, CreateBranchProtectionRuleInput, CreateCheckRunInput, CreateCheckSuiteInput, CreateCommitOnBranchInput, CreateDeploymentInput, CreateDeploymentStatusInput, CreateDiscussionInput, CreateEnterpriseOrganizationInput, CreateEnvironmentInput, CreateIpAllowListEntryInput, CreateIssueInput, CreateIssueTypeInput, CreateLabelInput, CreateLinkedBranchInput, CreateMigrationSourceInput, CreateProjectInput, CreateProjectV2FieldInput, CreateProjectV2Input, CreateProjectV2StatusUpdateInput, CreatePullRequestInput, CreateRefInput, CreateRepositoryInput, CreateRepositoryRulesetInput, CreateSponsorsListingInput, CreateSponsorsTierInput, CreateSponsorshipInput, CreateSponsorshipsInput, CreateTeamDiscussionCommentInput, CreateTeamDiscussionInput, CreateUserListInput, DeclineTopicSuggestionInput, DeleteBranchProtectionRuleInput, DeleteDeploymentInput, DeleteDiscussionCommentInput, DeleteDiscussionInput, DeleteEnvironmentInput, DeleteIpAllowListEntryInput, DeleteIssueCommentInput, DeleteIssueInput, DeleteIssueTypeInput, DeleteLabelInput, DeleteLinkedBranchInput, DeletePackageVersionInput, DeleteProjectCardInput, DeleteProjectColumnInput, DeleteProjectInput, DeleteProjectV2FieldInput, DeleteProjectV2Input, DeleteProjectV2ItemInput, DeleteProjectV2StatusUpdateInput, DeleteProjectV2WorkflowInput, DeletePullRequestReviewCommentInput, DeletePullRequestReviewInput, DeleteRefInput, DeleteRepositoryRulesetInput, DeleteTeamDiscussionCommentInput, DeleteTeamDiscussionInput, DeleteUserListInput, DeleteVerifiableDomainInput, DeploymentOrder, DequeuePullRequestInput, DisablePullRequestAutoMergeInput, DiscussionOrder, DiscussionPollOptionOrder, DismissPullRequestReviewInput, DismissRepositoryVulnerabilityAlertInput, DraftPullRequestReviewComment, DraftPullRequestReviewThread, EnablePullRequestAutoMergeInput, EnqueuePullRequestInput, EnterpriseAdministratorInvitationOrder, EnterpriseMemberInvitationOrder, EnterpriseMemberOrder, EnterpriseOrder, EnterpriseServerInstallationOrder, EnterpriseServerUserAccountEmailOrder, EnterpriseServerUserAccountOrder, EnterpriseServerUserAccountsUploadOrder, Environments, FileAddition, FileChanges, FileDeletion, FileExtensionRestrictionParametersInput, FilePathRestrictionParametersInput, FollowOrganizationInput, FollowUserInput, GistOrder, GrantEnterpriseOrganizationsMigratorRoleInput, GrantMigratorRoleInput, ImportProjectInput, InviteEnterpriseAdminInput, InviteEnterpriseMemberInput, IpAllowListEntryOrder, IssueCommentOrder, IssueDependencyOrder, IssueFilters, IssueOrder, IssueTypeOrder, LabelOrder, LanguageOrder, LinkProjectV2ToRepositoryInput, LinkProjectV2ToTeamInput, LinkRepositoryToProjectInput, LockLockableInput, MannequinOrder, MarkDiscussionCommentAsAnswerInput, MarkFileAsViewedInput, MarkProjectV2AsTemplateInput, MarkPullRequestReadyForReviewInput, MaxFilePathLengthParametersInput, MaxFileSizeParametersInput, MergeBranchInput, MergePullRequestInput, MergeQueueParametersInput, MilestoneOrder, MinimizeCommentInput, MoveProjectCardInput, MoveProjectColumnInput, OrgEnterpriseOwnerOrder, OrganizationOrder, OrganizationPropertyConditionTargetInput, OrganizationPropertyTargetDefinitionInput, PackageFileOrder, PackageOrder, PackageVersionOrder, PinEnvironmentInput, PinIssueInput, PinnedEnvironmentOrder, ProjectCardImport, ProjectColumnImport, ProjectOrder, ProjectV2Collaborator, ProjectV2FieldOrder, ProjectV2FieldValue, ProjectV2Filters, ProjectV2ItemFieldValueOrder, ProjectV2ItemOrder, ProjectV2Iteration, ProjectV2IterationFieldConfigurationInput, ProjectV2Order, ProjectV2SingleSelectFieldOptionInput, ProjectV2StatusOrder, ProjectV2ViewOrder, ProjectV2WorkflowOrder, PropertyTargetDefinitionInput, PublishSponsorsTierInput, PullRequestOrder, PullRequestParametersInput, ReactionOrder, RefNameConditionTargetInput, RefOrder, RefUpdate, RegenerateEnterpriseIdentityProviderRecoveryCodesInput, RegenerateVerifiableDomainTokenInput, RejectDeploymentsInput, ReleaseOrder, RemoveAssigneesFromAssignableInput, RemoveBlockedByInput, RemoveEnterpriseAdminInput, RemoveEnterpriseIdentityProviderInput, RemoveEnterpriseMemberInput, RemoveEnterpriseOrganizationInput, RemoveEnterpriseSupportEntitlementInput, RemoveLabelsFromLabelableInput, RemoveOutsideCollaboratorInput, RemoveReactionInput, RemoveStarInput, RemoveSubIssueInput, RemoveUpvoteInput, ReopenDiscussionInput, ReopenIssueInput, ReopenPullRequestInput, ReorderEnvironmentInput, ReplaceActorsForAssignableInput, RepositoryIdConditionTargetInput, RepositoryInvitationOrder, RepositoryMigrationOrder, RepositoryNameConditionTargetInput, RepositoryOrder, RepositoryPropertyConditionTargetInput, RepositoryRuleConditionsInput, RepositoryRuleInput, RepositoryRuleOrder, RepositoryRulesetBypassActorInput, ReprioritizeSubIssueInput, RequestReviewsInput, RequiredDeploymentsParametersInput, RequiredReviewerConfigurationInput, RequiredStatusCheckInput, RequiredStatusChecksParametersInput, RerequestCheckSuiteInput, ResolveReviewThreadInput, RetireSponsorsTierInput, RevertPullRequestInput, RevokeEnterpriseOrganizationsMigratorRoleInput, RevokeMigratorRoleInput, RuleParametersInput, SavedReplyOrder, SecurityAdvisoryIdentifierFilter, SecurityAdvisoryOrder, SecurityVulnerabilityOrder, SetEnterpriseIdentityProviderInput, SetOrganizationInteractionLimitInput, SetRepositoryInteractionLimitInput, SetUserInteractionLimitInput, SponsorAndLifetimeValueOrder, SponsorOrder, SponsorableOrder, SponsorsActivityOrder, SponsorsTierOrder, SponsorshipNewsletterOrder, SponsorshipOrder, StarOrder, StartOrganizationMigrationInput, StartRepositoryMigrationInput, StatusCheckConfigurationInput, SubmitPullRequestReviewInput, TagNamePatternParametersInput, TeamDiscussionCommentOrder, TeamDiscussionOrder, TeamMemberOrder, TeamOrder, TeamRepositoryOrder, TransferEnterpriseOrganizationInput, TransferIssueInput, UnarchiveProjectV2ItemInput, UnarchiveRepositoryInput, UnfollowOrganizationInput, UnfollowUserInput, UnlinkProjectV2FromRepositoryInput, UnlinkProjectV2FromTeamInput, UnlinkRepositoryFromProjectInput, UnlockLockableInput, UnmarkDiscussionCommentAsAnswerInput, UnmarkFileAsViewedInput, UnmarkIssueAsDuplicateInput, UnmarkProjectV2AsTemplateInput, UnminimizeCommentInput, UnpinIssueInput, UnresolveReviewThreadInput, UpdateBranchProtectionRuleInput, UpdateCheckRunInput, UpdateCheckSuitePreferencesInput, UpdateDiscussionCommentInput, UpdateDiscussionInput, UpdateEnterpriseAdministratorRoleInput, UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput, UpdateEnterpriseDefaultRepositoryPermissionSettingInput, UpdateEnterpriseDeployKeySettingInput, UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput, UpdateEnterpriseMembersCanCreateRepositoriesSettingInput, UpdateEnterpriseMembersCanDeleteIssuesSettingInput, UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput, UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput, UpdateEnterpriseMembersCanMakePurchasesSettingInput, UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput, UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput, UpdateEnterpriseOrganizationProjectsSettingInput, UpdateEnterpriseOwnerOrganizationRoleInput, UpdateEnterpriseProfileInput, UpdateEnterpriseRepositoryProjectsSettingInput, UpdateEnterpriseTeamDiscussionsSettingInput, UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingInput, UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput, UpdateEnvironmentInput, UpdateIpAllowListEnabledSettingInput, UpdateIpAllowListEntryInput, UpdateIpAllowListForInstalledAppsEnabledSettingInput, UpdateIssueCommentInput, UpdateIssueInput, UpdateIssueIssueTypeInput, UpdateIssueTypeInput, UpdateLabelInput, UpdateNotificationRestrictionSettingInput, UpdateOrganizationAllowPrivateRepositoryForkingSettingInput, UpdateOrganizationWebCommitSignoffSettingInput, UpdateParametersInput, UpdatePatreonSponsorabilityInput, UpdateProjectCardInput, UpdateProjectColumnInput, UpdateProjectInput, UpdateProjectV2CollaboratorsInput, UpdateProjectV2DraftIssueInput, UpdateProjectV2FieldInput, UpdateProjectV2Input, UpdateProjectV2ItemFieldValueInput, UpdateProjectV2ItemPositionInput, UpdateProjectV2StatusUpdateInput, UpdatePullRequestBranchInput, UpdatePullRequestInput, UpdatePullRequestReviewCommentInput, UpdatePullRequestReviewInput, UpdateRefInput, UpdateRefsInput, UpdateRepositoryInput, UpdateRepositoryRulesetInput, UpdateRepositoryWebCommitSignoffSettingInput, UpdateSponsorshipPreferencesInput, UpdateSubscriptionInput, UpdateTeamDiscussionCommentInput, UpdateTeamDiscussionInput, UpdateTeamReviewAssignmentInput, UpdateTeamsRepositoryInput, UpdateTopicsInput, UpdateUserListInput, UpdateUserListsForItemInput, UserStatusOrder, VerifiableDomainOrder, VerifyVerifiableDomainInput, WorkflowFileReferenceInput, WorkflowRunOrder, WorkflowsParametersInput.
+// AbortQueuedMigrationsInput, AbortRepositoryMigrationInput, AcceptEnterpriseAdministratorInvitationInput, AcceptEnterpriseMemberInvitationInput, AcceptTopicSuggestionInput, AccessUserNamespaceRepositoryInput, AddAssigneesToAssignableInput, AddBlockedByInput, AddCommentInput, AddDiscussionCommentInput, AddDiscussionPollVoteInput, AddEnterpriseOrganizationMemberInput, AddEnterpriseSupportEntitlementInput, AddLabelsToLabelableInput, AddProjectCardInput, AddProjectColumnInput, AddProjectV2DraftIssueInput, AddProjectV2ItemByIdInput, AddPullRequestReviewCommentInput, AddPullRequestReviewInput, AddPullRequestReviewThreadInput, AddPullRequestReviewThreadReplyInput, AddReactionInput, AddStarInput, AddSubIssueInput, AddUpvoteInput, AddVerifiableDomainInput, ApproveDeploymentsInput, ApproveVerifiableDomainInput, ArchiveProjectV2ItemInput, ArchiveRepositoryInput, AuditLogOrder, BranchNamePatternParametersInput, BulkSponsorship, CancelEnterpriseAdminInvitationInput, CancelEnterpriseMemberInvitationInput, CancelSponsorshipInput, ChangeUserStatusInput, CheckAnnotationData, CheckAnnotationRange, CheckRunAction, CheckRunFilter, CheckRunOutput, CheckRunOutputImage, CheckSuiteAutoTriggerPreference, CheckSuiteFilter, ClearLabelsFromLabelableInput, ClearProjectV2ItemFieldValueInput, CloneProjectInput, CloneTemplateRepositoryInput, CloseDiscussionInput, CloseIssueInput, ClosePullRequestInput, CodeScanningParametersInput, CodeScanningToolInput, CommitAuthor, CommitAuthorEmailPatternParametersInput, CommitContributionOrder, CommitMessage, CommitMessagePatternParametersInput, CommittableBranch, CommitterEmailPatternParametersInput, ContributionOrder, ConvertProjectCardNoteToIssueInput, ConvertProjectV2DraftIssueItemToIssueInput, ConvertPullRequestToDraftInput, CopilotCodeReviewParametersInput, CopyProjectV2Input, CreateAttributionInvitationInput, CreateBranchProtectionRuleInput, CreateCheckRunInput, CreateCheckSuiteInput, CreateCommitOnBranchInput, CreateDeploymentInput, CreateDeploymentStatusInput, CreateDiscussionInput, CreateEnterpriseOrganizationInput, CreateEnvironmentInput, CreateIpAllowListEntryInput, CreateIssueInput, CreateIssueTypeInput, CreateLabelInput, CreateLinkedBranchInput, CreateMigrationSourceInput, CreateProjectInput, CreateProjectV2FieldInput, CreateProjectV2Input, CreateProjectV2StatusUpdateInput, CreatePullRequestInput, CreateRefInput, CreateRepositoryCustomPropertyInput, CreateRepositoryInput, CreateRepositoryRulesetInput, CreateSponsorsListingInput, CreateSponsorsTierInput, CreateSponsorshipInput, CreateSponsorshipsInput, CreateUserListInput, CustomPropertyValueInput, DeclineTopicSuggestionInput, DeleteBranchProtectionRuleInput, DeleteDeploymentInput, DeleteDiscussionCommentInput, DeleteDiscussionInput, DeleteEnvironmentInput, DeleteIpAllowListEntryInput, DeleteIssueCommentInput, DeleteIssueInput, DeleteIssueTypeInput, DeleteLabelInput, DeleteLinkedBranchInput, DeletePackageVersionInput, DeleteProjectCardInput, DeleteProjectColumnInput, DeleteProjectInput, DeleteProjectV2FieldInput, DeleteProjectV2Input, DeleteProjectV2ItemInput, DeleteProjectV2StatusUpdateInput, DeleteProjectV2WorkflowInput, DeletePullRequestReviewCommentInput, DeletePullRequestReviewInput, DeleteRefInput, DeleteRepositoryCustomPropertyInput, DeleteRepositoryRulesetInput, DeleteUserListInput, DeleteVerifiableDomainInput, DeploymentOrder, DequeuePullRequestInput, DisablePullRequestAutoMergeInput, DiscussionOrder, DiscussionPollOptionOrder, DismissPullRequestReviewInput, DismissRepositoryVulnerabilityAlertInput, DraftPullRequestReviewComment, DraftPullRequestReviewThread, EnablePullRequestAutoMergeInput, EnqueuePullRequestInput, EnterpriseAdministratorInvitationOrder, EnterpriseMemberInvitationOrder, EnterpriseMemberOrder, EnterpriseOrder, EnterpriseServerInstallationOrder, EnterpriseServerUserAccountEmailOrder, EnterpriseServerUserAccountOrder, EnterpriseServerUserAccountsUploadOrder, Environments, FileAddition, FileChanges, FileDeletion, FileExtensionRestrictionParametersInput, FilePathRestrictionParametersInput, FollowOrganizationInput, FollowUserInput, GistOrder, GrantEnterpriseOrganizationsMigratorRoleInput, GrantMigratorRoleInput, ImportProjectInput, InviteEnterpriseAdminInput, InviteEnterpriseMemberInput, IpAllowListEntryOrder, IssueCommentOrder, IssueDependencyOrder, IssueFilters, IssueOrder, IssueTypeOrder, LabelOrder, LanguageOrder, LinkProjectV2ToRepositoryInput, LinkProjectV2ToTeamInput, LinkRepositoryToProjectInput, LockLockableInput, MannequinOrder, MarkDiscussionCommentAsAnswerInput, MarkFileAsViewedInput, MarkProjectV2AsTemplateInput, MarkPullRequestReadyForReviewInput, MaxFilePathLengthParametersInput, MaxFileSizeParametersInput, MergeBranchInput, MergePullRequestInput, MergeQueueParametersInput, MilestoneOrder, MinimizeCommentInput, MoveProjectCardInput, MoveProjectColumnInput, OrgEnterpriseOwnerOrder, OrganizationOrder, OrganizationPropertyConditionTargetInput, OrganizationPropertyTargetDefinitionInput, PackageFileOrder, PackageOrder, PackageVersionOrder, PinEnvironmentInput, PinIssueInput, PinnedEnvironmentOrder, ProjectCardImport, ProjectColumnImport, ProjectOrder, ProjectV2Collaborator, ProjectV2FieldOrder, ProjectV2FieldValue, ProjectV2Filters, ProjectV2ItemFieldValueOrder, ProjectV2ItemOrder, ProjectV2Iteration, ProjectV2IterationFieldConfigurationInput, ProjectV2Order, ProjectV2SingleSelectFieldOptionInput, ProjectV2StatusOrder, ProjectV2ViewOrder, ProjectV2WorkflowOrder, PromoteRepositoryCustomPropertyInput, PropertyTargetDefinitionInput, PublishSponsorsTierInput, PullRequestOrder, PullRequestParametersInput, ReactionOrder, RefNameConditionTargetInput, RefOrder, RefUpdate, RegenerateEnterpriseIdentityProviderRecoveryCodesInput, RegenerateVerifiableDomainTokenInput, RejectDeploymentsInput, ReleaseOrder, RemoveAssigneesFromAssignableInput, RemoveBlockedByInput, RemoveEnterpriseAdminInput, RemoveEnterpriseIdentityProviderInput, RemoveEnterpriseMemberInput, RemoveEnterpriseOrganizationInput, RemoveEnterpriseSupportEntitlementInput, RemoveLabelsFromLabelableInput, RemoveOutsideCollaboratorInput, RemoveReactionInput, RemoveStarInput, RemoveSubIssueInput, RemoveUpvoteInput, ReopenDiscussionInput, ReopenIssueInput, ReopenPullRequestInput, ReorderEnvironmentInput, ReplaceActorsForAssignableInput, RepositoryIdConditionTargetInput, RepositoryInvitationOrder, RepositoryMigrationOrder, RepositoryNameConditionTargetInput, RepositoryOrder, RepositoryPropertyConditionTargetInput, RepositoryRuleConditionsInput, RepositoryRuleInput, RepositoryRuleOrder, RepositoryRulesetBypassActorInput, ReprioritizeSubIssueInput, RequestReviewsByLoginInput, RequestReviewsInput, RequiredDeploymentsParametersInput, RequiredReviewerConfigurationInput, RequiredStatusCheckInput, RequiredStatusChecksParametersInput, RerequestCheckSuiteInput, ResolveReviewThreadInput, RetireSponsorsTierInput, RevertPullRequestInput, RevokeEnterpriseOrganizationsMigratorRoleInput, RevokeMigratorRoleInput, RuleParametersInput, SavedReplyOrder, SecurityAdvisoryIdentifierFilter, SecurityAdvisoryOrder, SecurityVulnerabilityOrder, SetEnterpriseIdentityProviderInput, SetOrganizationInteractionLimitInput, SetRepositoryCustomPropertyValuesInput, SetRepositoryInteractionLimitInput, SetUserInteractionLimitInput, SponsorAndLifetimeValueOrder, SponsorOrder, SponsorableOrder, SponsorsActivityOrder, SponsorsTierOrder, SponsorshipNewsletterOrder, SponsorshipOrder, StarOrder, StartOrganizationMigrationInput, StartRepositoryMigrationInput, StatusCheckConfigurationInput, SubmitPullRequestReviewInput, TagNamePatternParametersInput, TeamMemberOrder, TeamOrder, TeamRepositoryOrder, TransferEnterpriseOrganizationInput, TransferIssueInput, UnarchiveProjectV2ItemInput, UnarchiveRepositoryInput, UnfollowOrganizationInput, UnfollowUserInput, UnlinkProjectV2FromRepositoryInput, UnlinkProjectV2FromTeamInput, UnlinkRepositoryFromProjectInput, UnlockLockableInput, UnmarkDiscussionCommentAsAnswerInput, UnmarkFileAsViewedInput, UnmarkIssueAsDuplicateInput, UnmarkProjectV2AsTemplateInput, UnminimizeCommentInput, UnpinIssueInput, UnresolveReviewThreadInput, UpdateBranchProtectionRuleInput, UpdateCheckRunInput, UpdateCheckSuitePreferencesInput, UpdateDiscussionCommentInput, UpdateDiscussionInput, UpdateEnterpriseAdministratorRoleInput, UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput, UpdateEnterpriseDefaultRepositoryPermissionSettingInput, UpdateEnterpriseDeployKeySettingInput, UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput, UpdateEnterpriseMembersCanCreateRepositoriesSettingInput, UpdateEnterpriseMembersCanDeleteIssuesSettingInput, UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput, UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput, UpdateEnterpriseMembersCanMakePurchasesSettingInput, UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput, UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput, UpdateEnterpriseOrganizationProjectsSettingInput, UpdateEnterpriseOwnerOrganizationRoleInput, UpdateEnterpriseProfileInput, UpdateEnterpriseRepositoryProjectsSettingInput, UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingInput, UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput, UpdateEnvironmentInput, UpdateIpAllowListEnabledSettingInput, UpdateIpAllowListEntryInput, UpdateIpAllowListForInstalledAppsEnabledSettingInput, UpdateIssueCommentInput, UpdateIssueInput, UpdateIssueIssueTypeInput, UpdateIssueTypeInput, UpdateLabelInput, UpdateNotificationRestrictionSettingInput, UpdateOrganizationAllowPrivateRepositoryForkingSettingInput, UpdateOrganizationWebCommitSignoffSettingInput, UpdateParametersInput, UpdatePatreonSponsorabilityInput, UpdateProjectCardInput, UpdateProjectColumnInput, UpdateProjectInput, UpdateProjectV2CollaboratorsInput, UpdateProjectV2DraftIssueInput, UpdateProjectV2FieldInput, UpdateProjectV2Input, UpdateProjectV2ItemFieldValueInput, UpdateProjectV2ItemPositionInput, UpdateProjectV2StatusUpdateInput, UpdatePullRequestBranchInput, UpdatePullRequestInput, UpdatePullRequestReviewCommentInput, UpdatePullRequestReviewInput, UpdateRefInput, UpdateRefsInput, UpdateRepositoryCustomPropertyInput, UpdateRepositoryInput, UpdateRepositoryRulesetInput, UpdateRepositoryWebCommitSignoffSettingInput, UpdateSponsorshipPreferencesInput, UpdateSubscriptionInput, UpdateTeamReviewAssignmentInput, UpdateTeamsRepositoryInput, UpdateTopicsInput, UpdateUserListInput, UpdateUserListsForItemInput, UserStatusOrder, VerifiableDomainOrder, VerifyVerifiableDomainInput, WorkflowFileReferenceInput, WorkflowRunOrder, WorkflowsParametersInput.
 type Input interface{}
 
 // AbortQueuedMigrationsInput is an autogenerated input type of AbortQueuedMigrations.
@@ -398,7 +398,7 @@ type BranchNamePatternParametersInput struct {
 	// The pattern to match with. (Required.)
 	Pattern String `json:"pattern"`
 
-	// How this rule will appear to users. (Optional.)
+	// How this rule appears when configuring it. (Optional.)
 	Name *String `json:"name,omitempty"`
 	// If true, the rule will fail if the pattern matches. (Optional.)
 	Negate *Boolean `json:"negate,omitempty"`
@@ -690,7 +690,7 @@ type CommitAuthorEmailPatternParametersInput struct {
 	// The pattern to match with. (Required.)
 	Pattern String `json:"pattern"`
 
-	// How this rule will appear to users. (Optional.)
+	// How this rule appears when configuring it. (Optional.)
 	Name *String `json:"name,omitempty"`
 	// If true, the rule will fail if the pattern matches. (Optional.)
 	Negate *Boolean `json:"negate,omitempty"`
@@ -720,7 +720,7 @@ type CommitMessagePatternParametersInput struct {
 	// The pattern to match with. (Required.)
 	Pattern String `json:"pattern"`
 
-	// How this rule will appear to users. (Optional.)
+	// How this rule appears when configuring it. (Optional.)
 	Name *String `json:"name,omitempty"`
 	// If true, the rule will fail if the pattern matches. (Optional.)
 	Negate *Boolean `json:"negate,omitempty"`
@@ -744,7 +744,7 @@ type CommitterEmailPatternParametersInput struct {
 	// The pattern to match with. (Required.)
 	Pattern String `json:"pattern"`
 
-	// How this rule will appear to users. (Optional.)
+	// How this rule appears when configuring it. (Optional.)
 	Name *String `json:"name,omitempty"`
 	// If true, the rule will fail if the pattern matches. (Optional.)
 	Negate *Boolean `json:"negate,omitempty"`
@@ -791,7 +791,7 @@ type ConvertPullRequestToDraftInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
-// CopilotCodeReviewParametersInput represents request Copilot code review for new pull requests automatically if the author has access to Copilot code review.
+// CopilotCodeReviewParametersInput represents request Copilot code review for new pull requests automatically if the author has access to Copilot code review and their premium requests quota has not reached the limit.
 type CopilotCodeReviewParametersInput struct {
 
 	// Copilot automatically reviews draft pull requests before they are marked as ready for review. (Optional.)
@@ -1245,6 +1245,31 @@ type CreateRefInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// CreateRepositoryCustomPropertyInput is an autogenerated input type of CreateRepositoryCustomProperty.
+type CreateRepositoryCustomPropertyInput struct {
+	// The global relay id of the source in which a new custom property should be created in. (Required.)
+	SourceID ID `json:"sourceId"`
+	// The name of the custom property. (Required.)
+	PropertyName String `json:"propertyName"`
+	// The value type for the custom property. (Required.)
+	ValueType CustomPropertyValueType `json:"valueType"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+	// The description of the custom property. (Optional.)
+	Description *String `json:"description,omitempty"`
+	// The allowed values for the custom property. (Optional.)
+	AllowedValues *[]String `json:"allowedValues,omitempty"`
+	// Whether the custom property is required. (Optional.)
+	Required *Boolean `json:"required,omitempty"`
+	// The default value for the custom property if the property is required. (Optional.)
+	DefaultValue *String `json:"defaultValue,omitempty"`
+	// The regex pattern that the value of the custom property must match, if the `value_type` is `string`. (Optional.)
+	Regex *String `json:"regex,omitempty"`
+	// The allowed actors who can edit the values of a custom property. (Optional.)
+	ValuesEditableBy *RepositoryCustomPropertyValuesEditableBy `json:"valuesEditableBy,omitempty"`
+}
+
 // CreateRepositoryInput is an autogenerated input type of CreateRepository.
 type CreateRepositoryInput struct {
 	// The name of the new repository. (Required.)
@@ -1381,32 +1406,6 @@ type CreateSponsorshipsInput struct {
 	Recurring *Boolean `json:"recurring,omitempty"`
 }
 
-// CreateTeamDiscussionCommentInput is an autogenerated input type of CreateTeamDiscussionComment.
-type CreateTeamDiscussionCommentInput struct {
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-	// The ID of the discussion to which the comment belongs. This field is required. **Upcoming Change on 2024-07-01 UTC** **Description:** `discussionId` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement. **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions. (Optional.)
-	DiscussionID *ID `json:"discussionId,omitempty"`
-	// The content of the comment. This field is required. **Upcoming Change on 2024-07-01 UTC** **Description:** `body` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement. **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions. (Optional.)
-	Body *String `json:"body,omitempty"`
-}
-
-// CreateTeamDiscussionInput is an autogenerated input type of CreateTeamDiscussion.
-type CreateTeamDiscussionInput struct {
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-	// The ID of the team to which the discussion belongs. This field is required. **Upcoming Change on 2024-07-01 UTC** **Description:** `teamId` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement. **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions. (Optional.)
-	TeamID *ID `json:"teamId,omitempty"`
-	// The title of the discussion. This field is required. **Upcoming Change on 2024-07-01 UTC** **Description:** `title` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement. **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions. (Optional.)
-	Title *String `json:"title,omitempty"`
-	// The content of the discussion. This field is required. **Upcoming Change on 2024-07-01 UTC** **Description:** `body` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement. **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions. (Optional.)
-	Body *String `json:"body,omitempty"`
-	// If true, restricts the visibility of this discussion to team members and organization owners. If false or not specified, allows any organization member to view this discussion. **Upcoming Change on 2024-07-01 UTC** **Description:** `private` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement. **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions. (Optional.)
-	Private *Boolean `json:"private,omitempty"`
-}
-
 // CreateUserListInput is an autogenerated input type of CreateUserList.
 type CreateUserListInput struct {
 	// The name of the new list. (Required.)
@@ -1418,6 +1417,15 @@ type CreateUserListInput struct {
 	Description *String `json:"description,omitempty"`
 	// Whether or not the list is private. (Optional.)
 	IsPrivate *Boolean `json:"isPrivate,omitempty"`
+}
+
+// CustomPropertyValueInput represents the custom property name and value to be set.
+type CustomPropertyValueInput struct {
+	// The name of the custom property. (Required.)
+	PropertyName String `json:"propertyName"`
+
+	// The value to set for the custom property. Using a value of null will unset the property value, reverting to the default value if the property is required. (Optional.)
+	Value *CustomPropertyValue `json:"value,omitempty"`
 }
 
 // DeclineTopicSuggestionInput is an autogenerated input type of DeclineTopicSuggestion.
@@ -1642,28 +1650,19 @@ type DeleteRefInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// DeleteRepositoryCustomPropertyInput is an autogenerated input type of DeleteRepositoryCustomProperty.
+type DeleteRepositoryCustomPropertyInput struct {
+	// The global relay id of the custom property to be deleted. (Required.)
+	ID ID `json:"id"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // DeleteRepositoryRulesetInput is an autogenerated input type of DeleteRepositoryRuleset.
 type DeleteRepositoryRulesetInput struct {
 	// The global relay id of the repository ruleset to be deleted. (Required.)
 	RepositoryRulesetID ID `json:"repositoryRulesetId"`
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-}
-
-// DeleteTeamDiscussionCommentInput is an autogenerated input type of DeleteTeamDiscussionComment.
-type DeleteTeamDiscussionCommentInput struct {
-	// The ID of the comment to delete. (Required.)
-	ID ID `json:"id"`
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-}
-
-// DeleteTeamDiscussionInput is an autogenerated input type of DeleteTeamDiscussion.
-type DeleteTeamDiscussionInput struct {
-	// The discussion ID to delete. (Required.)
-	ID ID `json:"id"`
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
@@ -2525,6 +2524,15 @@ type ProjectV2WorkflowOrder struct {
 	Direction OrderDirection `json:"direction"`
 }
 
+// PromoteRepositoryCustomPropertyInput is an autogenerated input type of PromoteRepositoryCustomProperty.
+type PromoteRepositoryCustomPropertyInput struct {
+	// The ID of the repository custom property to be promoted. (Required.)
+	RepositoryCustomPropertyID ID `json:"repositoryCustomPropertyId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // PropertyTargetDefinitionInput represents a property that must match.
 type PropertyTargetDefinitionInput struct {
 	// The name of the property. (Required.)
@@ -2568,8 +2576,6 @@ type PullRequestParametersInput struct {
 
 	// Array of allowed merge methods. Allowed values include `merge`, `squash`, and `rebase`. At least one option must be enabled. (Optional.)
 	AllowedMergeMethods *[]PullRequestAllowedMergeMethods `json:"allowedMergeMethods,omitempty"`
-	// Request Copilot code review for new pull requests automatically if the author has access to Copilot code review. (Optional.)
-	AutomaticCopilotCodeReviewEnabled *Boolean `json:"automaticCopilotCodeReviewEnabled,omitempty"`
 	// This argument is in beta and subject to change. A collection of reviewers and associated file patterns. Each reviewer has a list of file patterns which determine the files that reviewer is required to review. (Optional.)
 	RequiredReviewers *[]RequiredReviewerConfigurationInput `json:"requiredReviewers,omitempty"`
 }
@@ -2654,7 +2660,7 @@ type ReleaseOrder struct {
 type RemoveAssigneesFromAssignableInput struct {
 	// The id of the assignable object to remove assignees from. (Required.)
 	AssignableID ID `json:"assignableId"`
-	// The id of users to remove as assignees. (Required.)
+	// The ids of actors to remove as assignees. (Required.)
 	AssigneeIDs []ID `json:"assigneeIds"`
 
 	// A unique identifier for the client performing the mutation. (Optional.)
@@ -2829,11 +2835,13 @@ type ReorderEnvironmentInput struct {
 type ReplaceActorsForAssignableInput struct {
 	// The id of the assignable object to replace the assignees for. (Required.)
 	AssignableID ID `json:"assignableId"`
-	// The ids of the actors to replace the existing assignees. (Required.)
-	ActorIDs []ID `json:"actorIds"`
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
+	// The ids of the actors to replace the existing assignees. May be used as an alternative to or in conjunction with actorLogins. (Optional.)
+	ActorIDs *[]ID `json:"actorIds,omitempty"`
+	// The usernames of the actors to replace the existing assignees. May be used as an alternative to or in conjunction with actorIds. For bots, use the login format with [bot] suffix (e.g., 'my-app[bot]'). (Optional.)
+	ActorLogins *[]String `json:"actorLogins,omitempty"`
 }
 
 // RepositoryIdConditionTargetInput represents parameters to be used for the repository_id condition.
@@ -2949,6 +2957,23 @@ type ReprioritizeSubIssueInput struct {
 	AfterID *ID `json:"afterId,omitempty"`
 	// The id of the sub-issue to be prioritized before (either positional argument after OR before should be specified). (Optional.)
 	BeforeID *ID `json:"beforeId,omitempty"`
+}
+
+// RequestReviewsByLoginInput is an autogenerated input type of RequestReviewsByLogin.
+type RequestReviewsByLoginInput struct {
+	// The Node ID of the pull request to modify. (Required.)
+	PullRequestID ID `json:"pullRequestId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+	// The login strings of the users to request reviews from. (Optional.)
+	UserLogins *[]String `json:"userLogins,omitempty"`
+	// The logins of the bots to request reviews from, including the [bot] suffix (e.g., 'copilot-pull-request-reviewer[bot]'). (Optional.)
+	BotLogins *[]String `json:"botLogins,omitempty"`
+	// The slugs of the teams to request reviews from (format: 'org/team-slug'). (Optional.)
+	TeamSlugs *[]String `json:"teamSlugs,omitempty"`
+	// Add users to the set rather than replace. (Optional.)
+	Union *Boolean `json:"union,omitempty"`
 }
 
 // RequestReviewsInput is an autogenerated input type of RequestReviews.
@@ -3175,6 +3200,17 @@ type SetOrganizationInteractionLimitInput struct {
 	Expiry *RepositoryInteractionLimitExpiry `json:"expiry,omitempty"`
 }
 
+// SetRepositoryCustomPropertyValuesInput is an autogenerated input type of SetRepositoryCustomPropertyValues.
+type SetRepositoryCustomPropertyValuesInput struct {
+	// A list of custom property names and associated values to apply. (Required.)
+	Properties []CustomPropertyValueInput `json:"properties"`
+	// The ID of the repository to set properties for. (Required.)
+	RepositoryID ID `json:"repositoryId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+}
+
 // SetRepositoryInteractionLimitInput is an autogenerated input type of SetRepositoryInteractionLimit.
 type SetRepositoryInteractionLimitInput struct {
 	// The ID of the repository to set a limit for. (Required.)
@@ -3342,26 +3378,10 @@ type TagNamePatternParametersInput struct {
 	// The pattern to match with. (Required.)
 	Pattern String `json:"pattern"`
 
-	// How this rule will appear to users. (Optional.)
+	// How this rule appears when configuring it. (Optional.)
 	Name *String `json:"name,omitempty"`
 	// If true, the rule will fail if the pattern matches. (Optional.)
 	Negate *Boolean `json:"negate,omitempty"`
-}
-
-// TeamDiscussionCommentOrder represents ways in which team discussion comment connections can be ordered.
-type TeamDiscussionCommentOrder struct {
-	// The field by which to order nodes. (Required.)
-	Field TeamDiscussionCommentOrderField `json:"field"`
-	// The direction in which to order nodes. (Required.)
-	Direction OrderDirection `json:"direction"`
-}
-
-// TeamDiscussionOrder represents ways in which team discussion connections can be ordered.
-type TeamDiscussionOrder struct {
-	// The field by which to order nodes. (Required.)
-	Field TeamDiscussionOrderField `json:"field"`
-	// The direction in which to order nodes. (Required.)
-	Direction OrderDirection `json:"direction"`
 }
 
 // TeamMemberOrder represents ordering options for team member connections.
@@ -3886,17 +3906,6 @@ type UpdateEnterpriseRepositoryProjectsSettingInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
-// UpdateEnterpriseTeamDiscussionsSettingInput is an autogenerated input type of UpdateEnterpriseTeamDiscussionsSetting.
-type UpdateEnterpriseTeamDiscussionsSettingInput struct {
-	// The ID of the enterprise on which to set the team discussions setting. (Required.)
-	EnterpriseID ID `json:"enterpriseId"`
-	// The value for the team discussions setting on the enterprise. (Required.)
-	SettingValue EnterpriseEnabledDisabledSettingValue `json:"settingValue"`
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-}
-
 // UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingInput is an autogenerated input type of UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting.
 type UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingInput struct {
 	// The ID of the enterprise on which to set the two-factor authentication disallowed methods setting. (Required.)
@@ -3993,7 +4002,7 @@ type UpdateIssueInput struct {
 	Title *String `json:"title,omitempty"`
 	// The body for the issue description. (Optional.)
 	Body *String `json:"body,omitempty"`
-	// An array of Node IDs of users for this issue. (Optional.)
+	// An array of Node IDs of users or bots for this issue. (Optional.)
 	AssigneeIDs *[]ID `json:"assigneeIds,omitempty"`
 	// The Node ID of the milestone for this issue. (Optional.)
 	MilestoneID *ID `json:"milestoneId,omitempty"`
@@ -4332,6 +4341,27 @@ type UpdateRefsInput struct {
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
 }
 
+// UpdateRepositoryCustomPropertyInput is an autogenerated input type of UpdateRepositoryCustomProperty.
+type UpdateRepositoryCustomPropertyInput struct {
+	// The global relay id of the source of the custom property. (Required.)
+	RepositoryCustomPropertyID ID `json:"repositoryCustomPropertyId"`
+
+	// A unique identifier for the client performing the mutation. (Optional.)
+	ClientMutationID *String `json:"clientMutationId,omitempty"`
+	// The updated description of the custom property. (Optional.)
+	Description *String `json:"description,omitempty"`
+	// The updated allowed values for the custom property. (Optional.)
+	AllowedValues *[]String `json:"allowedValues,omitempty"`
+	// Whether the updated custom property is required. (Optional.)
+	Required *Boolean `json:"required,omitempty"`
+	// The updated default value for the custom property if the property is required. (Optional.)
+	DefaultValue *String `json:"defaultValue,omitempty"`
+	// The regex pattern that the value of the custom property must match, if the `value_type` is `string`. (Optional.)
+	Regex *String `json:"regex,omitempty"`
+	// The updated actors who can edit the values of the custom property. (Optional.)
+	ValuesEditableBy *RepositoryCustomPropertyValuesEditableBy `json:"valuesEditableBy,omitempty"`
+}
+
 // UpdateRepositoryInput is an autogenerated input type of UpdateRepository.
 type UpdateRepositoryInput struct {
 	// The ID of the repository to update. (Required.)
@@ -4419,36 +4449,6 @@ type UpdateSubscriptionInput struct {
 
 	// A unique identifier for the client performing the mutation. (Optional.)
 	ClientMutationID *String `json:"clientMutationId,omitempty"`
-}
-
-// UpdateTeamDiscussionCommentInput is an autogenerated input type of UpdateTeamDiscussionComment.
-type UpdateTeamDiscussionCommentInput struct {
-	// The ID of the comment to modify. (Required.)
-	ID ID `json:"id"`
-	// The updated text of the comment. (Required.)
-	Body String `json:"body"`
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-	// The current version of the body content. (Optional.)
-	BodyVersion *String `json:"bodyVersion,omitempty"`
-}
-
-// UpdateTeamDiscussionInput is an autogenerated input type of UpdateTeamDiscussion.
-type UpdateTeamDiscussionInput struct {
-	// The Node ID of the discussion to modify. (Required.)
-	ID ID `json:"id"`
-
-	// A unique identifier for the client performing the mutation. (Optional.)
-	ClientMutationID *String `json:"clientMutationId,omitempty"`
-	// The updated title of the discussion. (Optional.)
-	Title *String `json:"title,omitempty"`
-	// The updated text of the discussion. (Optional.)
-	Body *String `json:"body,omitempty"`
-	// The current version of the body content. If provided, this update operation will be rejected if the given version does not match the latest version on the server. (Optional.)
-	BodyVersion *String `json:"bodyVersion,omitempty"`
-	// If provided, sets the pinned state of the updated discussion. (Optional.)
-	Pinned *Boolean `json:"pinned,omitempty"`
 }
 
 // UpdateTeamReviewAssignmentInput is an autogenerated input type of UpdateTeamReviewAssignment.

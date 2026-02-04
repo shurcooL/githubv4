@@ -159,6 +159,18 @@ const (
 	ContributionLevelFourthQuartile ContributionLevel = "FOURTH_QUARTILE" // Highest 25% of days of contributions. More contributions than the third quartile.
 )
 
+// CustomPropertyValueType represents the allowed value types for a custom property definition.
+type CustomPropertyValueType string
+
+// The allowed value types for a custom property definition.
+const (
+	CustomPropertyValueTypeString       CustomPropertyValueType = "STRING"        // A string value.
+	CustomPropertyValueTypeMultiSelect  CustomPropertyValueType = "MULTI_SELECT"  // A multi-select value.
+	CustomPropertyValueTypeSingleSelect CustomPropertyValueType = "SINGLE_SELECT" // A single-select value.
+	CustomPropertyValueTypeTrueFalse    CustomPropertyValueType = "TRUE_FALSE"    // A true/false value.
+	CustomPropertyValueTypeURL          CustomPropertyValueType = "URL"           // A URL value.
+)
+
 // DefaultRepositoryPermissionField represents the possible base permissions for repositories.
 type DefaultRepositoryPermissionField string
 
@@ -738,6 +750,9 @@ const (
 	IssueTimelineItemsItemTypeIssueTypeAddedEvent             IssueTimelineItemsItemType = "ISSUE_TYPE_ADDED_EVENT"               // Represents a 'issue_type_added' event on a given issue.
 	IssueTimelineItemsItemTypeIssueTypeRemovedEvent           IssueTimelineItemsItemType = "ISSUE_TYPE_REMOVED_EVENT"             // Represents a 'issue_type_removed' event on a given issue.
 	IssueTimelineItemsItemTypeIssueTypeChangedEvent           IssueTimelineItemsItemType = "ISSUE_TYPE_CHANGED_EVENT"             // Represents a 'issue_type_changed' event on a given issue.
+	IssueTimelineItemsItemTypeIssueFieldAddedEvent            IssueTimelineItemsItemType = "ISSUE_FIELD_ADDED_EVENT"              // Represents a 'issue_field_added' event on a given issue.
+	IssueTimelineItemsItemTypeIssueFieldRemovedEvent          IssueTimelineItemsItemType = "ISSUE_FIELD_REMOVED_EVENT"            // Represents a 'issue_field_removed' event on a given issue.
+	IssueTimelineItemsItemTypeIssueFieldChangedEvent          IssueTimelineItemsItemType = "ISSUE_FIELD_CHANGED_EVENT"            // Represents a 'issue_field_changed' event on a given issue.
 	IssueTimelineItemsItemTypeSubIssueAddedEvent              IssueTimelineItemsItemType = "SUB_ISSUE_ADDED_EVENT"                // Represents a 'sub_issue_added' event on a given issue.
 	IssueTimelineItemsItemTypeSubIssueRemovedEvent            IssueTimelineItemsItemType = "SUB_ISSUE_REMOVED_EVENT"              // Represents a 'sub_issue_removed' event on a given issue.
 	IssueTimelineItemsItemTypeParentIssueAddedEvent           IssueTimelineItemsItemType = "PARENT_ISSUE_ADDED_EVENT"             // Represents a 'parent_issue_added' event on a given issue.
@@ -1689,6 +1704,9 @@ const (
 	PullRequestTimelineItemsItemTypeIssueTypeAddedEvent               PullRequestTimelineItemsItemType = "ISSUE_TYPE_ADDED_EVENT"                // Represents a 'issue_type_added' event on a given issue.
 	PullRequestTimelineItemsItemTypeIssueTypeRemovedEvent             PullRequestTimelineItemsItemType = "ISSUE_TYPE_REMOVED_EVENT"              // Represents a 'issue_type_removed' event on a given issue.
 	PullRequestTimelineItemsItemTypeIssueTypeChangedEvent             PullRequestTimelineItemsItemType = "ISSUE_TYPE_CHANGED_EVENT"              // Represents a 'issue_type_changed' event on a given issue.
+	PullRequestTimelineItemsItemTypeIssueFieldAddedEvent              PullRequestTimelineItemsItemType = "ISSUE_FIELD_ADDED_EVENT"               // Represents a 'issue_field_added' event on a given issue.
+	PullRequestTimelineItemsItemTypeIssueFieldRemovedEvent            PullRequestTimelineItemsItemType = "ISSUE_FIELD_REMOVED_EVENT"             // Represents a 'issue_field_removed' event on a given issue.
+	PullRequestTimelineItemsItemTypeIssueFieldChangedEvent            PullRequestTimelineItemsItemType = "ISSUE_FIELD_CHANGED_EVENT"             // Represents a 'issue_field_changed' event on a given issue.
 	PullRequestTimelineItemsItemTypeSubIssueAddedEvent                PullRequestTimelineItemsItemType = "SUB_ISSUE_ADDED_EVENT"                 // Represents a 'sub_issue_added' event on a given issue.
 	PullRequestTimelineItemsItemTypeSubIssueRemovedEvent              PullRequestTimelineItemsItemType = "SUB_ISSUE_REMOVED_EVENT"               // Represents a 'sub_issue_removed' event on a given issue.
 	PullRequestTimelineItemsItemTypeParentIssueAddedEvent             PullRequestTimelineItemsItemType = "PARENT_ISSUE_ADDED_EVENT"              // Represents a 'parent_issue_added' event on a given issue.
@@ -1854,6 +1872,15 @@ const (
 	RepositoryContributionTypePullRequestReview RepositoryContributionType = "PULL_REQUEST_REVIEW" // Reviewed a pull request.
 )
 
+// RepositoryCustomPropertyValuesEditableBy represents the allowed actors who can edit the values of a custom property.
+type RepositoryCustomPropertyValuesEditableBy string
+
+// The allowed actors who can edit the values of a custom property.
+const (
+	RepositoryCustomPropertyValuesEditableByOrgActors        RepositoryCustomPropertyValuesEditableBy = "ORG_ACTORS"          // The organization actors.
+	RepositoryCustomPropertyValuesEditableByOrgAndRepoActors RepositoryCustomPropertyValuesEditableBy = "ORG_AND_REPO_ACTORS" // The organization and repository actors.
+)
+
 // RepositoryInteractionLimit represents a repository interaction limit.
 type RepositoryInteractionLimit string
 
@@ -2003,7 +2030,7 @@ const (
 	RepositoryRuleTypeSecretScanning                 RepositoryRuleType = "SECRET_SCANNING"                   // Secret scanning.
 	RepositoryRuleTypeWorkflowUpdates                RepositoryRuleType = "WORKFLOW_UPDATES"                  // Workflow files cannot be modified.
 	RepositoryRuleTypeCodeScanning                   RepositoryRuleType = "CODE_SCANNING"                     // Choose which tools must provide code scanning results before the reference is updated. When configured, code scanning must be enabled and have results for both the commit and the reference being updated.
-	RepositoryRuleTypeCopilotCodeReview              RepositoryRuleType = "COPILOT_CODE_REVIEW"               // Request Copilot code review for new pull requests automatically if the author has access to Copilot code review.
+	RepositoryRuleTypeCopilotCodeReview              RepositoryRuleType = "COPILOT_CODE_REVIEW"               // Request Copilot code review for new pull requests automatically if the author has access to Copilot code review and their premium requests quota has not reached the limit.
 )
 
 // RepositoryRulesetBypassActorBypassMode represents the bypass mode for a specific actor on a ruleset.
@@ -2658,22 +2685,6 @@ const (
 	SubscriptionStateUnsubscribed SubscriptionState = "UNSUBSCRIBED" // The User is only notified when participating or @mentioned.
 	SubscriptionStateSubscribed   SubscriptionState = "SUBSCRIBED"   // The User is notified of all conversations.
 	SubscriptionStateIgnored      SubscriptionState = "IGNORED"      // The User is never notified.
-)
-
-// TeamDiscussionCommentOrderField represents properties by which team discussion comment connections can be ordered.
-type TeamDiscussionCommentOrderField string
-
-// Properties by which team discussion comment connections can be ordered.
-const (
-	TeamDiscussionCommentOrderFieldNumber TeamDiscussionCommentOrderField = "NUMBER" // Allows sequential ordering of team discussion comments (which is equivalent to chronological ordering).
-)
-
-// TeamDiscussionOrderField represents properties by which team discussion connections can be ordered.
-type TeamDiscussionOrderField string
-
-// Properties by which team discussion connections can be ordered.
-const (
-	TeamDiscussionOrderFieldCreatedAt TeamDiscussionOrderField = "CREATED_AT" // Allows chronological ordering of team discussions.
 )
 
 // TeamMemberOrderField represents properties by which team member connections can be ordered.
