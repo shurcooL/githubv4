@@ -17,6 +17,11 @@ func TestURI_MarshalJSON(t *testing.T) {
 		want string
 	}{
 		{
+			name: "null",
+			in:   githubv4.URI{},
+			want: `null`,
+		},
+		{
 			in:   githubv4.URI{URL: &url.URL{Scheme: "https", Host: "example.org", Path: "/foo/bar"}},
 			want: `"https://example.org/foo/bar"`,
 		},

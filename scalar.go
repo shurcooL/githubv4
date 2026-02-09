@@ -77,6 +77,9 @@ type (
 // MarshalJSON implements the json.Marshaler interface.
 // The URI is a quoted string.
 func (u URI) MarshalJSON() ([]byte, error) {
+	if u.URL == nil {
+		return []byte("null"), nil
+	}
 	return json.Marshal(u.String())
 }
 
