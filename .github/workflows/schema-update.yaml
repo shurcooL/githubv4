@@ -1,0 +1,39 @@
+---
+name: Update Schema
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 2 * * *
+
+jobs:
+  update-schema:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup go
+        uses: actions/setup-go@v3
+        with:
+          go-version: "1.17"
+
+      - name: Run go generate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          go mod init github.com/shurcooL/githubv4
+          go mod tidy
+          go generate
+          rm go.mod
+          rm go.sum
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "chore: Update schema"
+          delete-branch: true
+          title: "[automation] Update with the latest schema changes"
+          body: Automated pull request to update the schema based on detected changes.
